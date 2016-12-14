@@ -8,4 +8,8 @@ class Index
         echo "nihao ";
     }
 
+    public function test(){
+        echo "陈炳坤提交的";
+    }
+
 }
