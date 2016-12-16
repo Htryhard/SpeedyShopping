@@ -2,7 +2,6 @@
 namespace app\admin\controller;
 
 use app\common\Comm;
-use think\Controller;
 
 class IndexController extends Controller
 {
@@ -19,6 +18,9 @@ class IndexController extends Controller
     public function testUUID()
     {
         echo "GUID:" . Comm::getNewGuid() . "<br/>";
+    }
+    public  function add(){
+        echo 'laibaibao提交的';
     }
 
 
