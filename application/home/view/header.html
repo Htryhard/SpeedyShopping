@@ -1,29 +1,72 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="/SpeedyShopping/public/static/bootstrap/css/bootstrap.css">
+
     <link rel="stylesheet" type="text/css" href="/SpeedyShopping/public/static/bootstrap/css/style.css">
-    <script type="text/javascript" src="/SpeedyShopping/public/static/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/SpeedyShopping/public/static/bootstrap/js/jquery-1.4.2.js"></script>
 </head>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".nav li").mousemove(function() {
+            $(this).find('ul').slideDown();
+        });
+        $(".nav li").mouseleave(function() {
+            $(this).find('ul').slideUp();
+        });
+    });
+</script>
+</head>
+
 <body>
-<div style="font-color:#">
-<nav class="navbar navbar-inverse" role="navigation" id="nav">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">全部商品</a>
-        </div>
-        <div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">首页</a></li>
-                <li><a href="">服装城</a></li>
-                <li>
-                    <a href="#">Java</a>
-                </li>
+<div class="nav_wrap">
+    <ul class="nav">
+        <li><a href="#" class="current">首页</a></li>
+        <li><a href="#">服装</a>
+            <ul class="sub_nav">
+                <li><a href="#">衣服</a></li>
+                <li><a href="#">裤子</a></li>
+                <li><a href="#">裙子</a></li>
+                <li><a href="#">套装</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-          </ul>
-        </div>
-    </div>
-</nav>
+        </li>
+        <li><a href="#">租车</a>
+            <ul class="sub_nav">
+                <li><a href="#">自行车</a></li>
+                <li><a href="#">电动车</a></li>
+                <li><a href="#">越野车</a></li>
+                <li><a href="#">宝马</a></li>
+            </ul>
+        </li>
+        <li><a href="#">美食</a>
+            <ul class="sub_nav">
+                <li><a href="#">小炒</a></li>
+                <li><a href="#">烧卤</a></li>
+                <li><a href="#">小吃</a></li>
+                <li><a href="#">奶茶</a></li>
+            </ul>
+        </li>
+        <li><a href="#">超市</a>
+            <ul class="sub_nav">
+                <li><a href="#">日化类</a></li>
+                <li><a href="#">囤货类</a></li>
+                <li><a href="#">家居类</a></li>
+
+            </ul>
+        </li>
+
+        <li><a href="#">联系我</a>
+            <ul class="sub_nav">
+                <li><a href="#">小强</a></li>
+                <li><a href="#">小租</a></li>
+                <li><a href="#">小痴</a></li>
+                <li><a href="#">小超</a></li>
+            </ul>
+        <li><a href="#"></a>
+        <li><a href="#"></a>
+        </li>
+        <li><a href="#">登陆</a>
+        <a href="#">注册</a>
+
+        </li>
+    </ul>
 </div>
+
 </body>
