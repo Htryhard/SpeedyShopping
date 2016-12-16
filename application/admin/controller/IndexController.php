@@ -26,6 +26,7 @@ class IndexController extends Controller
 
     public function test1(){
         echo "dddddd";
+        echo "aaaa";
     }
 
 
