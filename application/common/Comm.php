@@ -6,8 +6,21 @@
  * 功能：
  */
 namespace app\common;
+use app\common\model\User;
+
 class Comm
 {
+
+    /**
+     * 根据邮箱获取一个用户
+     * @param $email
+     * @return $user
+     */
+    public static function getUserByEmail($email)
+    {
+        $user = User::get(['email' => $email]);
+        return $user;
+    }
 
     /**
      * 获取一个sortid
