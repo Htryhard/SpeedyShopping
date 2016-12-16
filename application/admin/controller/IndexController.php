@@ -23,5 +23,9 @@ class IndexController extends Controller
         echo 'laibaibao提交的';
     }
 
+    public function test1(){
+        echo "dddddd";
+    }
+
 
 }
