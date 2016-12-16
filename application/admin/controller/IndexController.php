@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use app\common\Comm;
+use think\Controller;
 
 class IndexController extends Controller
 {
