@@ -21,5 +21,9 @@ class IndexController extends Controller
         echo "GUID:" . Comm::getNewGuid() . "<br/>";
     }
 
+    public function test1(){
+        echo "dddddd";
+    }
+
 
 }
