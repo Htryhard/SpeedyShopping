@@ -18,6 +18,7 @@ class CommodityController extends BaseController
         $data = $this->request->param();
         if (count($data)>0){
             dump($data);
+
         }else{
             //渲染视图
 
