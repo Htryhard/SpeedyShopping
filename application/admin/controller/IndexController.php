@@ -12,7 +12,7 @@ class IndexController extends BaseController
 {
     public function index()
     {
-        echo "nihao ";
+    return $this->fetch();
     }
 
     public function test()
