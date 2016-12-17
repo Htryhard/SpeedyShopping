@@ -1,0 +1,52 @@
+{layout name="layout" /}
+<form action="{:url('admin/commodity/addCommodity')}" method="post">
+
+    标题：<label>
+    <input type="text" name="title">
+</label><br/>
+
+
+    描述：<label>
+    <input type="text" name="describe">
+</label><br/>
+
+
+    {if condition="(count($types)>0)"}
+    <label for="label_id">分类</label><select id="label_id" name="label_id">
+    {volist name="types" id="item"}
+    <option value="{$item->getData('id')}">{$item->getData('content')}</option>
+    {/volist}
+</select>
+    {else /}
+    <span>还没有标签，<a href="{:url('admin/label/insert')}">去创建</a></span>
+    {/if}
+    <hr/>
+        <div id="InputsWrapper">
+            <div>参数名：<input type="text" name="parameterName[]">；参数值：<input type="text" name="parameterValue[]" id="field_1"/><a href="#" class="removeclass">×</a></div>
+        </div>
+    <a href="#" id="AddMoreFileBox" class="btn btn-info">添加参数</a></span></p>
+    <hr/>
+    <label>
+        商品下架时间：
+        <input class="Wdate" type="text" onClick="WdatePicker()">
+    </label>
+    <br/>
+    <hr/>
+    <div id="InputsWrappercq">
+        <div>
+            价格：<input type="text" name="price"><br/>
+            库存：<input type="text" name="repertory"><br/>
+
+            <div id="InputsWrappercq_attribute">
+                <div>
+
+                </div>
+            </div>
+            <a href="#" id="AddMoreFileBoxattribute" class="btn btn-info">添加属性</a></span></p>
+        </div>
+    </div>
+    <a href="#" id="AddMoreFileBoxcq" class="btn btn-info">添加规格</a></span></p>
+    <hr/>
+
+    <input type="submit" value="提交">
+</form>

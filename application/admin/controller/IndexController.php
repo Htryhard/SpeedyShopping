@@ -4,6 +4,10 @@ namespace app\admin\controller;
 use app\common\Comm;
 use app\common\controller\BaseController;
 
+/**
+ * 专门用来测试的控制器
+ * @package app\admin\controller
+ */
 class IndexController extends BaseController
 {
     public function index()

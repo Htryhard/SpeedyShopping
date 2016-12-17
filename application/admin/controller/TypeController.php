@@ -13,6 +13,10 @@ use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\Type;
 
+/**
+ * 类别控制器
+ * @package app\admin\controller
+ */
 class TypeController extends BaseController
 {
     //显示所有的类别

@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * 用户管理控制器
  * User: Huan
  * Date: 2016/12/16
  * Time: 11:19
