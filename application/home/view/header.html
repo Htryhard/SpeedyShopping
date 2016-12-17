@@ -1,72 +1,185 @@
 <head>
-
-    <link rel="stylesheet" type="text/css" href="/SpeedyShopping/public/static/bootstrap/css/style.css">
-    <script type="text/javascript" src="/SpeedyShopping/public/static/bootstrap/js/jquery-1.4.2.js"></script>
+	<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="/SpeedyShopping/public/static/bootstrap/css/style.css" type="text/css">
 </head>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".nav li").mousemove(function() {
-            $(this).find('ul').slideDown();
-        });
-        $(".nav li").mouseleave(function() {
-            $(this).find('ul').slideUp();
-        });
-    });
-</script>
-</head>
-
 <body>
-<div class="nav_wrap">
-    <ul class="nav">
-        <li><a href="#" class="current">首页</a></li>
-        <li><a href="#">服装</a>
-            <ul class="sub_nav">
-                <li><a href="#">衣服</a></li>
-                <li><a href="#">裤子</a></li>
-                <li><a href="#">裙子</a></li>
-                <li><a href="#">套装</a></li>
-            </ul>
-        </li>
-        <li><a href="#">租车</a>
-            <ul class="sub_nav">
-                <li><a href="#">自行车</a></li>
-                <li><a href="#">电动车</a></li>
-                <li><a href="#">越野车</a></li>
-                <li><a href="#">宝马</a></li>
-            </ul>
-        </li>
-        <li><a href="#">美食</a>
-            <ul class="sub_nav">
-                <li><a href="#">小炒</a></li>
-                <li><a href="#">烧卤</a></li>
-                <li><a href="#">小吃</a></li>
-                <li><a href="#">奶茶</a></li>
-            </ul>
-        </li>
-        <li><a href="#">超市</a>
-            <ul class="sub_nav">
-                <li><a href="#">日化类</a></li>
-                <li><a href="#">囤货类</a></li>
-                <li><a href="#">家居类</a></li>
+
+<!----------------------------导航栏——----------->
+<div class="menu">
+<nav class="navbar" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="ad">
+                    <img src="/SpeedyShopping/public/homestatic/img/hh.png" width="141" height="80" />
+
+
+            </div>
+
+
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">首页</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        超市 <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">杂货</a></li>
+                        <li><a href="#">日化</a></li>
+                        <li><a href="#">食品</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">服装</a></li>
+                    </ul>
+                </li>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        租车 <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">自行车</a></li>
+                        <li><a href="#">摩托车</a></li>
+                        <li><a href="#">电动车</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">汽车</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        学习 <b class="caret"></b>
+                    </a>
+                </li>
 
             </ul>
-        </li>
+        </div>
 
-        <li><a href="#">联系我</a>
-            <ul class="sub_nav">
-                <li><a href="#">小强</a></li>
-                <li><a href="#">小租</a></li>
-                <li><a href="#">小痴</a></li>
-                <li><a href="#">小超</a></li>
+    <div>
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-success">提交</button>
+        </form>
+    </div>
+    </div>
+</nav>
+    </div>
+<!-------------左侧导航栏------------------>
+    <div class="row">
+        <div class="col-xs-3">
+            <!--data-offset-top="125"-->
+            <ul class="nav nav-tabs nav-stacked" data-spy="affix">
+                <li class="active"><a href="" title="登录账号"
+                                      data-toggle="modal" data-target="#myModal">登录</a></li>
+                <li><a href="" title="注册账号" data-toggle="modal" data-target="#register">注册</a></li>
+                <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=1610357038&site=qq&menu=yes">
+                    联系我们</a>
+                </li>
+                <li><a href="">反馈</a></li>
             </ul>
-        <li><a href="#"></a>
-        <li><a href="#"></a>
-        </li>
-        <li><a href="#">登陆</a>
-        <a href="#">注册</a>
+            <!----------注册模态框------------->
+                <div class="modal fade" id="register" tabindex="-1" role="dialog"                                                 aria-labelledby="myregister" aria-hidden="true" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                  请注册账号
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div style="padding: 50px 50px 10px;">
+                                    <form class="bs-example bs-example-form" role="form">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">注册账号：</button>
+                    </span>
+                                                    <input type="text" class="form-control">
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                            </br>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">注册密码：</button>
+                    </span>
+                                                    <input type="password" class="form-control">
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                        </div><!-- /.row -->
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                    提交更改
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            <!------------------------登录模态框---------------------------->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"                                                 aria-labelledby="myModalLabel" aria-hidden="true" >
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myregister">
+                                请登录账号
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div style="padding: 50px 50px 10px;">
+                                <form class="bs-example bs-example-form" role="form">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">登录账号：</button>
+                    </span>
+                                                <input type="password" class="form-control">
+                                            </div><!-- /input-group -->
+                                        </div><!-- /.col-lg-6 -->
+                                        </br>
+                                        <div class="col-lg-10">
+                                            <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">登录密码：</button>
+                    </span>
+                                                <input type="password" class="form-control">
+                                            </div><!-- /input-group -->
+                                        </div><!-- /.col-lg-6 -->
+                                    </div><!-- /.row -->
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交更改
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
 
-        </li>
-    </ul>
-</div>
+
+
+
+        </div>
+       </div>
+
 
 </body>

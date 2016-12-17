@@ -27,7 +27,7 @@ a {
 }
 
 img {
-  max-width: 100%;
+  max-width:100%;
 }
 
 /* -------------------------------- 
@@ -37,8 +37,8 @@ Modules - reusable parts of our design
 -------------------------------- */
 .cd-container {
   /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
-  width: 90%;
-  max-width: 1170px;
+  width: 50%;
+  max-width: 1010px;
   margin: 0 auto;
 }
 .cd-container::after {
@@ -150,6 +150,7 @@ header h1 {
   -webkit-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+
 }
 .cd-item-wrapper li.cd-item-front {
   position: relative;
@@ -229,7 +230,8 @@ header h1 {
 }
 .cd-item-info b {
   float: left;
-  font-weight: bold;
+  font-weight: inherit;
+  font-size: 5px;
 }
 .cd-item-info b a {
   color: #323d55;
@@ -239,7 +241,7 @@ header h1 {
 }
 .cd-item-info em {
   float: right;
-  color: #7385ad;
+  color: red;
 }
 
 .cd-item-navigation a {

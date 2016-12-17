@@ -11,4 +11,13 @@ class IndexController extends  BaseController
            $this->assign('content',"这是内容崖");
            return $this->fetch();
     }
+    public  function  register(){
+
+    }
+    public  function  login(){
+
+    }
+    public function contact(){
+
+    }
 }

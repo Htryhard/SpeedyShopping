@@ -1,62 +1,43 @@
-﻿* {
-	margin:0;
-	padding:0;
+﻿
+	/* Custom Styles */
+.menu{
+	background-color:#A40000 ;
 }
-.nav_wrap {
-	margin:20px auto;
-	width:930px;
-	padding-left:30px;
-	height:140px;
-	background-color:#ad0007;
-	background:-moz-linear-gradient(top, #d5000a, #ad0007);
-	background:-webkit-linear-gradient(top, #d5000a, #ad0007);
-	background:linear-gradient(top, #d5000a, #ad0007);
-	border-radius:5px;
-	box-shadow:#333 0 1px 1px;
+	.menu .navbar ul li a{width:100%;color:#FFF;font:700 15px/40px "Microsoft Yahei";}
+	.menu .navbar ul li a:hover, .menu .navbar ul li a{background:#A40000;}
+	.menu .ad{left:0px;width:141px;height: 50px;
+	}
+
+	ul.nav-tabs{
+	width: 140px;
+	margin-top: 200px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
 }
-ul.nav li {
-	list-style:none;
-	float:left;
-	position:relative;
-	padding:5px 10px;
+ul.nav-tabs li{
+	margin: 0;
+	border-top: 1px solid #ddd;
 }
-ul.nav li a {
-	text-align:center;
-	color:#fff;
-	text-decoration:none;
-	line-height:30px;
-	height:30px;
-	width:70px;
-	font-size:14px;
-	float:left;
-	display:block;
-	padding:0 10px;
-	text-shadow:#666 1px 1px 1px;
+ul.nav-tabs li:first-child{
+	border-top: none;
 }
-ul.nav li a:hover, ul.nav li a.current {
-	background-color:#870007;
-	background:-moz-linear-gradient(top, #970007, #870007);
-	background:-webkit-linear-gradient(top, #970007, #870007);
-	background:linear-gradient(top, #970007, #870007);
-	border-radius:5px;
-	text-shadow:#333 1px 1px 1px;
+ul.nav-tabs li a{
+	margin: 0;
+	padding: 8px 16px;
+	border-radius: 0;
 }
-ul.sub_nav {
-	display:none;
-	position:absolute;
-	padding:0 0 10px 0;
-	background-color:#ad0007;
-	background:-moz-linear-gradient(top, #ad0007, #9f0007);
-	background:-webkit-linear-gradient(top, #ad0007, #9f0007);
-	background:linear-gradient(top, #ad0007, #9f0007);
-	border-radius:0 0 5px 5px;
-	left:0;
-	top:40px;
-	box-shadow:#333 0 1px 1px;
+ul.nav-tabs li.active a, ul.nav-tabs li a:hover{
+	color: paleturquoise;
+	background: #0088cc;
+	border: 1px solid #0088cc;
 }
-ul.sub_nav li {
-	float:none;
+ul.nav-tabs li:first-child a{
+	border-radius: 4px 4px 0 0;
 }
-ul.sub_nav li a {
-	float:none;
+ul.nav-tabs li:last-child a{
+	border-radius: 0 0 4px 4px;
+}
+ul.nav-tabs.affix{
+	top: 150px; /* Set the top position of pinned element */
 }
