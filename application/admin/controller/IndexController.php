@@ -29,5 +29,10 @@ class IndexController extends BaseController
         echo "aaaa";
     }
 
+    //测试后台布局界面
+    public function testWei(){
+        return $this->fetch();
+    }
+
 
 }
