@@ -231,7 +231,7 @@ header h1 {
 .cd-item-info b {
   float: left;
   font-weight: inherit;
-  font-size: 5px;
+  font-size: 12px;
 }
 .cd-item-info b a {
   color: #323d55;
