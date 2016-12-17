@@ -92,3 +92,38 @@ $(document).ready(function() {
         return false;
     })
 });
+
+
+//ajxa提交
+function toPostCommodity() {
+    $.ajax({
+       type:"POST",
+       url:"addCommodity",
+       dataType:"json",
+       data:{
+           commodityData:$('#commodityData').serializeArray()
+       },
+       success:function(msg){
+                   alert(msg);
+           switch (msg){
+               case 'repetition':
+                   getlayout("email_error","此邮箱已经被注册！");
+                   break;
+               case 'passwordNoFit':
+                   getlayout("password_error","两次密码不一致！");
+                   break;
+               case 'succeed':
+                   alert("成功注册！");
+                   break;
+               case 'captchaError':
+                   getlayout("captcha_error","验证码错误！");
+                   break;
+               default:
+                   alert(msg);
+
+           }
+                   var u = "{:url('admin/label/index')}";
+                   window.location = u;
+       },
+   });
+}

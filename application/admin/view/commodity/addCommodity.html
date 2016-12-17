@@ -1,5 +1,5 @@
 {layout name="layout" /}
-<form action="{:url('admin/commodity/addCommodity')}" method="post">
+<form action="{:url('admin/commodity/addCommodity')}" method="post" id="commodityData">
 
     标题：<label>
     <input type="text" name="title">
@@ -27,7 +27,7 @@
     <hr/>
     <label>
         商品下架时间：
-        <input class="Wdate" type="text" onClick="WdatePicker()">
+        <input class="Wdate" type="text" onClick="WdatePicker()" name="wdate">
     </label>
     <br/>
     <hr/>
@@ -47,5 +47,5 @@
     </div>
     <!--<a href="#" id="AddMoreFileBoxcq" class="btn btn-info">添加规格</a></span></p>-->
     <hr/>
-    <input type="submit" class="btn btn-info" value="保存并添加新规格">
+    <input type="button" onclick="toPostCommodity()" class="btn btn-info" value="保存并添加新规格">
 </form>

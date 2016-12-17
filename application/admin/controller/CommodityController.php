@@ -17,7 +17,9 @@ class CommodityController extends BaseController
     public function addCommodity(){
         $data = $this->request->param();
         if (count($data)>0){
-            dump($data);
+            dump($data['commodityData']);
+//            $commodityTitle = $data['title'];
+//            $commodityDescribe = $data['describe'];
 
         }else{
             //渲染视图
