@@ -23,7 +23,6 @@ class CommodityController extends BaseController
 
         }else{
             //渲染视图
-
             $this->assign("types",Type::all());
             return $this->fetch();
         }
