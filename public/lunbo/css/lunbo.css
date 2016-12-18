@@ -1,5 +1,7 @@
+
 *{margin:0px;padding:0px;}
-.box{width:700px;height:300px;margin:50px auto;position:relative;}
+.box{width:700px;height:300px;margin:50px auto;position:relative;
+   }
 .pic{width:700px;height:300px;overflow:hidden;}
 .pic ul li{list-style-type:none;width:100%;height:300px;position:relative;overflow:hidden;}
 .pic ul li .img1{position:absolute;left:-760px;top:0px;}
