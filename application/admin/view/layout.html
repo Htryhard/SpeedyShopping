@@ -18,14 +18,43 @@
 
 
 </head>
-<body>
-{include file="/header" /}
-{include file="/left"}
-<div class="content-wrapper" style="background: #FFFFFF;height: 100%;margin-right: 1%;">
+    <body>
+        <div class="hold-transition skin-red sidebar-mini">
+            {include file="/header" /}
+            {include file="/left"}
+            <div class="wrapper" >
+                    <div class="content-wrapper" style="background: #FFFFFF;">
+                        <section class="content-header">
+                        {__CONTENT__}
+                        </section>
+                </div>
+            </div>
+        </div>
 
-{__CONTENT__}
-
-</div>
-{include file="/footer" /}
-</body>
+    </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
