@@ -2098,7 +2098,7 @@ var ZYFILE = {
 					if(ZYFILE.funReturnNeedFiles().length > 0){
 						$("#fileSubmit").click();
 					}else{
-						alert("您至少要选一张图片");
+						alert("您至少要选一张图片作为您商品的封面图");
 					}
 	            });
 				
