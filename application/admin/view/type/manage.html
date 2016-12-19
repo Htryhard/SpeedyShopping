@@ -1,8 +1,170 @@
 {layout name="layout" /}
+<style>
+    .navbar-default {
+        background-color: #d9edf7;
+    }
+    .body{
+        background-color: #d9edf7;
+    }
+    </style>
+
+<body class="body">
+<nav class="navbar-default" role="navigation">
+    <form class="navbar-form  navbar-right" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button  type="submit" class="btn btn-success">Submit</button>
+    </form>
+    <button type="submit" class="btn btn-default navbar-btn">首页</button>
+</nav>
+
 <form action="{:url('admin/type/add')}" method="post">
-    名称：<input type="text" name="content">
-    <input type="submit" value="添加">
+                名称<input  type="text" name="content">
+                <input type="submit" value="添加">
+            {volist name="types" id="type"}
+                {$type.id}:{$type.content}
+                {/volist}<br/>
 </form>
+<br>
+<table class="table table-hover">
+    <thead>
+    <div style="padding: 10px 20px 10px;">
+
+        <form class="form-group" role="search">
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="name" placeholder="Search"
+                       value="{:input('get.name')}">
+            </div>
+            <button type="submit" class="btn btn-success">确定查询</button>
+
+        </form>
+
+
+        <button class="btn-primary btn-sm" data-toggle="modal" data-target="#add">添加名称</button>
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabe">
+                            添加
+                        </h4>
+
+                    </div>
+                    <form action="{:url('admin/type/add')}" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default" tabindex="-1">名称:</button>
+                                        </div><!-- /btn-group -->
+
+                                        <input type="text" class="form-control" name="name" placeholder="请输入名称">
+                                    </div><!-- /input-group -->
+
+
+                                </div><!-- /.col-lg-6 -->
+                            </div><!-- /.row -->
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default" data-dismiss="modal">关闭
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="postData()" value="提交">
+                                    提交更改
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+
+            </div><!-- /.modal -->
+
+        </div>
+
+
+
+
+
+        <tr>
+            <th>id</th>
+            <th>content</th>
+
+        </tr>
+
+
+
+    <tbody>
 {volist name="types" id="type"}
-{$type.id}:{$type.content}<br/>
-{/volist}
+    <tr>
+        <td>{$type.id}</td>
+        <td>{$type.content}</td>
+        <td>
+            <a class="btn btn-danger btn-sm" href="">
+                <i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>&nbsp;
+            <a class="btn btn-sm btn-primary" href=""
+               data-toggle="modal" data-target="#myModal">
+                <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+        </td>
+    </tr>
+    {/volist}
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        编辑
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" id="update_form">
+                        <input type="hidden" name="screenId" value="{}">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default" tabindex="-1">名称:</button>
+                                        </div><!-- /btn-group -->
+
+                                        <input type="text" class="form-control" name="name" placeholder="请输入名称">
+                                    </div><!-- /input-group -->
+
+
+                                </div><!-- /.col-lg-6 -->
+                            </div><!-- /.row -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="postUpdate()">
+                                提交更改
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+
+        </div><!-- /.modal -->
+
+    </div>
+
+    </tbody>
+</table>
+
+
+
+
+
+</body>
+
+
+
