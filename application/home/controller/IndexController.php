@@ -12,10 +12,13 @@ class IndexController extends  BaseController
            return $this->fetch();
     }
     public  function  register(){
-
+        return $this->fetch();
     }
     public  function  login(){
-
+         return $this->fetch();
+    }
+    public  function  loginHandle(){
+        return $this->fetch();
     }
     public function contact(){
 

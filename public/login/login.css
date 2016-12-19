@@ -1,0 +1,12 @@
+/**{ margin:0; padding:0;}*/
+#body { font-family:"微软雅黑", "宋体";  color:#111; background-color: #d8d8d8;}
+#userlogin { width:450px; background:#fff; margin:30px auto; padding:25px;}
+#userlogin h3 { font-size:16px; line-height:32px; margin-bottom:20px;}
+#userlogin p { margin-bottom:25px;}
+#userlogin .input-text { border:1px #ccc solid; height:38px; width:300px; background:url(../login/ico-user.png) no-repeat 0 -2px; padding-left:50px; font-size:14px; font-family:"微软雅黑", "宋体";}
+#userlogin .input-pwd { background:url(../login/ico-pwd.png) no-repeat -2px -2px;}
+#userlogin .input-btn { display:block; width:300px; height:40px; border:0; background:#9A0002; color:#fff; font-family:"微软雅黑", "宋体"; font-size:16px; font-weight:bold; letter-spacing:5px; border-radius:5px;}
+#userlogin .input-btn:hover { background:#D10003; cursor:pointer;} /*cursor属性：设置鼠标的显示形状。pointer值指的是手型*/
+#userlogin h6 { text-align:right;}
+#userlogin h6 a { color:#666; text-decoration:none; font-weight:normal; margin-right:12px;}
+#userlogin h6 a:hover { color:#C81D1F;}
