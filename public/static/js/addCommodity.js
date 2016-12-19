@@ -128,7 +128,6 @@ function toPostCommodity() {
    });
 }
 
-
 $(function () {
     // 初始化插件
     $("#zyupload").zyUpload({
@@ -136,8 +135,8 @@ $(function () {
         height: "400px",                 // 宽度
         itemWidth: "140px",                 // 文件项的宽度
         itemHeight: "115px",                 // 文件项的高度
-        url: "upload",              // 上传文件的路径
-        fileType: ["jpg", "png", "txt", "js", "exe"],// 上传文件的类型
+        url: "uploadImage",              // 上传文件的路径
+        fileType: ["jpg", "png"],// 上传文件的类型
         fileSize: 51200000,                // 上传文件的大小
         multiple: true,                    // 是否可以多个文件上传
         dragDrop: true,                    // 是否可以拖动上传文件
@@ -159,7 +158,11 @@ $(function () {
 //                console.info("此文件上传到服务器地址：");
 //                console.info(response);
 //                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
-            $("#dirname").val(response);
+
+            var imageName = document.getElementById("dirname").value;
+            imageName += ";" + response.substr(0,40);
+            $("#dirname").val(imageName);
+            // alert(response.substr(0,40));
         },
         onFailure: function (file, response) {          // 文件上传失败的回调方法
             console.info("此文件上传失败：");
@@ -172,15 +175,17 @@ $(function () {
 
             $.ajax({
                 type: "POST",
-                url: "{:url('demo/index/add')}",
+                url: "addCommodity",
                 dataType: "json",
                 data: {
-                    comdata: $('#comdata').serializeArray()
+                    commodityData: $('#commodityData').serializeArray()
                 },
                 success: function (msg) {
 
                 },
             });
+
+            $("#dirname").val("");
 
         }
     });
