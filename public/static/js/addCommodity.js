@@ -17,7 +17,7 @@ $(document).ready(function() {
         {
             FieldCount++; //text box added increment
             //add input box
-            $(InputsWrapper).append('<div>参数名：<input type="text" name="parameterName[]">；参数值：<input type="text" name="parameterValue[]" id="field_'+ FieldCount +'"/><a href="#" class="removeclass">×</a></div>');
+            $(InputsWrapper).append('<div>参数名：<input type="text" name="parameterName">；参数值：<input type="text" name="parameterValue" id="field_'+ FieldCount +'"/><a href="#" class="removeclass">×</a></div>');
             x++; //text box increment
         }
         return false;
@@ -142,7 +142,7 @@ $(function () {
         dragDrop: true,                    // 是否可以拖动上传文件
         tailor: true,                    // 是否可以裁剪图片
         del: true,                    // 是否可以删除文件
-        finishDel: false,  				  // 是否在上传文件完成后删除预览
+        finishDel: true,  				  // 是否在上传文件完成后删除预览
         /* 外部获得的回调接口 */
         onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
             console.info("当前选择了以下文件：");
@@ -167,12 +167,12 @@ $(function () {
         onFailure: function (file, response) {          // 文件上传失败的回调方法
             console.info("此文件上传失败：");
             console.info(file.name);
+            $("#dirname").val("");
         },
         onComplete: function (response) {           	  // 上传完成的回调方法
 //                console.info("文件上传完成");
 //                console.info(response);
 //                alert(response);
-
             $.ajax({
                 type: "POST",
                 url: "addCommodity",
@@ -184,7 +184,6 @@ $(function () {
 
                 },
             });
-
             $("#dirname").val("");
 
         }

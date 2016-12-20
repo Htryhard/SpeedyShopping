@@ -18,7 +18,18 @@ class CommodityController extends BaseController
     public function addCommodity(){
         $data = $this->request->param();
         if (count($data)>0){
-            dump($data['commodityData']);
+            $commodityData = $data['commodityData'];
+            $commodityImages = Comm::getCommodityImagesNameByForm($commodityData);
+            $commodityParameters = Comm::analysisParameter($commodityData);
+            $commodityData = Comm::analysisCommodityForm($commodityData);
+
+//            echo "图片：";
+//            dump($commodityImages);
+//            echo "<br/>参数：";
+//            dump($commodityParameters);
+//            echo "<br/>商品：";
+//            dump($commodityData);
+
 //            $commodityTitle = $data['title'];
 //            $commodityDescribe = $data['describe'];
 

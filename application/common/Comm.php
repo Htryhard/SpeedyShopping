@@ -176,4 +176,91 @@ class Comm
         return $a . $b;
     }
 
+    /**
+     * 解析商品表单从而获取商品的参数
+     * @param $arr
+     * @return array
+     */
+    public static function analysisParameter($arr){
+        $parameterName = array();
+        $parameterValue = array();
+        $paramet = array();
+        foreach ($arr as $item){
+            if ($item["name"]=="parameterName"){
+//                $parameterName += [$item['value']];
+                array_push($parameterName,$item['value']);
+            }
+
+            if ($item["name"]=="parameterValue"){
+//                $parameterValue += [$item['value']];
+                array_push($parameterValue,$item['value']);
+            }
+        }
+        $parametLen = count($parameterName);
+        for ($i = 0 ;$i < $parametLen ;$i++){
+            $paramet += [$parameterName[$i] => $parameterValue[$i]];
+//            $paramet[$parameterName[$i]] = [$parameterValue[$i]];
+        }
+        return $paramet;
+    }
+
+    /**
+     * 解析商品表单，商品表单数据格式不规则，需要单独解析
+     * @param $arr
+     * @return array|null
+     */
+    public static function analysisCommodityForm($arr){
+        if (count($arr) > 0) {
+            $result = array();
+            foreach ($arr as $item) {
+                if ($item["name"]=="parameterValue" || $item["name"]=="parameterName" || $item["name"]=="dirname"){
+                    continue;
+                }
+                $result += [$item['name'] => $item['value']];
+            }
+            return $result;
+        } else {
+            return null;
+        }
+    }
+
+    /**从商品表单中解析出图片的名称
+     * @param $arr
+     * @return array|null
+     */
+    public static function getCommodityImagesNameByForm($arr){
+        if (count($arr) > 0) {
+            $result = array();
+            $imgStr = "";
+            foreach ($arr as $item) {
+                if ($item["name"]=="dirname"){
+                    $imgStr = $item['value'];
+                    $imgStr = substr($imgStr,1);
+//                    array_push($result,$item['value']);
+                    break;
+                }
+            }
+            $result = explode(";",$imgStr);
+            return $result;
+        } else {
+            return null;
+        }
+    }
+
+    /**把一个数组进行json编码
+     * @param $arr
+     * @return string
+     */
+    public static function toJson($arr){
+        return json_encode($arr);
+    }
+
+    /**把一个json字符串转换成数组
+     * @param $json
+     * @return mixed
+     */
+    public static function jsonToArr($json){
+        return json_decode($json, true);
+    }
+
 }
