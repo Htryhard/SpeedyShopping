@@ -20,7 +20,7 @@ use app\common\model\Type;
 class TypeController extends BaseController
 {
     //显示所有的类别
-    public function manage()
+    public function index()
     {
         $types = Type::all();
         $this->assign("types", $types);
