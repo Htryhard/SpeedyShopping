@@ -6,6 +6,7 @@
  * 功能：
  */
 namespace app\common;
+
 use app\common\model\User;
 
 class Comm
@@ -45,7 +46,7 @@ class Comm
         $streamFileRand = date('YmdHis') . rand(1000, 9999);
         $streamFilename = ROOT_PATH . "/public/uploads/icon_images/" . $streamFileRand . $streamFileType;
         //存入数据库的位置
-        $path =  $streamFileRand . $streamFileType;
+        $path = $streamFileRand . $streamFileType;
         //处理base64文本，用正则把第一个base64,之前的部分砍掉
         preg_match('/(?<=base64,)[\S|\s]+/', $base64Icon, $streamForW);
         if (file_put_contents($streamFilename, base64_decode($streamForW[0])) === false) {
@@ -181,23 +182,24 @@ class Comm
      * @param $arr
      * @return array
      */
-    public static function analysisParameter($arr){
+    public static function analysisParameter($arr)
+    {
         $parameterName = array();
         $parameterValue = array();
         $paramet = array();
-        foreach ($arr as $item){
-            if ($item["name"]=="parameterName"){
+        foreach ($arr as $item) {
+            if ($item["name"] == "parameterName") {
 //                $parameterName += [$item['value']];
-                array_push($parameterName,$item['value']);
+                array_push($parameterName, $item['value']);
             }
 
-            if ($item["name"]=="parameterValue"){
+            if ($item["name"] == "parameterValue") {
 //                $parameterValue += [$item['value']];
-                array_push($parameterValue,$item['value']);
+                array_push($parameterValue, $item['value']);
             }
         }
         $parametLen = count($parameterName);
-        for ($i = 0 ;$i < $parametLen ;$i++){
+        for ($i = 0; $i < $parametLen; $i++) {
             $paramet += [$parameterName[$i] => $parameterValue[$i]];
 //            $paramet[$parameterName[$i]] = [$parameterValue[$i]];
         }
@@ -209,11 +211,12 @@ class Comm
      * @param $arr
      * @return array|null
      */
-    public static function analysisCommodityForm($arr){
+    public static function analysisCommodityForm($arr)
+    {
         if (count($arr) > 0) {
             $result = array();
             foreach ($arr as $item) {
-                if ($item["name"]=="parameterValue" || $item["name"]=="parameterName" || $item["name"]=="dirname"){
+                if ($item["name"] == "parameterValue" || $item["name"] == "parameterName" || $item["name"] == "dirname") {
                     continue;
                 }
                 $result += [$item['name'] => $item['value']];
@@ -228,19 +231,20 @@ class Comm
      * @param $arr
      * @return array|null
      */
-    public static function getCommodityImagesNameByForm($arr){
+    public static function getCommodityImagesNameByForm($arr)
+    {
         if (count($arr) > 0) {
             $result = array();
             $imgStr = "";
             foreach ($arr as $item) {
-                if ($item["name"]=="dirname"){
+                if ($item["name"] == "dirname") {
                     $imgStr = $item['value'];
-                    $imgStr = substr($imgStr,1);
+                    $imgStr = substr($imgStr, 1);
 //                    array_push($result,$item['value']);
                     break;
                 }
             }
-            $result = explode(";",$imgStr);
+            $result = explode(";", $imgStr);
             return $result;
         } else {
             return null;
@@ -251,7 +255,8 @@ class Comm
      * @param $arr
      * @return string
      */
-    public static function toJson($arr){
+    public static function toJson($arr)
+    {
         return json_encode($arr);
     }
 
@@ -259,8 +264,20 @@ class Comm
      * @param $json
      * @return mixed
      */
-    public static function jsonToArr($json){
+    public static function jsonToArr($json)
+    {
         return json_decode($json, true);
+    }
+
+    /**
+     * @param $newUrl 新路径（全路径）
+     * @param $oldUrl 旧路径（全路径）
+     * @return bool 成功返回真，失败返回假
+     */
+    public static function moveFile($newUrl, $oldUrl)
+    {
+        copy($oldUrl, $newUrl); //拷贝到新目录
+        return unlink($oldUrl); //删除旧目录下的文件
     }
 
 }
