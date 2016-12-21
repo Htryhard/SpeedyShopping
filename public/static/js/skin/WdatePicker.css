@@ -1,7 +1,7 @@
 .Wdate{
 	border:#999 1px solid;
 	height:30px;
-	width: 470px;
+	width: 430px;
 	background:#fff url(datePicker.gif) no-repeat right;
 }
 .Wdate::-ms-clear{display:none;}
@@ -12,5 +12,5 @@
 }
 .kk{
 	height:30px;
-	width: 180px;
+	width: 150px;
 }
