@@ -17,7 +17,8 @@ $(document).ready(function() {
         {
             FieldCount++; //text box added increment
             //add input box
-            $(InputsWrapper).append('<div>参数名：<input type="text" name="parameterName">；参数值：<input type="text" name="parameterValue" id="field_'+ FieldCount +'"/><a href="#" class="removeclass">×</a></div>');
+            $(InputsWrapper).append('<div>参数名：<input type="text" name="parameterName" style=" height:30px;width: 150px ">；参数值：<input type="text" style=" height:30px;width:150px  " name="parameterValue" id="field_'+ FieldCount +'"/>' +
+                '<a href="#" class="removeclass" >×</a></div>');
             x++; //text box increment
         }
         return false;
@@ -131,7 +132,7 @@ function toPostCommodity() {
 $(function () {
     // 初始化插件
     $("#zyupload").zyUpload({
-        width: "650px",                 // 宽度
+        width: "700px",                 // 宽度
         height: "400px",                 // 宽度
         itemWidth: "140px",                 // 文件项的宽度
         itemHeight: "115px",                 // 文件项的高度
