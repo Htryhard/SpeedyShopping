@@ -22,7 +22,9 @@ $(document).ready(function() {
                 '参数值：<input type="text" style=" height:30px;width:150px  " name="parameterValue" id="field_'+ FieldCount +'"/>' +
                 '<a href="#" class="removeclass" >' + '<img src="../images/delete.png" width="15px;"height="15px"></a>' +
                 '</div>');
+
             x++; //text box increment
+
         }
         return false;
     });
