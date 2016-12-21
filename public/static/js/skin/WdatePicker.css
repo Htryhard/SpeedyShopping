@@ -1,6 +1,7 @@
 .Wdate{
 	border:#999 1px solid;
-	height:20px;
+	height:30px;
+	width: 480px;
 	background:#fff url(datePicker.gif) no-repeat right;
 }
 .Wdate::-ms-clear{display:none;}
@@ -8,4 +9,8 @@
 .WdateFmtErr{
 	font-weight:bold;
 	color:red;
+}
+.kk{
+	height:30px;
+	width: 50px;
 }
