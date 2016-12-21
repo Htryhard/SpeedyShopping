@@ -13,5 +13,9 @@ use think\Model;
 
 class Type extends Model
 {
+    public function commodities()
+    {
+        return $this->hasMany('commodity','type_id','id');
+    }
 
 }

@@ -31,4 +31,12 @@ class Commodity extends Validate
         'price.max'     => '商品价格最多不能超过20个字符',
     ];
 
+    protected $scene = [
+        'title'  =>  ['title'],
+        'parameter'  =>  ['parameter'],
+        'repertory'  =>  ['repertory'],
+        'price'  =>  ['price'],
+        'addOrEdit'  =>  ['title','parameter','repertory','price'],
+    ];
+
 }

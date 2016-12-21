@@ -13,5 +13,9 @@ use think\Model;
 
 class Commodity extends Model
 {
+    public function type()
+    {
+        return $this->belongsTo('type');
+    }
 
 }
