@@ -131,7 +131,7 @@ function toPostCommodity() {
 $(function () {
     // 初始化插件
     $("#zyupload").zyUpload({
-        width: "650px",                 // 宽度
+        width: "700px",                 // 宽度
         height: "400px",                 // 宽度
         itemWidth: "140px",                 // 文件项的宽度
         itemHeight: "115px",                 // 文件项的高度
