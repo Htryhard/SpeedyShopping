@@ -20,7 +20,7 @@ $(document).ready(function() {
             $(InputsWrapper).append('<div>' +
                 '参数名：<input type="text" name="parameterName" style=" height:30px;width: 150px ">；' +
                 '参数值：<input type="text" style=" height:30px;width:150px  " name="parameterValue" id="field_'+ FieldCount +'"/>' +
-                '<a href="#" class="removeclass" >' + '<img src="../images/delete.png" width="15px;"height="15px"></a>' +
+                '<a href="#" class="removeclass" >' + '<img src="/SpeedyShopping/public/static/images/delete.png" width="15px;"height="15px"></a>' +
                 '</div>');
 
             x++; //text box increment
