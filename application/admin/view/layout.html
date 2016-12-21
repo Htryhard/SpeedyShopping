@@ -4,34 +4,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
     {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
-    {load href="__PUBLIC__/static/js/jquery-3.1.1.min.js" /}
+    <!--{load href="__PUBLIC__/static/js/jquery-3.1.1.min.js" /}-->
     {load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
-
-
-    {load href="__PUBLIC__/static/js/addCommodity.js" /}
 
     {load href="__PUBLIC__/static/js/WdatePicker.js" /}
 
+    {load href="__PUBLIC__/static/zyupload/skins/zyupload-1.0.0.min.css" /}
+    {load href="__PUBLIC__/static/zyupload/jquery-1.7.2.js" /}
+    {load href="__PUBLIC__/static/zyupload/zyupload-1.0.0.js" /}
 
-    {load href="__PUBLIC__/static/up-images-plug-in/css/default.css" /}
-    {load href="__PUBLIC__/static/up-images-plug-in/css/fileinput.css" /}
-
+    {load href="__PUBLIC__/static/js/addCommodity.js" /}
 
 </head>
     <body>
-        <div class="hold-transition skin-red sidebar-mini">
-            {include file="/header" /}
-            {include file="/left"}
-            <div class="wrapper" >
-                    <div class="content-wrapper" style="background: #d9edf7;">
-                        <section class="content-header">
-                        {__CONTENT__}
-                        </section>
-
-                </div>
-            </div>
-        </div>
-
+    {__CONTENT__}
     </body>
 </html>
 

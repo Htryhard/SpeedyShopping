@@ -7,7 +7,7 @@
        top:-4px;
     }
 </style>
-<body>
+
 
 <!----------------------------导航栏——----------->
 <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -21,7 +21,7 @@
         </div>
         <button  type="submit" class="btn btn-success">Submit</button>
     </form>
-    <button type="submit" class="btn btn-default navbar-btn">首页</button>
+    <button type="submit" class="btn btn-default navbar-btn" href="{:url('home/index/login')}">首页</button>
     <button type="submit" class="btn btn-default navbar-btn">超市</button>
     <button type="submit" class="btn btn-default navbar-btn">租车</button>
     <button type="submit" class="btn btn-default navbar-btn">杂货</button>
@@ -31,139 +31,115 @@
 
 </nav>
 
+
+<div class="container">
+
+    <div class="leftsidebar_box">
+        <div class="line"></div>
+        <dl class="system_log">
+            <dt onClick="changeImage()">超市<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">食品饮料</a></dd>
+            <dd><a href="#">粮油副食</a></dd>
+            <dd><a href="#">美容洗护</a></dd>
+            <dd><a href="#">家居彩电</a></dd>
+            <dd><a href="#">家庭清洁</a></dd>
+            <dd><a href="#">生活服务</a></dd>
+        </dl>
+
+        <dl class="custom">
+            <dt onClick="changeImage()">服装<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">女装</a></dd>
+            <dd><a href="#">男装</a></dd>
+            <dd><a href="#">内衣</a></dd>
+
+        </dl>
+
+        <dl class="channel">
+            <dt>办公<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">学习</a></dd>
+            <dd><a href="#">书城</a></dd>
+            <dd><a href="#">办公用具</a></dd>
+        </dl>
+
+        <dl class="app">
+            <dt onClick="changeImage()">运动<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">户外健身必带</a></dd>
+            <dd><a href="#">运动鞋</a></dd>
+
+        </dl>
+
+        <dl class="cloud">
+            <dt>杂货<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">餐具</a></dd>
+        </dl>
+
+        <dl class="syetem_management">
+            <dt>轻松一刻<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">游戏</a></dd>
+            <dd><a href="#">电影</a></dd>
+            <dd><a href="#">球赛</a></dd>
+
+        </dl>
+
+        <dl class="source">
+            <dt>租车<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">自行车</a></dd>
+            <dd><a href="#">山地车</a></dd>
+            <dd><a href="#">汽车</a></dd>
+        </dl>
+
+        <dl class="statistics">
+            <dt>维修<b class="caret"></b></dt>
+            <dd class="first_dd"><a href="#">手机维修</a></dd>
+            <dd><a href="#">家电维修</a></dd>
+            <dd><a href="#">汽车维修</a></dd>
+        </dl>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(".leftsidebar_box dt").css({"background-color":"#3992d0"});
+    $(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+    $(function(){
+        $(".leftsidebar_box dd").hide();
+        $(".leftsidebar_box dt").click(function(){
+            $(".leftsidebar_box dt").css({"background-color":"#3992d0"})
+            $(this).css({"background-color": "#317eb4"});
+            $(this).parent().find('dd').removeClass("menu_chioce");
+            $(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+            $(this).parent().find('img').attr("src","images/left/select_xl.png");
+            $(".menu_chioce").slideUp();
+            $(this).parent().find('dd').slideToggle();
+            $(this).parent().find('dd').addClass("menu_chioce");
+        });
+    })
+</script>
+
+
+
+
+
 <!-------------左侧导航栏------------------>
     <div class="row">
-        <div class="col-xs-2">
+        <div class="col-xs-1.5">
             <!--data-offset-top="125"-->
             <ul class="nav nav-tabs nav-stacked" data-spy="affix">
-                <li class="active"><a href="" title="登录账号"
-                                      data-toggle="modal" data-target="#myModal">登录</a></li>
-                <li><a href="" title="注册账号" data-toggle="modal" data-target="#register">注册</a></li>
+                <li class="navbar-inverse"><a href="{:url('home/index/login')}" title="登录账号">登录</a></li>
+                <li><a href="{:url('home/Index/register')}" title="注册账号">注册</a></li>
                 <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=1610357038&site=qq&menu=yes">
                     联系我们</a>
                 </li>
                 <li><a href="">反馈</a></li>
             </ul>
-            <!----------注册模态框------------->
-                <div class="modal fade" id="register" tabindex="-1" role="dialog"                                                 aria-labelledby="myregister" aria-hidden="true" >
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    &times;
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                  请注册账号
-                                </h4>
-                            </div>
-                            <div class="modal-body">
-                                <div style="padding: 50px 50px 10px;">
-                                    <form class="bs-example bs-example-form" role="form">
-                                        <div class="row">
-                                            <div class="col-lg-10">
-                                                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">注册账号：</button>
-                    </span>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            </br>
-                                            <div class="col-lg-10">
-                                                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">注册密码：</button>
-                    </span>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                            </div><!-- /.col-lg-6 -->
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-10">
-                                                <div class="input-group">
-                               <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button">确认密码：</button>
-                                           </span>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-10">
-                                                <div class="input-group">
-                               <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button">手机号码：</button>
-                                           </span>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                                </button>
-                                <button type="button" class="btn btn-primary">
-                                    提交更改
-                                </button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-            <!------------------------登录模态框---------------------------->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"                                                 aria-labelledby="myModalLabel" aria-hidden="true" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                &times;
-                            </button>
-                            <h4 class="modal-title" id="myregister">
-                                请登录账号
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-                            <div style="padding: 50px 50px 10px;">
-                                <form class="bs-example bs-example-form" role="form">
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">登录账号：</button>
-                    </span>
-                                                <input type="password" class="form-control">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                        </br>
-                                        <div class="col-lg-10">
-                                            <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">登录密码：</button>
-                    </span>
-                                                <input type="password" class="form-control">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div><!-- /.row -->
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                                提交更改
-                            </button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
+
+</div>
+</div>
 
 
 
 
-        </div>
-       </div>
 
 
 </body>

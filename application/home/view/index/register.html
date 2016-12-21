@@ -1,0 +1,164 @@
+{layout name="layout" /}
+
+
+<div style="height: 100px;"></div>
+<div class="container" >
+    <div class="row col-md-2"></div>
+    <form class="form-horizontal" role="form" action="{:url('home/Index/register')}" method="post" id="formdata">
+        <div class="row col-md-5 ">
+            <div class="form-group">
+                <div class="container">
+                    <div class="imageBox">
+                        <div class="thumbBox"></div>
+                        <div class="spinner" style="display: none">Loading...</div>
+                    </div>
+                    <div class="action" style="margin-top: 50px;">
+                        <input type="file" id="file" style="float:left; width: 200px">
+                        <input type="button" id="btnCrop" value="确认" style="float: left">
+                        <input type="button" id="btnZoomIn" value="放大" style="float: left">
+                        <input type="button" id="btnZoomOut" value="缩小" style="float: left">
+                    </div>
+                    <div class="cropped">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-4" style="margin-top: 30px;">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="email">邮箱</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱">
+                </div>
+                <div class="col-md-3" id="email_error"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="password">密码</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                </div>
+                <div class="col-md-3" id="password_error"></div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="password2">确认密码</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="请再次输入密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="name">用户名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="name" name="sdasd" placeholder="请输入用户名">
+                </div>
+                <div class="col-md-3" id=""></div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="name">个性签名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="sdasd" name="sdasd" placeholder="请输入个性签">
+                </div>
+                <div class="col-md-3" id="name_error"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="phone">联系方式</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入联系方式">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="address">地址</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="请输入地址">
+                </div>
+            </div>
+
+            <input type="hidden" id="hidd" name="base64Icon" value="">
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-md-10">
+                    <button type="button" class="btn btn-success" style="width: 200px"id="topost" >提交</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        var options =
+            {
+                imageBox: '.imageBox',
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: '__PUBLIC__/static/images/user2-160x160.jpg'
+            }
+        var cropper = new cropbox(options);
+        document.querySelector('#file').addEventListener('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                options.imgSrc = e.target.result;
+                cropper = new cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+            this.files = [];
+        })
+        document.querySelector('#topost').addEventListener('click', function () {
+            var img = cropper.getDataURL();
+            $('#hidd').val(img);
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/Index/register')}",
+                dataType: "json",
+                data: {
+                    userdata: $('#formdata').serializeArray()
+                },
+                success: function (msg) {
+//                    alert(msg);
+                    switch (msg) {
+                        case 'repetition':
+                            getlayout("email_error", "此邮箱已经被注册！");
+                            break;
+                        case 'passwordNoFit':
+                            getlayout("password_error", "两次密码不一致！");
+                            break;
+                        case 'succeed':
+                            alert("成功注册！");
+                            break;
+                        default:
+                            alert(msg);
+
+                    }
+//                    var u = "{:url('admin/label/index')}";
+//                    window.location = u;
+                },
+            });
+        })
+        document.querySelector('#btnZoomIn').addEventListener('click', function () {
+            cropper.zoomIn();
+        })
+        document.querySelector('#btnZoomOut').addEventListener('click', function () {
+            cropper.zoomOut();
+        })
+    };
+
+    //==========================================
+
+    //获得错误html代码
+    function getlayout(elid, str) {
+        $("#" + elid).empty();
+        $("#" + elid).parent().removeClass("has-success");
+        $("#" + elid).parent().addClass("has-error");
+        $("#" + elid).append(
+            "<font style='color:red;font-weight:bold;'><span class='glyphicon glyphicon-remove'></span> " + str + "</font>"
+        );
+    }
+</script>
+
+</body>
