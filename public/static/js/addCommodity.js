@@ -17,7 +17,8 @@ $(document).ready(function() {
         {
             FieldCount++; //text box added increment
             //add input box
-            $(InputsWrapper).append('<div>参数名：<input type="text" name="parameterName">；参数值：<input type="text" name="parameterValue" id="field_'+ FieldCount +'"/><a href="#" class="removeclass">×</a></div>');
+            $(InputsWrapper).append('<div>参数名：<input type="text" name="parameterName" style=" height:30px;width: 470px ">；参数值：<input type="text" style=" height:30px;width: 470px " name="parameterValue" id="field_'+ FieldCount +'"/>' +
+                '<a href="#" class="removeclass" >×</a></div>');
             x++; //text box increment
         }
         return false;
