@@ -17,7 +17,12 @@ use app\common\model\Type;
 
 class CommodityController extends BaseController
 {
-    public function index(){
+    /**
+     * 商品首页
+     * @return mixed
+     */
+    public function index()
+    {
 // 获取查询信息
         $title = input('get.title');
         $pageSize = 15; // 每页显示15条数据
@@ -37,6 +42,11 @@ class CommodityController extends BaseController
         $this->assign('commodities', $commodities);
         return $this->fetch();
     }
+
+    /**
+     * 添加商品
+     * @return mixed|string
+     */
     public function addCommodity()
     {
         $data = $this->request->param();
@@ -99,6 +109,10 @@ class CommodityController extends BaseController
         }
     }
 
+    /**
+     * 上传商品的图片
+     * @return string
+     */
     public function uploadImage()
     {
         $imgSuffix = $_FILES['file']['name'];
@@ -116,6 +130,39 @@ class CommodityController extends BaseController
         } else {
             print "文件上传失败啦!这里有一些信息可以帮助你去调试:\n";
             print_r($_FILES);
+        }
+    }
+
+    public function commodityDetailed()
+    {
+        $commodityId = $this->request->param("id");
+        if ($commodityId != "") {
+            $commodity = Commodity::get(['id' => $commodityId]);
+            if ($commodity != null) {
+
+//                $commodityData = Comm::analysisCommodityForm($commodityData);
+
+                //构造商品的图片
+                $commodityImages = array();
+                $commodityImageObjects = $commodity['images'];
+                foreach ($commodityImageObjects as $imageObject){
+                    $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
+                    array_push($commodityImages,$imgUrl);
+                }
+
+                //构造商品的参数
+                $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
+
+
+                $this->assign("commodity",$commodity);
+                $this->assign("parameters",$commodityParameters);
+                $this->assign("images",$commodityImages);
+                return $this->fetch();
+            } else {
+                return "商品不存在";
+            }
+        } else {
+            return "必须传入商品的ID";
         }
     }
 }

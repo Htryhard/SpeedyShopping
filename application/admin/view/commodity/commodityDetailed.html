@@ -1,0 +1,18 @@
+{layout name="layout" /}
+<span>商品信息：</span><br/>
+<span>标题：</span>
+{$commodity->getData("title")}<br/>
+<span>分类：</span>
+{$commodity['type']['content']}<br/>
+...
+<hr/>
+
+<span>商品参数：</span><br/>
+{volist name="parameters" id="vo"  }
+{$key}<span>:</span>{$vo}<br/>
+{/volist}
+<hr/>
+<span>商品图片：</span>
+{volist name="images" id="item"}
+<img src="{$item}" width="150px;"height="150px">
+{/volist}

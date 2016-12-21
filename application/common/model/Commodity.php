@@ -18,4 +18,8 @@ class Commodity extends Model
         return $this->belongsTo('type');
     }
 
+    public function images(){
+        return $this->hasMany('CommodityImages','commodity_id','id');
+    }
+
 }
