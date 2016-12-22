@@ -133,6 +133,10 @@ class CommodityController extends BaseController
         }
     }
 
+    /**
+     * 商品明细页面
+     * @return mixed|string
+     */
     public function commodityDetailed()
     {
         $commodityId = $this->request->param("id");
@@ -144,7 +148,7 @@ class CommodityController extends BaseController
 
                 //构造商品的图片
                 $commodityImages = array();
-                $commodityImageObjects = $commodity['image'];
+                $commodityImageObjects = $commodity['images'];
                 foreach ($commodityImageObjects as $imageObject){
                     $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
                     array_push($commodityImages,$imgUrl);
@@ -153,10 +157,9 @@ class CommodityController extends BaseController
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
 
-
                 $this->assign("commodity",$commodity);
                 $this->assign("parameters",$commodityParameters);
-                $this->assign("image",$commodityImages);
+                $this->assign("images",$commodityImages);
                 return $this->fetch();
             } else {
                 return "商品不存在";
@@ -165,4 +168,7 @@ class CommodityController extends BaseController
             return "必须传入商品的ID";
         }
     }
+
+
+
 }
