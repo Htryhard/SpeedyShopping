@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
     {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
     {load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
     {load href="__PUBLIC__/static/zyupload/jquery-1.7.2.js" /}
@@ -11,19 +12,17 @@
 
 </head>
 <body>
-<div class="zong">
-    <div class="shang" style="margin-bottom: 2px;">
+
         {include file="./header" /}
-    </div>
-    <!--<div style="height: 200px;background: forestgreen"></div>-->
-    <div class="zuo" style="float: left">
+        <div style="float: left;width: 1500px" class="left">
         {include file="./left" /}
-    </div>
-    <div class="you" style="float: left;">
+        </div>
+
         {__CONTENT__}
+
         <div id="zyupload" class=""></div>
-    </div>
-</div>
+
+
 </body>
 </html>
 
