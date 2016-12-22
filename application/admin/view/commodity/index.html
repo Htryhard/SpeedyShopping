@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<table class="table table-hover"  style="width: 1300px">
+<table class="table table-hover"  style="width: 1100px;float: right" >
     <h3 style="color: #00c0ef">所有商品</h3>
     <thead>
     <tr class="info">
@@ -40,7 +40,7 @@
         <td>{$item->getData('repertory')}</td>
         <td>{$item->getData('grade')}</td>
         <td>
-            <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> ||
+            <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> |
             <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">编辑</a>
         </td>
     </tr>
