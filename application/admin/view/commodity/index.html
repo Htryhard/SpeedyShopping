@@ -40,7 +40,8 @@
         <td>{$item->getData('repertory')}</td>
         <td>{$item->getData('grade')}</td>
         <td>
-            <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a>
+            <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> ||
+            <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">编辑</a>
         </td>
     </tr>
     {/volist}

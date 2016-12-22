@@ -169,6 +169,33 @@ class CommodityController extends BaseController
         }
     }
 
+    public function editCommodity(){
+        $commodityId = $this->request->param("id");
+        if ($commodityId != "") {
+            $commodity = Commodity::get(['id' => $commodityId]);
+            if ($commodity != null) {
+                //构造商品的图片
+                $commodityImages = array();
+                $commodityImageObjects = $commodity['images'];
+                foreach ($commodityImageObjects as $imageObject){
+                    $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
+                    array_push($commodityImages,$imgUrl);
+                }
 
+                //构造商品的参数
+                $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
+
+                $this->assign("types", Type::all());
+                $this->assign("commodity",$commodity);
+                $this->assign("parameters",$commodityParameters);
+                $this->assign("images",$commodityImages);
+                return $this->fetch();
+            } else {
+                return "商品不存在";
+            }
+        } else {
+            return "必须传入商品的ID";
+        }
+    }
 
 }

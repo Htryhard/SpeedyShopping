@@ -1,0 +1,106 @@
+{layout name="layout" /}
+<block name="resources">
+
+    {load href="__PUBLIC__/static/js/WdatePicker.js" /}
+    {load href="__PUBLIC__/static/zyupload/skins/zyupload-1.0.0.min.css" /}
+    {load href="__PUBLIC__/static/zyupload/zyupload-1.0.0.js" /}
+    {load href="__PUBLIC__/static/js/editCommodity.js" /}
+
+</block>
+
+<div style="background: #DAF3F5">
+    <div style="height: 100px"></div>
+    <form class="form-horizontal" role="form" id="commodityData" action="">
+
+        <input type="hidden" id="dirname" name="dirname" value=""/>
+
+        <div class="form-group">
+            <label for="title" class="col-sm-4 control-label">标题</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="title" name="title" value="{$commodity->getData('title')}" placeholder="请输入商品标题">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="type_id" class="col-sm-4 control-label">分类</label>
+            <div class="col-sm-4">
+                {if condition="(count($types)>0)"}
+                <select class="form-control" id="type_id" name="type_id">
+                    {volist name="types" id="item"}
+
+                    {eq name="$commodity->getData('type_id')" value="$item->getData('id')"}
+                    <option value="{$item->getData('id')}" class="a" selected>{$item->getData('content')}</option>
+                    {else/}
+                    <option value="{$item->getData('id')}" class="a">{$item->getData('content')}</option>
+                    {/eq}
+
+                    {/volist}
+                </select>
+                {else /}
+                <span>还没有标签，<a href="{:url('admin/label/insert')}">去创建</a></span>
+                {/if}
+            </div>
+        </div><br/>
+
+        <div class="form-group">
+            <label for="wdate" class="col-md-4 control-label">商品下架时间：</label>
+            <div class="col-md-4">
+                <input class="Wdate" id="wdate" type="text" value="{:date('Y-m-d ',$commodity->getData('out_time'))}" onClick="WdatePicker()" name="wdate">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price" class="col-sm-4 control-label">商品价格(元)</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" id="price" name="price" value="{$commodity->getData('price')}" placeholder="请输入价格">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="repertory" class="col-sm-4 control-label">库存</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="repertory" id="repertory" value="{$commodity->getData('repertory')}" placeholder="请输入库存">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="type_id" class="col-sm-4 control-label">填写商品参数</label>
+            <div class="col-sm-4">
+                <div id="InputsWrapper">
+                    {volist name="parameters" id="vo"  }
+
+                    <div>
+                        参数名：<input type="text" name="parameterName" value="{$key}" class="kk" >
+                        ；参数值：<input type="text" name="parameterValue" id="field_1" value="{$vo}" class="kk"/>
+                        <a href="#" class="removeclass" ><img src="__PUBLIC__/static/images/delete.png" width="15px;"height="15px"></a>
+                    </div>
+
+                    {/volist}
+
+
+
+                </div>
+                <div style="height: 5px"></div>
+                <a href="#" id="AddMoreFileBox"><button class="btn btn-success" style="width: 470px">添加参数</button></a>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="describe" class="col-sm-4 control-label">描述</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" class="form-control" rows="4" cols="20" name="describe" id="describe" placeholder="描述">
+                    {$commodity->getData('describe')}
+                </textarea>
+
+            </div>
+        </div>
+
+        <span>商品图片：</span>
+        {volist name="images" id="item"}
+        <img src="{$item}" width="150px;"height="150px">
+        {/volist}
+    </form>
+
+    <div id="zyupload" class="zyupload"></div>
+</div>
