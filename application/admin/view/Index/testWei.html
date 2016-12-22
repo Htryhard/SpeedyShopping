@@ -1,201 +1,132 @@
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>jQuery下拉导航菜单</title>
-    <!--<link href="__PUBLIC__/wei/css/style.css" rel="stylesheet" type="text/css" />-->
+    <meta charset="UTF-8">
+    <title>树型菜单</title>
+
     <style>
-        * {
-            margin:0;
-            padding:0;
-            list-style:none;
-        }
-        body {
-            background:#fff;
-            font-size:12px;
-        }
-        img {
-            border:0;
-        }
-        a {
-            text-decoration:none;
-            color:#333;
-        }
-        a:hover {
-            color:#FF8400;
-        }
-        .clearfix:after {
-            content:".";
-            display:block;
-            height:0;
-            clear:both;
-            visibility:hidden;
-        }
-        .clearfix10:after {
-            content:".";
-            display:block;
-            height:10px;
-            clear:both;
-            visibility:hidden;
-        }
-        .h10{height:10px;}
-        .h15{height:15px;}
-        #header{width:1000px; margin:0 auto;}
-        .navBar {
-            width:1000px;
-            margin:0 auto;
+        /*
+                author :前端一枚  努力学习中 qq：815183231;
+        */
 
-            height:50px;
-            line-height:50px;
-            background:#000;
-            color:#333;
-        }
-        .nav {
-            position:relative;
-            width:980px;
-            margin:0 auto;
-            font-family:"Microsoft YaHei",SimSun,SimHei;
-            font-size:14px;
-        }
-        .nav a {
-            color:#fff;
-        }
-        .nav h3 {
-            font-size:100%;
-            font-weight:normal;
-        }
-        .nav .m {
-            float:left;
-            position:relative;
-            z-index:1;
-        }
-        .nav .s {
-            float:left;
-            width:3px;
-            text-align:center;
-            color:#D4D4D4;
-            font-size:12px;
-        }
-        .nav h3 a {
+        /*简单粗暴重置默认样式===============================*/
+        *{ margin: 0; padding: 0; }
+        img{border:0;}
+        ul,li{list-style-type:none;}
+        a {color:#00007F;text-decoration:none;}
+        a:hover {color:#bd0a01;text-decoration:underline;}
+        .treebox{ width: 200px; background-color:#1a6cb9; }
+        .menu{ overflow: hidden; border-color: #ddd; border-style: solid ; border-width: 0 1px 1px ; }
+        /*第一层*/
+        .menu li.level1>a{
             display:block;
-            width:115px;
-            text-align:center;
-            font-weight:bold;
+            height: 45px;
+            line-height: 45px;
+            color: #fff;
+            padding-left: 50px;
+            border-bottom: 1px solid #000;
+            font-size: 16px;
+            position: relative;
+            transition:all .5s ease 0s;
         }
-        .nav .sub {
-            display:none;
-            position:absolute;
-            left:-3px;
-            top:50px;
-            z-index:1;
-            width:117px;
-            border:1px solid #E6E4E3;
-            border-top:0;
-            background:#fff;
+        .menu li.level1 a:hover{ text-decoration: none;background-color:#326ea5;   }
+        .menu li.level1 a.current{ background: #0f4679; }
+
+        /*============修饰图标*/
+        .ico{ width: 20px; height: 20px; display:block;   position: absolute; left: 20px; top: 10px; background-repeat: no-repeat; background-image: url(__PUBLIC__/wei/images/ico1.png); }
+
+        /*============小箭头*/
+        .level1 i{ width: 20px; height: 10px; background-image:url(__PUBLIC__/wei/images/arrow.png); background-repeat: no-repeat; display: block; position: absolute; right: 20px; top: 20px; }
+        .level1 i.down{ background-position: 0 -10px; }
+
+        .ico1{ background-position: 0 0; }
+        .ico2{ background-position: 0 -20px; }
+        .ico3{ background-position: 0 -40px; }
+        .ico4{ background-position: 0 -60px; }
+        .ico5{ background-position: 0 -80px; }
+
+        /*第二层*/
+        .menu li ul{ overflow: hidden; }
+        .menu li ul.level2{ display: none;background: #0f4679;  }
+        .menu li ul.level2 li a{
+            display: block;
+            height: 45px;
+            line-height: 45px;
+            color: #fff;
+            text-indent: 60px;
+            /*border-bottom: 1px solid #ddd; */
+            font-size: 14px;
+            transition:all 1s ease 0s;
         }
-        .nav .sub li {
-            text-align:center;
-            padding:0 8px;
-            margin-bottom:-1px;
-        }
-        .nav .sub li a {
-            display:block;
-            border-bottom:1px solid #E6E4E3;
-            padding:8px 0;
-            height:28px;
-            line-height:28px;
-            color:#000;
-            font-size:12px;
-            font-weight:bold;
-        }
-        .nav .sub li a:hover {
-            color:#FE7700;
-        }
-        .nav .block {
-            height:8px;
-            width:120px;
-            background:#FE7700;
-            position:absolute;
-            left:0;
-            top:42px;
-            overflow:hidden;
-        }
+
     </style>
-    <script src="__PUBLIC__/wei/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 </head>
-
 <body>
-<br>
-<div class="navBar">
-    <ul class="nav clearfix">
-        <li class="m">
-            <h3><a target="_blank" href="#">网站首页</a></h3>
-        </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#" title="关于我们">关于我们</a></h3>
-            <ul class="sub">
-                <li><a href="#" title="企业简介">企业简介</a></li>
-                <li><a href="#" title="组织架构">组织架构</a></li>
-                <li><a href="#" title="企业资质">企业资质</a></li>
-                <li><a href="#" title="企业文化">企业文化</a></li>
+<div class="treebox">
+    <ul class="menu">
+        <li class="level1">
+            <a href="#none"><em class="ico ico1"></em>导航一<i class="down"></i></a>
+            <ul class="level2">
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
             </ul>
         </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#">资质认定</a></h3>
-            <ul class="sub">
-                <li><a href="#" title="国家高新认证">国家高新认证</a></li>
-                <li><a href="#" title="软件企业认证">软件企业认证</a></li>
-                <li><a href="#" title="深圳市高企认证">深圳市高企认证</a></li>
-                <li><a href="#" title="其它认证">其它认证</a></li>
+        <li class="level1">
+            <a href="#none"><em class="ico ico2"></em>导航一<i></i></a>
+            <ul class="level2">
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
             </ul>
         </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#">政府扶持</a></h3>
-            <ul class="sub" style="display: none;">
-                <li><a href="#" title="深圳市级扶持">深圳市级扶持</a></li>
-                <li><a href="#" title="各区级扶持">各区级扶持</a></li>
-                <li><a href="#" title="广东省级扶持">广东省级扶持</a></li>
-                <li><a href="#" title="国家和部级扶持">国家和部级扶持</a></li>
+        <li class="level1">
+            <a href="#none"><em class="ico ico3"></em>导航一<i></i></a>
+            <ul class="level2">
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
             </ul>
         </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#" title="知识产权">知识产权</a></h3>
-            <ul class="sub" style="display: none;">
-                <li><a href="#" title="知识产权申请">知识产权申请</a></li>
-                <li><a href="#" title="知识产权转让">知识产权转让</a></li>
-                <li><a href="#" title="技术咨询">技术咨询</a></li>
-                <li><a href="#" title="技术成果鉴定">技术成果鉴定</a></li>
+        <li class="level1">
+            <a href="#none"><em class="ico ico4"></em>导航一<i></i></a>
+            <ul class="level2">
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
             </ul>
         </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#" title="上市服务">上市服务</a></h3>
-            <ul class="sub" style="display: none;">
-                <li><a href="#" title="上市条件及流程">上市条件及流程</a></li>
-                <li><a href="#" title="上市顾问">上市顾问</a></li>
-                <li><a href="#" title="税收筹划">税收筹划</a></li>
-                <li><a href="#" title="资产重组">资产重组</a></li>
+        <li class="level1">
+            <a href="#none"><em class="ico ico5"></em>导航一<i></i></a>
+            <ul class="level2">
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
+                <li><a href="javascript:;">导航选项</a></li>
             </ul>
         </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#" title="人才招聘">人才招聘</a></h3>
-        </li>
-        <li class="s">|</li>
-        <li class="m">
-            <h3><a target="_blank" href="#" title="联系我们">联系我们</a></h3>
-        </li>
-        <li class="block" style="left: 251px;"></li>
     </ul>
 </div>
-<script type="text/javascript" src="__PUBLIC__/wei/js/SuperSlide.2.1.js"></script>
-<script src="__PUBLIC__/wei/js/daimabiji.js" type="text/javascript"></script>
+<!-- 引入 jQuery -->
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="__PUBLIC__/wei/js/easing.js"></script>
+<script>
+    //等待dom元素加载完毕.
+    $(function(){
+        $(".treebox .level1>a").click(function(){
+            $(this).addClass('current')   //给当前元素添加"current"样式
+                    .find('i').addClass('down')   //小箭头向下样式
+                    .parent().next().slideDown('slow','easeOutQuad')  //下一个元素显示
+                    .parent().siblings().children('a').removeClass('current')//父元素的兄弟元素的子元素去除"current"样式
+                    .find('i').removeClass('down').parent().next().slideUp('slow','easeOutQuad');//隐藏
+            return false; //阻止默认时间
+        });
+    })
+</script>
 </body>
+
 </html>

@@ -144,7 +144,7 @@ class CommodityController extends BaseController
 
                 //构造商品的图片
                 $commodityImages = array();
-                $commodityImageObjects = $commodity['images'];
+                $commodityImageObjects = $commodity['image'];
                 foreach ($commodityImageObjects as $imageObject){
                     $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
                     array_push($commodityImages,$imgUrl);
@@ -156,7 +156,7 @@ class CommodityController extends BaseController
 
                 $this->assign("commodity",$commodity);
                 $this->assign("parameters",$commodityParameters);
-                $this->assign("images",$commodityImages);
+                $this->assign("image",$commodityImages);
                 return $this->fetch();
             } else {
                 return "商品不存在";
