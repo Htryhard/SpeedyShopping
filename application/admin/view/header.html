@@ -1,19 +1,15 @@
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>jQuery下拉导航菜单</title>
-
+    <!--<link href="__PUBLIC__/wei/css/style.css" rel="stylesheet" type="text/css" />-->
     <style>
         * {
             margin:0;
             padding:0;
             list-style:none;
         }
-
+        body {
+            background:#fff;
+            font-size:12px;
+        }
         img {
             border:0;
         }
@@ -31,8 +27,18 @@
             clear:both;
             visibility:hidden;
         }
+        .clearfix10:after {
+            content:".";
+            display:block;
+            height:10px;
+            clear:both;
+            visibility:hidden;
+        }
+        .h10{height:10px;}
+        .h15{height:15px;}
+        #header{width:1000px; margin:0 auto;}
         .navBar {
-            width:100%;
+            width:1000px;
             margin:0 auto;
 
             height:50px;
@@ -111,10 +117,10 @@
             overflow:hidden;
         }
     </style>
+    <script src="__PUBLIC__/wei/js/jquery-1.7.2.min.js" type="text/javascript"></script>
 </head>
 
-<body>
-<br>
+
 <div class="navBar">
     <ul class="nav clearfix">
         <li class="m">
@@ -181,7 +187,6 @@
         <li class="block" style="left: 251px;"></li>
     </ul>
 </div>
-<script type="text/javascript" src="/SpeedyShopping/public/wei/js/SuperSlide.2.1.js"></script>
-<script src="/SpeedyShopping/public/wei/js/daimabiji.js" type="text/javascript"></script>
-</body>
-</html>
+<script type="text/javascript" src="__PUBLIC__/wei/js/SuperSlide.2.1.js"></script>
+<script src="__PUBLIC__/wei/js/daimabiji.js" type="text/javascript"></script>
+
