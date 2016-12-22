@@ -16,8 +16,22 @@
     {load href="__PUBLIC__/static/js/addCommodity.js" /}
 
 </head>
-    <body>
-        {__CONTENT__}
+    <body >
+    <!--{__CONTENT__}-->
+    <div class="zong">
+        <div class="shang" style="margin-bottom: 2px;">
+            {include file="./header" /}
+        </div>
+        <!--<div style="height: 200px;background: forestgreen"></div>-->
+        <div class="zuo" style="float: left">
+            {include file="./left" /}
+        </div>
+        <div class="you" style="float: left;margin-left: ;">
+            {__CONTENT__}
+            <div id="zyupload" class=""></div>
+        </div>
+    </div>
+
     </body>
 </html>
 
