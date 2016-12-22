@@ -1,57 +1,16 @@
+{layout name="layout" /}
+
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-{load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
-{load href="__PUBLIC__/static/bootstrap/css/style.css" /}
-{load href="__PUBLIC__/static/js/jquery-3.1.1.min.js" /}
-{load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
-<style>
-    .navbar-inverse{
-        background: #1c2d3f;
 
 
-
-    }
-
-
-</style>
-<div style="background:#72afd2;height: 120px";>
-    <div style="height: 20px"></div>
-<p align="center" style="font-size: 40px">周边送后台管理</p>
-</div>
-
-<div class="navbar navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">SpeedyShopping</a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#"><span class="glyphicon glyphicon-home">首页</span></a></li>
-                <li><a href=""><span class="glyphicon glyphicon-user">员工管理</span></a></li>
-                <li><a href=""><span class="glyphicon glyphicon-list">陈总经理你好</span></a></li>
-            </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-        </ul>
-        </div>
-    </div>
-</div>
-<div class="navbar navbar-fixt-top navbar-inverse" role="navigation">
-</div>
 <!--<div style="height:10px"></div>-->
-
+<div align="center">
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-11">
 
         <div class="row">
 
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <form class="form-inline">
                     <div class="form-group">
                         <label class="sr-only" >Search</label>
@@ -63,7 +22,7 @@
             <form action="{:url('admin/type/add')}" method="post"  class="form-inline">
 
                 <div class="form-group">
-                    <div class="col-md-8"style="right: 40px">
+                    <div class="col-md-8">
                     <label class="sr-only" >Add</label>
                         <input  type="text" name="content" class="form-control" placeholder="添加...">
                     </div>
@@ -72,8 +31,8 @@
             </form>
         </div>
 
-        <table class="table table-hover table-bordered">
-            <tr class="info">
+        <table class="table table-hover table-bordered" style="width: 1300px">
+            <tr class="info" >
                 <th>id</th>
                 <th>内容</th>
                 <th>操作</th>
@@ -92,7 +51,7 @@
 
     </div>
 </div>
-
+</div>
 
 
 
@@ -108,7 +67,7 @@
 
 
 
-</body>
+
 
 
 
