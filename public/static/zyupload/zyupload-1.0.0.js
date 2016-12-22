@@ -1664,7 +1664,7 @@ var ZYFILE = {
 		            html += '				<div id="status_info" class="info">选中0张文件，共0B。</div>';
 		            html += '				<div class="btns">';
 		            html += '					<div class="webuploader_pick">继续选择</div>';
-		            html += '					<div class="upload_btn">确认添加商品</div>';
+		            html += '					<div class="upload_btn">上传商品图片</div>';
 		            html += '				</div>';
 		            html += '			</div>';
 					html += '			<div id="preview" class="upload_preview"></div>';

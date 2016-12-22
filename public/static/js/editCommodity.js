@@ -68,11 +68,12 @@ $(function () {
 //添加参数
 $(document).ready(function() {
 
-    var MaxInputs       = 10; //maximum input boxes allowed
+    var MaxInputs       = 20; //maximum input boxes allowed
     var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
     var AddButton       = $("#AddMoreFileBox"); //Add button ID
 
-    var x = InputsWrapper.length; //initlal text box count
+    // var x = InputsWrapper.length; //initlal text box count
+    var x = $("#InputsWrapper div").length;
     var FieldCount=1; //to keep track of text box added
 
     $(AddButton).click(function (e)  //on add input button click
