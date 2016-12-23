@@ -8,7 +8,6 @@
 
 namespace app\common\model;
 
-
 use app\common\Comm;
 use think\Model;
 
