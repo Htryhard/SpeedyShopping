@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>用户注册</title>
-    {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
-    {load href="__PUBLIC__/static/js/jquery-3.1.1.min.js" /}
-    {load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
+{layout name="layout" /}
+<block name="resources">
     {load href="__PUBLIC__/static/css/cropbox.css" /}
     {load href="__PUBLIC__/static/js/cropbox-min.js" /}
+</block>
+
     <style>
-        nav#nav{
-            background:gainsboro;
-        }
+
         nav#nav  ul li a:hover{
             background: #ebebeb;
         }
     </style>
-</head>
-<body style="background-color: #F4F4F4">
 
+<div style="height: 100px"></div>
 <div class="container">
     <div class="row col-md-1"></div>
     <form class="form-horizontal" role="form" action="{:url('admin/user/register')}" method="post" id="formdata">
@@ -164,6 +157,3 @@
         );
     }
 </script>
-
-</body>
-</html>
