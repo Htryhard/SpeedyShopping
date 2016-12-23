@@ -8,9 +8,6 @@ class IndexController extends  BaseController
 {
     public function index()
     {
-
-
-
         $this->assign('email','你好');
         return $this->fetch();
 
