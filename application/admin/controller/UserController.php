@@ -15,6 +15,9 @@ use app\common\model\User;
 
 class UserController extends BaseController
 {
+    public function index(){
+
+    }
     public function login()
     {
         // 临时关闭布局
