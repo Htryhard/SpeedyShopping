@@ -3,7 +3,6 @@
  */
 //添加参数
 $(document).ready(function() {
-
     var MaxInputs       = 20; //maximum input boxes allowed
     var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
     var AddButton       = $("#AddMoreFileBox"); //Add button ID
