@@ -19,10 +19,10 @@ $(document).ready(function() {
             FieldCount++; //text box added increment
             //add input box
             $(InputsWrapper).append(
-                '<div class="form-inline">' +
-                '参数名：<input type="text" name="parameterName" class="form-control" ">；' +
-                '参数值：<input type="text" class="form-control" name="parameterValue" id="field_'+ FieldCount +'"/>' +
-                '<a href="#" class="removeclass" >' + '<img src="/SpeedyShopping/public/static/images/delete.png" width="15px;"height="15px"></a>' +
+                '<div>' +
+                '参数名：<input type="text" name="parameterName">；' +
+                '参数值：<input type="text" name="parameterValue" id="field_'+ FieldCount +'"/>' +
+                '<a href="#" class="removeclass" >' + '<img src="/SpeedyShopping/public/static/images/delete.png" style="width=10px;height=10px"></a>' +
                 '</div>');
 
             x++; //text box increment

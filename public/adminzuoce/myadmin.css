@@ -48,7 +48,7 @@ aside{
     overflow-y:scroll;
 
 
-    background-color:#fff;
+    /*background-color:#fff;*/
     color:#000000;
 }
 .nav-header.collapsed > span.glyphicon-chevron-toggle:before {
