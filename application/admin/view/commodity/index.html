@@ -18,7 +18,10 @@
         </form>
     </div>
 </div>
-
+<style>
+    /*a:link,a:visited { color:#00FF00;}*/
+    a:hover,a:active { color:#000000;}
+</style>
 <table class="table table-hover"  >
     <h3 style="color: #000000" align="center">所有商品</h3>
     <thead>
@@ -36,7 +39,7 @@
     </thead>
     <tbody>
     {volist name="commodities" id="item" key="key"}
-    <tr>
+    <tr style="td:hover;td:active;{ color:#000000;}">
         <td>{$key}</td>
         <td>{$item->getData('title')}</td>
         <td>{$item['type']['content']}</td>
