@@ -1,6 +1,6 @@
 {layout name="layout" /}
+<block name="title"><title>添加商品</title></block>
 <block name="resources">
-
     {load href="__PUBLIC__/static/js/WdatePicker.js" /}
     {load href="__PUBLIC__/static/zyupload/skins/zyupload-1.0.0.min.css" /}
     {load href="__PUBLIC__/static/zyupload/zyupload-1.0.0.js" /}
@@ -56,13 +56,11 @@
         <div class="form-group">
             <label for="type_id" class="col-sm-2 control-label">填写商品参数</label>
             <div class="col-md-8">
+                <div class="form-inline">
                 <div id="InputsWrapper">
-                    <div class="form-inline">
                     <div>
-                        参数名：<input type="text" name="parameterName" class="form-control" >
-                        ；参数值：<input type="text" name="parameterValue" id="field_1" class="form-control"/>
+                        参数名：<input type="text" name="parameterName" class="form-control" >；参数值：<input type="text" name="parameterValue" id="field_1" class="form-control"/>
                         <a href="#" class="removeclass" ><img src="__PUBLIC__/static/images/delete.png" width="10px;"height="10px"></a>
-
                     </div>
                     </div>
 

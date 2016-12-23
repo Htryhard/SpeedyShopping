@@ -4,7 +4,7 @@
 //添加参数
 $(document).ready(function() {
 
-    var MaxInputs       = 10; //maximum input boxes allowed
+    var MaxInputs       = 20; //maximum input boxes allowed
     var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
     var AddButton       = $("#AddMoreFileBox"); //Add button ID
 
@@ -20,9 +20,9 @@ $(document).ready(function() {
             //add input box
             $(InputsWrapper).append(
                 '<div>' +
-                '参数名：<input type="text" name="parameterName">；' +
-                '参数值：<input type="text" name="parameterValue" id="field_'+ FieldCount +'"/>' +
-                '<a href="#" class="removeclass" >' + '<img src="/SpeedyShopping/public/static/images/delete.png" style="width=10px;height=10px"></a>' +
+                '参数名：<input type="text" name="parameterName" class="form-control"/>；' +
+                '参数值：<input type="text" name="parameterValue" id="field_'+ FieldCount +'" class="form-control"/>' +
+                ' <a href="#" class="removeclass" >' + '<img src="/SpeedyShopping/public/static/images/delete.png" width="10px;"height="10px"></a>' +
                 '</div>');
 
             x++; //text box increment

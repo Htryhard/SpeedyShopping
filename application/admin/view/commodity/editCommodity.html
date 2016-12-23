@@ -1,6 +1,6 @@
 {layout name="layout" /}
+<block name="title"><title>编辑商品</title></block>
 <block name="resources">
-
     {load href="__PUBLIC__/static/js/WdatePicker.js" /}
     {load href="__PUBLIC__/static/zyupload/skins/zyupload-1.0.0.min.css" /}
     {load href="__PUBLIC__/static/zyupload/zyupload-1.0.0.js" /}
@@ -69,23 +69,19 @@
         <div class="form-group">
             <label for="type_id" class="col-sm-2 control-label">填写商品参数</label>
             <div class="col-md-8">
+                <div class="form-inline">
                 <div id="InputsWrapper">
                     {volist name="parameters" id="vo" }
-                    <div class="form-inline">
                           <div>
-                            参数名：<input type="text" name="parameterName" value="{$key}" class="form-control">
-                            ；参数值：<input type="text" name="parameterValue" value="{$vo}" class="form-control"/>
+                            参数名：<input type="text" name="parameterName" value="{$key}" class="form-control">；参数值：<input type="text" name="parameterValue" value="{$vo}" class="form-control"/>
                             <a href="#" class="removeclass">
                                 <img src="__PUBLIC__/static/images/delete.png" width="10px;" height="10px">
                             </a>
                         </div>
-
-                    </div>
-
                     {/volist}
-
-
+                    </div>
                 </div>
+
                 <div style="height: 5px"></div>
                 <a href="#" id="AddMoreFileBox">
                     <button class="btn btn-success" style="width: 470px">添加参数</button>
@@ -150,7 +146,7 @@
             dragDrop: true,                    // 是否可以拖动上传文件
             tailor: true,                    // 是否可以裁剪图片
             del: true,                    // 是否可以删除文件
-            finishDel: true,  				  // 是否在上传文件完成后删除预览
+            finishDel: false,  				  // 是否在上传文件完成后删除预览
             /* 外部获得的回调接口 */
             onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
                 console.info("当前选择了以下文件：");
