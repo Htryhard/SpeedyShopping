@@ -12,7 +12,7 @@ namespace app\admin\controller;
 use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\Type;
-use think\Request;
+
 
 /**
  * 类别控制器
