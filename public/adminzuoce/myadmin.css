@@ -1,0 +1,89 @@
+*{padding:0;margin:0;border:none;}
+.navbar-default {
+
+    height: 50px;
+
+}
+
+body{
+    font-size:16px;
+    font-family:"微软雅黑";
+    margin:0;
+}
+header{
+    width:100%;
+    height:50px;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    background-color:#669999;
+    color:#fff;
+}
+aside{
+    width:250px;
+    position:absolute;
+    top:80px;
+    left:0px;
+    bottom:100px;
+
+    font-size: 16px;
+    height: 100%;
+    position: fixed;
+}
+#main{
+    position: absolute;
+    left: 300px;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+#con{
+    height:100%;
+    overflow:auto;
+
+    /*或者
+    *overflow-x:hidden;
+    *overflow-y:scroll;
+    */
+
+    background-color:#789;
+    color:#fff;
+}
+.nav-header.collapsed > span.glyphicon-chevron-toggle:before {
+    content: "\e114";
+}
+
+.nav-header > span.glyphicon-chevron-toggle:before {
+    content: "\e113";
+}
+.secondmenu a {
+    font-size: 14px;
+    color: #d33724;
+    text-align: center;
+}
+
+.secondmenu li.active {
+    background-color: #eee;
+    border-color: #428bca;
+}
+.left{ width:200px; height:100%; border-right:1px solid #CCCCCC ; color:#000000; font-size:14px; text-align:center;}
+
+.div1{text-align:center; width:200px; padding-top:10px;}
+
+.div2{height:40px; line-height:40px;cursor: pointer; font-size:13px; position:relative;border-bottom:#ccc 1px dotted;}
+
+.jbsz {position: absolute; height: 20px; width: 20px; left: 40px; top: 10px; background:url('__PUBLIC__/adminzuoce/images/1.png');}
+
+.xwzx {position: absolute; height: 20px; width: 20px; left: 40px; top: 10px; background:url('__PUBLIC__/adminzuoce/images/2.png');}
+
+.zxcp {position: absolute; height: 20px; width: 20px; left: 40px; top: 10px; background:url('__PUBLIC__/adminzuoce/images/4.png');}
+
+.lmtj {position: absolute; height: 20px; width: 20px; left: 40px; top: 10px; background:url('__PUBLIC__/adminzuoce/images/8.png');}
+
+.div3{display: none;cursor:pointer; font-size:13px;}
+
+.div3 ul{margin:0;padding:0;}
+
+.div3 li{ height:30px; line-height:30px; list-style:none; border-bottom:#ccc 1px dotted; text-align:center;}

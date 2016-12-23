@@ -12,6 +12,7 @@ namespace app\admin\controller;
 use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\Type;
+use think\Request;
 
 /**
  * 类别控制器
@@ -37,6 +38,12 @@ class TypeController extends BaseController
             $type->content = $data;
             $type->save($type->getData());
         }
+
+    }
+    public function test(){
+        $types = Type::all();
+        $this->assign("types", $types);
+        return $this->fetch();
     }
 
 }
