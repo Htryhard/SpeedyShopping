@@ -1,5 +1,5 @@
 {layout name="layout" /}
-<div style="height: 100px"></div>
+<div style="height: 50px"></div>
 <table class="table table-hover">
     <caption>悬停表格布局</caption>
     <thead>
@@ -12,9 +12,9 @@
     </tr>
     </thead>
     <tbody>
-    {volist name="users" id="item"  }
+    {volist name="users" id="item"}
     <tr>
-        <td>{$key}</td>
+        <td>{$key+1}</td>
         <td>{$item.email}</td>
         <td>{$item.user_name}</td>
         <td>{$item.phone}</td>
