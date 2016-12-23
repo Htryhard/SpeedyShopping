@@ -17,22 +17,21 @@ class UserController extends BaseController
 {
     public function index(){
         // 获取查询信息
-        $title = input('get.title');
+        $email = input('get.email');
         $pageSize = 15; // 每页显示15条数据
-        $commodity = new Commodity();
+        $user = new User();
         // 定制查询信息
-        if (!empty($title)) {
-            $commodities = $commodity->where('title', 'like', '%' . $title . '%')->paginate($pageSize, false,
+        if (!empty($email)) {
+            $users = $user->where('email', 'like', '%' . $email . '%')->paginate($pageSize, false,
                 [
                     'query' => [
-                        'title' => $title,
+                        'email' => $email,
                     ],
                 ]);
         } else {
-            $commodities = $commodity->paginate($pageSize);
+            $users = $user->paginate($pageSize);
         }
-//        $this->assign("user",User::getUserBySession());
-        $this->assign('commodities', $commodities);
+        $this->assign("users",$users);
         return $this->fetch();
     }
     public function login()

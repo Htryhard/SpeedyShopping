@@ -1,28 +1,25 @@
 {layout name="layout" /}
+<div style="height: 100px"></div>
 <table class="table table-hover">
     <caption>悬停表格布局</caption>
     <thead>
     <tr>
-        <th>名称</th>
-        <th>城市</th>
-        <th>邮编</th>
+        <th>讯号</th>
+        <th>邮箱</th>
+        <th>用户名</th>
+        <th>联系方式</th>
+        <th>操作</th>
     </tr>
     </thead>
     <tbody>
+    {volist name="users" id="item"  }
     <tr>
-        <td>Tanmay</td>
-        <td>Bangalore</td>
-        <td>560001</td>
+        <td>{$key}</td>
+        <td>{$item.email}</td>
+        <td>{$item.user_name}</td>
+        <td>{$item.phone}</td>
+        <td><a href="#">明细</a></td>
     </tr>
-    <tr>
-        <td>Sachin</td>
-        <td>Mumbai</td>
-        <td>400003</td>
-    </tr>
-    <tr>
-        <td>Uma</td>
-        <td>Pune</td>
-        <td>411027</td>
-    </tr>
+    {/volist}
     </tbody>
 </table>
