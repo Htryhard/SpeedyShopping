@@ -44,7 +44,7 @@ aside{
     overflow:auto;
 
     /*或者*/
-    overflow-x:scroll;
+    overflow-x:hidden;
     overflow-y:scroll;
 
 
