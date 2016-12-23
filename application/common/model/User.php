@@ -86,7 +86,6 @@ class User extends Model
     static public function passwordFit($pw1,$pw2){
         return $pw1===$pw2 ? true:false;
     }
-
     /**
      * 从session中获取一个用户
      * @return null|static
