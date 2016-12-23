@@ -104,6 +104,10 @@
             <label  class="col-sm-2 control-label">商品图片：</label>
             <div class="row">
         {volist name="images" id="item"}
+                {eq name="$key" value="3"}
+                <br/>
+                {else/}
+                {/eq}
         <div id="box_{$key}">
             <img  src="{$item}" style="float: left" width="150px;" height="150px";>
             <a href="#" onclick="deleteImg('{$item}','{$key}')" style="float: left">删除</a>
@@ -113,7 +117,7 @@
             <div class="form-group">
                 <label  class="col-sm-2 control-label">修改</label>
                 <div class="col-md-2">
-                    <input type="submit" class="btn btn-success" onclick="toPost()" value="确认修改" style="width: 470px;"align="center" >
+                    <input type="button" class="btn btn-success" onclick="toPost()" value="确认修改" style="width: 470px;"align="center" >
                 </div>
             </div>
         </div>
