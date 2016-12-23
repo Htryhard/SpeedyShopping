@@ -3,6 +3,7 @@
 	height:30px;
 	width: 430px;
 	background:#fff url(datePicker.gif) no-repeat right;
+
 }
 .Wdate::-ms-clear{display:none;}
 
@@ -10,7 +11,4 @@
 	font-weight:bold;
 	color:red;
 }
-.kk{
-	height:30px;
-	width:148px;
-}
+

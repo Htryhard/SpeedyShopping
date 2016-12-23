@@ -68,15 +68,18 @@
 
         <div class="form-group">
             <label for="type_id" class="col-sm-2 control-label">填写商品参数</label>
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div id="InputsWrapper">
                     {volist name="parameters" id="vo" }
+                    <div class="form-inline">
+                          <div>
+                            参数名：<input type="text" name="parameterName" value="{$key}" class="form-control">
+                            ；参数值：<input type="text" name="parameterValue" value="{$vo}" class="form-control"/>
+                            <a href="#" class="removeclass">
+                                <img src="__PUBLIC__/static/images/delete.png" width="10px;" height="10px">
+                            </a>
+                        </div>
 
-                    <div>
-                        参数名：<input type="text" name="parameterName" value="{$key}" class="kk">
-                        ；参数值：<input type="text" name="parameterValue" value="{$vo}" class="kk"/>
-                        <a href="#" class="removeclass"><img src="__PUBLIC__/static/images/delete.png" width="15px;"
-                                                             height="15px"></a>
                     </div>
 
                     {/volist}
@@ -110,7 +113,7 @@
                 {/eq}
         <div id="box_{$key}">
             <img  src="{$item}" style="float: left" width="150px;" height="150px";>
-            <a href="#" onclick="deleteImg('{$item}','{$key}')" style="float: left">删除</a>
+            <a href="#" onclick="deleteImg('{$item}','{$key}')" style="float: left"><img src="__PUBLIC__/static/images/delete.png" style="height: 10px;width: 10px"></a>
         </div>
         {/volist}
             </div>

@@ -1,20 +1,40 @@
 {layout name="layout" /}
 
-<span>商品信息：</span><br/>
-<span>标题：</span>
-{$commodity->getData("title")}<br/>
-<span>分类：</span>
-{$commodity['type']['content']}<br/>
-...
-<hr/>
-
-<span>商品参数：</span><br/>
-{volist name="parameters" id="vo"  }
-{$key}<span>:</span>{$vo}<br/>
-{/volist}
-<hr/>
-<span>商品图片：</span>
-{volist name="images" id="item"}
-<img src="{$item}" width="150px;"height="150px">
-{/volist}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">商品详情</h3>
+    </div>
+    <table class="table">
+        <th></th><th> </th>
+        <tr><td>标题：</td><td>{$commodity->getData("title")}<br/></td>
+        <tr><td>分类：</td><td>{$commodity['type']['content']}<br/></td></tr>
+    </table>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">商品参数</div>
+    <table class="table">
+        <th></th><th> </th>
+        {volist name="parameters" id="vo"  }
+        <tr><td>{$key}</td>:<td>{$vo}</td></tr>
+        {/volist}
+    </table>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">商品图片</div>
+    <table class="table">
+        <th></th><th> </th>
+        {volist name="images" id="item"}
+        <img src="{$item}" width="150px;"height="150px">
+        {/volist}
+    </table>
+</div>
+<!--<span>商品参数：</span><br/>-->
+<!--{volist name="parameters" id="vo"  }-->
+<!--{$key}<span>:</span>{$vo}<br/>-->
+<!--{/volist}-->
+<!--<hr/>-->
+<!--<span>商品图片：</span>-->
+<!--{volist name="images" id="item"}-->
+<!--<img src="{$item}" width="150px;"height="150px">-->
+<!--{/volist}-->
 
