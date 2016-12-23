@@ -17,7 +17,8 @@
         <div class="form-group">
             <label for="title" class="col-sm-4 control-label">标题</label>
             <div class="col-md-4">
-                <input type="text" class="form-control" id="title" name="title" value="{$commodity->getData('title')}" placeholder="请输入商品标题">
+                <input type="text" class="form-control" id="title" name="title" value="{$commodity->getData('title')}"
+                       placeholder="请输入商品标题">
             </div>
         </div>
 
@@ -40,26 +41,30 @@
                 <span>还没有标签，<a href="{:url('admin/label/insert')}">去创建</a></span>
                 {/if}
             </div>
-        </div><br/>
+        </div>
+        <br/>
 
         <div class="form-group">
             <label for="wdate" class="col-md-4 control-label">商品下架时间：</label>
             <div class="col-md-4">
-                <input class="Wdate" id="wdate" type="text" value="{:date('Y-m-d ',$commodity->getData('out_time'))}" onClick="WdatePicker()" name="wdate">
+                <input class="Wdate" id="wdate" type="text" value="{:date('Y-m-d ',$commodity->getData('out_time'))}"
+                       onClick="WdatePicker()" name="wdate">
             </div>
         </div>
 
         <div class="form-group">
             <label for="price" class="col-sm-4 control-label">商品价格(元)</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="price" name="price" value="{$commodity->getData('price')}" placeholder="请输入价格">
+                <input type="number" class="form-control" id="price" name="price" value="{$commodity->getData('price')}"
+                       placeholder="请输入价格">
             </div>
         </div>
 
         <div class="form-group">
             <label for="repertory" class="col-sm-4 control-label">库存</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="repertory" id="repertory" value="{$commodity->getData('repertory')}" placeholder="请输入库存">
+                <input type="text" class="form-control" name="repertory" id="repertory"
+                       value="{$commodity->getData('repertory')}" placeholder="请输入库存">
             </div>
         </div>
 
@@ -67,21 +72,23 @@
             <label for="type_id" class="col-sm-4 control-label">填写商品参数</label>
             <div class="col-sm-4">
                 <div id="InputsWrapper">
-                    {volist name="parameters" id="vo"  }
+                    {volist name="parameters" id="vo" }
 
                     <div>
-                        参数名：<input type="text" name="parameterName" value="{$key}" class="kk" >
-                        ；参数值：<input type="text" name="parameterValue"  value="{$vo}" class="kk"/>
-                        <a href="#" class="removeclass" ><img src="__PUBLIC__/static/images/delete.png" width="15px;"height="15px"></a>
+                        参数名：<input type="text" name="parameterName" value="{$key}" class="kk">
+                        ；参数值：<input type="text" name="parameterValue" value="{$vo}" class="kk"/>
+                        <a href="#" class="removeclass"><img src="__PUBLIC__/static/images/delete.png" width="15px;"
+                                                             height="15px"></a>
                     </div>
 
                     {/volist}
 
 
-
                 </div>
                 <div style="height: 5px"></div>
-                <a href="#" id="AddMoreFileBox"><button class="btn btn-success" style="width: 470px">添加参数</button></a>
+                <a href="#" id="AddMoreFileBox">
+                    <button class="btn btn-success" style="width: 470px">添加参数</button>
+                </a>
 
             </div>
         </div>
@@ -89,7 +96,8 @@
         <div class="form-group">
             <label for="describe" class="col-sm-4 control-label">描述</label>
             <div class="col-sm-4">
-                <textarea class="form-control" class="form-control" rows="4" cols="20" name="describe" id="describe" placeholder="描述">
+                <textarea class="form-control" class="form-control" rows="4" cols="20" name="describe" id="describe"
+                          placeholder="描述">
                     {$commodity->getData('describe')}
                 </textarea>
             </div>
@@ -97,9 +105,124 @@
 
         <span>商品图片：</span>
         {volist name="images" id="item"}
-        <img src="{$item}" width="150px;"height="150px">
+        <div id="box_{$key}">
+            <img src="{$item}" width="150px;" height="150px">
+            <a href="#" onclick="deleteImg('{$item}','{$key}')">删除</a>
+        </div>
         {/volist}
+
+        <input type="button" class="form-control" onclick="toPost()" value="确认修改">
     </form>
 
     <div id="zyupload" class="zyupload"></div>
 </div>
+
+<script type="text/javascript">
+
+    $(function () {
+        // 初始化插件
+        $("#zyupload").zyUpload({
+            width: "700px",                 // 宽度
+            height: "400px",                 // 宽度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "{:url('admin/commodity/uploadImage')}",              // 上传文件的路径
+            fileType: ["jpg", "png"],// 上传文件的类型
+            fileSize: 51200000,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: true,                    // 是否可以拖动上传文件
+            tailor: true,                    // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: true,  				  // 是否在上传文件完成后删除预览
+            /* 外部获得的回调接口 */
+            onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                console.info("当前选择了以下文件：");
+                console.info(selectFiles);
+            },
+            onDelete: function (file, files) {              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                console.info("当前删除了此文件：");
+                console.info(file.name);
+            },
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+//                console.info("此文件上传成功：");
+//                console.info(file.name);
+//                console.info("此文件上传到服务器地址：");
+//                console.info(response);
+//                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+
+                var imageName = document.getElementById("dirname").value;
+                imageName += ";" + response.substr(0,40);
+                $("#dirname").val(imageName);
+                // alert(response.substr(0,40));
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                console.info("此文件上传失败：");
+                console.info(file.name);
+                $("#dirname").val("");
+            },
+            onComplete: function (response) {           	  // 上传完成的回调方法
+//                console.info("文件上传完成");
+//                console.info(response);
+//                alert(response);
+//             $.ajax({
+//                 type: "POST",
+//                 url: "editCommodityHandle",
+//                 dataType: "json",
+//                 data: {
+//                     commodityData: $('#commodityData').serializeArray()
+//                 },
+//                 success: function (msg) {
+//
+//                 },
+//             });
+//                $("#dirname").val("");
+
+            }
+        });
+
+    });
+
+    function deleteImg(img, divId) {
+        // alert(img);
+        var id = "box_" + divId;
+        $("#"+id).remove();
+        var url = "{:url('admin/commodity/deleteImg')}";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {
+                imgUrl: img
+            },
+            success: function (msg) {
+//                alert(msg+"====="+divId);
+                switch (msg) {
+                    case "Success":
+                            alert("ok");
+                        break;
+                    default:
+
+                }
+            },
+        });
+    }
+    
+    //提交修改好的商品信息
+    function toPost() {
+        var url = "{:url('admin/commodity/editCommodityHandle?id='.$commodity->getData('id'))}";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {
+                commodityData: $('#commodityData').serializeArray()
+            },
+            success: function (msg) {
+//                alert(msg+"====="+divId);
+                $("#dirname").val("");
+
+            },
+        });
+
+    }
+</script>

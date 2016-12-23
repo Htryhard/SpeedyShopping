@@ -198,4 +198,71 @@ class CommodityController extends BaseController
         }
     }
 
+    public function editCommodityHandle(){
+        $commodityId = $this->request->param("id");
+        $data = $this->request->param();
+        if ($commodityId != "") {
+            $commodity = Commodity::get(['id' => $commodityId]);
+            if ($commodity != null) {
+                //构造商品的图片
+                $commodityData = $data['commodityData'];
+                $commodityImages = Comm::getCommodityImagesNameByForm($commodityData);
+                $commodityParameters = Comm::analysisParameter($commodityData);
+                $commodityData = Comm::analysisCommodityForm($commodityData);
+
+                echo "图片：";
+                dump($commodityImages);
+                echo "<br/>参数：";
+                dump($commodityParameters);
+                echo "<br/>商品：";
+                dump($commodityData);
+
+                $commodity->title = $commodityData["title"];
+                $commodity->describe = $commodityData["describe"];
+                $commodity->out_time = strtotime($commodityData["wdate"]);
+                $commodity->type_id = $commodityData["type_id"];
+                $commodity->repertory = $commodityData["repertory"];
+                $commodity->price = $commodityData["price"];
+                $commodity->parameter = Comm::toJson($commodityParameters);
+
+                if ($commodity->validate(true)->save($commodity->getData())) {
+                    foreach ($commodityImages as $image) {
+                        $commodityImage = new CommodityImages();
+                        $commodityImage->id = Comm::getNewGuid();
+                        $commodityImage->commodity_id = $commodity->getData("id");
+                        $commodityImage->image = $image;
+                        $commodityImage->save();
+                        $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "cacheImages" . DS . $image;
+                        $newUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "commodity_images" . DS . $image;
+                        Comm::moveFile($newUrl, $oldUrl);
+                    }
+                } else {
+                    return $commodity->getError();
+                }
+
+            } else {
+                return "商品不存在";
+            }
+        }else {
+            return "必须传入商品的ID";
+        }
+    }
+
+    public function deleteImg(){
+        $imgUrl = $this->request->post("imgUrl");
+        if ($imgUrl != ""){
+            $imgName = str_replace("/","",strrchr($imgUrl,"/"));
+            $img = ROOT_PATH . 'public' . DS . 'uploads' . DS . "commodity_images".DS.$imgName;
+            $commodityImg = CommodityImages::get(["image"=>$imgName]);
+            $commodityImg->delete();
+            if (unlink($img)){
+                return json('Success');
+            }else{
+                return json('fail');
+            }
+        }else{
+            return json("url null");
+        }
+    }
+
 }
