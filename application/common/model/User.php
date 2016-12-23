@@ -87,6 +87,10 @@ class User extends Model
         return $pw1===$pw2 ? true:false;
     }
 
+    /**
+     * 从session中获取一个用户
+     * @return null|static
+     */
     public static function getUserBySession(){
         if (self::isLogin()){
             $userEmail = session("email");

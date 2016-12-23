@@ -42,6 +42,17 @@ class UserController extends Controller
         $this->view->engine->layout(false);
         return $this->fetch();
     }
+    public function loginHandle()
+    {
+        // 接收post信息
+        $data = Request::instance()->post();
+        // 直接调用M层方法，进行登录。
+        if (User::login($data['email'], $data['password'])) {
+            return json("succeed");
+        } else {
+            return json('TheUserNameOrPasswordError');
+        }
+    }
 
     public function register()
     {
