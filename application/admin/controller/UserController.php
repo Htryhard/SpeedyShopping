@@ -16,7 +16,24 @@ use app\common\model\User;
 class UserController extends BaseController
 {
     public function index(){
-
+        // 获取查询信息
+        $title = input('get.title');
+        $pageSize = 15; // 每页显示15条数据
+        $commodity = new Commodity();
+        // 定制查询信息
+        if (!empty($title)) {
+            $commodities = $commodity->where('title', 'like', '%' . $title . '%')->paginate($pageSize, false,
+                [
+                    'query' => [
+                        'title' => $title,
+                    ],
+                ]);
+        } else {
+            $commodities = $commodity->paginate($pageSize);
+        }
+//        $this->assign("user",User::getUserBySession());
+        $this->assign('commodities', $commodities);
+        return $this->fetch();
     }
     public function login()
     {
