@@ -1,5 +1,12 @@
 {layout name="layout" /}
-<div style="float: right;width: 1000px">
+
+<block name="resources">
+    {load href="__PUBLIC__/adminzuoce/myadmin.css" /}
+</block>
+<section id="main">
+<div id="con">
+
+
 
 
 <span>商品信息：</span><br/>
@@ -20,3 +27,5 @@
 <img src="{$item}" width="150px;"height="150px">
 {/volist}
 </div>
+    </div>
+</section>

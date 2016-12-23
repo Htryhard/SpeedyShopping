@@ -40,10 +40,6 @@ class TypeController extends BaseController
         }
 
     }
-    public function test(){
-        $types = Type::all();
-        $this->assign("types", $types);
-        return $this->fetch();
-    }
+
 
 }

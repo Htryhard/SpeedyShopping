@@ -33,7 +33,7 @@ aside{
 }
 #main{
     position: absolute;
-    left: 300px;
+    left: 200px;
     top: 30px;
     right: 0;
     bottom: 0;
@@ -43,10 +43,10 @@ aside{
     height:100%;
     overflow:auto;
 
-    /*或者
-    *overflow-x:hidden;
-    *overflow-y:scroll;
-    */
+    /*或者*/
+    overflow-x:scroll;
+    overflow-y:scroll;
+
 
     background-color:#789;
     color:#fff;
