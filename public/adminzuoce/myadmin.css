@@ -49,7 +49,7 @@ aside{
 
 
     background-color:#fff;
-    color:#fff;
+    color:#000000;
 }
 .nav-header.collapsed > span.glyphicon-chevron-toggle:before {
     content: "\e114";
