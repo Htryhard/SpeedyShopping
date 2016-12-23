@@ -12,8 +12,10 @@ namespace app\admin\controller;
 use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\User;
+use think\Controller;
+use think\Request;
 
-class UserController extends BaseController
+class UserController extends Controller
 {
     public function index(){
         // 获取查询信息
@@ -43,7 +45,7 @@ class UserController extends BaseController
 
     public function register()
     {
-        $data = $this->request->param();
+        $data = Request::instance()->param();
         if (count($data) > 0) {
             $data = $data['userdata'];
             $userdata = array();
@@ -89,5 +91,6 @@ class UserController extends BaseController
             return $this->fetch();
         }
     }
+
 
 }

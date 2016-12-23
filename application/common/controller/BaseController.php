@@ -9,6 +9,7 @@
 namespace app\common\controller;
 
 
+use app\common\model\User;
 use think\Controller;
 use think\Request;
 
@@ -19,6 +20,11 @@ class BaseController extends Controller
     {
         parent::__construct();
         $this->request = $request;
+
+        // 验证用户是否登陆
+        if (!User::isLogin()) {
+            $this->redirect(url('home/user/login'));
+        }
     }
 
 }
