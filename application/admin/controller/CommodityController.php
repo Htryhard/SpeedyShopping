@@ -137,7 +137,7 @@ class CommodityController extends BaseController
      * 商品明细页面
      * @return mixed|string
      */
-    public function commodityDetailed()
+    public function  commodityDetailed()
     {
         $commodityId = $this->request->param("id");
         if ($commodityId != "") {

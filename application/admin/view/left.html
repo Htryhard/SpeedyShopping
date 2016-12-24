@@ -2,7 +2,7 @@
 <aside>
     <script type="text/javascript">
 
-        $(document).ready(function(){
+      $(document).ready(function(){
 
             $(".div2").click(function(){
 
@@ -15,18 +15,24 @@
         });
 
     </script>
+<script>
 
+</script>
     <div class="left">
 
         <div class="div1">
 
-            <div class="left_top"><img src="__PUBLIC__/adminzuoce/images/bbb_01.jpg">
-                <img src="__PUBLIC__/adminzuoce/images/bbb_02.jpg" id="2">
-                <img src="__PUBLIC__/adminzuoce/images/bbb_03.jpg">
-                <img src="__PUBLIC__/adminzuoce/images/bbb_04.jpg"> </div>
+            <div class="left_top">
+                <a href="{:url('admin/Index/index')}"> <button type="button" class="btn btn-primary btn-md" style="text-shadow: black 5px 3px 3px;width: 150px">
+                    <span class="	glyphicon glyphicon-home"></span>&nbsp;Home
+                </button></a>
+                <!--<a href="{:url('admin/Index/index')}"><img src="__PUBLIC__/adminzuoce/images/bbb_03.jpg"-->
+                <!--width="120px"height="35"/></a>-->
 
-            <div class="div2"><div class="jbsz"> </div>基本管理
-                <span class="glyphicon glyphicon-chevron-down"></span> </div>
+            </div>
+
+            <div class="div2"><div class="jbsz"> </div>系统设置
+                <span class="glyphicon glyphicon-chevron-down" id="toge"></span> </div>
 
             <div class="div3">
 
@@ -42,51 +48,52 @@
 
             </div>
 
-            <div class="div2"><div class="xwzx"> </div>新闻中心
+            <div class="div2"><div class="xwzx"> </div>权限管理
                 <span class="glyphicon glyphicon-chevron-down"></span></div>
 
             <div class="div3">
 
                 <ul>
 
-                    <li> 管理文章</li>
-                    <li> 文章分类</li>
+                    <li> 管理员列表</li>
+                    <li> 角色管理</li>
 
-                    <li> 添加文章</li>
-
+                    <li> 供应商管理</li>
+                    <li> 管理员日志</li>
                 </ul>
 
             </div>
 
-            <div class="div2"><div class="zxcp"> </div>最新产品</div>
+            <div class="div2"><div class="zxcp"> </div>商品管理 <span class="glyphicon glyphicon-chevron-down"></span></div>
 
             <div class="div3">
 
                 <ul>
 
-                    <li>图片管理</li>
+                    <li>商品分类</li>
 
-                    <li> 图片分类</li>
-
-                    <li> 添加图片</li>
-
+                    <li ><a href="{:url('admin/Commodity/index')}">商品列表</a> </li>
+                    <li> 商品评论</li>
+                    <li> 商品咨询</li>
+                    <li> 商品属性</li>
                 </ul>
 
             </div>
 
-            <div class="div2"><div class="lmtj"> </div> 栏目添加</div>
+            <div class="div2"><div class="lmtj"> </div> 订单管理 <span class="glyphicon glyphicon-chevron-down"></span></div>
 
             <div class="div3">
 
                 <ul>
 
-                    <li> 文章系统</li>
+                    <li> 订单列表</li>
 
-                    <li> 图片系统</li>
+                    <li> 发货单</li>
 
-                    <li> 添加表单</li>
+                    <li> 退货单</li>
 
-                    <li> 招聘系统</li>
+                    <li> 添加订单</li>
+                    <li> 订单日志</li>
 
                 </ul>
 
