@@ -1664,7 +1664,7 @@ var ZYFILE = {
 		            html += '				<div id="status_info" class="info">选中0张文件，共0B。</div>';
 		            html += '				<div class="btns">';
 		            html += '					<div class="webuploader_pick">继续选择</div>';
-		            html += '					<div class="upload_btn">上传商品图片</div>';
+		            html += '					<div class="upload_btn">开始上传</div>';
 		            html += '				</div>';
 		            html += '			</div>';
 					html += '			<div id="preview" class="upload_preview"></div>';
@@ -1694,7 +1694,7 @@ var ZYFILE = {
 				    html += '				<div class="add_upload">';
 				    html += '					<a style="height:'+para.itemHeight+';width:'+para.itemWidth+';" title="点击添加文件" id="rapidAddImg" class="add_imgBox" href="javascript:void(0)">';
 				    html += '						<div class="uploadImg" style="width:'+imgWidth+'px">';
-				    html += '							<img class="upload_image" src="zyupload/skins/image/add_img.png" style="width:expression(this.width > '+imgWidth+' ? '+imgWidth+'px : this.width)" />';
+				    html += '							<img class="upload_image" src="zyupload/skins/images/add_img.png" style="width:expression(this.width > '+imgWidth+' ? '+imgWidth+'px : this.width)" />';
 				    html += '						</div>'; 
 				    html += '					</a>';
 				    html += '				</div>';
@@ -1792,7 +1792,7 @@ var ZYFILE = {
 				var newStr = file.name.split("").reverse().join("");
 				var type = newStr.split(".")[0].split("").reverse().join("");
 				// 处理不同类型文件代表的图标
-				var fileImgSrc = "zyupload/skins/image/fileType/";
+				var fileImgSrc = "zyupload/skins/images/fileType/";
 				if(type == "rar"){
 					fileImgSrc = fileImgSrc + "rar.png";
 				}else if(type == "zip"){
@@ -2098,7 +2098,7 @@ var ZYFILE = {
 					if(ZYFILE.funReturnNeedFiles().length > 0){
 						$("#fileSubmit").click();
 					}else{
-						alert("您至少要选一张图片作为您商品的封面图");
+						alert("请先选中文件再点击上传");
 					}
 	            });
 				
