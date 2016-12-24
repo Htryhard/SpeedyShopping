@@ -58,16 +58,9 @@ aside{
 .nav-header > span.glyphicon-chevron-toggle:before {
     content: "\e113";
 }
-.secondmenu a {
-    font-size: 14px;
-    color: #d33724;
-    text-align: center;
-}
 
-.secondmenu li.active {
-    background-color: #eee;
-    /*border-color: #428bca;*/
-}
+
+
 .left{ width:200px; height:100%; border-right:1px solid #CCCCCC ; color:#000000; font-size:14px; text-align:center;}
 
 .div1{text-align:center; width:200px; padding-top:10px; color:#000000;}
@@ -88,4 +81,4 @@ aside{
 
 .div3 li{ color: #000000;height:30px; line-height:30px; list-style:none; border-bottom:#ccc 1px dotted; text-align:center;}
 .div3 ul li a{color: #000000;}
-.div3 ul li a:hover{color: #1b6d85;}
+.div3 ul li a:hover{color: #00007F;}
