@@ -5,35 +5,67 @@
     body{
         background: #F4F4F4;
     }
-    .title{
-        overflow: hidden;   /*超出的隐藏掉*/
-        text-overflow: ellipsis; /*超出的用....*/
-        white-space: nowrap;   /*不换行*/
-    }
-    .synopsis{
-        color: #9d9d9d;
-        overflow: hidden;   /*超出的隐藏掉*/
-        text-overflow: ellipsis; /*超出的用....*/
-        white-space: nowrap;   /*不换行*/
-    }
+
     .conten_margin{
-        margin-bottom: 10px;
-        margin-right: 10px;
-        width: 186px;
+        margin-bottom: 20px;
+        margin-right:20px;
         float: left;
     }
+    .conten_margin .titlea{
+        width: 180px;
+        overflow: hidden;   /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap;   /*不换行*/
+    }
+.bordera{
+      float: left;
+    padding: 5px;
+      border: 1px solid silver;
+    font-size: 18px;
 
+  }
+    .borderb{
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        font-size: 18px;
+        color: red;
+    }
+    .pricea{
+        font-size: 18px;
+        color: red;
+    }
 </style>
 <div>
     {volist name="commodities" id="item"}
     <div>
         <div class="conten_margin col-md-">
             <a href="#">
-                <img src="{$imgRoot}{$item.images[0]['image']}" style="height: 220px;width: 180px" /></a>
-            <section class="title">{$item.title}</section>
+                <img src="{$imgRoot}{$item.images[0]['image']}" style="height: 220px;width: 180px;" /></a>
+            <section class="pricea">￥999.00</section>
+            <section class="titlea">{$item.title}</section>
+            <section class="">已有<a>999</a>+人评价</section>
+            <section class="bordera">关注</section>
+            <section class="borderb">加入购物车</section>
             <section class="synopsis"></section>
         </div>
     </div>
     {/volist}
 </div>
+<!--<div>-->
+    <!--{volist name="commodities" id="item"}-->
+    <!--<div>-->
+        <!--<div class="conten_margin col-md-">-->
+            <!--<a href="#">-->
+                <!--<img src="{$imgRoot}{$item.images[0]['image']}" style="height: 220px;width: 180px" /></a>-->
+            <!--<section class="">价格放置</section>-->
+            <!--<section class="title">{$item.title}</section>-->
+            <!--<section class="">已有N+人评价</section>-->
+            <!--<section class="border">关注</section>-->
+            <!--<section class="border">加入购物车</section>-->
+            <!--<section class="synopsis"></section>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--{/volist}-->
+<!--</div>-->
 
