@@ -1,0 +1,115 @@
+{layout name="layout" /}
+<block name="titel"><title>周边购-GO!购物直径</title></block>
+<script type="text/javascript" >
+
+    </script>
+<style>
+    body{
+        background: #F4F4F4;
+    }
+    .conten_margin{
+        margin-bottom: 20px;
+        margin-right:20px;
+        float: left;
+    }
+    .conten_margin:hover{ border: 1px solid silver; }
+    .conten_margin .titlea{
+        width: 180px;
+        overflow: hidden;   /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap;   /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+.bordera{
+      float: left;
+      padding: 5px;
+      border: 1px solid silver;
+    color: #666666;
+    font-size: 13px;
+
+  }
+.bordera:hover{
+    border: 1px solid red;
+    color: red;
+}
+.borderb{
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+    font-size: 13px;
+    }
+.borderb:hover{
+        border: 1px solid red;
+    }
+.pricea{  font-size: 18px; color: red;  }
+.pingjiaa{  font-size: 13px;  color: #666666;  }
+.pingjiab{  font-size: 18px;  color: red;  }
+.img_xing{vertical-align: middle;  }
+.btn_guanzhu{ border: 0;background:#F4F4F4; vertical-align: middle;  font-size: 13px; }
+
+</style>
+<div>
+    {volist name="commodities" id="item"}
+    <div >
+        <div class="conten_margin col-md-" >
+            <a href="#">
+                <img src="{$imgRoot}{$item.images[0]['image']}" style="height: 220px;width: 180px;" /></a>
+            <section class="pricea">￥999.00</section>
+            <section class="titlea">{$item.title}</section>
+            <section class="pingjiaa" >已有<i class="pingjiab">999</i>+人评价</section>
+
+            <section class="bordera"  onmouseover ="over_id('{$key}');" onmouseout ="out_id('{$key}');" >
+                <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png"
+                     style="width: 20px;height: 20px;" ><button class="btn_guanzhu">关注</button>
+            </section>
+            <section class="borderb" onmouseover ="over_aid('{$key}');" onmouseout ="out_aid('{$key}');">
+                <img class="img_xing" id="a{$key}" src="__PUBLIC__/wei/images/baigouwuche.png"
+                     style="width: 20px;height: 20px;" >
+                <button class="btn_guanzhu">加入购物车</button>
+            </section>
+
+        </div>
+    </div>
+    {/volist}
+</div>
+<!--<div>-->
+    <!--{volist name="commodities" id="item"}-->
+    <!--<div>-->
+        <!--<div class="conten_margin col-md-">-->
+            <!--<a href="#">-->
+                <!--<img src="{$imgRoot}{$item.images[0]['image']}" style="height: 220px;width: 180px" /></a>-->
+            <!--<section class="">价格放置</section>-->
+            <!--<section class="title">{$item.title}</section>-->
+            <!--<section class="">已有N+人评价</section>-->
+            <!--<section class="border">关注</section>-->
+            <!--<section class="border">加入购物车</section>-->
+            <!--<section class="synopsis"></section>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--{/volist}-->
+<!--</div>-->
+
+<script type="text/javascript">
+    //关注（心）图标处理
+    function over_id(id)
+    {
+//        alert(id);
+        document.getElementById('b'+id).src ="__PUBLIC__/wei/images/hongxing.png"
+    }
+    function out_id(id)
+    {
+//        alert(id);
+        document.getElementById('b'+id).src ="__PUBLIC__/wei/images/baixing.png"
+    }
+    //购物车图标处理
+    function over_aid(id)
+    {
+        document.getElementById('a'+id).src ="__PUBLIC__/wei/images/honggouwuche.png"
+    }
+    function out_aid(id)
+    {
+        document.getElementById('a'+id).src ="__PUBLIC__/wei/images/baigouwuche.png"
+    }
+</script>
