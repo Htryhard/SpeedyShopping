@@ -54,7 +54,7 @@
     {volist name="commodities" id="item"}
     <div >
         <div class="conten_margin col-md-" >
-            <a href="#">
+            <a href="{:url('home/commodity/commodityDetailed?id='.$item->getData('id'))}">
                 <img src="{$imgRoot}{$item.images[0]['image']}" style="height: 220px;width: 180px;" /></a>
             <section class="pricea">￥999.00</section>
             <section class="titlea">{$item.title}</section>
