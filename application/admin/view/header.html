@@ -1,13 +1,19 @@
+
 <block name="resources">
 
-    {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
-    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    {load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
-    {load href="__PUBLIC__/adminzuoce/myadmin.css" /}
 </block>
 
+<style>
+    .navbar-default{
+        background-color: #2fa0ec;
+        color: #fff;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #fff;
+    }
 
 
+</style>
 <body>
 <header>
     <div class="navbar navbar-fixed-top navbar-default" role="navigation" >
@@ -19,19 +25,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"  style="float: left">周边送</a>
+                <a class="navbar-brand" href="#"  style="float: left;color: #fff">周边送</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{:url('admin/Commodity/index')}"><span class="glyphicon glyphicon-home">Home</span></a></li>
-                    <li><a href="#shop"><span class="glyphicon glyphicon-shopping-cart">Shop</span></a></li>
-                    <li><a href="#support"><span class="glyphicon glyphicon-headphones">Support</span></a></li>
+                    <li><a href="{:url('admin/Commodity/index')}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                    <li><a href="#shop"><span class="glyphicon glyphicon-shopping-cart"></span>Shop</a></li>
+                    <li><a href="#support"><span class="glyphicon glyphicon-headphones"></span>Support</a></li>
                 </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-            </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+                </ul>
             </div><!-- /.nav-collapse -->
         </div><!-- /.container -->
     </div>
@@ -41,12 +47,10 @@
 
 
 <!--<section id="main">-->
-    <!--<div id="con">-->
-        <!--这里写内容-->
-    <!--</div>-->
+<!--<div id="con">-->
+<!--这里写内容-->
+<!--</div>-->
 <!--</section>-->
-
-
 
 
 
