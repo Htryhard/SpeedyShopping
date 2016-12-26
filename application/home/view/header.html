@@ -1,151 +1,101 @@
-<head>
 
-</head>
+<block name="resources">
+
+</block>
+
 <style>
-    .navbar-inverse{
-        background-color: #761c19;
-       top:-4px;
+    .navbar-default{
+        background-color: #d33724;
+        color: #fff;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #fff;
+    }
+    .navbar-default . navbar-collapse> li > a {
+        color: #fff;
     }
 </style>
+<body>
+<header>
+    <div class="navbar navbar-fixed-top navbar-default" role="navigation" >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"  style="float: left">周边送</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{:url('admin/Commodity/index')}"><span class="glyphicon glyphicon-home">Home</span></a></li>
+                    <li><a href="#shop"><span class="glyphicon glyphicon-shopping-cart">Shop</span></a></li>
+                    <li><a href="#support"><span class="glyphicon glyphicon-headphones">Support</span></a></li>
+                </ul>
 
-
-<!----------------------------导航栏——----------->
-<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand">周边送SpeedyShopping</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+                </ul>
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
     </div>
-    <form class="navbar-form  navbar-right" role="search">
-        <div class="form-group">
-
-            <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button  type="submit" class="btn btn-success">Submit</button>
-    </form>
-    <!--<button type="submit" class="btn btn-default navbar-btn" href="{:url('home/index/index')}">首页</button>-->
-    <!--<button type="submit" class="btn btn-default navbar-btn">超市</button>-->
-    <!--<button type="submit" class="btn btn-default navbar-btn">办公</button>-->
-    <!--<button type="submit" class="btn btn-default navbar-btn">杂货</button>-->
-    <!--<button type="submit" class="btn btn-default navbar-btn">轻松一刻</button>-->
-    <!--<button type="submit" class="btn btn-default navbar-btn">租车</button>-->
-    <!--<button type="submit" class="btn btn-default navbar-btn">维修</button>-->
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="首页"></a>
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="超市"></a>
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="办公"></a>
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="杂货"></a>
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="轻松一刻"></a>
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="租车"></a>
-    <a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="维修"></a>
-
-</nav>
-
-<div class="container">
-
-    <div class="leftsidebar_box">
-        <div class="line"></div>
-        <dl class="system_log">
-            <dt onClick="changeImage()">超市<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">食品饮料</a></dd>
-            <dd><a href="#">粮油副食</a></dd>
-            <dd><a href="#">美容洗护</a></dd>
-            <dd><a href="#">家居彩电</a></dd>
-            <dd><a href="#">家庭清洁</a></dd>
-            <dd><a href="#">生活服务</a></dd>
-        </dl>
-
-        <dl class="custom">
-            <dt onClick="changeImage()">服装<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">女装</a></dd>
-            <dd><a href="#">男装</a></dd>
-            <dd><a href="#">内衣</a></dd>
-
-        </dl>
-
-        <dl class="channel">
-            <dt>办公<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">学习</a></dd>
-            <dd><a href="#">书城</a></dd>
-            <dd><a href="#">办公用具</a></dd>
-        </dl>
-
-        <dl class="app">
-            <dt onClick="changeImage()">运动<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">户外健身必带</a></dd>
-            <dd><a href="#">运动鞋</a></dd>
-
-        </dl>
-
-        <dl class="cloud">
-            <dt>杂货<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">餐具</a></dd>
-        </dl>
-
-        <dl class="syetem_management">
-            <dt>轻松一刻<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">游戏</a></dd>
-            <dd><a href="#">电影</a></dd>
-            <dd><a href="#">球赛</a></dd>
-
-        </dl>
-
-        <dl class="source">
-            <dt>租车<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">自行车</a></dd>
-            <dd><a href="#">山地车</a></dd>
-            <dd><a href="#">汽车</a></dd>
-        </dl>
-
-        <dl class="statistics">
-            <dt>维修<b class="caret"></b></dt>
-            <dd class="first_dd"><a href="#">手机维修</a></dd>
-            <dd><a href="#">家电维修</a></dd>
-            <dd><a href="#">汽车维修</a></dd>
-        </dl>
-
-    </div>
-
-</div>
-
-<script type="text/javascript">
-    $(".leftsidebar_box dt").css({"background-color":"#3992d0"});
-    $(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-    $(function(){
-        $(".leftsidebar_box dd").hide();
-        $(".leftsidebar_box dt").click(function(){
-            $(".leftsidebar_box dt").css({"background-color":"#3992d0"})
-            $(this).css({"background-color": "#317eb4"});
-            $(this).parent().find('dd').removeClass("menu_chioce");
-            $(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-            $(this).parent().find('img').attr("src","images/left/select_xl.png");
-            $(".menu_chioce").slideUp();
-            $(this).parent().find('dd').slideToggle();
-            $(this).parent().find('dd').addClass("menu_chioce");
-        });
-    })
-</script>
-
-
-
-
-
-<!-------------左侧导航栏------------------>
-    <div class="row">
-        <div class="col-xs-1.5">
-            <!--data-offset-top="125"-->
-            <ul class="nav nav-tabs nav-stacked" data-spy="affix">
-                <li class="navbar-inverse"><a href="{:url('home/index/login')}" title="登录账号">登录</a></li>
-                <li><a href="{:url('home/Index/register')}" title="注册账号">注册</a></li>
-                <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=1610357038&site=qq&menu=yes">
-                    联系我们</a>
-                </li>
-                <li><a href="">反馈</a></li>
-            </ul>
-
-</div>
-</div>
-
-
-
-
-
-
+</header>
 </body>
+<!--<aside>Side Nav</aside>-->
+
+
+<!--<section id="main">-->
+<!--<div id="con">-->
+<!--这里写内容-->
+<!--</div>-->
+<!--</section>-->
+
+
+
+
+
+
+<!---->
+<!--<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">-->
+    <!--<div class="navbar-header">-->
+        <!--<a class="navbar-brand">周边送SpeedyShopping</a>-->
+    <!--</div>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="首页"></a>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="超市"></a>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="办公"></a>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="杂货"></a>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="轻松一刻"></a>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="租车"></a>-->
+    <!--<a href="{:url('home/index/index')}"><input type="submit" class="btn btn-default navbar-btn" value="维修"></a>-->
+
+<!--</nav>-->
+
+
+
+
+
+
+<!-------------you侧导航栏------------------>
+   <!--<div class="row">-->
+    <!--<div class="col-xs-1.5">-->
+        <!--&lt;!&ndash;data-offset-top="125"&ndash;&gt;-->
+        <!--<ul class="nav nav-tabs nav-stacked" data-spy="affix">-->
+            <!--<li class="navbar-inverse"><a href="{:url('home/index/login')}" title="登录账号">登录</a></li>-->
+            <!--<li><a href="{:url('home/Index/register')}" title="注册账号">注册</a></li>-->
+            <!--<li><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=1610357038&site=qq&menu=yes">-->
+                <!--联系我们</a>-->
+            <!--</li>-->
+            <!--<li><a href="">反馈</a></li>-->
+        <!--</ul>-->
+
+    <!--</div>-->
+<!--</div>-->
+
+
+
+
+
+

@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <block name="titel"></block>
-
-    <block name="resources"></block>
     {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
-    {load href="__PUBLIC__/static/bootstrap/css/style.css" /}
     {load href="__PUBLIC__/static/js/jquery-3.1.1.min.js" /}
     {load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
-    {load href="__PUBLIC__/homestatic/css/reset.css" /}
-    {load href="__PUBLIC__/homestatic/css/style.css" /}
-    {load href="__PUBLIC__/homestatic/js/modernizr.js" /}
-    {load href="__PUBLIC__/homestatic/js/jquery-2.1.1.js" /}
-    {load href="__PUBLIC__/homestatic/js/main.js" /}
-    {load href="__PUBLIC__/lunbo/js/jquery.js" /}
-    {load href="__PUBLIC__/lunbo/css/lunbo.css" /}
+
     {load href="__PUBLIC__/zuoce/jquery.js" /}
     {load href="__PUBLIC__/zuoce/zuoce.css" /}
     {load href="__PUBLIC__/login/login.css" /}
     {load href="__PUBLIC__/static/bootstrap/css/cropbox.css" /}
     {load href="__PUBLIC__/static/bootstrap/js/cropbox-min.js" /}
+    {load href="__PUBLIC__/adminzuoce/myadmin.css" /}
+
     <block name="resources"></block>
 <body>
-
-{include file="/header"/}
+<header>
+    {include file="./header" /}
+</header>
+<aside>
+    {include file="./left"/}
+</aside>
+<section id="mymain">
+    <div id="con">
+        <div style="height: 60px;"></div>
 {__CONTENT__}
-{include file="/footer"/}
+    </div>
+</section>
+
 </body>
 </html>

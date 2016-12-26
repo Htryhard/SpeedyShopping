@@ -1,17 +1,24 @@
 {layout name="layout" /}
 <block name="titel"><title>周边购-GO!购物直径</title></block>
 <block name="resources">
-    {load href="__PUBLIC__/homestatic/css/reset.css" /}
-    {load href="__PUBLIC__/homestatic/css/style.css" /}
-    {load href="__PUBLIC__/homestatic/js/modernizr.js" /}
-    {load href="__PUBLIC__/homestatic/js/jquery-2.1.1.js" /}
-    {load href="__PUBLIC__/homestatic/js/main.js" /}
+    <!--{load href="__PUBLIC__/homestatic/css/reset.css" /}-->
+    <!--{load href="__PUBLIC__/homestatic/css/style.css" /}-->
+    <!--{load href="__PUBLIC__/homestatic/js/modernizr.js" /}-->
+    <!--{load href="__PUBLIC__/homestatic/js/jquery-2.1.1.js" /}-->
+    <!--{load href="__PUBLIC__/homestatic/js/main.js" /}-->
     {load href="__PUBLIC__/lunbo/js/jquery.js" /}
     {load href="__PUBLIC__/lunbo/css/lunbo.css" /}
-    {load href="__PUBLIC__/zuoce/jquery.js" /}
-    {load href="__PUBLIC__/zuoce/zuoce.css" /}
-</block>
 
+</block>
+<div style="width:500px;margin:0 auto;text-align:center;" >
+    <form class="form-group" role="search"  >
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="name" placeholder="Search"
+                   value="{:input('get.name')}">
+        </div>
+        <button type="submit" class="btn btn-success">&nbsp;搜&nbsp;索&nbsp;</button>
+
+    </form></div>
 <div class="box">
     <div class="pic">
         <ul>
@@ -38,7 +45,7 @@
             </li>
         </ul>
     </div>
-    <div class="nav">
+    <div class="lunbonav">
         <ul>
             <li class="bg"></li>
             <li></li>
@@ -48,7 +55,7 @@
         </ul>
     </div>
 </div>
-<script type="text/javascript" src="/public/lunbo/js/jquery.js"></script>
+
 <script type="text/javascript">
     var i = -1;
     var time=0;
@@ -87,217 +94,217 @@
     })
 </script>
 
-<ul id="cd-gallery-items" class="cd-container">
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB1.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB2.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB3.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-out"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB4.jpg" alt="Preview image"></a></li>
-            <!-- <li class="cd-item-out">...</li> -->
-        </ul> <!-- cd-item-wrapper -->
+<!--<ul id="cd-gallery-items" class="cd-container">-->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB1.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB2.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB3.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-out"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB4.jpg" alt="Preview image"></a></li>-->
+            <!--&lt;!&ndash; <li class="cd-item-out">...</li> &ndash;&gt;-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">零食礼包1400g</a></b>
-            <em>$90</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">零食礼包1400g</a></b>-->
+            <!--<em>$90</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB7.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB8.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB9.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB7.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB8.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB9.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">时尚服装</a></b>
-            <em>$99</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">时尚服装</a></b>-->
+            <!--<em>$99</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB10.jpg" alt="Preview image" ></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB1.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB12.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB10.jpg" alt="Preview image" ></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB1.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB12.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">租车</a></b>
-            <em>$99</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">租车</a></b>-->
+            <!--<em>$99</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB13.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB14.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB15.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB13.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB14.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB15.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">洗护</a></b>
-            <em>$39</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">洗护</a></b>-->
+            <!--<em>$39</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper" >
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB16.jpg" alt="Preview image" width="100%" height="100%"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB17.jpg" alt="Preview image"width="100%" height="100%"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB18.jpg" alt="Preview image" width="100%" height="100%"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper" >-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB16.jpg" alt="Preview image" width="100%" height="100%"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB17.jpg" alt="Preview image"width="100%" height="100%"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB18.jpg" alt="Preview image" width="100%" height="100%"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">护肤</a></b>
-            <em>$88</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">护肤</a></b>-->
+            <!--<em>$88</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB20.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB21.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB22.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB20.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB21.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB22.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">汽车  一天</a></b>
-            <em>$60</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">汽车  一天</a></b>-->
+            <!--<em>$60</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB25.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB24.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB23.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB25.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB24.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB23.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">学习</a></b>
-            <em>$9.99</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">学习</a></b>-->
+            <!--<em>$9.99</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB27.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB28.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB26.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB27.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB28.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB26.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">演出服</a></b>
-            <em>$20</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">演出服</a></b>-->
+            <!--<em>$20</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
 
-    <li>
-        <ul class="cd-item-wrapper">
-            <li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB31.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB30.jpg" alt="Preview image"></a></li>
-            <li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB29.jpg" alt="Preview image"></a></li>
-        </ul> <!-- cd-item-wrapper -->
+    <!--<li>-->
+        <!--<ul class="cd-item-wrapper">-->
+            <!--<li class="cd-item-front"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB31.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-middle"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB30.jpg" alt="Preview image"></a></li>-->
+            <!--<li class="cd-item-back"><a href="#0"><img src="__PUBLIC__/homestatic/img/TB29.jpg" alt="Preview image"></a></li>-->
+        <!--</ul> &lt;!&ndash; cd-item-wrapper &ndash;&gt;-->
 
-        <div class="cd-item-info">
-            <b><a href="#0">营养保健</a></b>
-            <em>$99</em>
-        </div> <!-- cd-item-info -->
+        <!--<div class="cd-item-info">-->
+            <!--<b><a href="#0">营养保健</a></b>-->
+            <!--<em>$99</em>-->
+        <!--</div> &lt;!&ndash; cd-item-info &ndash;&gt;-->
 
-        <nav>
-            <ul class="cd-item-navigation">
-                <li><a class="cd-img-replace" href="#0">Prev</a></li>
-                <li><a class="cd-img-replace" href="#0">Next</a></li>
-            </ul>
-        </nav>
+        <!--<nav>-->
+            <!--<ul class="cd-item-navigation">-->
+                <!--<li><a class="cd-img-replace" href="#0">Prev</a></li>-->
+                <!--<li><a class="cd-img-replace" href="#0">Next</a></li>-->
+            <!--</ul>-->
+        <!--</nav>-->
 
-        <a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>
-    </li>
-    <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
+        <!--<a class="cd-3d-trigger cd-img-replace" href="#0">Open</a>-->
+    <!--</li>-->
+    <!--<ul class="pagination">-->
+        <!--<li><a href="#">&laquo;</a></li>-->
+        <!--<li><a href="#">1</a></li>-->
+        <!--<li><a href="#">2</a></li>-->
+        <!--<li><a href="#">3</a></li>-->
+        <!--<li><a href="#">4</a></li>-->
+        <!--<li><a href="#">5</a></li>-->
+        <!--<li><a href="#">&raquo;</a></li>-->
+    <!--</ul>-->
 
-</ul> <!-- cd-gallery-items -->
+<!--</ul> &lt;!&ndash; cd-gallery-items &ndash;&gt;-->
 
 </body>
 </html>
