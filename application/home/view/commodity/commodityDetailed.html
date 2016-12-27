@@ -7,88 +7,92 @@
 
 </block>
 <div class="row">
-<body>
+    <body>
 
-<div class="preview">
+    <div class="preview">
 
-    <div id="vertical" class="bigImg">
+        <div id="vertical" class="bigImg">
 
-        <img src="__PUBLIC__/homestatic/img/TB1.jpg" width="400" height="400" alt="" id="midimg" />
+            <img src="__PUBLIC__/homestatic/img/TB1.jpg" width="400" height="400" alt="" id="midimg"/>
 
-        <div style="display:none;" id="winSelector"></div>
+            <div style="display:none;" id="winSelector"></div>
 
-    </div><!--bigImg end-->
+        </div><!--bigImg end-->
 
-    <div class="smallImg">
+        <div class="smallImg">
 
-        <div class="scrollbutton smallImgUp disabled"></div>
+            <div class="scrollbutton smallImgUp disabled"></div>
 
-        <div id="imageMenu">
+            <div id="imageMenu">
 
-            <ul>
+                <ul>
 
-                <li id="onlickImg"><img src="__PUBLIC__/homestatic/img/TB25.jpg" width="68" height="68" alt=""/></li>
+                    <li id="onlickImg"><img src="__PUBLIC__/homestatic/img/TB25.jpg" width="68" height="68" alt=""/>
+                    </li>
 
-                <li><img src="__PUBLIC__/homestatic/img/TB1.jpg" width="68" height="68" alt=""/></li>
+                    <li><img src="__PUBLIC__/homestatic/img/TB1.jpg" width="68" height="68" alt=""/></li>
 
-                <li><img src="__PUBLIC__/homestatic/img/TB5.jpg" width="68" height="68" alt=""/></li>
+                    <li><img src="__PUBLIC__/homestatic/img/TB5.jpg" width="68" height="68" alt=""/></li>
 
-                <li><img src="__PUBLIC__/homestatic/img/TB4.jpg" width="68" height="68" alt=""/></li>
+                    <li><img src="__PUBLIC__/homestatic/img/TB4.jpg" width="68" height="68" alt=""/></li>
 
-                <li><img src="__PUBLIC__/homestatic/img/TB13.jpg" width="68" height="68" alt=""/></li>
+                    <li><img src="__PUBLIC__/homestatic/img/TB13.jpg" width="68" height="68" alt=""/></li>
 
-                <li><img src="__PUBLIC__/homestatic/img/TB12.jpg" width="68" height="68" alt=""/></li>
+                    <li><img src="__PUBLIC__/homestatic/img/TB12.jpg" width="68" height="68" alt=""/></li>
 
-                <li><img src="__PUBLIC__/homestatic/img/TB2.jpg" width="68" height="68" alt=""/></li>
+                    <li><img src="__PUBLIC__/homestatic/img/TB2.jpg" width="68" height="68" alt=""/></li>
 
-            </ul>
+                </ul>
 
-        </div>
+            </div>
 
-        <div class="scrollbutton smallImgDown"></div>
+            <div class="scrollbutton smallImgDown"></div>
 
-    </div><!--smallImg end-->
+        </div><!--smallImg end-->
 
-    <div id="bigView" style="display:none;"><img width="800" height="800" alt="" src="" /></div>
+        <div id="bigView" style="display:none;"><img width="800" height="800" alt="" src=""/></div>
 
-</div>
+    </div>
 
-<style>
-    .fixed-top{
-        top: -400px;
-        right: -10px;
-        font-weight: inherit;
-       font-size: 25px;
-    }
+    <style>
+        .fixed-top {
+            top: -400px;
+            right: -10px;
+            font-weight: inherit;
+            font-size: 25px;
+        }
 
-     .userData {behavior:url(#default#userdata);}
+        .userData {
+            behavior: url(#default#userdata);
+        }
 
-</style>
-
-
-<div class="container">
-<div  class="row fixed-top col-md-4" >
+    </style>
 
 
-    <span >【{$commodity->getData("title")}】</span>
-</br></br>
-   <span>分类:{$commodity['type']['content']}</span>
-    </br></br>
-    <span>价格:<i style="color: #d33724">￥100</i></span>
-    </br></br>
-    <span >
+    <div class="container">
+        <div class="row fixed-top col-md-4">
+
+
+            <span>【{$commodity->getData("title")}】</span>
+            </br></br>
+            <span>分类:{$commodity['type']['content']}</span>
+            </br></br>
+            <span>价格:<i style="color: #d33724">￥100</i></span>
+            </br></br>
+            <span>
       <body onload="initProvince()">
 
         配送至:
-        <select name="province" id="selProvince" onchange="getCity(this.options[this.selectedIndex].value)" class="userData">
+        <select name="province" id="selProvince" onchange="getCity(this.options[this.selectedIndex].value)"
+                class="userData">
         </select>
-        <select name="city" id="selCity" >
+        <select name="city" id="selCity">
         </select>
 </body>
         <i style="font-size: 14px">有货</i>
     </span>
-    </br></br>
-<span>选择类型：
+            </br></br>
+            <span>选择类型：
     <div class="form-inline">
         <input type="text" value="加绒加厚黑色" readonly="readonly">
         <input type="text" value="加绒加厚红色" readonly="readonly">
@@ -96,36 +100,37 @@
          <input type="text" value="春秋薄款黑色" readonly="readonly">
     </div>
 </span></br>
-    <span>
-        <input id="min" name="" type="button" value="-" />
-<input id="text_box" name="" type="text" value="1"style="width:30px;"/>
-<input id="add" name="" type="button" value="+" />
-    </span><button type="submit" style="background-color: #d33724;color: #fff">加入购物车</button>
+            <span>
+        <input id="min" name="" type="button" value="-"/>
+<input id="text_box" name="" type="text" value="1" style="width:30px;"/>
+<input id="add" name="" type="button" value="+"/>
+    </span>
+            <button type="submit" style="background-color: #d33724;color: #fff">加入购物车</button>
 
-</div>
-</div>
-</body>
+        </div>
+    </div>
+    </body>
 </div>
 <script type="text/javascript">
     //数量加减
-    $(document).ready(function(){
+    $(document).ready(function () {
 //获得文本框对象
         var t = $("#text_box");
 //初始化数量为1,并失效减
-        $('#min').attr('disabled',true);
+        $('#min').attr('disabled', true);
         //数量增加操作
-        $("#add").click(function(){
-            t.val(parseInt(t.val())+1)
-            if (parseInt(t.val())!=1){
-                $('#min').attr('disabled',false);
+        $("#add").click(function () {
+            t.val(parseInt(t.val()) + 1)
+            if (parseInt(t.val()) != 1) {
+                $('#min').attr('disabled', false);
             }
 
         })
         //数量减少操作
-        $("#min").click(function(){
-            t.val(parseInt(t.val())-1);
-            if (parseInt(t.val())==1){
-                $('#min').attr('disabled',true);
+        $("#min").click(function () {
+            t.val(parseInt(t.val()) - 1);
+            if (parseInt(t.val()) == 1) {
+                $('#min').attr('disabled', true);
             }
 
         })
@@ -133,29 +138,29 @@
     });
 </script>
 <!--<div class="panel panel-info">-->
-    <!--<div class="panel-heading">-->
-        <!--<h3 class="panel-title">商品详情</h3>-->
-    <!--</div>-->
-    <!--<table class="table">-->
+<!--<div class="panel-heading">-->
+<!--<h3 class="panel-title">商品详情</h3>-->
+<!--</div>-->
+<!--<table class="table">-->
 
-        <!--<tr><td>标题：</td><td>{$commodity->getData("title")}<br/></td>-->
-        <!--<tr><td>分类：</td><td>{$commodity['type']['content']}<br/></td>-->
-    <!--</table>-->
+<!--<tr><td>标题：</td><td>{$commodity->getData("title")}<br/></td>-->
+<!--<tr><td>分类：</td><td>{$commodity['type']['content']}<br/></td>-->
+<!--</table>-->
 <!--</div>-->
 <!--<div class="panel panel-info">-->
-    <!--<div class="panel-heading">商品参数</div>-->
-    <!--<table class="table">-->
-        <!--{volist name="parameters" id="vo"  }-->
-        <!--<tr><td>{$key}</td>:<td>{$vo}</td></tr>-->
-        <!--{/volist}-->
-    <!--</table>-->
+<!--<div class="panel-heading">商品参数</div>-->
+<!--<table class="table">-->
+<!--{volist name="parameters" id="vo"  }-->
+<!--<tr><td>{$key}</td>:<td>{$vo}</td></tr>-->
+<!--{/volist}-->
+<!--</table>-->
 <!--</div>-->
 <!--<div class="panel panel-info">-->
-    <!--<div class="panel-heading">商品图片</div>-->
-    <!--<table class="table">-->
-        <!--<th></th><th> </th>-->
-        <!--{volist name="images" id="item"}-->
-        <!--<img src="{$item}" width="150px;"height="150px">-->
-        <!--{/volist}-->
-    <!--</table>-->
+<!--<div class="panel-heading">商品图片</div>-->
+<!--<table class="table">-->
+<!--<th></th><th> </th>-->
+<!--{volist name="images" id="item"}-->
+<!--<img src="{$item}" width="150px;"height="150px">-->
+<!--{/volist}-->
+<!--</table>-->
 <!--</div>-->
