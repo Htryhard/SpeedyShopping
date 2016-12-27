@@ -52,6 +52,7 @@ class CommodityController extends BaseController
         $data = $this->request->param();
         if (count($data) > 0) {
             $commodityData = $data['commodityData'];
+//            $commoditySpecifications = Comm::getCommoditySpecificationsByForm($commodityData);
             $commodityImages = Comm::getCommodityImagesNameByForm($commodityData);
             $commodityParameters = Comm::analysisParameter($commodityData);
             $commodityData = Comm::analysisCommodityForm($commodityData);
@@ -60,48 +61,50 @@ class CommodityController extends BaseController
             dump($commodityImages);
             echo "<br/>参数：";
             dump($commodityParameters);
+            echo "<br/>规格：";
+            dump($commodityData);
             echo "<br/>商品：";
             dump($commodityData);
 
-            if (count($commodityImages) > 0) {
-                if (count($commodityParameters) > 0) {
-                    if (count($commodityData) > 0) {
-                        $commodity = new Commodity();
-                        $commodity->id = Comm::getNewGuid();
-                        $commodity->title = $commodityData["title"];
-                        $commodity->describe = $commodityData["describe"];
-                        $commodity->staistics = 0;
-                        $commodity->parameter = Comm::toJson($commodityParameters);
-                        $commodity->creation_time = time();
-                        $commodity->out_time = strtotime($commodityData["wdate"]);
-                        $commodity->type_id = $commodityData["type_id"];
-                        $commodity->repertory = $commodityData["repertory"];
-                        $commodity->price = $commodityData["price"];
-                        $commodity->grade = 0;
-                        if ($commodity->validate(true)->save($commodity->getData())) {
-                            foreach ($commodityImages as $image) {
-                                $commodityImage = new CommodityImages();
-                                $commodityImage->id = Comm::getNewGuid();
-                                $commodityImage->commodity_id = $commodity->getData("id");
-                                $commodityImage->image = $image;
-                                $commodityImage->save();
-                                $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "cacheImages" . DS . $image;
-                                $newUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "commodity_images" . DS . $image;
-                                Comm::moveFile($newUrl, $oldUrl);
-                            }
-                        } else {
-                            return $commodity->getError();
-                        }
-                    } else {
-                        return "商品不能为空";
-                    }
-
-                } else {
-                    return "参数不能为空";
-                }
-            } else {
-                return "至少选择一张图片";
-            }
+//            if (count($commodityImages) > 0) {
+//                if (count($commodityParameters) > 0) {
+//                    if (count($commodityData) > 0) {
+//                        $commodity = new Commodity();
+//                        $commodity->id = Comm::getNewGuid();
+//                        $commodity->title = $commodityData["title"];
+//                        $commodity->describe = $commodityData["describe"];
+//                        $commodity->staistics = 0;
+//                        $commodity->parameter = Comm::toJson($commodityParameters);
+//                        $commodity->creation_time = time();
+//                        $commodity->out_time = strtotime($commodityData["wdate"]);
+//                        $commodity->type_id = $commodityData["type_id"];
+//                        $commodity->repertory = $commodityData["repertory"];
+//                        $commodity->price = $commodityData["price"];
+//                        $commodity->grade = 0;
+//                        if ($commodity->validate(true)->save($commodity->getData())) {
+//                            foreach ($commodityImages as $image) {
+//                                $commodityImage = new CommodityImages();
+//                                $commodityImage->id = Comm::getNewGuid();
+//                                $commodityImage->commodity_id = $commodity->getData("id");
+//                                $commodityImage->image = $image;
+//                                $commodityImage->save();
+//                                $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "cacheImages" . DS . $image;
+//                                $newUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "commodity_images" . DS . $image;
+//                                Comm::moveFile($newUrl, $oldUrl);
+//                            }
+//                        } else {
+//                            return $commodity->getError();
+//                        }
+//                    } else {
+//                        return "商品不能为空";
+//                    }
+//
+//                } else {
+//                    return "参数不能为空";
+//                }
+//            } else {
+//                return "至少选择一张图片";
+//            }
         } else {
             //渲染视图
             $this->assign("types", Type::all());

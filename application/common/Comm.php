@@ -206,6 +206,29 @@ class Comm
         return $paramet;
     }
 
+    public static function getCommoditySpecificationsByForm($arr){
+        $parameterName = array();
+        $parameterValue = array();
+        $paramet = array();
+        foreach ($arr as $item) {
+            if ($item["name"] == "parameterName") {
+//                $parameterName += [$item['value']];
+                array_push($parameterName, $item['value']);
+            }
+
+            if ($item["name"] == "parameterValue") {
+//                $parameterValue += [$item['value']];
+                array_push($parameterValue, $item['value']);
+            }
+        }
+        $parametLen = count($parameterName);
+        for ($i = 0; $i < $parametLen; $i++) {
+            $paramet += [$parameterName[$i] => $parameterValue[$i]];
+//            $paramet[$parameterName[$i]] = [$parameterValue[$i]];
+        }
+        return $paramet;
+    }
+
     /**
      * 解析商品表单，商品表单数据格式不规则，需要单独解析
      * @param $arr

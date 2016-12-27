@@ -55,7 +55,8 @@ $(document).ready(function() {
         {
             FieldCount++; //text box added increment
             //add input box
-            $(Inputscq).append('<div>库存：<input type="text" name="repertory"><br/>价格：<input type="text" name="price"><br/><a href="#" id="AddMoreFileBoxattribute" class="btn btn-info">添加属性</a></div>');
+            $(Inputscq).append('<div>规格：<input type="text" name="specificationContent" class="form-control"><br/>库存：<input type="text" name="specificationRepertory" class="form-control"><br/>价格：<input type="text" name="specificationPrice" class="form-control">' +
+                '<a href="#" class="removeclass_cq" ><img src="/SpeedyShopping/public/static/images/delete.png" width="10px;"height="10px"></a><br/><span>---------------------------------------------------------</span></div>');
             x++; //text box increment
         }
         return false;

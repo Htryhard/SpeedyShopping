@@ -10,15 +10,14 @@ namespace app\home\controller;
 
 
 use app\common\Comm;
-use app\common\controller\BaseController;
 use app\common\model\Commodity;
+use think\Controller;
 
-class CommodityController extends BaseController
+class CommodityController extends Controller
 {
 
     public function search()
     {
-        $title = $this->request->param();
         // 获取查询信息
         $title = input('get.title');
         $pageSize = 30; // 每页显示15条数据
