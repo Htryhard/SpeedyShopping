@@ -22,10 +22,8 @@
         <th>序号</th>
         <th>标题</th>
         <th>类型</th>
-        <th>价格</th>
         <th>上架时间</th>
         <th>销量</th>
-        <th>库存</th>
         <th>评分</th>
         <th>操作</th>
     </tr>
@@ -36,10 +34,8 @@
         <td>{$key}</td>
         <td>{$item->getData('title')}</td>
         <td>{$item['type']['content']}</td>
-        <td><i style="color: #d33724">￥{$item->getData('price')}</i></td>
         <td>{:date('Y-m-d ',$item->getData('creation_time'))}</td>
         <td>{$item->getData('staistics')}</td>
-        <td>{$item->getData('repertory')}</td>
         <td>{$item->getData('grade')}</td>
         <td>
             <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> |

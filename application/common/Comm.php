@@ -206,27 +206,38 @@ class Comm
         return $paramet;
     }
 
+    /**
+     * 根据商品表单  从中解析出商品的规格
+     * @param $arr
+     * @return array
+     */
     public static function getCommoditySpecificationsByForm($arr){
-        $parameterName = array();
-        $parameterValue = array();
-        $paramet = array();
+        $specificationContent = array();
+        $specificationRepertory = array();
+        $specificationPrice = array();
+        $specifications = array();
         foreach ($arr as $item) {
-            if ($item["name"] == "parameterName") {
-//                $parameterName += [$item['value']];
-                array_push($parameterName, $item['value']);
+            if ($item["name"] == "specificationContent") {
+                array_push($specificationContent, $item['value']);
             }
 
-            if ($item["name"] == "parameterValue") {
-//                $parameterValue += [$item['value']];
-                array_push($parameterValue, $item['value']);
+            if ($item["name"] == "specificationRepertory") {
+                array_push($specificationRepertory, $item['value']);
+            }
+
+            if ($item["name"] == "specificationPrice") {
+                array_push($specificationPrice, $item['value']);
             }
         }
-        $parametLen = count($parameterName);
-        for ($i = 0; $i < $parametLen; $i++) {
-            $paramet += [$parameterName[$i] => $parameterValue[$i]];
-//            $paramet[$parameterName[$i]] = [$parameterValue[$i]];
+        $specificationLen = count($specificationContent);
+        for ($i = 0; $i < $specificationLen; $i++) {
+            $cachearr = array();
+            array_push($cachearr,$specificationContent[$i]);
+            array_push($cachearr,$specificationRepertory[$i]);
+            array_push($cachearr,$specificationPrice[$i]);
+            $specifications += [$i => $cachearr];
         }
-        return $paramet;
+        return $specifications;
     }
 
     /**
@@ -239,7 +250,9 @@ class Comm
         if (count($arr) > 0) {
             $result = array();
             foreach ($arr as $item) {
-                if ($item["name"] == "parameterValue" || $item["name"] == "parameterName" || $item["name"] == "dirname") {
+                if ($item["name"] == "parameterValue" || $item["name"] == "parameterName"
+                    || $item["name"] == "dirname" || $item["name"] == "specificationContent"
+                    || $item["name"] == "specificationRepertory" || $item["name"] == "specificationPrice") {
                     continue;
                 }
                 $result += [$item['name'] => $item['value']];
@@ -260,7 +273,7 @@ class Comm
             $result = array();
             $imgStr = "";
             foreach ($arr as $item) {
-                if ($item["name"] == "dirname") {
+                if ($item["name"] == "dirname" && $item['value'] != "") {
                     $imgStr = $item['value'];
                     $imgStr = substr($imgStr, 1);
 //                    array_push($result,$item['value']);

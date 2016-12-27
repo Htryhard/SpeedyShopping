@@ -14,10 +14,33 @@
     <div class="panel-heading">商品参数</div>
     <table class="table">
         {volist name="parameters" id="vo"  }
-        <tr><td>{$key}</td>:<td>{$vo}</td></tr>
+        <tr>
+            <td>{$key}</td>:<td>{$vo}</td>
+        </tr>
         {/volist}
     </table>
 </div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">商品规格</div>
+    <table class="table">
+        <tr>
+            <td>规格内容</td>
+            <td>规格库存</td>
+            <td>价格</td>
+
+        </tr>
+        {volist name="$commodity['specifications']" id="vo"  }
+        <tr>
+          <td>{$vo['content']}</td>
+          <td>{$vo['repertory']}</td>
+          <td>{$vo['price']}</td>
+
+        </tr>
+        {/volist}
+    </table>
+</div>
+
 <div class="panel panel-info">
     <div class="panel-heading">商品图片</div>
     <table class="table">

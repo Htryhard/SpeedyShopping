@@ -86,7 +86,7 @@
             </br></br>
             <span>分类:{$commodity['type']['content']}</span>
             </br></br>
-            <span>价格:<i style="color: #d33724">￥100</i></span>
+            <span>价格:<i style="color: #d33724" id="i_price">￥--.--</i></span>
             </br></br>
             <span>
       <body onload="initProvince()">
@@ -100,27 +100,40 @@
 </body>
         <i style="font-size: 14px">有货</i>
     </span>
-            </br></br>
+            </br>
             <span>选择类型：
     <div class="form-inline">
-        <input type="text" value="加绒加厚黑色" readonly="readonly">
-        <input type="text" value="加绒加厚红色" readonly="readonly">
-         <input type="text" value="春秋薄款红色" readonly="readonly">
-         <input type="text" value="春秋薄款黑色" readonly="readonly">
+        <ul>
+          {volist name="$commodity['specifications']" id="vo"  }
+            <li><a href="#" onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>{$vo['content']}</a></li>
+        {/volist}
+        </ul>
+        <!--<input type="text" value="加绒加厚黑色" readonly="readonly">-->
+        <!--<input type="text" value="加绒加厚红色" readonly="readonly">-->
+        <!--<input type="text" value="春秋薄款红色" readonly="readonly">-->
+        <!--<input type="text" value="春秋薄款黑色" readonly="readonly">-->
     </div>
 </span></br>
             <span>
         <input id="min" name="" type="button" value="-"/>
 <input id="text_box" name="" type="text" value="1" style="width:30px;"/>
 <input id="add" name="" type="button" value="+"/>
+                库存：<span id="s_repertory">--</span>
     </span>
-            <button type="submit" style="background-color: #d33724;color: #fff">立即购买</button>
+            <a href="#" style="background-color: #d33724;color: #fff" onclick="postBay()">立即购买</a>
             <button type="submit" style="background-color: #d33724;color: #fff">加入购物车</button>
-
         </div>
     </div>
     </body>
 </div>
+
+<form id="post_bay" action="{:url('home/user/buyOne')}" method="post">
+    <!--标记规格的ID-->
+    <input type="hidden" name="specificationId" id="specificationId" value="">
+    <input type="hidden" name="commodityId" value="{$commodity['id']}">
+    <input type="hidden" name="count" id="count" value="">
+</form>
+
 <script type="text/javascript">
     //数量加减
     $(document).ready(function () {
@@ -134,7 +147,7 @@
             if (parseInt(t.val()) != 1) {
                 $('#min').attr('disabled', false);
             }
-
+            document.getElementById("count").value = t.val();
         })
         //数量减少操作
         $("#min").click(function () {
@@ -142,10 +155,49 @@
             if (parseInt(t.val()) == 1) {
                 $('#min').attr('disabled', true);
             }
+            document.getElementById("count").value = t.val();
+        });
 
-        })
-
+        document.getElementById("count").value = 1;
+        //初始化规格
+        document.getElementById("specificationId").value = "{$commodity['specifications'][0]['id']}";
+        document.getElementById("i_price").innerText = "￥{$commodity['specifications'][0]['price']}";
+        document.getElementById("s_repertory").innerText = "{$commodity['specifications'][0]['repertory']}";
     });
+
+    //用户切换规格
+    function showSpecification(repertory, price, id) {
+        document.getElementById("specificationId").value = "";
+        document.getElementById("specificationId").value = id;
+        document.getElementById("i_price").innerText = "￥" + price;
+        document.getElementById("s_repertory").innerText = repertory;
+    }
+    //立即购买 提交按钮
+    function postBay() {
+        var specificationId = document.getElementById("specificationId").value;
+        var commodityId = "{$commodity['id']}";
+        var url = "{:url('home/user/buyOne')}";
+        $("#post_bay").submit();
+//        $.ajax({
+//            type: "POST",
+//            url: url,
+//            dataType: "json",
+//            data: {
+//                specificationId: specificationId,
+//                commodityId:commodityId
+//            },
+//            success: function (msg) {
+////                alert(msg+"====="+divId);
+//                switch (msg) {
+//                    case "Success":
+//                        alert("ok");
+//                        break;
+//                    default:
+//
+//                }
+//            },
+//        });
+    }
 </script>
 <!--<div class="panel panel-info">-->
 <!--<div class="panel-heading">-->

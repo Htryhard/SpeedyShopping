@@ -13,5 +13,9 @@ use think\Model;
 
 class Address extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo('user');
+    }
 
 }

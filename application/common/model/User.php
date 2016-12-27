@@ -13,6 +13,14 @@ use think\Model;
 
 class User extends Model
 {
+    /**
+     * 用户关联地址
+     * @return \think\model\Relation
+     */
+    public function address()
+    {
+        return $this->hasMany('address','user_id','id');
+    }
 
     /**
      * 判断用户是否已登录

@@ -22,4 +22,9 @@ class Commodity extends Model
         return $this->hasMany('CommodityImages','commodity_id','id');
     }
 
+    public function specifications()
+    {
+        return $this->hasMany('specification','commodity_id','id');
+    }
+
 }

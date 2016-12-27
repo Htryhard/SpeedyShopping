@@ -13,5 +13,9 @@ use think\Model;
 
 class Order extends Model
 {
+    public function orderSpecification()
+    {
+        return $this->belongsTo('OrderSpecification');
+    }
 
 }
