@@ -1,4 +1,30 @@
+*{padding:0;margin:0;border:none;}
 body{font:16px/18px "宋体",arial,sans-serif;color:#585858;}
+
+
+asideleft{
+    width:500px;
+    position:absolute;
+    top:80px;
+    left:60px;
+    bottom:100px;
+    font-size: 16px;
+    height: 100%;
+    position: fixed;
+}
+#xxmain{
+    position: absolute;
+    left: 500px;
+    top: 170px;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+
+}
+#xxcon{
+    height:100%;
+
+}
 
 body,div,p,span,form,iframe,table,td,th,input,textarea,button,label,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6{
     margin:0;}
@@ -33,7 +59,7 @@ a:active{color:#1d7400;}
 
 
 
-.preview{width:400px; height:465px; margin:50px 0px 0px 150px;padding: 80px}
+.preview{width:400px; height:465px; margin:50px 0px 0px 150px;padding: 70px}
 
 /* smallImg */
 
