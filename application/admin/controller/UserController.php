@@ -53,7 +53,6 @@ class UserController extends Controller
             return json('TheUserNameOrPasswordError');
         }
     }
-
     public function register()
     {
         $data = Request::instance()->param();

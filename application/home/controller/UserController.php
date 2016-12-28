@@ -18,8 +18,7 @@ use app\common\model\User;
 use think\Controller;
 use think\Request;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     public function register()
     {
         return $this->fetch();
