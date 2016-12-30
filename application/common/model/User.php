@@ -13,6 +13,11 @@ use think\Model;
 
 class User extends Model
 {
+    public function orders()
+    {
+        return $this->hasMany('order','user_id','id');
+    }
+
     /**
      * 用户关联地址
      * @return \think\model\Relation

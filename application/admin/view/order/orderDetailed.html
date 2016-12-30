@@ -1,0 +1,86 @@
+{layout name="layout" /}
+<block name="title"><title>所有订单</title></block>
+<block name="resources">
+
+</block>
+<div class="container">
+    <div style="page-break-after: always;">
+        <h1 class="text-center">订单信息</h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td style="width: 50%;">发送自</td>
+                <td style="width: 50%;">订单详情</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <address><strong>周边送购物商城</strong><br/>柳州市周边送大厦</address>
+                    <b>电话:</b> 74110<br/>
+                    <b>E-Mail:</b> <br/>
+                    <b>网址:</b> <a href="www.nb74110.com">周边送购物商城购无止境</a>
+                </td>
+                <td style="width: 50%;">
+                    <b>下单日期:</b>{:date('Y-m-d ',$order->getData('order_time'))}<br/>
+                    <b>订单号:</b> {$order['order_number']}<br/>
+                    <b>支付方式:</b> <br/>
+                    <b>配送方式:</b> 周边送官方配送<br/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td colspan="4"><b>收货信息</b></td>
+            </tr>
+            <tr>
+                <td>收件人</td>
+                <td>联系电话</td>
+                <td>收货地址</td>
+                <td>邮编</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{$order['address']['user_name']}</td>
+                <td>{$order['address']['phone']}</td>
+                <td>{$order['address']['content']}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td><b>序号</b></td>
+                <td><b>商品名称</b></td>
+                <td><b>规格属性</b></td>
+                <td><b>数量</b></td>
+                <td><b>单价</b></td>
+                <td class="text-right"><b>小计</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="$order['orderSpecifications']" id="item" key="key"}
+            <tr>
+                <td>{$key}</td>
+                <td>{$item['specification']['commodity']['title']}</td>
+                <td>{$item['specification']['content']}</td>
+                <td>{$item['count']}</td>
+                <td>{$item['specification']['price']}</td>
+                <td class="text-right">{$item['count']*$item['specification']['price']}</td>
+            </tr>
+            {/volist}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6" class="text-center"><input class="btn btn-default noprint" type="submit"
+                                                           onclick="window.print();" value="打印"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+

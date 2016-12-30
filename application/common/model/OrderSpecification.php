@@ -17,5 +17,9 @@ class OrderSpecification extends Model
     {
         return $this->belongsTo('order');
     }
+    public function specification()
+    {
+        return $this->belongsTo('specification');
+    }
 
 }
