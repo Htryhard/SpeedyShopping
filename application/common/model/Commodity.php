@@ -27,4 +27,9 @@ class Commodity extends Model
         return $this->hasMany('specification','commodity_id','id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('comment','commodity_id','id');
+    }
+
 }

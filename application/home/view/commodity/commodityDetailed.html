@@ -9,7 +9,7 @@
 </block>
 
 
-   <asideleft>
+<asideleft>
     <div class="preview">
         <div id="vertical" class="bigImg">
             <!--<img src="__PUBLIC__/homestatic/img/TB1.jpg" width="400" height="400" alt="" id="midimg"/>-->
@@ -34,7 +34,7 @@
         </div><!--smallImg end-->
         <div id="bigView" style="display:none;"><img width="800" height="800" alt="" src=""/></div>
     </div>
-   </asideleft>
+</asideleft>
 
 <style>
 
@@ -44,18 +44,18 @@
     }
 
     /*.add-to-cart{*/
-        /*width: 180px;*/
-        /*height: 40px;*/
-        /*background: #CD0003;*/
-        /*color: #fff;*/
-        /*text-align: center;*/
-        /*line-height: 40px;*/
-        /*font-weight: bold;*/
-        /*text-decoration: none;*/
-        /*font-family: "微软雅黑";*/
-        /*display: block; !*将a标签默认的display：inline修改为block*!*/
+    /*width: 180px;*/
+    /*height: 40px;*/
+    /*background: #CD0003;*/
+    /*color: #fff;*/
+    /*text-align: center;*/
+    /*line-height: 40px;*/
+    /*font-weight: bold;*/
+    /*text-decoration: none;*/
+    /*font-family: "微软雅黑";*/
+    /*display: block; !*将a标签默认的display：inline修改为block*!*/
     /*}*/
-    .inline a{
+    .inline a {
         display: inline-table;
         width: 180px;
         height: 50px;
@@ -73,14 +73,14 @@
 <section id="xxmain">
         <span style="font-size: 20px;font-weight: bold">【{$commodity->getData("title")}】
         </span>
-        <div style="height: 6px"></div>
-        <div style="background: #ffffcc;width: 660px;height: 300px">
-            <div style="height: 5px"></div>
-            <span>分类:{$commodity['type']['content']}</span>
-            </br></br>
-            <span>价格:<i style="color: #d33724" id="i_price">￥--.--</i></span>
-            </br></br>
-            <span>
+    <div style="height: 6px"></div>
+    <div style="background: #ffffcc;width: 660px;height: 300px">
+        <div style="height: 5px"></div>
+        <span>分类:{$commodity['type']['content']}</span>
+        </br></br>
+        <span>价格:<i style="color: #d33724" id="i_price">￥--.--</i></span>
+        </br></br>
+        <span>
       <body onload="initProvince()">
 
         配送至:
@@ -92,20 +92,31 @@
 </body>
         <i style="font-size: 14px">有货</i>
     </span>
-          <div style="height: 10px;"></div>
+        <div style="height: 10px;"></div>
 
 
-         <div>
-                  选择类型:
-                  {volist  name="$commodity['specifications']" id="vo"  }
-                     <a href="#" onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>
-                         {$vo['content']}</a>
-                    {/volist}
-         </div>
-
+        <div>
+            选择类型:
+            {volist name="$commodity['specifications']" id="vo" }
+            <a href="#" onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>
+                {$vo['content']}</a>
+            {/volist}
         </div>
-        </br>
-        <span >
+
+    </div>
+    </br>
+    <span>销量{$commodity['staistics']}</span><br/>
+
+   <a href="#">
+
+       <section class="bordera"  onmouseover ="over_id('0');" onmouseout ="out_id('0');" >
+           <img class="img_xing" id="b0" src="/SpeedyShopping/public/wei/images/baixing.png"
+                style="width: 20px;height: 20px;" ><button class="btn_guanzhu">关注</button>
+       </section>
+
+   </a>
+
+    <span>
         <input id="min" name="" type="button" value="-"/>
 <input id="text_box" name="" type="text" value="1"/>
 <input id="add" name="" type="button" value="+"/>
@@ -113,19 +124,71 @@
     </span>
     <div class="inline">
 
-            <a href="#" style="background-color: #d33724;color: #fff" onclick="postBay()">立即购买</a>
+        <a href="#" style="background-color: #d33724;color: #fff" onclick="postBay()">立即购买</a>
         &nbsp;
-            <a href="#" style=" background-color: #d33724;color: #fff" onclick=""  >加入购物车</a>
+        <a href="#" style=" background-color: #d33724;color: #fff" onclick="">加入购物车</a>
     </div>
-        <form id="post_bay" action="{:url('home/user/buyOne')}" method="post">
-            <!--标记规格的ID-->
-            <input type="hidden" name="specificationId" id="specificationId" value="">
-            <input type="hidden" name="commodityId" value="{$commodity['id']}">
-            <input type="hidden" name="count" id="count" value="">
-        </form>
-
+    <form id="post_bay" action="{:url('home/user/buyOne')}" method="post">
+        <!--标记规格的ID-->
+        <input type="hidden" name="specificationId" id="specificationId" value="">
+        <input type="hidden" name="commodityId" value="{$commodity['id']}">
+        <input type="hidden" name="count" id="count" value="">
+    </form>
 </section>
+<p>商品信息</p>
+<ul class="nav nav-tabs">
+    <li class="active" id="li_describe" onclick="showContent('li_describe')"><a href="#">宝贝描述</a></li>
+    <li id="li_parameter" onclick="showContent('li_parameter')"><a href="#">宝贝参数</a></li>
+    <li id="li_comment" onclick="showContent('li_comment')"><a href="#">评价<i style="color: #d33724">({:count($commodity['comments'])})</i></a></li>
+</ul>
+<div id="ending">
+    {$commodity->getData("describe")}
+</div>
+<script type="text/javascript">
+    function showContent(id) {
+        var li = document.getElementById(id);
+        var li_1 = document.getElementById("li_describe");
+        var li_2 = document.getElementById("li_parameter");
+        var li_3 = document.getElementById("li_comment");
+        li_1.setAttribute("class", "");
+        li_2.setAttribute("class", "");
+        li_3.setAttribute("class", "");
+        li.setAttribute("class", "active");
 
+        var content = document.getElementById("ending");
+        content.innerHTML = "";
+        if (id == "li_describe") {
+            content.innerHTML = "{$commodity->getData('describe')}";
+        } else if (id == "li_parameter") {
+            var str = "{volist name='parameters' id='item' key='key'}{$key}:{$item}-/{/volist}";
+            var arrParas = [];
+            var con = "";
+            arrParas = str.split("-/");
+            for (i=0;i<arrParas.length;i++){
+                if (i!=0 && (i%2)==0){
+                    con += "<span>"+arrParas[i]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>";
+                }else{
+                    con += "<span>"+arrParas[i]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+            }
+            content.innerHTML = con;
+        } else if (id == "li_comment") {
+
+        }
+    }
+
+    //关注（心）图标处理
+    function over_id(id)
+    {
+//        alert(id);
+        document.getElementById('b'+id).src ="/SpeedyShopping/public/wei/images/hongxing.png"
+    }
+    function out_id(id)
+    {
+//        alert(id);
+        document.getElementById('b'+id).src ="/SpeedyShopping/public/wei/images/baixing.png"
+    }
+</script>
 
 <script type="text/javascript">
     //数量加减

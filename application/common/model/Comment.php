@@ -13,5 +13,9 @@ use think\Model;
 
 class Comment extends Model
 {
+    public function commodity()
+    {
+        return $this->belongsTo('commodity');
+    }
 
 }
