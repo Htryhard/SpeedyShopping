@@ -51,6 +51,15 @@
 .btn_guanzhu{ border: 0;background:#F4F4F4; vertical-align: middle;  font-size: 13px; }
 
 </style>
+<div style="width:600px;margin:0 auto;text-align:center;" >
+    <form class="form-group" role="search" action="{:url('home/commodity/search')}" method="get">
+        <div class="col-md-10">
+            <input type="text" style="height: 50px" class="form-control" name="title" placeholder="Search"
+                   value="{:input('get.title')}" >
+        </div>
+        <button type="submit"  style="height: 50px" class="btn btn-success">&nbsp;搜&nbsp;索&nbsp;</button>
+
+    </form></div>
 <div>
     {volist name="commodities" id="item"}
     <div >

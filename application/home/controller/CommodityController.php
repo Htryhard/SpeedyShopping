@@ -11,6 +11,7 @@ namespace app\home\controller;
 
 use app\common\Comm;
 use app\common\model\Commodity;
+use app\common\model\User;
 use think\Controller;
 
 class CommodityController extends Controller
@@ -18,6 +19,8 @@ class CommodityController extends Controller
 
     public function search()
     {
+        $user = User::getUserBySession();
+        $this->assign("user",$user);
         // 获取查询信息
         $title = input('get.title');
         $pageSize = 30; // 每页显示15条数据
@@ -60,7 +63,8 @@ class CommodityController extends Controller
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-
+                $user = User::getUserBySession();
+                $this->assign("user",$user);
                 $this->assign("commodity",$commodity);
                 $this->assign("parameters",$commodityParameters);
                 $this->assign("images",$commodityImages);

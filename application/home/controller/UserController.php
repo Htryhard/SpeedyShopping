@@ -124,5 +124,9 @@ class UserController extends Controller {
         }
     }
 
+    public function logout(){
+        User::logOut();
+    }
+
 
 }

@@ -44,6 +44,18 @@ class User extends Model
     }
 
     /**
+     * 注销
+     * @return bool  成功true，失败false。
+     * @author huan
+     */
+    static public function logOut()
+    {
+        // 销毁session中数据
+        session('email', null);
+        return true;
+    }
+
+    /**
      * 用户登录
      * @param  string $email 邮箱
      * @param  string $password 密码
