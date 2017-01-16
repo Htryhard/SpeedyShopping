@@ -1,17 +1,17 @@
 <?php
 namespace app\home\controller;
 
-use app\common\controller\BaseController;
-use app\common\model\Commodity;
-use think\Request;
 
-class IndexController extends  BaseController
+use app\common\model\Type;
+use think\Controller;
+
+class IndexController extends  Controller
 {
     public function index()
     {
-        $this->assign('email','你好');
+//        $this->assign("commodities",);
+        $this->assign('types',Type::all());
         return $this->fetch();
-
     }
 
 
