@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 50715
 Source Host           : localhost:3306
 Source Database       : shopp_database
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2016-12-28 04:43:32
+Date: 2017-01-16 20:28:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -200,7 +200,7 @@ CREATE TABLE `shopp_commodity` (
 -- ----------------------------
 -- Records of shopp_commodity
 -- ----------------------------
-INSERT INTO `shopp_commodity` VALUES ('1C26D516-A5F1-7C2E-7158-8A658A3F9083', '27寸大屏2K液晶电脑显示器 IPS高清1080PS4游戏制图显示屏HDMI ', '                    27寸大屏幕 IPS屏 高清分辨率 游戏 PS4                 ', '0', '{\"\\u5236\\u9020\\u5546\\u540d\\u79f0\":\"\\u6df1\\u5733\\u5e02\\u540e\\u601d\\u79d1\\u6280\\u6709\\u9650\\u516c\\u53f8\",\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u6db2\\u6676\\u663e\\u793a\\u5668\",\"\\u578b\\u53f7\":\"BKA270\",\"\\u6444\\u50cf\\u5934\\u7c7b\\u578b\":\"\\u65e0\\u6444\\u50cf\\u5934\"}', '1482860943', '1483718400', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0');
+INSERT INTO `shopp_commodity` VALUES ('1C26D516-A5F1-7C2E-7158-8A658A3F9083', '27寸大屏2K液晶电脑显示器 IPS高清1080PS4游戏制图显示屏HDMI ', '                                                            27寸大屏幕 IPS屏 高清分辨率 游戏 PS4                                                 ', '0', '{\"\\u5236\\u9020\\u5546\\u540d\\u79f0\":\"\\u6df1\\u5733\\u5e02\\u540e\\u601d\\u79d1\\u6280\\u6709\\u9650\\u516c\\u53f8\",\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u6db2\\u6676\\u663e\\u793a\\u5668\",\"\\u578b\\u53f7\":\"BKA270\",\"\\u6444\\u50cf\\u5934\\u7c7b\\u578b\":\"\\u65e0\\u6444\\u50cf\\u5934\",\"\\u7535\\u6c60\":\"6000\\u6beb\\u5b89\"}', '1482860943', '1483718400', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0');
 
 -- ----------------------------
 -- Table structure for shopp_commodity_images
@@ -216,6 +216,7 @@ CREATE TABLE `shopp_commodity_images` (
 -- ----------------------------
 -- Records of shopp_commodity_images
 -- ----------------------------
+INSERT INTO `shopp_commodity_images` VALUES ('643F82EF-7F61-3C9B-6C76-62D5255C2557', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', 'B3195156-9300-44C5-56FB-552D8D67FFD7.png');
 INSERT INTO `shopp_commodity_images` VALUES ('673D94FA-01E2-6F9F-D35F-9F87C3CA22F7', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', '6350699E-CD5B-DC0A-198C-78320274A619.png');
 INSERT INTO `shopp_commodity_images` VALUES ('A4A73C7A-46AD-F92B-DC43-F6279FB5306E', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', 'C48809C5-1916-F829-8490-3A99D06CC7C8.png');
 INSERT INTO `shopp_commodity_images` VALUES ('BEFF68EF-B07E-B032-36FB-850F0FFBC50E', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', 'E56FA03A-738D-500E-F9C4-C84636B61F6F.png');
@@ -247,9 +248,9 @@ CREATE TABLE `shopp_order` (
   `status` int(2) NOT NULL,
   `user_id` char(36) NOT NULL,
   `order_number` varchar(100) NOT NULL,
-  `order_time` date NOT NULL,
-  `pay_time` date NOT NULL,
-  `succeed_time` date NOT NULL,
+  `order_time` varchar(20) NOT NULL,
+  `pay_time` varchar(20) NOT NULL,
+  `succeed_time` varchar(20) NOT NULL,
   `address_id` varchar(36) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -257,7 +258,8 @@ CREATE TABLE `shopp_order` (
 -- ----------------------------
 -- Records of shopp_order
 -- ----------------------------
-INSERT INTO `shopp_order` VALUES ('9101BAF5-6416-96A5-D8B1-F232ACC198B6', '0', '5D754767-F3D5-1D93-E588-856B288B08CC', '1482871207', '0000-00-00', '0000-00-00', '0000-00-00', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
+INSERT INTO `shopp_order` VALUES ('3D6DBFA3-624E-69DB-E8DE-5D26B9E33968', '2', '5D754767-F3D5-1D93-E588-856B288B08CC', '1483776627', '1483776627', '1483776627', '1483776627', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
+INSERT INTO `shopp_order` VALUES ('8630AB36-897C-F23D-961E-B4ACB15D9C8A', '2', '5D754767-F3D5-1D93-E588-856B288B08CC', '1483030733', '1483030733', '1483030733', '1483030733', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 
 -- ----------------------------
 -- Table structure for shopp_order_specification
@@ -274,7 +276,8 @@ CREATE TABLE `shopp_order_specification` (
 -- ----------------------------
 -- Records of shopp_order_specification
 -- ----------------------------
-INSERT INTO `shopp_order_specification` VALUES ('BF6DE8BD-C32D-EC17-D2A2-6EA2D769E3BA', '9101BAF5-6416-96A5-D8B1-F232ACC198B6', '8AF4D58C-E65C-4D2E-3A6C-9E832EFB2BDE', '2');
+INSERT INTO `shopp_order_specification` VALUES ('11E20DE9-8F7E-A426-B390-34FADFADAAE9', '8630AB36-897C-F23D-961E-B4ACB15D9C8A', '7D118229-AF8E-3C21-D440-6A3E4B94424A', '2');
+INSERT INTO `shopp_order_specification` VALUES ('FB3FB3ED-EA8D-C17A-B0A7-EEDB49463133', '3D6DBFA3-624E-69DB-E8DE-5D26B9E33968', '64D63924-E57B-C610-6CEF-4E528BE1D391', '4');
 
 -- ----------------------------
 -- Table structure for shopp_role
@@ -308,9 +311,9 @@ CREATE TABLE `shopp_specification` (
 -- ----------------------------
 -- Records of shopp_specification
 -- ----------------------------
-INSERT INTO `shopp_specification` VALUES ('2F4AF392-1949-0C3B-6BE9-6D13489A2545', '白色普通版', '800', '20', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
-INSERT INTO `shopp_specification` VALUES ('8AF4D58C-E65C-4D2E-3A6C-9E832EFB2BDE', '高配2K高清版', '999', '12', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
-INSERT INTO `shopp_specification` VALUES ('A6BFDCC3-091D-719B-C381-FB8E6F72EB30', '黑色普通版', '800', '26', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
+INSERT INTO `shopp_specification` VALUES ('64D63924-E57B-C610-6CEF-4E528BE1D391', '高配2K高清版', '999', '12', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
+INSERT INTO `shopp_specification` VALUES ('BDE33C6F-A44C-ECC3-4585-6B493AD223F3', '白色普通版', '800', '20', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
+INSERT INTO `shopp_specification` VALUES ('D29F12CC-3CCF-5749-E84F-BD61DAC7E61C', '黑色普通版', '800', '26', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
 
 -- ----------------------------
 -- Table structure for shopp_type
@@ -355,3 +358,4 @@ CREATE TABLE `shopp_user` (
 INSERT INTO `shopp_user` VALUES ('5D754767-F3D5-1D93-E588-856B288B08CC', 'admin@qq.com', 'admin', '0ec0cebaee2a51bb93589ef32bb8341a228f320d', null, '11111', '201612161528083417.png', '', null);
 INSERT INTO `shopp_user` VALUES ('843B2B6B-4D6C-14C0-8C0B-184BEC722BD3', 'test2@qq.com', 'test2', '9e8fa5ab3be86fd237c16f2f358216de81118c18', null, '22222', '201612231058437310.png', '', null);
 INSERT INTO `shopp_user` VALUES ('C6C5BE9C-76CB-AC21-0476-942224A29F96', 'test1@qq.com', 'test1', '0cff20526af50e37b8fe8c49313f2ae1a1e622ab', null, '111111111', '201612231008219460.png', '', null);
+SET FOREIGN_KEY_CHECKS=1;
