@@ -9,6 +9,7 @@
 namespace app\home\controller;
 
 use app\common\Comm;
+use app\common\controller\BaseController;
 use app\common\model\Address;
 use app\common\model\Commodity;
 use app\common\model\Order;
@@ -18,29 +19,16 @@ use app\common\model\User;
 use think\Controller;
 use think\Request;
 
-class UserController extends Controller {
-    public function register()
-    {
+class UserController extends BaseController{
+
+    //TODO:关注/取消关注商品
+    //TODO:加入购物车/编辑购物车
+    //TODO:所有订单
+    //TODO: ...
+    //TODO:用户的个人主页
+    public function userHome(){
         $this->assign("user",User::getUserBySession());
         return $this->fetch();
-    }
-
-    public function login()
-    {
-        $this->assign("user",User::getUserBySession());
-        return $this->fetch();
-    }
-
-    public function loginHandle()
-    {
-        // 接收post信息
-        $data = Request::instance()->post();
-        // 直接调用M层方法，进行登录。
-        if (User::login($data['email'], $data['password'])) {
-            return json("succeed");
-        } else {
-            return json('TheUserNameOrPasswordError');
-        }
     }
 
     /**
@@ -57,6 +45,10 @@ class UserController extends Controller {
         $address->save();
     }
 
+    /**
+     * 直接购买一件商品
+     * @return mixed|string
+     */
     public function buyOne(){
         $count = Request::instance()->param("count");
         $specificationId = Request::instance()->param("specificationId");
@@ -129,6 +121,7 @@ class UserController extends Controller {
     public function logout(){
         User::logOut();
     }
+
 
 
 }

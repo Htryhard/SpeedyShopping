@@ -6,12 +6,12 @@
 <body style="height: 100px;" id="body">
 
 
-<form action="{:url('home/user/loginHandle')}" method="post" name="userlogin" id="userlogin">
+<form action="{:url('home/thing/loginHandle')}" method="post" name="userlogin" id="userlogin">
     <h3>用户登录</h3>
     <p> <input class="input-text" type="text" id="email" name="email" placeholder="手机号/会员名/邮箱"></p>
     <p><input class="input-text input-pwd" id="password" name="password" type="password" required></p>
     <p><input class="input-btn" type="button" onclick="userToLogin()" value="登录"></p>
-    <h6><a href="#">忘记密码</a><a href="{:url('home/Index/register')}">免费注册</a></h6>
+    <h6><a href="#">忘记密码</a><a href="{:url('home/thing/register')}">免费注册</a></h6>
 </form>
 </body>
 
@@ -21,7 +21,7 @@
         var email = $("#email").val();
         $.ajax({
             type: "POST",
-            url: "{:url('home/user/loginHandle')}",
+            url: "{:url('home/thing/loginHandle')}",
             dataType: "json",
             data: {
                 password: password,
