@@ -402,6 +402,14 @@
 
         <section class="bordera" onmouseover="over_id('{$key}');" onmouseout="out_id('{$key}');"
                  onclick=userCollect("{$commodity['id']}")>
+
+            {php}
+            if(count($userCollects)==0){
+            echo '<img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png" style="width: 20px;height: 20px;">';
+            }
+
+            {/php}
+
             {volist name="userCollects" id="item"}
             {if condition="$item['commodity_id']==$commodity['id']"}
             <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/hongxing.png"
@@ -411,13 +419,6 @@
                  style="width: 20px;height: 20px;">
             {/if}
             {/volist}
-
-            {php}
-            if(count($userCollects)==0){
-            echo '<img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png" style="width: 20px;height: 20px;">';
-            }
-
-            {/php}
 
             <button class="btn_guanzhu">关注</button>
         </section>
