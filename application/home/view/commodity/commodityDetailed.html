@@ -122,7 +122,8 @@
         <input type="hidden" name="commodityId" value="{$commodity['id']}">
         <input type="hidden" name="count" id="count" value="">
     </form>
-
+</section>
+<asidefoot>
 <p>商品信息</p>
 <ul class="nav nav-tabs">
     <li class="active" id="li_describe" onclick="showContent('li_describe')"><a href="#">宝贝描述</a></li>
@@ -132,7 +133,7 @@
 <div id="ending">
     {$commodity->getData("describe")}
 </div>
-</section>
+</asidefoot>
 <script type="text/javascript">
     function showContent(id) {
         var li = document.getElementById(id);

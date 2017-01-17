@@ -19,7 +19,13 @@ asideleft{
     overflow: hidden;
 
 }
+asidefoot{
+    left:0px;
+    right: 0;
 
+    overflow: hidden;
+    top:-520px;
+}
 
 
 
