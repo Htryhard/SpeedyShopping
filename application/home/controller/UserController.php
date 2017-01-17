@@ -21,18 +21,20 @@ use think\Request;
 class UserController extends Controller {
     public function register()
     {
+        $this->assign("user",User::getUserBySession());
         return $this->fetch();
     }
 
     public function login()
     {
+        $this->assign("user",User::getUserBySession());
         return $this->fetch();
     }
 
     public function loginHandle()
     {
         // 接收post信息
-        $data = Request::instance()->param();
+        $data = Request::instance()->post();
         // 直接调用M层方法，进行登录。
         if (User::login($data['email'], $data['password'])) {
             return json("succeed");

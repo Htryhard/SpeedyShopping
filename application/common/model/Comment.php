@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * 商品评论模型
  * User: Huan
  * Date: 2016/12/16
  * Time: 10:25

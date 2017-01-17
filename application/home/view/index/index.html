@@ -363,9 +363,9 @@
     <div class="conten_margin col-md-" >
         <a href="{:url('home/commodity/commodityDetailed?id='.$commodity->getData('id'))}">
             <img src="{$imgRoot}{$commodity.images[0]['image']}" style="height: 220px;width: 180px;" /></a>
-        <section class="pricea">￥999.00</section>
+        <section class="pricea">￥{$commodity['specifications'][0]['price']}</section>
         <section class="titlea">{$commodity.title}</section>
-        <section class="pingjiaa" >已有<i class="pingjiab">999</i>+人评价</section>
+        <section class="pingjiaa" >已有<i class="pingjiab">{:count($commodity['comments'])}</i>人评价</section>
 
         <section class="bordera"  onmouseover ="over_id('{$key}');" onmouseout ="out_id('{$key}');" >
             <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png"
