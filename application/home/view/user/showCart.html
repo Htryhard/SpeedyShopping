@@ -1,0 +1,155 @@
+{layout name="layout" /}
+<block name="titel"><title>我的购物车</title></block>
+<block name="resources">
+
+</block>
+
+<div>
+    <span>我的购物车</span><br/>
+    <table class="table table-hover"  >
+        <thead>
+        <tr class="info">
+            <th>店铺宝贝</th>
+            <th>商品规格</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--item是购物车里的中间表-->
+        {volist name="cart['CartSpecifications']" id="item"}
+        <tr>
+            <td>
+                <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}" style="width: 50px; height: 50px">
+                {$item['Specification']['commodity']['title']}
+            </td>
+            <td>{$item['Specification']['content']}</td>
+            <td>{$item['Specification']['price']}</td>
+            <td>
+                <a href="#" onclick=minusCount("{$item['Specification']['price']}","{$item['id']}")>- </a>
+                <span id="c_{$item['id']}">{$item['count']}</span>
+                <a href="#" onclick=addCount("{$item['Specification']['price']}","{$item['id']}","{$item['Specification']['repertory']}")> +</a>
+            </td>
+            <td><span id="x_{$item['id']}">{$item['count']*$item['Specification']['price']}</span></td>
+            <td><a href="#" onclick=deleteFromCart("{$item['id']}")><img src="__PUBLIC__/static/images/delete.png" width="20px;"height="20px"></a></td>
+        </tr>
+        {/volist}
+
+        </tbody>
+    </table>
+    <a href="#" style="background-color: #d33724;color: #fff" onclick="postBuy()">提交订单</a>
+</div>
+
+<script type="text/javascript">
+    function minusCount(price,id) {
+        var td_count = document.getElementById("c_"+id);
+        var xiaoji = document.getElementById("x_"+id);
+        var nowCount = td_count.innerText;
+        if (nowCount > 1){
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/user/cartCommodityCount')}",
+                dataType: "json",
+                data: {
+                    CartSpecificationId: id,
+                    type:"minus"
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "IllegalRequest":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "NotFindCartSpecification":
+                            alert('这件宝贝从地球上消失了~~');
+                            break;
+                        default:
+//                            var obj = msg.parseJSON();
+//                            alert(obj.state);
+
+                    }
+                },
+                error: function (msg) {
+                    alert(msg);
+                },
+            });
+            nowCount = nowCount-1;
+            td_count.innerText=nowCount;
+            xiaoji.innerText=(nowCount*price);
+        }
+    }
+    //多一个参数，库存repertory
+    function addCount(price,id,repertory) {
+//        alert(repertory);
+        var td_count = document.getElementById("c_"+id);
+        var xiaoji = document.getElementById("x_"+id);
+        var nowCount = parseInt(td_count.innerText);
+        if (parseInt(repertory) > parseInt(nowCount)){
+            nowCount = nowCount+1;
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/user/cartCommodityCount')}",
+                dataType: "json",
+                data: {
+                    CartSpecificationId: id,
+                    type:"add"
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "IllegalRequest":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "NotFindCartSpecification":
+                            alert('这件宝贝从地球上消失了~~');
+                            break;
+                        default:
+//                            alert(msg);
+                    }
+                },
+                error: function (msg) {
+                    alert(msg);
+                },
+            });
+            td_count.innerText=nowCount;
+            xiaoji.innerText=(nowCount*price);
+        }else {
+            alert("已经到达购买上限");
+        }
+    }
+
+    function deleteFromCart(id) {
+        if (confirm("你确定要从购物车中移除此商品？")){
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/user/deleteCommodityFromCart')}",
+                dataType: "json",
+                data: {
+                    CartSpecificationId: id
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "Success":
+                            //移除成功！重新加载当前页面
+                            location.reload();
+                            break;
+                        case "IllegalRequest":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "NotFindCartSpecification":
+                            alert('这件宝贝从地球上消失了~~');
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    alert(msg);
+                },
+            });
+        }
+    }
+</script>
+

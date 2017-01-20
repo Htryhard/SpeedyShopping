@@ -56,6 +56,7 @@
         font-weight: bold;
     }
 
+    input[type='radio']{display:inline-block; height:20px; }
 
 </style>
 <section id="xxmain">
@@ -86,8 +87,20 @@
         <div>
             选择类型:
             {volist name="$commodity['specifications']" id="vo" }
-            <a href="#" onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>
-                {$vo['content']}</a>
+            {switch name="$key"}
+            {case value="0"}
+            <div id="{$vo['id']}">
+                <label onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>
+                    <input name="Fruit" type="radio" value="" checked/>{$vo['content']}</label>
+            </div>
+            {/case}
+            {default /}
+            <div id="{$vo['id']}">
+                <label onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>
+                    <input name="Fruit" type="radio" value="" />{$vo['content']}</label>
+            </div>
+            {/switch}
+
             {/volist}
         </div>
 
@@ -95,14 +108,15 @@
     </br>
     <span>销量{$commodity['staistics']}</span><br/>
 
-   <a href="#">
+    <a href="#">
 
-       <section class="bordera"  onmouseover ="over_id('0');" onmouseout ="out_id('0');" >
-           <img class="img_xing" id="b0" src="/SpeedyShopping/public/wei/images/baixing.png"
-                style="width: 20px;height: 20px;" ><button class="btn_guanzhu">关注</button>
-       </section>
+        <section class="bordera" onmouseover="over_id('0');" onmouseout="out_id('0');">
+            <img class="img_xing" id="b0" src="/SpeedyShopping/public/wei/images/baixing.png"
+                 style="width: 20px;height: 20px;">
+            <button class="btn_guanzhu">关注</button>
+        </section>
 
-   </a>
+    </a>
 
     <span>
         <input id="min" name="" type="button" value="-"/>
@@ -114,25 +128,26 @@
 
         <a href="#" style="background-color: #d33724;color: #fff" onclick="postBay()">立即购买</a>
         &nbsp;
-        <a href="#" style=" background-color: #d33724;color: #fff" onclick="">加入购物车</a>
+        <a href="#" style=" background-color: #d33724;color: #fff" onclick=addToCart("{$commodity['id']}")>加入购物车</a>
     </div>
     <form id="post_bay" action="{:url('home/user/buyOne')}" method="post">
         <!--标记规格的ID-->
-        <input type="hidden" name="specificationId" id="specificationId" value="">
+        <input type="hidden" name="specificationId" id="specificationId" value="{$commodity['specifications'][0]['id']}">
         <input type="hidden" name="commodityId" value="{$commodity['id']}">
         <input type="hidden" name="count" id="count" value="">
     </form>
 </section>
 <asidefoot>
-<p>商品信息</p>
-<ul class="nav nav-tabs">
-    <li class="active" id="li_describe" onclick="showContent('li_describe')"><a href="#">宝贝描述</a></li>
-    <li id="li_parameter" onclick="showContent('li_parameter')"><a href="#">宝贝参数</a></li>
-    <li id="li_comment" onclick="showContent('li_comment')"><a href="#">评价<i style="color: #d33724">({:count($commodity['comments'])})</i></a></li>
-</ul>
-<div id="ending">
-    {$commodity->getData("describe")}
-</div>
+    <p>商品信息</p>
+    <ul class="nav nav-tabs">
+        <li class="active" id="li_describe" onclick="showContent('li_describe')"><a href="#">宝贝描述</a></li>
+        <li id="li_parameter" onclick="showContent('li_parameter')"><a href="#">宝贝参数</a></li>
+        <li id="li_comment" onclick="showContent('li_comment')"><a href="#">评价<i style="color: #d33724">({:count($commodity['comments'])})</i></a>
+        </li>
+    </ul>
+    <div id="ending">
+        {$commodity->getData("describe")}
+    </div>
 </asidefoot>
 <script type="text/javascript">
     function showContent(id) {
@@ -154,11 +169,11 @@
             var arrParas = [];
             var con = "";
             arrParas = str.split("-/");
-            for (i=0;i<arrParas.length;i++){
-                if (i!=0 && (i%2)==0){
-                    con += "<span>"+arrParas[i]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>";
-                }else{
-                    con += "<span>"+arrParas[i]+"</span>&nbsp;&nbsp;&nbsp;&nbsp;";
+            for (i = 0; i < arrParas.length; i++) {
+                if (i != 0 && (i % 2) == 0) {
+                    con += "<span>" + arrParas[i] + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>";
+                } else {
+                    con += "<span>" + arrParas[i] + "</span>&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
             }
             content.innerHTML = con;
@@ -168,15 +183,13 @@
     }
 
     //关注（心）图标处理
-    function over_id(id)
-    {
+    function over_id(id) {
 //        alert(id);
-        document.getElementById('b'+id).src ="/SpeedyShopping/public/wei/images/hongxing.png"
+        document.getElementById('b' + id).src = "/SpeedyShopping/public/wei/images/hongxing.png"
     }
-    function out_id(id)
-    {
+    function out_id(id) {
 //        alert(id);
-        document.getElementById('b'+id).src ="/SpeedyShopping/public/wei/images/baixing.png"
+        document.getElementById('b' + id).src = "/SpeedyShopping/public/wei/images/baixing.png"
     }
 </script>
 
@@ -225,5 +238,47 @@
         var url = "{:url('home/user/buyOne')}";
         $("#post_bay").submit();
 
+    }
+
+    //添加到购物车
+    function addToCart(commodityId) {
+        var specificationId = document.getElementById("specificationId").value;
+        $.ajax({
+            type: "POST",
+            url: "{:url('home/user/addToCart')}",
+            dataType: "json",
+            data: {
+                commodityId: commodityId,
+                specificationId:specificationId
+            },
+            success: function (msg) {
+                switch (msg) {
+                    case "AddCartSuccess":
+                        alert("添加进购物车成功！");
+                        break;
+                    case "NotRepertory":
+                        alert("库存不足！店小二正在急忙补货中！");
+                        break;
+                    case "NotFindSpecification":
+                        alert("规格参数不正确");
+                        break;
+                    case "IllegalRequest":
+                        //非法请求
+                        alert("非法请求");
+                        break;
+                    case "UserNotLogin":
+                        window.location = "{:url('home/thing/login')}";
+                        break;
+                    case "NotFindCommodity":
+                        alert('这件宝贝从地球上消失了~~');
+                        break;
+                    default:
+
+                }
+            },
+            error: function (msg) {
+                alert(msg);
+            },
+        });
     }
 </script>

@@ -42,15 +42,4 @@ class ThingController extends Controller
         }
     }
 
-    public function addCart($commodityId,$type){
-        $commodity = Commodity::get(['id'=>$commodityId]);
-        if ($commodity != null){
-            if ($type==""){
-
-            }
-        }else{
-            return json(404);
-        }
-    }
-
 }

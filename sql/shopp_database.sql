@@ -1,28 +1,24 @@
 /*
-MySQL Data Transfer
-Source Host: localhost
-Source Database: shopp_database
-Target Host: localhost
-Target Database: shopp_database
-Date: 2017/1/16 22:50:58
+Navicat MySQL Data Transfer
+
+Source Server         : localhost_3306
+Source Server Version : 50715
+Source Host           : localhost:3306
+Source Database       : shopp_database
+
+Target Server Type    : MYSQL
+Target Server Version : 50715
+File Encoding         : 65001
+
+Date: 2017-01-20 13:16:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
--- ----------------------------
--- Table structure for comment_reply
--- ----------------------------
-CREATE TABLE `comment_reply` (
-  `id` varchar(36) NOT NULL,
-  `content` text NOT NULL,
-  `comment_id` varchar(36) NOT NULL,
-  `user_id` varchar(36) NOT NULL,
-  `creation_time` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_address
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_address`;
 CREATE TABLE `shopp_address` (
   `id` char(36) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -33,8 +29,30 @@ CREATE TABLE `shopp_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of shopp_address
+-- ----------------------------
+INSERT INTO `shopp_address` VALUES ('051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9', '077128384858', '广西壮族自治区 南宁市 良庆区 南晓镇', '5D754767-F3D5-1D93-E588-856B288B08CC', '你的大兄弟');
+INSERT INTO `shopp_address` VALUES ('58B47E1E-2AC2-3972-3294-48A8764F2A74', '077128384858', '广西壮族自治区 柳州市 柳州职业技术学院', '5D754767-F3D5-1D93-E588-856B288B08CC', '爱丽丝');
+
+-- ----------------------------
+-- Table structure for shopp_authority
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_authority`;
+CREATE TABLE `shopp_authority` (
+  `id` char(36) NOT NULL,
+  `describe` varchar(250) NOT NULL,
+  `rule` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_authority
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for shopp_auth_group
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_auth_group`;
 CREATE TABLE `shopp_auth_group` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` char(100) NOT NULL DEFAULT '',
@@ -44,8 +62,13 @@ CREATE TABLE `shopp_auth_group` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of shopp_auth_group
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for shopp_auth_group_access
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_auth_group_access`;
 CREATE TABLE `shopp_auth_group_access` (
   `uid` mediumint(8) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL,
@@ -55,8 +78,13 @@ CREATE TABLE `shopp_auth_group_access` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of shopp_auth_group_access
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for shopp_auth_rule
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_auth_rule`;
 CREATE TABLE `shopp_auth_rule` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(80) NOT NULL DEFAULT '',
@@ -69,18 +97,13 @@ CREATE TABLE `shopp_auth_rule` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for shopp_authority
+-- Records of shopp_auth_rule
 -- ----------------------------
-CREATE TABLE `shopp_authority` (
-  `id` char(36) NOT NULL,
-  `describe` varchar(250) NOT NULL,
-  `rule` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_cart
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_cart`;
 CREATE TABLE `shopp_cart` (
   `id` char(36) NOT NULL,
   `user_id` char(36) NOT NULL,
@@ -88,18 +111,53 @@ CREATE TABLE `shopp_cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for shopp_cart_commodity
+-- Records of shopp_cart
 -- ----------------------------
-CREATE TABLE `shopp_cart_commodity` (
+INSERT INTO `shopp_cart` VALUES ('CD80475B-942E-E686-55D2-302363E3A2A3', '5D754767-F3D5-1D93-E588-856B288B08CC');
+
+-- ----------------------------
+-- Table structure for shopp_cart_specification
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_cart_specification`;
+CREATE TABLE `shopp_cart_specification` (
   `id` char(36) NOT NULL,
-  `commodity_id` char(36) NOT NULL,
+  `specification_id` char(36) NOT NULL,
   `cart_id` char(36) NOT NULL,
+  `count` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of shopp_cart_specification
+-- ----------------------------
+INSERT INTO `shopp_cart_specification` VALUES ('8105DF95-B23D-80C1-7A83-FBB49D634D33', '6C584A55-081F-D42C-F5F4-9F6810931FF9', 'CD80475B-942E-E686-55D2-302363E3A2A3', '1');
+INSERT INTO `shopp_cart_specification` VALUES ('F591592D-2587-5A55-7605-FE80C8313D84', 'BDE33C6F-A44C-ECC3-4585-6B493AD223F3', 'CD80475B-942E-E686-55D2-302363E3A2A3', '1');
+
+-- ----------------------------
+-- Table structure for shopp_collect
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_collect`;
+CREATE TABLE `shopp_collect` (
+  `id` varchar(36) NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  `commodity_id` varchar(36) NOT NULL,
+  `creation_time` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_collect
+-- ----------------------------
+INSERT INTO `shopp_collect` VALUES ('98760AA2-3C09-F263-E561-921E5661520F', '5D754767-F3D5-1D93-E588-856B288B08CC', 'FEF2C2E1-6304-F2CF-C1C7-EA18C9C219EC', '1484745758');
+INSERT INTO `shopp_collect` VALUES ('A7D64D58-B488-4E7C-C696-1D1BD07C4FF4', '5D754767-F3D5-1D93-E588-856B288B08CC', 'E1A02C6D-C1C6-A748-983D-A236648BDCD4', '1484685505');
+INSERT INTO `shopp_collect` VALUES ('BEBB89DB-ECB5-2BC8-D36C-B58DE79BBC8D', '5D754767-F3D5-1D93-E588-856B288B08CC', 'D708E35B-239A-0E3B-3988-B7EA5C3A3066', '1484728832');
+INSERT INTO `shopp_collect` VALUES ('CF8E2046-C4A9-0651-9790-8D0BFDC07FA8', '5D754767-F3D5-1D93-E588-856B288B08CC', 'FB498C2A-0CB1-403B-A836-D602ABC96AB8', '1484745768');
+INSERT INTO `shopp_collect` VALUES ('D8118305-9EC1-3C0C-5E6C-DFEE9C223ADB', '5D754767-F3D5-1D93-E588-856B288B08CC', 'F396C933-04BC-E46D-012F-AE67F7DD37EE', '1484745773');
+
+-- ----------------------------
 -- Table structure for shopp_comment
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_comment`;
 CREATE TABLE `shopp_comment` (
   `id` char(36) NOT NULL,
   `content` text NOT NULL,
@@ -111,8 +169,13 @@ CREATE TABLE `shopp_comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of shopp_comment
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for shopp_comment_images
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_comment_images`;
 CREATE TABLE `shopp_comment_images` (
   `id` char(36) NOT NULL,
   `comment_id` char(36) NOT NULL,
@@ -121,8 +184,30 @@ CREATE TABLE `shopp_comment_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of shopp_comment_images
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shopp_comment_reply
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_comment_reply`;
+CREATE TABLE `shopp_comment_reply` (
+  `id` varchar(36) NOT NULL,
+  `content` text NOT NULL,
+  `comment_id` varchar(36) NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  `creation_time` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_comment_reply
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for shopp_commodity
 -- ----------------------------
+DROP TABLE IF EXISTS `shopp_commodity`;
 CREATE TABLE `shopp_commodity` (
   `id` char(36) NOT NULL,
   `title` varchar(250) NOT NULL,
@@ -138,106 +223,8 @@ CREATE TABLE `shopp_commodity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for shopp_commodity_images
+-- Records of shopp_commodity
 -- ----------------------------
-CREATE TABLE `shopp_commodity_images` (
-  `id` char(36) NOT NULL,
-  `commodity_id` char(36) NOT NULL,
-  `image` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_feedback
--- ----------------------------
-CREATE TABLE `shopp_feedback` (
-  `id` varchar(36) NOT NULL,
-  `title` varchar(250) NOT NULL,
-  `content` text NOT NULL,
-  `creation_time` varchar(40) NOT NULL,
-  `user_id` varchar(36) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_order
--- ----------------------------
-CREATE TABLE `shopp_order` (
-  `id` char(36) NOT NULL,
-  `status` int(2) NOT NULL,
-  `user_id` char(36) NOT NULL,
-  `order_number` varchar(100) NOT NULL,
-  `order_time` varchar(20) NOT NULL,
-  `pay_time` varchar(20) NOT NULL,
-  `succeed_time` varchar(20) NOT NULL,
-  `address_id` varchar(36) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_order_specification
--- ----------------------------
-CREATE TABLE `shopp_order_specification` (
-  `id` char(36) NOT NULL,
-  `order_id` char(36) NOT NULL,
-  `specification_id` char(36) NOT NULL,
-  `count` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_role
--- ----------------------------
-CREATE TABLE `shopp_role` (
-  `id` char(36) NOT NULL,
-  `content` varchar(250) NOT NULL,
-  `describe` varchar(250) NOT NULL,
-  `authority_id` char(36) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_specification
--- ----------------------------
-CREATE TABLE `shopp_specification` (
-  `id` varchar(36) NOT NULL,
-  `content` varchar(250) NOT NULL,
-  `price` double(20,0) NOT NULL,
-  `repertory` int(10) NOT NULL,
-  `commodity_id` varchar(36) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_type
--- ----------------------------
-CREATE TABLE `shopp_type` (
-  `id` char(36) NOT NULL,
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for shopp_user
--- ----------------------------
-CREATE TABLE `shopp_user` (
-  `id` char(36) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `user_name` varchar(30) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `nick_name` varchar(20) DEFAULT NULL COMMENT '昵称',
-  `phone` varchar(20) NOT NULL,
-  `icon` varchar(250) NOT NULL COMMENT '头像',
-  `sbasb` varchar(250) DEFAULT '',
-  `role_id` char(36) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records 
--- ----------------------------
-INSERT INTO `shopp_address` VALUES ('051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9', '077128384858', '广西壮族自治区 南宁市 良庆区 南晓镇', '5D754767-F3D5-1D93-E588-856B288B08CC', '你的大兄弟');
-INSERT INTO `shopp_address` VALUES ('58B47E1E-2AC2-3972-3294-48A8764F2A74', '077128384858', '广西壮族自治区 柳州市 柳州职业技术学院', '5D754767-F3D5-1D93-E588-856B288B08CC', '爱丽丝');
 INSERT INTO `shopp_commodity` VALUES ('1C26D516-A5F1-7C2E-7158-8A658A3F9083', '27寸大屏2K液晶电脑显示器 IPS高清1080PS4游戏制图显示屏HDMI ', '                                                            27寸大屏幕 IPS屏 高清分辨率 游戏 PS4                                                 ', '0', '{\"\\u5236\\u9020\\u5546\\u540d\\u79f0\":\"\\u6df1\\u5733\\u5e02\\u540e\\u601d\\u79d1\\u6280\\u6709\\u9650\\u516c\\u53f8\",\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u6db2\\u6676\\u663e\\u793a\\u5668\",\"\\u578b\\u53f7\":\"BKA270\",\"\\u6444\\u50cf\\u5934\\u7c7b\\u578b\":\"\\u65e0\\u6444\\u50cf\\u5934\",\"\\u7535\\u6c60\":\"6000\\u6beb\\u5b89\"}', '1482860943', '1483718400', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('37B10231-4225-C269-DB28-F1C40A6CA448', '雪纺白衬衫女长袖韩版休闲百搭职业女装秋冬季加绒加厚保暖衬衣寸', '衬衫', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u805a\\u916f\\u7ea4\\u7ef495% \\u805a\\u6c28\\u916f\\u5f39\\u6027\\u7ea4\",\"\\u670d\\u88c5\\u7248\\u578b\":\"\\u4fee\\u8eab\",\"\\u98ce\\u683c\":\"\\u901a\\u52e4\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\" \\u5355\\u6392\\u591a\\u6263\",\"\\u5c3a\\u7801\":\"S M L XL XXL 3XL 4XL\"}', '1484576598', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('934AE8D8-B061-C383-3FE1-6566C597B7F4', '明治雪吻草莓绿茶牛奶可可豆年货巧克力62g 送男女友批发小吃零食 ', '巧克力', '0', '{\"\\u50a8\\u85cf\\u65b9\\u6cd5\":\"\\u7f6e\\u4e8e\\u9634\\u51c9\\u5e72\\u71e5\\u5904\",\"\\u6210\\u5206\\u542b\\u91cf\":\"26%\",\"\\u98df\\u54c1\\u53e3\\u5473\":\"\\u725b\\u5976\\u53e3\\u5473 \\u8349\\u8393\\u53e3\\u5473 \\u7cbe\\u9009\\u53ef\\u53ef\",\"\\u5305\\u88c5\\u79cd\\u7c7b\":\"\\u76d2\\u88c5\",\"\\u662f\\u5426\\u542b\\u6709\\u4ee3\\u53ef\\u53ef\\u8102\":\"\\u5426\",\"\\u4ea7\\u5730\":\"\\u4e2d\\u56fd\\u5927\\u9646\",\"\\u4fdd\\u8d28\\u671f\":\"300\\u5929\"}', '1484577647', '1486742400', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
@@ -249,6 +236,21 @@ INSERT INTO `shopp_commodity` VALUES ('F396C933-04BC-E46D-012F-AE67F7DD37EE', '�
 INSERT INTO `shopp_commodity` VALUES ('F72A0711-12B1-2360-6A79-023E0A6FB6BF', '正山小种茶叶 红茶茶叶 武夷山正山小种茶叶散装600克 五虎红茶', '正山小种茶叶 红茶茶叶 武夷山正山小种茶叶散装600克 五虎红茶 ', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u4e94\\u864e 150\\u514b*4 \\u6b63\\u5c71\\u5c0f\\u79cd\",\"\\u51c0\\u542b\\u91cf\":\"600g\",\"\\u5305\\u88c5\\u65b9\\u5f0f:\":\"\\u5305\\u88c5\"}', '1484570266', '1486742400', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('FB498C2A-0CB1-403B-A836-D602ABC96AB8', '秋冬季健身服男套装健身房三四五件套运动透气速干长袖跑步紧身衣', '秋冬季健身服男套装健身房三四五件套运动透气速干长袖跑步紧身衣', '0', '{\"\\u4e0a\\u88c5\\u6b3e\\u5f0f\":\"\\u957f\\u8896\",\"\\u529f\\u80fd\":\"\\u5438\\u6e7f\\u6392\\u6c57 \\u901f\\u5e72 \\u900f\\u6c14 \\u8d85\\u5f3a\\u5f39\\u6027\",\"\\u5c3a\\u7801\":\"M L XL XXL\",\"\\u4e0b\\u88c5\\u88e4\\u957f\":\"\\u957f\\u88e4\"}', '1484576146', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('FEF2C2E1-6304-F2CF-C1C7-EA18C9C219EC', '2017春装新款女韩版时尚鱼尾红裙子小香风明星同款蕾丝红色连衣裙 ', '连衣裙', '0', '{\"\\u8896\\u578b\":\"\\u5e38\\u89c4\",\"\\u6d41\\u884c\\u5143\\u7d20\":\"\\u62fc\\u63a5 \\u62c9\\u94fe \\u857e\\u4e1d\",\"\\u8863\\u95e8\\u895f\":\"\\u5957\\u5934\",\"\\u56fe\\u6848\":\"\\u7eaf\\u8272\",\"\\u88d9\\u957f\":\"\\u4e2d\\u88d9\",\"\\u8170\\u578b:\":\"\\u9ad8\\u8170\"}', '1484577839', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
+
+-- ----------------------------
+-- Table structure for shopp_commodity_images
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_commodity_images`;
+CREATE TABLE `shopp_commodity_images` (
+  `id` char(36) NOT NULL,
+  `commodity_id` char(36) NOT NULL,
+  `image` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_commodity_images
+-- ----------------------------
 INSERT INTO `shopp_commodity_images` VALUES ('0BF0872F-1938-4913-F73B-73B9448914C5', 'B45A2DB7-6698-C70C-1AD5-94E3E5E7E6A1', '5C5BDFF5-0994-E920-5329-6C442D94090E.png');
 INSERT INTO `shopp_commodity_images` VALUES ('1392DEEA-1C96-1926-ED21-A07BF51CFC23', 'F396C933-04BC-E46D-012F-AE67F7DD37EE', 'B10C4D0E-DC6B-E713-601B-295AD39E3082.png');
 INSERT INTO `shopp_commodity_images` VALUES ('15667DF7-9FAC-22DF-03AD-00E467EDFEE3', '96A28FC7-E21C-2185-D3BC-4DD5FE91ADB7', 'D4C56046-57DD-C8E0-E3BA-57FAF9B6FBC7.png');
@@ -280,10 +282,96 @@ INSERT INTO `shopp_commodity_images` VALUES ('C8A8BAE2-418D-8F27-37D7-2969A761F2
 INSERT INTO `shopp_commodity_images` VALUES ('CB420F6D-2768-F2BB-EE1B-31CCF0ABA4F5', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', '32156F6D-2601-5460-EE18-6499A4A08901.png');
 INSERT INTO `shopp_commodity_images` VALUES ('EA9C9F7D-83C9-6327-35D3-08713DBE2D92', 'E1A02C6D-C1C6-A748-983D-A236648BDCD4', 'B521368A-73CA-C9E1-A427-F8CBC92E73A0.png');
 INSERT INTO `shopp_commodity_images` VALUES ('F1E81D5D-8330-5595-EED8-19F1805C1FBE', 'E1A02C6D-C1C6-A748-983D-A236648BDCD4', '89F7EE4C-1CA5-9245-D06E-EA9439918A75.png');
+
+-- ----------------------------
+-- Table structure for shopp_feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_feedback`;
+CREATE TABLE `shopp_feedback` (
+  `id` varchar(36) NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `content` text NOT NULL,
+  `creation_time` varchar(40) NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_feedback
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shopp_order
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_order`;
+CREATE TABLE `shopp_order` (
+  `id` char(36) NOT NULL,
+  `status` int(2) NOT NULL,
+  `user_id` char(36) NOT NULL,
+  `order_number` varchar(100) NOT NULL,
+  `order_time` varchar(20) NOT NULL,
+  `pay_time` varchar(20) NOT NULL,
+  `succeed_time` varchar(20) NOT NULL,
+  `address_id` varchar(36) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_order
+-- ----------------------------
 INSERT INTO `shopp_order` VALUES ('3D6DBFA3-624E-69DB-E8DE-5D26B9E33968', '2', '5D754767-F3D5-1D93-E588-856B288B08CC', '1483776627', '1483776627', '1483776627', '1483776627', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 INSERT INTO `shopp_order` VALUES ('8630AB36-897C-F23D-961E-B4ACB15D9C8A', '2', '5D754767-F3D5-1D93-E588-856B288B08CC', '1483030733', '1483030733', '1483030733', '1483030733', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
+
+-- ----------------------------
+-- Table structure for shopp_order_specification
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_order_specification`;
+CREATE TABLE `shopp_order_specification` (
+  `id` char(36) NOT NULL,
+  `order_id` char(36) NOT NULL,
+  `specification_id` char(36) NOT NULL,
+  `count` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_order_specification
+-- ----------------------------
 INSERT INTO `shopp_order_specification` VALUES ('11E20DE9-8F7E-A426-B390-34FADFADAAE9', '8630AB36-897C-F23D-961E-B4ACB15D9C8A', '7D118229-AF8E-3C21-D440-6A3E4B94424A', '2');
 INSERT INTO `shopp_order_specification` VALUES ('FB3FB3ED-EA8D-C17A-B0A7-EEDB49463133', '3D6DBFA3-624E-69DB-E8DE-5D26B9E33968', '64D63924-E57B-C610-6CEF-4E528BE1D391', '4');
+
+-- ----------------------------
+-- Table structure for shopp_role
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_role`;
+CREATE TABLE `shopp_role` (
+  `id` char(36) NOT NULL,
+  `content` varchar(250) NOT NULL,
+  `describe` varchar(250) NOT NULL,
+  `authority_id` char(36) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shopp_specification
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_specification`;
+CREATE TABLE `shopp_specification` (
+  `id` varchar(36) NOT NULL,
+  `content` varchar(250) NOT NULL,
+  `price` double(20,0) NOT NULL,
+  `repertory` int(10) NOT NULL,
+  `commodity_id` varchar(36) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_specification
+-- ----------------------------
 INSERT INTO `shopp_specification` VALUES ('0D6B0C51-712A-6270-08E9-39811DA6A3D1', '350g', '20', '1000', 'B45A2DB7-6698-C70C-1AD5-94E3E5E7E6A1');
 INSERT INTO `shopp_specification` VALUES ('119CD58F-4126-CF58-BEC2-1567ADB34E05', '1800x2000mm', '2000', '200', 'D708E35B-239A-0E3B-3988-B7EA5C3A3066');
 INSERT INTO `shopp_specification` VALUES ('143FDD53-49C8-A58C-CEC6-740FD97D479E', '1件', '179', '200', 'FEF2C2E1-6304-F2CF-C1C7-EA18C9C219EC');
@@ -297,6 +385,20 @@ INSERT INTO `shopp_specification` VALUES ('A927A4FD-79FA-7DE2-F15C-2EEDDD0A5EC5'
 INSERT INTO `shopp_specification` VALUES ('BDE33C6F-A44C-ECC3-4585-6B493AD223F3', '白色普通版', '800', '20', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
 INSERT INTO `shopp_specification` VALUES ('BE3CB921-D7EF-AFD4-863A-630BDFD766D5', '62g', '19', '1000', '934AE8D8-B061-C383-3FE1-6566C597B7F4');
 INSERT INTO `shopp_specification` VALUES ('D29F12CC-3CCF-5749-E84F-BD61DAC7E61C', '黑色普通版', '800', '26', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
+
+-- ----------------------------
+-- Table structure for shopp_type
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_type`;
+CREATE TABLE `shopp_type` (
+  `id` char(36) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_type
+-- ----------------------------
 INSERT INTO `shopp_type` VALUES ('035979B6-A44A-32EA-646F-28A51C607A73', '手机数码');
 INSERT INTO `shopp_type` VALUES ('25D26743-4E79-4489-AB85-C6B773BA6588', '美食');
 INSERT INTO `shopp_type` VALUES ('57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '服装');
@@ -304,6 +406,26 @@ INSERT INTO `shopp_type` VALUES ('B619C389-BE62-40B1-0F25-4B5E60B356D2', '家电
 INSERT INTO `shopp_type` VALUES ('D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '日常用品');
 INSERT INTO `shopp_type` VALUES ('F994FC1C-7A5F-16A6-70E4-1672633B13D6', '美妆');
 INSERT INTO `shopp_type` VALUES ('FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '图书');
+
+-- ----------------------------
+-- Table structure for shopp_user
+-- ----------------------------
+DROP TABLE IF EXISTS `shopp_user`;
+CREATE TABLE `shopp_user` (
+  `id` char(36) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `user_name` varchar(30) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `nick_name` varchar(20) DEFAULT NULL COMMENT '昵称',
+  `phone` varchar(20) NOT NULL,
+  `icon` varchar(250) NOT NULL COMMENT '头像',
+  `sbasb` varchar(250) DEFAULT '',
+  `role_id` char(36) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of shopp_user
+-- ----------------------------
 INSERT INTO `shopp_user` VALUES ('5D754767-F3D5-1D93-E588-856B288B08CC', 'admin@qq.com', 'admin', '0ec0cebaee2a51bb93589ef32bb8341a228f320d', null, '11111', '201612161528083417.png', '', null);
-INSERT INTO `shopp_user` VALUES ('843B2B6B-4D6C-14C0-8C0B-184BEC722BD3', 'test2@qq.com', 'test2', '9e8fa5ab3be86fd237c16f2f358216de81118c18', null, '22222', '201612231058437310.png', '', null);
-INSERT INTO `shopp_user` VALUES ('C6C5BE9C-76CB-AC21-0476-942224A29F96', 'test1@qq.com', 'test1', '0cff20526af50e37b8fe8c49313f2ae1a1e622ab', null, '111111111', '201612231008219460.png', '', null);
+SET FOREIGN_KEY_CHECKS=1;

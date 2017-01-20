@@ -400,30 +400,33 @@
         <section class="titlea">{$commodity.title}</section>
         <section class="pingjiaa">已有<i class="pingjiab">{:count($commodity['comments'])}</i>人评价</section>
 
-        <section class="bordera" onmouseover="over_id('{$key}');" onmouseout="out_id('{$key}');"
+        <section class="bordera" onmouseover=over_id("x_{$commodity['id']}"); onmouseout=out_id("x_{$commodity['id']}");
                  onclick=userCollect("{$commodity['id']}")>
 
             {php}
+            $flag = false;
             if(count($userCollects)==0){
-            echo '<img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png" style="width: 20px;height: 20px;">';
+            $flag = false;
             }
-
+            foreach ($userCollects as $collect){
+                if($collect['commodity_id']==$commodity['id']){
+            $flag = true;
+            break;
+            }else{
+            $flag = false;
+            }
+            }
+            $imgId = "x_".$commodity["id"];
+            if($flag){
+            echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/hongxing.png" style="width: 20px;height: 20px;">';
+            }else{
+            echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/baixing.png" style="width: 20px;height: 20px;">';
+            }
             {/php}
-
-            {volist name="userCollects" id="item"}
-            {if condition="$item['commodity_id']==$commodity['id']"}
-            <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/hongxing.png"
-                 style="width: 20px;height: 20px;">
-            {else /}
-            <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png"
-                 style="width: 20px;height: 20px;">
-            {/if}
-            {/volist}
-
             <button class="btn_guanzhu">关注</button>
         </section>
-        <section class="borderb" onmouseover="over_aid('{$key}');" onmouseout="out_aid('{$key}');">
-            <img class="img_xing" id="a{$key}" src="__PUBLIC__/wei/images/baigouwuche.png"
+        <section class="borderb" onmouseover=over_aid("g_{$item['id']}"); onmouseout=out_aid("g_{$item['id']}"); onclick=addToCart("{$item['id']}")>
+            <img class="img_xing" id="g_{$item['id']}" src="__PUBLIC__/wei/images/baigouwuche.png"
                  style="width: 20px;height: 20px;">
             <button class="btn_guanzhu">加入购物车</button>
         </section>
@@ -439,24 +442,35 @@
 <script type="text/javascript">
     //关注（心）图标处理
     function over_id(id) {
-//        alert(id);
-        document.getElementById('b' + id).src = "__PUBLIC__/wei/images/hongxing.png"
+        var img = document.getElementById(id);
+        var imgOldSrc = img.getAttribute("src");
+        if (imgOldSrc.indexOf("baixing")>0){
+            img.src="__PUBLIC__/wei/images/hongxing.png";
+        }else {
+            img.src="__PUBLIC__/wei/images/baixing.png";
+        }
+//        document.getElementById(id).src = "__PUBLIC__/wei/images/hongxing.png"
     }
     function out_id(id) {
-//        alert(id);
-        document.getElementById('b' + id).src = "__PUBLIC__/wei/images/baixing.png"
+        var img = document.getElementById(id);
+        var imgOldSrc = img.getAttribute("src");
+        if (imgOldSrc.indexOf("baixing")>0){
+            img.src="__PUBLIC__/wei/images/hongxing.png";
+        }else {
+            img.src="__PUBLIC__/wei/images/baixing.png";
+        }
     }
     //购物车图标处理
     function over_aid(id) {
-        document.getElementById('a' + id).src = "__PUBLIC__/wei/images/honggouwuche.png"
+        document.getElementById(id).src = "__PUBLIC__/wei/images/honggouwuche.png"
     }
     function out_aid(id) {
-        document.getElementById('a' + id).src = "__PUBLIC__/wei/images/baigouwuche.png"
+        document.getElementById(id).src = "__PUBLIC__/wei/images/baigouwuche.png"
     }
 
     //收藏功能
     function userCollect(commodityId) {
-//        alert(commodityId);
+        var img = document.getElementById("x_"+commodityId);
         $.ajax({
             type: "POST",
             url: "{:url('home/user/userCollect')}",
@@ -467,11 +481,16 @@
             success: function (msg) {
                 switch (msg) {
                     case "AddCollectSuccess":
+                        img.src="__PUBLIC__/wei/images/hongxing.png";
+                            alert("收藏成功！");
                         break;
                     case "CancelCollectSuccess":
+                        img.src="__PUBLIC__/wei/images/baixing.png";
+                        alert("期待您下次的宠幸！");
                         break;
                     case "IllegalRequest":
                         //非法请求
+                            alert("非法请求");
                         break;
                     case "UserNotLogin":
                         window.location = "{:url('home/thing/login')}";
@@ -482,11 +501,47 @@
                     default:
 
                 }
-//                if (msg=="succeed"){
-//
-//                }else {
-//                    alert("登录失败");
-//                }
+            },
+            error: function (msg) {
+                alert(msg);
+            },
+        });
+    }
+
+    //添加到购物车
+    function addToCart(commodityId) {
+        $.ajax({
+            type: "POST",
+            url: "{:url('home/user/addToCart')}",
+            dataType: "json",
+            data: {
+                commodityId: commodityId,
+                specificationId:""
+            },
+            success: function (msg) {
+                switch (msg) {
+                    case "AddCartSuccess":
+                        alert("添加进购物车成功！");
+                        break;
+                    case "NotRepertory":
+                        alert("库存不足！店小二正在急忙补货中！");
+                        break;
+                    case "NotFindSpecification":
+                        alert("规格参数不正确");
+                        break;
+                    case "IllegalRequest":
+                        //非法请求
+                        alert("非法请求");
+                        break;
+                    case "UserNotLogin":
+                        window.location = "{:url('home/thing/login')}";
+                        break;
+                    case "NotFindCommodity":
+                        alert('这件宝贝从地球上消失了~~');
+                        break;
+                    default:
+
+                }
             },
             error: function (msg) {
                 alert(msg);

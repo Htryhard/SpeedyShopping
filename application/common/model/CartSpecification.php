@@ -11,7 +11,11 @@ namespace app\common\model;
 
 use think\Model;
 
-class CartCommodity extends Model
+class CartSpecification extends Model
 {
+    public function Specification()
+    {
+        return $this->belongsTo('Specification');
+    }
 
 }

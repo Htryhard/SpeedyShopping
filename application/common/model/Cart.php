@@ -13,5 +13,14 @@ use think\Model;
 
 class Cart extends Model
 {
+    public function user()
+    {
+        return $this->belongsTo('user');
+    }
+
+    public function CartSpecifications()
+    {
+        return $this->hasMany('CartSpecification','cart_id','id');
+    }
 
 }

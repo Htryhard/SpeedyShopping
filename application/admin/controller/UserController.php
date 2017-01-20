@@ -11,6 +11,7 @@ namespace app\admin\controller;
 
 use app\common\Comm;
 use app\common\controller\BaseController;
+use app\common\model\Cart;
 use app\common\model\User;
 use think\Controller;
 use think\Request;
@@ -88,6 +89,11 @@ class UserController extends Controller
             if ($user->validate(true)->save($user->getData())) {
                 $user->icon = Comm::uploadsIcon($userdata['base64Icon']);
                 $user->save();
+                //为用户创建一个空的购物车待用
+                $cart = new Cart();
+                $cart->id = Comm::getNewGuid();
+                $cart->user_id = $user->getData('id');
+                $cart->save();
                 //写入默认权限
 //                Comm::defaltPermission($user->getData("id"));
                 return json('succeed');

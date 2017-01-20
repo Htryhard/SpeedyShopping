@@ -10,6 +10,7 @@ namespace app\home\controller;
 
 
 use app\common\Comm;
+use app\common\model\Collect;
 use app\common\model\Commodity;
 use app\common\model\User;
 use think\Controller;
@@ -20,6 +21,11 @@ class CommodityController extends Controller
     public function search()
     {
         $user = User::getUserBySession();
+        $userCollects = array();
+        if ($user!=null){
+            $userCollects = Collect::all(['user_id'=>$user->getData('id')]);
+        }
+        $this->assign("userCollects",$userCollects);
         $this->assign("user",$user);
         // 获取查询信息
         $title = input('get.title');

@@ -18,6 +18,11 @@ class User extends Model
         return $this->hasMany('order','user_id','id');
     }
 
+    public function cart()
+    {
+        return $this->belongsTo('cart');
+    }
+
     /**
      * 用户关联地址
      * @return \think\model\Relation
