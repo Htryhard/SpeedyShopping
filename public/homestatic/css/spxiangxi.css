@@ -3,29 +3,30 @@ body{font:16px/18px "宋体",arial,sans-serif;color:#585858;}
 
 
 asideleft{
-    width:250px;
+    width:300px;
     top:0px;
-    left:-50px;
+    left:-200px;
     font-size: 16px;
     position: relative;
+  margin-left: -10px;
+
 }
 /*商品详细*/
 #xxmain{
     position: relative;
     left: 0px;
-    top: -380px;
+    top: -400px;
     right: 0;
     bottom: 0;
+    left:-150px;
     overflow: hidden;
-
 }
 asidefoot{
-    left:0px;
-    right: 0;
-
-    overflow: hidden;
-    top:-520px;
+    position: relative;
+  top: -350px;
 }
+
+
 
 
 

@@ -1,0 +1,64 @@
+*{padding:0;margin:0;border:none;}
+html{
+    height:100%;
+    width:100%;
+}
+
+body{
+    height:100%;
+    width:100%;
+    font-size:16px;
+    font-family:"微软雅黑";
+    margin:0;
+}
+header{
+    width:100%;
+    height:100px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    color:#fff;
+}
+asidehome{
+    width:300px;
+    position:fixed;
+    top:80px;
+    left:0px;
+    bottom:100px;
+    margin-left: 150px;
+
+
+
+}
+#myhomemain{
+    position: absolute;
+    left: 100px;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+
+
+}
+#con{
+    height:100%;
+    overflow:auto;
+
+    /*或者*/
+    overflow-x:hidden;
+    overflow-y:scroll;
+
+
+    background-color:#fff;
+    color:#000000;
+}
+.nav-header.collapsed > span.glyphicon-chevron-toggle:before {
+    content: "\e114";
+}
+
+.nav-header > span.glyphicon-chevron-toggle:before {
+    content: "\e113";
+}
+
+

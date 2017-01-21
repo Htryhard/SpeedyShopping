@@ -12,10 +12,10 @@
 <asideleft>
     <div class="preview">
         <div id="vertical" class="bigImg">
-            <!--<img src="__PUBLIC__/homestatic/img/TB1.jpg" width="400" height="400" alt="" id="midimg"/>-->
+
             <img src="{$images[0]}" width="400" height="400" alt="" id="midimg"/>
             <div style="display:none;" id="winSelector"></div>
-        </div><!--bigImg end-->
+        </div>
 
         <div class="smallImg">
             <div class="scrollbutton smallImgUp disabled"></div>
@@ -31,7 +31,7 @@
                 </ul>
             </div>
             <div class="scrollbutton smallImgDown"></div>
-        </div><!--smallImg end-->
+        </div>
         <div id="bigView" style="display:none;"><img width="800" height="800" alt="" src=""/></div>
     </div>
 </asideleft>
@@ -60,7 +60,7 @@
 
 </style>
 <section id="xxmain">
-        <span style="font-size: 20px;font-weight: bold">【{$commodity->getData("title")}】
+        <span style="font-size: 22px;font-weight: bold;font-family: 华文楷体">【{$commodity->getData("title")}】
         </span>
     <div style="height: 6px"></div>
     <div style="background: #ffffcc;width: 660px;height: 300px">
@@ -138,7 +138,7 @@
     </form>
 </section>
 <asidefoot>
-    <p>商品信息</p>
+    <p style="font-family: 华文楷体;font-size: 35px;color: #9f191f">商品信息</p></br>
     <ul class="nav nav-tabs">
         <li class="active" id="li_describe" onclick="showContent('li_describe')"><a href="#">宝贝描述</a></li>
         <li id="li_parameter" onclick="showContent('li_parameter')"><a href="#">宝贝参数</a></li>
