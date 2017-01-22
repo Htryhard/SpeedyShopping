@@ -1,90 +1,82 @@
 
 <aside>
+    <style>
+        body {
+            margin: 0;
+            font-family: "微软雅黑", "宋体";
+            background: #3c8dbc;
+        }
 
-    <style type="text/css">
-        .menu_list{width:200px;height:auto;margin:0 auto; float: left;}
-        .menu_head{
-            height: 100px;
-            line-height: 147px;
-            padding-left: 10px;
+        left{ width:200px; height:100%;
+            border-right:1px solid #CCCCCC ;#FFFFFF;
+            color:#000000;
             font-size: 14px;
-            color: #525252;
-            cursor: pointer;
-            border-left: 1px solid #e1e1e1;
-            border-right: 1px solid #e1e1e1;
-            border-bottom: 1px solid #e1e1e1;
-            border-top: 1px solid #F1F1F1;
-            position: relative;
-            margin: 0px;
-            font-weight: bold;
-            background: #f1f1f1 url('/SpeedyShopping/public/adminzuoce/images/pro_left.png') center right no-repeat;
+                text-align: center;
+
+            }
+            .div1{
+                text-align: center;
+                width: 200px;
+                padding-top: 30px;
+
+            }
+            .div2{
+                height:40px;
+                line-height: 40px;
+                cursor: pointer;
+                font-size: 13px;
+                position: relative;
+                border-bottom: #ccc 1px dotted;
+
+            }
+            .div2 a{
+                color: #000000;
+            }
+        .div2 a:hover{
+            color: red;
         }
-        .menu_list .current{background:#f1f1f1 url('__PUBLIC__/adminzuoce/images/pro_down.png') center right no-repeat;}
-        .menu_body{
-            line-height: 38px;
-            border-left: 1px solid #e1e1e1;
-            backguound: #fff;
-            border-right: 1px solid #e1e1e1;
-        }
-        .menu_body a{display:block;height:38px;line-height:38px;padding-left:38px;color:#777777;background:#fff;text-decoration:none;border-bottom:1px solid #e1e1e1;}
-        .menu_body a:hover{text-decoration:none;color: #d33724}
+
+            .jbsz{
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                left: 40px;
+                top: 10px;
+
+
+            }
+
     </style>
-    <div id="firstpane" class="menu_list">
-        <h3 class="menu_head current">系统设置</h3>
-        <div style="display:block" class="menu_body">
-            <a href="{:url('admin/Commodity/index')}">权限资源列表</a>
-            <a href="{:url('admin/type/index')}">管理设置</a>
 
+<body>
 
-        </div>
-        <h3 class="menu_head">权限管理</h3>
-        <div style="display:none" class="menu_body">
-            <a href="#">管理员列表</a>
-            <a href="#">角色管理</a>
-            <a href="#">供应商管理</a>
-            <a href="#">管理员日志</a>
-        </div>
-        <h3 class="menu_head">商品管理</h3>
-        <div style="display:none" class="menu_body">
-            <a href="#">商品分类</a>
-            <a href="#">商品列表</a>
-            <a href="#">库存日志</a>
-            <a href="#">商品评论</a>
-            <a href="#">商品咨询</a>
+<div class="left">
+<div class="div1">
+    <div class="div2">
 
-        </div>
-        <h3 class="menu_head">订单管理</h3>
-        <div style="display:none" class="menu_body">
-            <a href="#">订单列表</a>
-            <a href="#">发货单</a>
-            <a href="#">退货单</a>
-            <a href="#">添加订单</a>
-            <a href="#">订单日志</a>
-            <a href="#">促销管理</a>
-            <a href="#">统计报表</a>
-
-
-        </div>
-        <h3 class="menu_head">自提点管理</h3>
-        <div style="display:none" class="menu_body">
-            <a href="#">添加自提点</a>
-            <a href="#">自提点列表</a>
-        </div>
+        <div style="color: #d33724">
+          你好！Admin@qq.com
+           </div>
+        <div class="div2">
+            <div class="jbsz"></div>
+            <a href="{:url('admin/type/index')}">显示分类</a></div>
+        <div class="div2"><div class="jbsz"> </div>
+            <a href="{:url('admin/commodity/addCommodity')}">添加商品</a></div>
+        <div class="div2"><div class="jbsz"> </div>
+            <a href="{:url('admin/commodity/index')}">所有商品</a></div>
+        <div class="div2"><div class="jbsz"> </div>商品评论</div>
+        <div class="div2"><div class="jbsz"></div><a href="tencent://Message/?Uin=1610357038&websiteName=www.oicqzone.com&Menu=yes" >商品咨询</a></div>
+        <div class="div2"><div class="xwzx"> </div>添加自提点</div>
+        <div class="div2"><div class="xwzx"> </div>自提点列表</div>
+        <div class="div2"><div class="lmtj"> </div> 订单管理</div>
+        <div class="div2"><div class="lmtj"> </div> 订单列表</div>
+        <div class="div2"><div class="lmtj"> </div> 添加订单</div>
+        <div class="div2"><div class="lmtj"> </div> 退货单</div>
+        <div class="div2"><div class="lmtj"> </div> 发货单</div>
+        <div class="div2"><div class="xwzx"> </div>统计报表</div>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $("#firstpane .menu_body:eq(0)").show();
-            $("#firstpane h3.menu_head").click(function(){
-                $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
-                $(this).siblings().removeClass("current");
-            });
-            $("#secondpane .menu_body:eq(0)").show();
-            $("#secondpane h3.menu_head").mouseover(function(){
-                $(this).addClass("current").next("div.menu_body").slideDown(500).siblings("div.menu_body").slideUp("slow");
-                $(this).siblings().removeClass("current");
-            });
-        });
-    </script>
+</div>
+</div>
+</body>
 
 </aside>
