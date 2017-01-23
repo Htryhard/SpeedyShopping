@@ -2,55 +2,241 @@
 <block name="titel"><title>我的周边送</title></block>
 <block name="resources">
     {load href="__PUBLIC__/login/login.css" /}
+    {load href="__PUBLIC__/homestatic/css/myhome.css" /}
 </block>
+<style>
 
-<div id="box_left">
-    <ul>
-        <li>全部功能</li>
-        <li>我的收藏</li>
-        <li>全部订单</li>
-        <li><a href="{:url('home/user/showCart')}">我的购物车</a></li>
-        <li>我的评价</li>
-        <li>退换货</li>
-    </ul>
-</div>
+    left {
+        width: 200px;
+        height: 100%;
+        border-right: 1px solid #CCCCCC;
+        color: #000000;
+        font-size: 14px;
+        text-align: center;
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        bottom: 100px;
+        position: fixed;
+    }
 
-<div id="box_userMsg">
-    <div id="box_user">
-        <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">
-        <span>{$user['user_name']}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span><a href="#">我的收货地址</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span><a href="#">我的个人信息</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </div>
-    <div id="box_userSta"></div>
-</div>
+    .div1 {
+        text-align: center;
+        width: 200px;
+        padding-top: 30px;
 
-<span>我收藏的宝贝：</span>
-<div id="box_collects">
-    {if condition="count($userCollects)>0"}
-    {volist name="userCollects" id="item"}
-    <div >
-        <div class="conten_margin col-md-" >
-            <a href="{:url('home/commodity/commodityDetailed?id='.$item['commodity']['id'])}">
-                <img src="{$imgRoot}{$item['commodity']['images'][0]['image']}" style="height: 220px;width: 180px;" /></a>
-            <section class="pricea">￥{$item['commodity']['specifications'][0]['price']}</section>
-            <section class="titlea">{$item['commodity']['title']}</section>
-            <section class="pingjiaa" >已有<i class="pingjiab">{:count($item['commodity']['comments'])}</i>人评价</section>
+    }
 
-            <section class="bordera"  onmouseover ="over_id('{$key}');" onmouseout ="out_id('{$key}');" >
-                <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png"
-                     style="width: 20px;height: 20px;" ><button class="btn_guanzhu">关注</button>
-            </section>
-            <section class="borderb" onmouseover ="over_aid('{$key}');" onmouseout ="out_aid('{$key}');">
-                <img class="img_xing" id="a{$key}" src="__PUBLIC__/wei/images/baigouwuche.png"
-                     style="width: 20px;height: 20px;" >
-                <button class="btn_guanzhu">加入购物车</button>
-            </section>
+    .div2 {
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        font-size: 13px;
+        position: relative;
+        border-bottom: #ccc 1px dotted;
 
+    }
+
+    .div2 a {
+        color: #000000;
+    }
+
+    .div2 a:hover {
+        color: red;
+    }
+
+    .jbsz {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 40px;
+        top: 10px;
+    }
+
+    .right {
+        position: relative;
+        left: 250px;
+        top: 30px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+
+    }
+
+    .conten_margin {
+        /*margin-bottom: 20px;*/
+        /*margin-right: 20px;*/
+        float: left;
+        padding: 5px;
+
+    }
+
+    .conten_margin:hover {
+        /*border: 1px solid silver;*/
+    }
+
+    .conten_margin .titlea {
+        width: 180px;
+        overflow: hidden; /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap; /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .bordera {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: #666666;
+        font-size: 13px;
+
+    }
+
+    .bordera:hover {
+        border: 1px solid red;
+        color: red;
+    }
+
+    .borderb {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+        font-size: 13px;
+    }
+
+    .borderb:hover {
+        border: 1px solid red;
+    }
+
+    .pricea {
+        font-size: 18px;
+        color: red;
+    }
+
+    .pingjiaa {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    .pingjiab {
+        font-size: 18px;
+        color: red;
+    }
+
+    .img_xing {
+        vertical-align: middle;
+    }
+
+    .btn_guanzhu {
+        border: 0;
+        background: #F4F4F4;
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    #myhomem {
+        position: absolute;
+        left: 300px;
+        top: 30px;
+        right: 0px;
+        bottom: 0;
+        overflow: hidden;
+    }
+</style>
+<asidehome>
+    <div class="left">
+        <div class="div1">
+            <div class="div2">
+                <div class="div2" style="font-size:25px;font-family: '楷体', '微软雅黑'">
+                    <h2>全部功能</h2>
+                </div>
+                <div class="div2">
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="">我的收藏</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="">全部订单</a>
+                    </div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/showCart')}">我的购物车</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="">我的评价</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a>退换货</a></div>
+
+                </div>
+            </div>
         </div>
     </div>
-    {/volist}
-    {else /}
-    <span>收藏夹空空如也...快去发现点干货吧~<a href="#">好货街</a></span>
-    {/if}
+</asidehome>
+<div id="myhomem">
+    <div id="con">
+        <div id="box_userMsg">
+            <div id="box_user">
+                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">
+                <span>{$user['user_name']}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><a href="#">我的收货地址</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span><a href="#">我的个人信息</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div id="box_userSta"></div>
+        </div>
+        <table border="1" width="700px" >
+            <tr>
+            <th>待付款
+                <td><i style="color: red">0</i></td>
+               </th>
+                <th>待发货
+            <td><i style="color: red">0</i></td></th>
+                <th>待收货
+            <td><i style="color: red">0</i></td></th>
+                <th>待评价
+            <td><i style="color: red">0</i></td></th>
+                <th>退款返修
+            <td><i style="color: red">0</i></td></th>
+            </th>
+            </tr>
+        </table>
+        <div style="height: 10px"></div>
+        <span style="font-family: '楷体', '微软雅黑';font-size:30px;color: #9f191f">我收藏的宝贝</span>
+        <div style="height: 10px"></div>
+
+
+        <div id="box_collects" style="background-color: #00A2D4">
+            {if condition="count($userCollects)>0"}
+            {volist name="userCollects" id="item"}
+
+            <div class="conten_margin">
+                <a href="{:url('home/commodity/commodityDetailed?id='.$item['commodity']['id'])}">
+                    <img src="{$imgRoot}{$item['commodity']['images'][0]['image']}"
+                         style="height: 220px;width: 180px;"/></a>
+                <section class="pricea">&yen;{$item['commodity']['specifications'][0]['price']}</section>
+                <section class="titlea">{$item['commodity']['title']}</section>
+                <section class="pingjiaa">已有<i class="pingjiab">{:count($item['commodity']['comments'])}</i>人评价
+                </section>
+
+                <section class="bordera" onmouseover="over_id('{$key}');" onmouseout="out_id('{$key}');">
+                    <img class="img_xing" id="b{$key}" src="__PUBLIC__/wei/images/baixing.png"
+                         style="width: 20px;height: 20px;">
+                    <button class="btn_guanzhu">关注</button>
+                </section>
+                <section class="borderb" onmouseover="over_aid('{$key}');" onmouseout="out_aid('{$key}');">
+                    <img class="img_xing" id="a{$key}" src="__PUBLIC__/wei/images/baigouwuche.png"
+                         style="width: 20px;height: 20px;">
+                    <button class="btn_guanzhu">加入购物车</button>
+                </section>
+            </div>
+        {/volist}
+        {else /}
+        <span>收藏夹空空如也...快去发现点干货吧~<a href="#">好货街</a></span>
+        {/if}
+        </div>
+    </div>
 </div>
+
+

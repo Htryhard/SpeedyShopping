@@ -25,6 +25,18 @@ asidefoot{
     position: relative;
   top: -350px;
 }
+#con{
+    height:100%;
+    overflow:auto;
+
+    /*或者*/
+    overflow-x:hidden;
+    overflow-y:scroll;
+
+
+    background-color:#fff;
+    color:#000000;
+}
 
 
 

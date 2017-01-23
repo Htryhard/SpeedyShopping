@@ -15,6 +15,7 @@ use app\common\model\Commodity;
 use app\common\model\CommodityImages;
 use app\common\model\Specification;
 use app\common\model\Type;
+use app\common\model\User;
 
 class CommodityController extends BaseController
 {
@@ -39,7 +40,7 @@ class CommodityController extends BaseController
         } else {
             $commodities = $commodity->paginate($pageSize);
         }
-//        $this->assign("user",User::getUserBySession());
+        $this->assign("user",User::getUserBySession());
         $this->assign('commodities', $commodities);
         return $this->fetch();
     }
@@ -124,6 +125,7 @@ class CommodityController extends BaseController
             }
         } else {
             //渲染视图
+            $this->assign("user",User::getUserBySession());
             $this->assign("types", Type::all());
             return $this->fetch();
         }
@@ -176,7 +178,7 @@ class CommodityController extends BaseController
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-
+                $this->assign("user",User::getUserBySession());
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);
                 $this->assign("images", $commodityImages);
@@ -205,7 +207,7 @@ class CommodityController extends BaseController
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-
+                $this->assign("user",User::getUserBySession());
                 $this->assign("types", Type::all());
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);
