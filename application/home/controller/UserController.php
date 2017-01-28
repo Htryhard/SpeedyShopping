@@ -187,9 +187,9 @@ class UserController extends BaseController
             $cartSpecification = CartSpecification::get(['id'=>$CartSpecificationId]);
             if ($cartSpecification!=null){
                 $cartSpecification->delete();
-                return json('Success');//非法请求
+                return json('Success');//请求成功
             }else{
-                return json("NotFindCartSpecification");//没有这项商品
+                return json("NotFindCartSpecification");//没有这项商品规格
             }
         }else{
             return json('IllegalRequest');//非法请求
