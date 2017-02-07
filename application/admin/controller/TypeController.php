@@ -12,6 +12,7 @@ namespace app\admin\controller;
 use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\Type;
+use app\common\model\User;
 
 
 /**
@@ -24,6 +25,8 @@ class TypeController extends BaseController
     public function index()
     {
         $types = Type::all();
+        $user = User::getUserBySession();
+        $this->assign("user",$user);
         $this->assign("types", $types);
         return $this->fetch();
     }

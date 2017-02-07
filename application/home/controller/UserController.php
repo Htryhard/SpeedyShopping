@@ -26,6 +26,14 @@ class UserController extends BaseController
 {
 
     //TODO:所有订单
+    public function userOrders(){
+        $user = User::getUserBySession();
+        $this->assign("user", $user);
+//        $orders = Order::all(["user_id"=>$user->getData('id')]);
+        $orders = Order::where("user_id",$user->getData('id'))->paginate(15);
+        $this->assign("orders",$orders);
+        return $this->fetch();
+    }
     //TODO: ...
     //TODO:用户的个人主页
     public function userHome()
@@ -38,6 +46,10 @@ class UserController extends BaseController
         $this->assign("userCollects", $userCollects);
         $this->assign("user", $user);
         $this->assign("iconRoot", $iconRoot);
+        $orders = Order::where("user_id",$user->getData('id'))->paginate(15);
+        $this->assign("orders",$orders);
+        $cart = Cart::get(['user_id'=>$user->getData("id")]);
+        $this->assign("cart",$cart);
         return $this->fetch();
     }
 
