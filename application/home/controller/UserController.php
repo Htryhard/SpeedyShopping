@@ -297,10 +297,14 @@ class UserController extends BaseController
             return "亲，请选择商品规格";
         }
     }
-
-    public function logout()
+    //TODO:用户个人资料
+    public function userMessage()
     {
-        User::logOut();
+        $user = User::getUserBySession();
+        $this->assign("user",$user);
+        $iconRoot = "/speedyshopping/public//uploads/icon_images/";
+        $this->assign("iconRoot", $iconRoot);
+        return $this->fetch();
     }
 
 

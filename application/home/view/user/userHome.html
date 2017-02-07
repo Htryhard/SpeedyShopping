@@ -179,10 +179,8 @@
     <div id="con">
         <div id="box_userMsg">
             <div id="box_user">
-                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">
-                <span>{$user['user_name']}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span><a href="#">我的收货地址</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span><a href="#">我的个人信息</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
+                <span><a href="{:url('home/user/userMessage')}">{$user['user_name']}</a></span>
             </div>
             <div id="box_userSta"></div>
         </div>
@@ -286,7 +284,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr class="info">
-                    <th><input type="checkbox" id="all_check" onclick="allCheck()"/>全选</th>
+                    <th><label><input type="checkbox" id="all_check" onclick="allCheck()"/>全选</label></th>
                     <th>店铺宝贝</th>
                     <th>商品规格</th>
                     <th>单价</th>
