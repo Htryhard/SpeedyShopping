@@ -254,7 +254,7 @@ class UserController extends BaseController
             return "亲，请选择商品规格";
         }
     }
-
+    //TODO:处理下单(单个商品)
     public function buyOneHandle()
     {
         $count = Request::instance()->param("count");
@@ -297,6 +297,98 @@ class UserController extends BaseController
             return "亲，请选择商品规格";
         }
     }
+
+    //TODO:下单（多个商品的情况）
+    public function placeOrder(){
+        $idStr = $this->request->post("CartSpecificationsId");
+        $cartspeId = "";
+        if ($idStr!=""){
+            $idStr = str_replace("x_","",$idStr);
+            $idStr = substr($idStr,0,strlen($idStr)-1);
+            $cartspeId = $idStr;
+            $idStr = explode(";",$idStr);
+            $CartSpecifications = array();
+            foreach ($idStr as $CartSpecificationId){
+                $CartSpecification = CartSpecification::get(["id"=>$CartSpecificationId]);
+                if ($CartSpecification==null){
+                    continue;
+                }else{
+                    array_push($CartSpecifications,$CartSpecification);
+                }
+            }
+            if (count($CartSpecifications)!=0){
+                $user = User::getUserBySession();
+                $this->assign("user",$user);
+                $this->assign("CartSpecifications",$CartSpecifications);
+                $this->assign("cartspeId",$cartspeId);
+                return $this->fetch();
+            }else{
+             return $this->error("请求参数错误，没有找到指定商品规格");
+            }
+        }else{
+            return $this->error("参数不全");
+        }
+    }
+
+    //TODO:提交订单（多个商品情况下）
+    public function placeOrdersHandle(){
+        if (User::isLogin()){
+            //1购物车中间表的id（因为下单完成之后我们需要把它删除了）
+            //1）数量
+            //3）规格id
+            $idStr = $this->request->post("cartspeId");
+            //2地址id
+            $addressId = $this->request->post("addressId");
+            if ($idStr != "" && $addressId != ""){
+                $idStr = explode(";",$idStr);
+                $CartSpecifications = array();
+                foreach ($idStr as $CartSpecificationId){
+                    $CartSpecification = CartSpecification::get(["id"=>$CartSpecificationId]);
+                    if ($CartSpecification==null){
+                        continue;
+                    }else{
+                        array_push($CartSpecifications,$CartSpecification);
+                    }
+                }
+                if (count($CartSpecifications)!=0){
+
+                    $order = new Order();
+                    $order->id = Comm::getNewGuid();
+                    $order->status = 0;
+                    $order->user_id = User::getUserBySession()['id'];
+                    $order->address_id = $addressId;
+                    $order->order_number = time();
+                    $order->order_time = time();
+                    $order->pay_time = time();
+                    $order->succeed_time = time();
+                    $order->save();
+
+                    foreach ($CartSpecifications as $item){
+                        //写入中间表
+                        $orderSpecification = new OrderSpecification();
+                        $orderSpecification->id = Comm::getNewGuid();
+                        $orderSpecification->order_id = $order['id'];
+                        $orderSpecification->count = $item['count'];
+                        $orderSpecification->specification_id = $item['Specification']['id'];
+                        $orderSpecification->save();
+
+                        //删除购物车和规格的中间表
+                        $item->delete();
+
+                    }
+
+                }else{
+                    return $this->error("请求参数错误，没有找到指定商品规格");
+                }
+            }else{
+                return $this->error("参数错误，缺少商品或者地址");
+            }
+
+        }else{
+            return $this->error("请先登陆");
+        }
+    }
+
     //TODO:用户个人资料
     public function userMessage()
     {

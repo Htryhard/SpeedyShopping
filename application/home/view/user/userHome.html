@@ -263,6 +263,15 @@
                         {$order['orderSpecifications'][0]['specification']['commodity']['title']}
                     </td>
                     <th rowspan="3">
+                        <div style="width: 100px"></div>
+                    </th>
+                    <th rowspan="3">
+                        <span>配送中</span>
+                    </th>
+                    <th rowspan="3">
+                        <div style="width: 100px"></div>
+                    </th>
+                    <th rowspan="3">
                         <button> 确认收货</button>
                     </th>
                 </tr>
@@ -297,7 +306,7 @@
                 <!--item是购物车里的中间表-->
                 {volist name="cart['CartSpecifications']" id="item"}
                 <tr id="gouwuche_{$item['id']}">
-                    <td><input name="one_check" type="checkbox"/></td>
+                    <td><input name="one_check" type="checkbox" onclick=checkDoing("{$item['id']}") /></td>
                     <td>
                         <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}"
                              style="width: 50px; height: 50px">
@@ -324,12 +333,15 @@
                 <tr>
                     <th colspan="1"></th>
                     <th>合计：<span id="heji">00.00</span></th>
-                    <th><button style="background-color: #d33724;color: #fff">结算</button></th>
+                    <th><button style="background-color: #d33724;color: #fff" onclick="orderPost()">结算</button></th>
                 </tr>
             </table>
         </div>
         <!--第三层结束【购物车】-->
     </div>
+    <form action="{:url('home/user/placeOrder')}" method="post" id="CartSpecificationsPost">
+        <input type="hidden" name="CartSpecificationsId" id="hi_checkId" value=""/>
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -499,6 +511,10 @@
                         default:
 //                            var obj = msg.parseJSON();
 //                            alert(obj.state);
+                            var count = cartCount();
+                            var heji = document.getElementById("heji");
+                            heji.innerHTML = "";
+                            heji.innerHTML = count;
 
                     }
                 },
@@ -538,6 +554,10 @@
                             break;
                         default:
 //                            alert(msg);
+                            var count = cartCount();
+                            var heji = document.getElementById("heji");
+                            heji.innerHTML = "";
+                            heji.innerHTML = count;
                     }
                 },
                 error: function (msg) {
@@ -587,26 +607,80 @@
     //全选/全不选
     function allCheck() {
         var all_check = document.getElementById("all_check");
+        var xiaoji = document.getElementsByClassName('xiaoji');
+        var len = xiaoji.length;
+        var hi_checkId = document.getElementById("hi_checkId");
+
         if (all_check.checked) {
+            hi_checkId.value="";
+            var checkId = "";
+            for (var i = 0 ;i < len ;i++){
+                checkId = checkId+xiaoji[i].id+";";
+            }
+            hi_checkId.value = checkId;
+
             $("[name = one_check]:checkbox").attr("checked", true);
-            var count = cartCount();
-            var heji = document.getElementById("heji");
-            heji.innerHTML = "";
-            heji.innerHTML = count;
         } else {
             $("[name = one_check]:checkbox").attr("checked", false);
+            hi_checkId.value="";
         }
+        var count = cartCount();
+        var heji = document.getElementById("heji");
+        heji.innerHTML = "";
+        heji.innerHTML = count;
+//        alert(hi_checkId.value);
     }
 
     //统计合计
     function cartCount() {
-        var xiaoji = document.getElementsByClassName('xiaoji');
-        var len = xiaoji.length;
+//        var xiaoji = document.getElementsByClassName('xiaoji');
+//        var len = xiaoji.length;
+//        var count = 0;
+//        for (var i = 0 ;i < len ;i++){
+//            count =count + parseFloat(xiaoji[i].innerText);
+//        }
+//        return count;
         var count = 0;
-        for (var i = 0 ;i < len ;i++){
-            count =count + parseFloat(xiaoji[i].innerText);
+        var hi_checkId = document.getElementById("hi_checkId");
+        if (hi_checkId.value!=""){
+            var str = hi_checkId.value.substring(0,hi_checkId.value.length-1);
+            var id_array = str.split(";");
+            var len = id_array.length;
+            for (var i = 0;i < len;i++){
+                var xiaoji = document.getElementById(id_array[i]);
+                count =count + parseFloat(xiaoji.innerText);
+            }
+        }else {
+            count = 0.00;
         }
         return count;
+    }
+    
+    function checkDoing(id) {
+        var hi_checkId = document.getElementById("hi_checkId");
+        var trueId = "x_"+id;
+        if (hi_checkId.value.indexOf(id)>0){
+            hi_checkId.value = hi_checkId.value.replace(trueId+";","");
+//            alert("包含："+hi_checkId.value);
+        }else {
+            hi_checkId.value = hi_checkId.value+trueId+";";
+//            alert("不包含："+hi_checkId.value);
+        }
+//        alert("最终值："+hi_checkId.value);
+        var count = cartCount();
+        var heji = document.getElementById("heji");
+        heji.innerHTML = "";
+        heji.innerHTML = count;
+    }
+    
+    function orderPost() {
+        var hi_checkId = document.getElementById("hi_checkId");
+        if (hi_checkId.value==""){
+            alert("请至少选中一件商品");
+        }else{
+            document.getElementById("CartSpecificationsPost").submit();
+        }
+
     }
 </script>
 
