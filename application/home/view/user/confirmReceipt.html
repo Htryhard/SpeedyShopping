@@ -1,0 +1,89 @@
+{layout name="layout" /}
+<block name="titel"><title>付款</title></block>
+<block name="resources"></block>
+<div id="box_address">
+    收货人：{$order['address']['user_name']}<br/>
+    联系方式：{$order['address']['phone']}<br/>
+    配送至：{$order['address']['content']}<br/>
+</div>
+<div>
+    <span>订单信息</span><br/>
+    <table class="table table-hover">
+        <thead>
+        <tr class="info">
+            <th>店铺宝贝</th>
+            <th>商品规格</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="order['orderSpecifications']" id="orderSpecifications"}
+        <tr>
+            <td>
+                <img src="__PUBLIC__/uploads/commodity_images/{$orderSpecifications['specification']['commodity']['images'][0]['image']}"
+                     style="width: 50px; height: 50px">
+                {$orderSpecifications['specification']['commodity']['title']}
+            </td>
+            <td>{$orderSpecifications['specification']['content']}</td>
+            <td>{$orderSpecifications['specification']['price']}</td>
+            <td>{$orderSpecifications['count']}</td>
+            <td class="td_xiaoji">{$orderSpecifications['count']*$orderSpecifications['specification']['price']}</td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    <div id="box_heji">
+        本订单共消费：<span id="sp_heji" style="color: red">0</span>元
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var xiaoji = document.getElementsByClassName('td_xiaoji');
+        var len = xiaoji.length;
+        var count = 0;
+        for (var i = 0; i < len; i++) {
+            count = count + parseFloat(xiaoji[i].innerText);
+        }
+        var sp_heji = document.getElementById("sp_heji");
+        sp_heji.innerText = "";
+        sp_heji.innerText = count;
+    });
+
+    function doPayAction() {
+        var password = document.getElementById("password").value;
+        $.ajax({
+            type: "POST",
+            url: "{:url('home/user/doPayHandle')}",
+            dataType: "json",
+            data: {
+                password: password,
+                orderId:"{$order['id']}"
+            },
+            success: function (msg) {
+//                alert(msg.toString());
+                if ((msg.toString().indexOf("UnderStock"))>0){
+                    //库存不足
+//                    var mstr = msg.toString().replace("UnderStock/","");
+                    alert(msg);
+                }else if(msg=="PaySuccess"){
+                    window.location = "{:url('home/user/orderDetailed?orderId='.$order->getData('id'))}";
+                }else if(msg=="OrderNull"){
+                    alert("您要支付的订单不存在！");
+                }else if(msg=="PasswordError"){
+                    alert("登录密码错误！请重新输入!");
+                }else if(msg=="PostError"){
+                    alert("您的提交方式不安全！");
+                }else {
+                    alert(msg);
+                }
+            },
+            error: function (msg) {
+                alert(msg);
+            },
+        });
+    }
+</script>

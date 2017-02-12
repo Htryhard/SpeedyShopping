@@ -186,22 +186,11 @@
         </div>
         <table border="1" width="700px">
             <tr>
-                <th>待付款
-                <td><i style="color: red">0</i></td>
-                </th>
-                <th>待发货
-                <td><i style="color: red">0</i></td>
-                </th>
-                <th>待收货
-                <td><i style="color: red">0</i></td>
-                </th>
-                <th>待评价
-                <td><i style="color: red">0</i></td>
-                </th>
-                <th>退款返修
-                <td><i style="color: red">0</i></td>
-                </th>
-                </th>
+                <th><a href="#">待付款<i style="color: red">{$order_0}</i></a></th>
+                <th><a href="#">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
+                <th><a href="#">待收货<i style="color: red">{$order_3}</i></a></th>
+                <th><a href="#">待评价<i style="color: red">0</i></a></th>
+                <th><a href="#">退款返修<i style="color: red">0</i></a></th>
             </tr>
         </table>
         <div style="height: 10px"></div>
@@ -267,13 +256,37 @@
                         <div style="width: 100px"></div>
                     </th>
                     <th rowspan="3">
-                        <span>配送中</span>
+                        {switch name="$order->getData('status')"}
+                        {case value="0"}
+                        待付款
+                        {/case}
+                        {case value="1"}
+                        待捡货
+                        {/case}
+                        {case value="2"}
+                        待发货
+                        {/case}
+                        {case value="3"}
+                        配送中
+                        {/case}
+                        {case value="4"}
+                        货到付款
+                        {/case}
+                        {default /}
+                        {/switch}
                     </th>
                     <th rowspan="3">
                         <div style="width: 100px"></div>
                     </th>
                     <th rowspan="3">
-                        <button> 确认收货</button>
+                        {switch name="$order->getData('status')"}
+                        {case value="0"}
+                        去付款
+                        {/case}
+                        {case value="4"}{/case}
+                        {default /}
+                        <a href="#" onclick=confirmReceipt("{$order['id']}")>确认收货</a>
+                        {/switch}
                     </th>
                 </tr>
                 <tr>
@@ -346,6 +359,41 @@
 </div>
 
 <script type="text/javascript">
+    //确认收货
+    function confirmReceipt(orderId) {
+        if (confirm("请确保收到货后再确认收货，您收到货了吗？")) {
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/user/confirmReceipt')}",
+                dataType: "json",
+                data: {
+                    orderId: orderId
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "ReceiptSuccess":
+                            window.location = "{:url('home/user/orderDetailed?orderId=')}";
+                            break;
+                        case "PostError":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        case "OrderNull":
+                            alert('这个订单从地球上消失了~~');
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    alert(msg);
+                },
+            });
+        }
+    }
     //关注（心）图标处理
     function over_id(id) {
         var img = document.getElementById(id);

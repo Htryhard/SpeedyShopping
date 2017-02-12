@@ -1,0 +1,75 @@
+{layout name="layout" /}
+<block name="titel"><title>订单明细</title></block>
+<block name="resources"></block>
+
+<div id="box_address">
+    收货人：{$order['address']['user_name']}<br/>
+    联系方式：{$order['address']['phone']}<br/>
+    配送至：{$order['address']['content']}<br/>
+</div>
+
+<div>
+    订单号：{$order['order_number']}<br/>
+    订单生成时间：{:date('Y-m-d H:i:s',$order['order_time'])}<br/>
+    支付时间：
+    {eq name="$order['pay_time']" value=""}
+    {else/}
+    {:date('Y-m-d H:i:s',$order['pay_time'])}
+    {/eq}
+    <br/>
+    交易完成时间：
+    {eq name="$order['succeed_time']" value=""}
+    {else/}
+    {:date('Y-m-d H:i:s',$order['succeed_time'])}
+    {/eq}
+    <br/>
+    状态：{$order['status']}
+</div>
+
+<div>
+    <span>订单信息</span><br/>
+    <table class="table table-hover">
+        <thead>
+        <tr class="info">
+            <th>店铺宝贝</th>
+            <th>商品规格</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="order['orderSpecifications']" id="orderSpecifications"}
+        <tr>
+            <td>
+                <img src="__PUBLIC__/uploads/commodity_images/{$orderSpecifications['specification']['commodity']['images'][0]['image']}"
+                     style="width: 50px; height: 50px">
+                {$orderSpecifications['specification']['commodity']['title']}
+            </td>
+            <td>{$orderSpecifications['specification']['content']}</td>
+            <td>{$orderSpecifications['specification']['price']}</td>
+            <td>{$orderSpecifications['count']}</td>
+            <td class="td_xiaoji">{$orderSpecifications['count']*$orderSpecifications['specification']['price']}</td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    <div id="box_heji">
+        本订单共消费：<span id="sp_heji" style="color: red">0</span>元
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var xiaoji = document.getElementsByClassName('td_xiaoji');
+        var len = xiaoji.length;
+        var count = 0;
+        for (var i = 0; i < len; i++) {
+            count = count + parseFloat(xiaoji[i].innerText);
+        }
+        var sp_heji = document.getElementById("sp_heji");
+        sp_heji.innerText = "";
+        sp_heji.innerText = count;
+    });
+</script>

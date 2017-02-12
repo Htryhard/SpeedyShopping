@@ -88,7 +88,7 @@ class User extends Model
      * @param  string $password 密码
      * @return bool
      */
-    public function checkPassword($password)
+     public function checkPassword($password)
     {
         return $this->getData('password')==$this::encryptPassword($password) ? true : false;
     }
