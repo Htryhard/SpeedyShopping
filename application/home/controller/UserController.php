@@ -399,5 +399,11 @@ class UserController extends BaseController
         return $this->fetch();
     }
 
+    //TODO:注销
+    public function logOut(){
+        User::logOut();
+        $this->redirect(url('home/index/index'));
+    }
+
 
 }

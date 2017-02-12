@@ -8,8 +8,9 @@
 
 <form action="{:url('home/thing/loginHandle')}" method="post" name="userlogin" id="userlogin">
     <h3>用户登录</h3>
-    <p> <input class="input-text" type="text" id="email" name="email" placeholder="手机号/会员名/邮箱"></p>
-    <p><input class="input-text input-pwd" id="password" name="password" type="password" required></p>
+    <p> <input class="input-text" type="text" id="email" name="email" placeholder="邮箱"></p>
+    <p><input class="input-text input-pwd" id="password" name="password" type="password" placeholder="密码" required></p>
+    <p id="p_error" style="display: none;"><img src="__PUBLIC__/static/images/delete.png" width="20px;"height="20px"> <i style="color: red;font-size: 16px">用户名或者密码错误！</i></p>
     <p><input class="input-btn" type="button" onclick="userToLogin()" value="登录"></p>
     <h6><a href="#">忘记密码</a><a href="{:url('home/thing/register')}">免费注册</a></h6>
 </form>
@@ -31,7 +32,8 @@
                 if (msg=="succeed"){
                     window.location = "{:url('home/index/index')}";
                 }else {
-                    alert("登录失败");
+//                    alert("登录失败");
+                    document.getElementById("p_error").style.display = "";//显
                 }
             },
             error: function (msg) {

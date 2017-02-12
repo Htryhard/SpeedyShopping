@@ -22,8 +22,10 @@ class BaseController extends Controller
         $this->request = $request;
 
         // 验证用户是否登陆
-        if (!User::isLogin()) {
-            $this->redirect(url('home/user/login'));
+        if (!$this->request->isAjax()){
+            if (!User::isLogin()) {
+                $this->redirect(url('home/user/login'));
+            }
         }
     }
 
