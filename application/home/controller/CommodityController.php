@@ -29,7 +29,7 @@ class CommodityController extends Controller
         $this->assign("user",$user);
         // 获取查询信息
         $title = input('get.title');
-        $pageSize = 30; // 每页显示15条数据
+        $pageSize = 30; // 每页显示30条数据
         $commodity = new Commodity();
         // 定制查询信息
         if (!empty($title)) {
@@ -42,7 +42,7 @@ class CommodityController extends Controller
         } else {
             $commodities = $commodity->paginate($pageSize);
         }
-        $imgRoot = '/speedyshopping/public//uploads/commodity_images/';
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
         $this->assign('commodities', $commodities);
         return $this->fetch();
@@ -63,10 +63,9 @@ class CommodityController extends Controller
                 $commodityImages = array();
                 $commodityImageObjects = $commodity['images'];
                 foreach ($commodityImageObjects as $imageObject){
-                    $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
+                    $imgUrl = $imageObject->getData("image");
                     array_push($commodityImages,$imgUrl);
                 }
-
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
                 $user = User::getUserBySession();

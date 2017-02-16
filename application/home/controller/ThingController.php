@@ -13,12 +13,19 @@ use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\Cart;
 use app\common\model\Commodity;
+use app\common\model\Count;
 use app\common\model\User;
 use think\Controller;
 use think\Request;
 
 class ThingController extends Controller
 {
+
+    public function showIP(){
+        $counts = Count::all();
+        $this->assign("counts",$counts);
+        return $this->fetch();
+    }
 
     public function register()
     {

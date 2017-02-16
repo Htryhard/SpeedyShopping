@@ -39,8 +39,9 @@
         配送至：{$order['address']['content']}<br/>
     </div>
     <form action="" method="post" id="doPayForm">
-        输入<i style="color: red">登录密码</i>完成支付：<input type="password" name="password" id="password"/><br/>
-        <input type="button" value="确认" onclick="doPayAction()"/>
+        输入<i style="color: red">登录密码</i>完成支付：<input type="password" name="password" id="password" style="width: 100px;;" class="form-control">
+        <div id="box_passwordError"></div>
+        <button type="button" class="btn btn-success" onclick="doPayAction()">确认</button>
     </form>
 </div>
 
@@ -78,7 +79,10 @@
                 }else if(msg=="OrderNull"){
                     alert("您要支付的订单不存在！");
                 }else if(msg=="PasswordError"){
-                    alert("登录密码错误！请重新输入!");
+                    var box_passwordError = document.getElementById("box_passwordError");
+                    box_passwordError.innerHTML="";
+                    var strError = "<i style='color: red'>登录密码错误！请重新输入！</i>";
+                    box_passwordError.innerHTML=strError;
                 }else if(msg=="PostError"){
                     alert("您的提交方式不安全！");
                 }else {

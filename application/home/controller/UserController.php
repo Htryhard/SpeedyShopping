@@ -26,13 +26,64 @@ class UserController extends BaseController
 {
 
     //TODO:所有订单
-    public function userOrders()
+    public function userOrders($type)
     {
         $user = User::getUserBySession();
         $this->assign("user", $user);
 //        $orders = Order::all(["user_id"=>$user->getData('id')]);
-        $orders = Order::where("user_id", $user->getData('id'))->paginate(15);
+//        $type = input('get.type');
+        $orders = null;
+        if ($type=="statu0"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>0])->paginate(6);
+        }elseif ($type=="statu1"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>1])->paginate(6);
+        }elseif ($type=="statu2"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>2])->paginate(6);
+        }elseif ($type=="statu3"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>3])->paginate(6);
+        }elseif ($type=="statu4"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>4])->paginate(6);
+        }elseif ($type=="statu5"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>5])->paginate(6);
+        }elseif ($type=="statu6"){
+            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>6])->paginate(6);
+        }else{
+            //全部订单
+            $orders = Order::where("user_id", $user->getData('id'))->order('order_time','desc')->paginate(6);
+        }
         $this->assign("orders", $orders);
+
+        $this->assign("status",$type);
+        $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+        $this->assign("imgRoot", $imgRoot);
+        $this->assign("iconRoot", $iconRoot);
+
+
+        //用户订单状态
+        $order_0 = 0;//待付款
+        $order_1 = 0;//待捡货
+        $order_2 = 0;//待发货
+        $order_3 = 0;//配送中
+        $order_4 = 0;//货到付款
+        foreach ($user['orders'] as $order) {
+            if ($order->getData('status') == 0) {
+                $order_0 = $order_0 + 1;
+            } elseif ($order->getData('status') == 1) {
+                $order_1 = $order_1 + 1;
+            } elseif ($order->getData('status') == 2) {
+                $order_2 = $order_2 + 1;
+            } elseif ($order->getData('status') == 3) {
+                $order_3 = $order_3 + 1;
+            } elseif ($order->getData('status') == 4) {
+                $order_4 = $order_4 + 1;
+            }
+        }
+        $this->assign("order_0", $order_0);
+        $this->assign("order_1", $order_1);
+        $this->assign("order_2", $order_2);
+        $this->assign("order_3", $order_3);
+        $this->assign("order_4", $order_4);
         return $this->fetch();
     }
     //TODO: ...
@@ -40,9 +91,10 @@ class UserController extends BaseController
     public function userHome()
     {
         $user = User::getUserBySession();
-        $userCollects = Collect::all(["user_id" => $user->getData("id")]);
-        $iconRoot = "/speedyshopping/public//uploads/icon_images/";
-        $imgRoot = '/speedyshopping/public//uploads/commodity_images/';
+//        $userCollects = Collect::all(["user_id" => $user->getData("id")]);
+        $userCollects = Collect::where(["user_id" => $user->getData("id")])->order("creation_time","desc")->paginate(10);
+        $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
         $this->assign("userCollects", $userCollects);
         $this->assign("user", $user);
@@ -180,6 +232,36 @@ class UserController extends BaseController
         $cart = Cart::get(['user_id' => $user->getData("id")]);
         $this->assign("user", $user);
         $this->assign("cart", $cart);
+
+        $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+        $this->assign("imgRoot", $imgRoot);
+        $this->assign("iconRoot", $iconRoot);
+
+        //用户订单状态
+        $order_0 = 0;//待付款
+        $order_1 = 0;//待捡货
+        $order_2 = 0;//待发货
+        $order_3 = 0;//配送中
+        $order_4 = 0;//货到付款
+        foreach ($user['orders'] as $order) {
+            if ($order->getData('status') == 0) {
+                $order_0 = $order_0 + 1;
+            } elseif ($order->getData('status') == 1) {
+                $order_1 = $order_1 + 1;
+            } elseif ($order->getData('status') == 2) {
+                $order_2 = $order_2 + 1;
+            } elseif ($order->getData('status') == 3) {
+                $order_3 = $order_3 + 1;
+            } elseif ($order->getData('status') == 4) {
+                $order_4 = $order_4 + 1;
+            }
+        }
+        $this->assign("order_0", $order_0);
+        $this->assign("order_1", $order_1);
+        $this->assign("order_2", $order_2);
+        $this->assign("order_3", $order_3);
+        $this->assign("order_4", $order_4);
         return $this->fetch();
     }
 
@@ -429,7 +511,7 @@ class UserController extends BaseController
     {
         $user = User::getUserBySession();
         $this->assign("user", $user);
-        $iconRoot = "/speedyshopping/public//uploads/icon_images/";
+        $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
         $this->assign("iconRoot", $iconRoot);
         return $this->fetch();
     }

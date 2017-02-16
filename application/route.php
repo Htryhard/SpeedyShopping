@@ -17,5 +17,6 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
-
+    'home$'=>'home/index/index',//定义首页路由
+    'admin$'=>'admin/user/login',//定义后台首页路由
 ];

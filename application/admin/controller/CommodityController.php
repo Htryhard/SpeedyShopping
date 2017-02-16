@@ -13,6 +13,7 @@ use app\common\Comm;
 use app\common\controller\BaseController;
 use app\common\model\Commodity;
 use app\common\model\CommodityImages;
+use app\common\model\Count;
 use app\common\model\Specification;
 use app\common\model\Type;
 use app\common\model\User;
@@ -25,20 +26,28 @@ class CommodityController extends BaseController
      */
     public function index()
     {
+        //记录访问IP
+        $requestIP =Comm::getClientIP();
+        $requestDate = time();
+        $count = new Count();
+        $count->ipcontent = $requestIP;
+        $count->time = $requestDate;
+        $count->save();
+
 // 获取查询信息
         $title = input('get.title');
         $pageSize = 15; // 每页显示15条数据
         $commodity = new Commodity();
         // 定制查询信息
         if (!empty($title)) {
-            $commodities = $commodity->where('title', 'like', '%' . $title . '%')->paginate($pageSize, false,
+            $commodities = $commodity->where('title', 'like', '%' . $title . '%')->order('creation_time','desc')->paginate($pageSize, false,
                 [
                     'query' => [
                         'title' => $title,
                     ],
                 ]);
         } else {
-            $commodities = $commodity->paginate($pageSize);
+            $commodities = $commodity->order('creation_time','desc')->paginate($pageSize);
         }
         $this->assign("user",User::getUserBySession());
         $this->assign('commodities', $commodities);

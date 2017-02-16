@@ -4,6 +4,7 @@ namespace app\home\controller;
 
 use app\common\Comm;
 use app\common\model\Collect;
+use app\common\model\Count;
 use app\common\model\Type;
 use app\common\model\User;
 use think\Controller;
@@ -13,6 +14,15 @@ class IndexController extends  Controller
     public function index()
     {
 
+        //记录访问IP
+        $requestIP =Comm::getClientIP();
+        $requestDate = time();
+        $count = new Count();
+        $count->ipcontent = $requestIP;
+        $count->time = $requestDate;
+        $count->save();
+
+
 //        $this->assign("commodities",);
         $user = User::getUserBySession();
         $userCollects = array();
@@ -21,7 +31,7 @@ class IndexController extends  Controller
         }
         $this->assign("userCollects",$userCollects);
         $this->assign("user",$user);
-        $imgRoot = '/speedyshopping/public//uploads/commodity_images/';
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
         $this->assign('types',Type::all());
         return $this->fetch();

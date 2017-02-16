@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="__PUBLIC__/uploads/iocn.png" media="screen" />
     <meta charset="UTF-8">
     <block name="titel"></block>
     {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
@@ -16,14 +17,14 @@
     {load href="__PUBLIC__/static/zyupload/jquery-1.7.2.js" /}
     <block name="resources"></block>
 <body>
-<header>
-    {include file="./header" /}
-</header>
 <section id="myhomemain">
     <div id="con">
+        <div style="height: 80px;"></div>
             {__CONTENT__}
     </div>
 </section>
-
+<header>
+    {include file="./header" /}
+</header>
 </body>
 </html>

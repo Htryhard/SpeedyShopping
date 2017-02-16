@@ -1,7 +1,417 @@
 {layout name="layout" /}
-<block name="titel"><title>我的周边送-个人资料</title></block>
-<block name="resources"></block>
+<block name="titel"><title>我的周边送</title></block>
+<block name="resources">
+    {load href="__PUBLIC__/login/login.css" /}
+    {load href="__PUBLIC__/homestatic/css/myhome.css" /}
+    {load href="__PUBLIC__/homestatic/js/dizhi.js" /}
+</block>
+<style>
+    .div1 {
+        text-align: center;
+        width: 200px;
+        padding-top: 30px;
 
-<div id="box_user">
-    <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
+    }
+
+    .div2 {
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        font-size: 13px;
+        position: relative;
+        border-bottom: #ccc 1px dotted;
+
+    }
+
+    .div2 a {
+        color: #000000;
+    }
+
+    .div2 a:hover {
+        color: red;
+    }
+
+    .jbsz {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 40px;
+        top: 10px;
+    }
+
+    .conten_margin {
+        /*margin-bottom: 20px;*/
+        /*margin-right: 20px;*/
+        float: left;
+        padding: 5px;
+
+    }
+
+    .conten_margin:hover {
+        /*border: 1px solid silver;*/
+    }
+
+    .conten_margin .titlea {
+        width: 180px;
+        overflow: hidden; /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap; /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .bordera {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: #666666;
+        font-size: 13px;
+
+    }
+
+    .bordera:hover {
+        border: 1px solid red;
+        color: red;
+    }
+
+    .borderb {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+        font-size: 13px;
+    }
+
+    .borderb:hover {
+        border: 1px solid red;
+    }
+
+    .pricea {
+        font-size: 18px;
+        color: red;
+    }
+
+    .pingjiaa {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    .pingjiab {
+        font-size: 18px;
+        color: red;
+    }
+
+    .img_xing {
+        vertical-align: middle;
+    }
+
+    .btn_guanzhu {
+        border: 0;
+        background: #F4F4F4;
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    #myhomem {
+        position: absolute;
+        left: 300px;
+        top: 30px;
+        right: 0px;
+        bottom: 50px;
+        overflow: hidden;
+    }
+
+    .box_ms {
+        position: relative;
+        left: -150px;
+
+    }
+
+    .userData {
+        behavior: url(#default#userdata);
+    }
+</style>
+<asidehome>
+    <div class="left">
+        <div class="div1">
+            <div class="div2">
+                <div class="div2" style="font-size:25px;font-family: '楷体', '微软雅黑'">
+                    <h2>全部功能</h2>
+                </div>
+                <div class="div2">
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userHome')}">我的收藏</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userOrders',['type'=>'all'])}">全部订单</a>
+                    </div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/showCart')}">我的购物车</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userMessage')}" style="color: #00a2d4;">我的个人资料</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="">我的评价</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a>退换货</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</asidehome>
+<div id="myhomem">
+    <div id="con">
+        <div class="box_ms">
+            <div style="height: 90px;"></div>
+            <div class="container">
+                <div class="row col-md-2"></div>
+                <form class="form-horizontal" role="form" action="" method="post" id="formdata">
+                    <div class="row col-md-5 ">
+                        <div class="form-group">
+                            <div class="container">
+                                <div class="imageBox">
+                                    <div class="thumbBox"></div>
+                                    <div class="spinner" style="display: none">Loading...</div>
+                                </div>
+                                <div class="action" style="margin-top: 50px;">
+                                    <input type="file" id="file" style="float:left; width: 200px">
+                                    <input type="button" id="btnCrop" value="确认" style="float: right"
+                                           class="btn btn-success">
+                                    <input type="button" id="btnZoomIn" value="放大" style="float: left"
+                                           class="btn btn-default">
+                                    <input type="button" id="btnZoomOut" value="缩小" style="float: left"
+                                           class="btn btn-default">
+                                </div>
+                                <div class="cropped">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-4" style="margin-top: 30px;">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="email">邮箱</label>
+                            <div class="col-sm-6">
+                                <p class="col-sm-12 control-label" id="email">{$user->getData('email')}
+                                </p>
+                            </div>
+                            <div class="col-md-6" id="email_error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="nick_name">昵称</label>
+                            <div class="col-sm-6">
+                                <p class="col-sm-12 control-label">
+                                    {eq name="$user->getData('nick_name')" value=""}
+                                    未设置
+                                    {else/}
+                                    $user->getData('nick_name')
+                                    {/eq}
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </p>
+                                <input type="text" class="form-control" id="nick_name" name="nick_name"
+                                       placeholder="请输入昵称" style="display: none">
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="password">密码</label>
+                            <div class="col-sm-6">
+                                <p class="col-sm-12 control-label">修改密码
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </p>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="请输入密码" style="display: none">
+                            </div>
+                            <div class="col-md-6" id="password_error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="name">用户名</label>
+                            <div class="col-sm-6">
+                                <p class="col-sm-12 control-label">{$user->getData('user_name')}
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </p>
+                                <input type="text" class="form-control" id="name" name="name"
+                                       placeholder="请输入用户名" style="display: none">
+                            </div>
+                            <div class="col-md-6" id=""></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="phone">联系方式</label>
+                            <div class="col-sm-6">
+                                <p class="col-sm-12 control-label">{$user->getData('phone')}
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </p>
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                       placeholder="请输入联系方式" style="display: none">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="sbasb">个性签名</label>
+                            <div class="col-sm-6">
+                                <p class="col-sm-50 control-label">
+                                    {eq name="$user->getData('sbasb')" value=""}
+                                    这家伙很懒，神马都没留下。
+                                    {else/}
+                                    $user->getData('sbasb')
+                                    {/eq}
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </p>
+                                <input type="text" class="form-control" id="sbasb" name="sbasb"
+                                       placeholder="请输入个性签名" style="display: none">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6" id="other_error"></div>
+
+                        <input type="hidden" id="hidd" name="base64Icon" value="">
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="position:relative;right: 5px;width:88%">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>内容</th>
+                    <th>联系方式</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="$user['address']" id="address"}
+                <tr>
+                    <td>{$key}</td>
+                    <td>{$address['user_name']}</td>
+                    <td id="td_con_address_{$address['id']}" ondblclick=editAddress("{$address['id']}")>
+                        {$address['content']}
+                        <div id="box_dizhi_{$address['id']}">
+                            <select name="province" id="selProvince"
+                                    onchange="getCity(this.options[this.selectedIndex].value)"
+                                    class="userData">
+                            </select>
+                            <select name="city" id="selCity">
+                            </select>
+                        </div>
+                    </td>
+                    <td>{$address['phone']}</td>
+                    <td><a href="#">删除</a>| <a href="#">编辑</a>| <a href="#">设为默认</a></td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var options =
+        {
+            imageBox: '.imageBox',
+            thumbBox: '.thumbBox',
+            spinner: '.spinner',
+            imgSrc: "{:$iconRoot.$user['icon']}"
+        }
+        var cropper = new cropbox(options);
+        document.querySelector('#file').addEventListener('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                options.imgSrc = e.target.result;
+                cropper = new cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+            this.files = [];
+        })
+        document.querySelector('#topost').addEventListener('click', function () {
+            var img = cropper.getDataURL();
+            $('#hidd').val(img);
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/thing/')}",
+                dataType: "json",
+                data: {
+                    userdata: $('#formdata').serializeArray()
+                },
+                success: function (msg) {
+//                    alert(msg);
+                    switch (msg) {
+                        case 'repetition':
+                            getlayout("other_error", "此邮箱已经被注册！");
+                            break;
+                        case 'passwordNoFit':
+                            getlayout("other_error", "两次密码不一致！");
+                            break;
+                        case 'error_notAjax':
+                            alert("提交方式出错！");
+                            break;
+                        case 'succeed':
+                            window.location = "{:url('home/index/index')}";
+                            break;
+                        default:
+                            getlayout("other_error", msg);
+
+                    }
+//                    var u = "{:url('admin/label/index')}";
+//                    window.location = u;
+                },
+            });
+        })
+        document.querySelector('#btnZoomIn').addEventListener('click', function () {
+            cropper.zoomIn();
+        })
+        document.querySelector('#btnZoomOut').addEventListener('click', function () {
+            cropper.zoomOut();
+        })
+    };
+    $(function(){
+        initProvince();
+    });
+
+    //==========================================
+
+    //获得错误html代码
+    function getlayout(elid, str) {
+        $("#" + elid).empty();
+        $("#" + elid).parent().removeClass("has-success");
+        $("#" + elid).parent().addClass("has-error");
+        $("#" + elid).append(
+                "<font style='color:red;font-weight:bold;'><span class='glyphicon glyphicon-remove'></span> " + str + "</font>"
+        );
+    }
+
+    function editAddress(addressId) {
+//        document.getElementById("EleId").style.display="none";
+//        document.getElementById("EleId").style.display="inline";
+        var td_con_address = document.getElementById("td_con_address_" + addressId);
+        td_con_address.style.display = "none";
+        document.getElementById("box_dizhi_" + addressId).style.display = "inline";
+    }
+</script>
+
+

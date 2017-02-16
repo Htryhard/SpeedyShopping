@@ -1,60 +1,289 @@
 {layout name="layout" /}
 <block name="titel"><title>我的购物车</title></block>
 <block name="resources">
-
+    {load href="__PUBLIC__/login/login.css" /}
+    {load href="__PUBLIC__/homestatic/css/myhome.css" /}
 </block>
+<style>
 
-<div>
-    <span>我的购物车</span><br/>
-    <table class="table table-hover"  >
-        <thead>
-        <tr class="info">
-            <th>店铺宝贝</th>
-            <th>商品规格</th>
-            <th>单价</th>
-            <th>数量</th>
-            <th>小计</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!--item是购物车里的中间表-->
-        {volist name="cart['CartSpecifications']" id="item"}
-        <tr>
-            <td>
-                <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}" style="width: 50px; height: 50px">
-                {$item['Specification']['commodity']['title']}
-            </td>
-            <td>{$item['Specification']['content']}</td>
-            <td>{$item['Specification']['price']}</td>
-            <td>
-                <a href="#" onclick=minusCount("{$item['Specification']['price']}","{$item['id']}")>- </a>
-                <span id="c_{$item['id']}">{$item['count']}</span>
-                <a href="#" onclick=addCount("{$item['Specification']['price']}","{$item['id']}","{$item['Specification']['repertory']}")> +</a>
-            </td>
-            <td><span id="x_{$item['id']}">{$item['count']*$item['Specification']['price']}</span></td>
-            <td><a href="#" onclick=deleteFromCart("{$item['id']}")><img src="__PUBLIC__/static/images/delete.png" width="20px;"height="20px"></a></td>
-        </tr>
-        {/volist}
+    left {
+        width: 200px;
+        height: 100%;
+        border-right: 1px solid #CCCCCC;
+        color: #000000;
+        font-size: 14px;
+        text-align: center;
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        bottom: 100px;
+        position: fixed;
+    }
 
-        </tbody>
-    </table>
-    <a href="#" style="background-color: #d33724;color: #fff" onclick="postBuy()">提交订单</a>
+    .div1 {
+        text-align: center;
+        width: 200px;
+        padding-top: 30px;
+
+    }
+
+    .div2 {
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        font-size: 13px;
+        position: relative;
+        border-bottom: #ccc 1px dotted;
+
+    }
+
+    .div2 a {
+        color: #000000;
+    }
+
+    .div2 a:hover {
+        color: red;
+    }
+
+    .jbsz {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 40px;
+        top: 10px;
+    }
+
+    .right {
+        position: relative;
+        left: 250px;
+        top: 30px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+
+    }
+
+    .conten_margin {
+        /*margin-bottom: 20px;*/
+        /*margin-right: 20px;*/
+        float: left;
+        padding: 5px;
+
+    }
+
+    .conten_margin:hover {
+        /*border: 1px solid silver;*/
+    }
+
+    .conten_margin .titlea {
+        width: 180px;
+        overflow: hidden; /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap; /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .bordera {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: #666666;
+        font-size: 13px;
+
+    }
+
+    .bordera:hover {
+        border: 1px solid red;
+        color: red;
+    }
+
+    .borderb {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+        font-size: 13px;
+    }
+
+    .borderb:hover {
+        border: 1px solid red;
+    }
+
+    .pricea {
+        font-size: 18px;
+        color: red;
+    }
+
+    .pingjiaa {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    .pingjiab {
+        font-size: 18px;
+        color: red;
+    }
+
+    .img_xing {
+        vertical-align: middle;
+    }
+
+    .btn_guanzhu {
+        border: 0;
+        background: #F4F4F4;
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    #myhomem {
+        position: absolute;
+        left: 300px;
+        top: 30px;
+        right: 0px;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+    .s-bar {
+        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        color: #fff;
+        background: #a0cdeb;
+        border: #a0cdeb;
+        border-top: #e4eaee;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 11px 10px;
+        position: relative;
+    }
+</style>
+<asidehome>
+    <div class="left">
+        <div class="div1">
+            <div class="div2">
+                <div class="div2" style="font-size:25px;font-family: '楷体', '微软雅黑'">
+                    <h2>全部功能</h2>
+                </div>
+                <div class="div2">
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userHome')}">我的收藏</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userOrders',['type'=>'all'])}">全部订单</a>
+                    </div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/showCart')}" style="color: #00a2d4;">我的购物车</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userMessage')}">我的个人资料</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="">我的评价</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a>退换货</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</asidehome>
+<div id="myhomem">
+    <div id="con">
+        <div style="height: 80px;"></div>
+        <div id="box_userMsg">
+            <div id="box_user">
+                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
+                <span><a href="{:url('home/user/userMessage')}">{$user['user_name']}</a></span>
+            </div>
+            <div id="box_userSta"></div>
+        </div>
+        <table border="1" width="700px">
+            <tr>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">0</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
+            </tr>
+        </table>
+        <div style="height: 10px"></div>
+        <!--第三层开始【购物车】-->
+        <div id="box_cart_content" style="width: 95%">
+            <div class="s-bar">我的购物车</div>
+            <table class="table table-hover">
+                <thead>
+                <tr class="info">
+                    <td style="font-size: 10px"><label><input type="checkbox" id="all_check" onclick="allCheck()"/>全选</label></td>
+                    <td>店铺宝贝</td>
+                    <td>商品规格</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                <!--item是购物车里的中间表-->
+                {volist name="cart['CartSpecifications']" id="item"}
+                <tr id="gouwuche_{$item['id']}">
+                    <td><input name="one_check" type="checkbox" onclick=checkDoing("{$item['id']}")></td>
+                    <td>
+                        <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}"
+                             style="width: 50px; height: 50px">
+                        <span style="font-size: 16px">{$item['Specification']['commodity']['title']}</span>
+                    </td>
+                    <td>{$item['Specification']['content']}</td>
+                    <td>{$item['Specification']['price']}</td>
+                    <td>
+                        <a href="#" onclick=minusCount("{$item['Specification']['price']}","{$item['id']}")>- </a>
+                        <span id="c_{$item['id']}">{$item['count']}</span>
+                        <a href="#"
+                           onclick=addCount("{$item['Specification']['price']}","{$item['id']}","{$item['Specification']['repertory']}")>
+                            +</a>
+                    </td>
+                    <td><span id="x_{$item['id']}"
+                              class="xiaoji">{$item['count']*$item['Specification']['price']}</span></td>
+                    <td><a href="#" onclick=deleteFromCart("{$item['id']}")><img
+                            src="__PUBLIC__/static/images/delete.png" width="20px;" height="20px"></a></td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+            <table style="float:right;">
+                <tr>
+                    <th colspan="1"></th>
+                    <th>合计：<span id="heji">00.00</span> 元</th>
+                    <th>
+                        &nbsp;<button type="button" class="btn btn-danger" onclick="orderPost()">结算</button>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <!--第三层结束【购物车】-->
+    </div>
+    <form action="{:url('home/user/placeOrder')}" method="post" id="CartSpecificationsPost">
+        <input type="hidden" name="CartSpecificationsId" id="hi_checkId" value=""/>
+    </form>
 </div>
 
+<!--购物车操作-->
 <script type="text/javascript">
-    function minusCount(price,id) {
-        var td_count = document.getElementById("c_"+id);
-        var xiaoji = document.getElementById("x_"+id);
+    function minusCount(price, id) {
+        var td_count = document.getElementById("c_" + id);
+        var xiaoji = document.getElementById("x_" + id);
         var nowCount = td_count.innerText;
-        if (nowCount > 1){
+        if (nowCount > 1) {
             $.ajax({
                 type: "POST",
                 url: "{:url('home/user/cartCommodityCount')}",
                 dataType: "json",
                 data: {
                     CartSpecificationId: id,
-                    type:"minus"
+                    type: "minus"
                 },
                 success: function (msg) {
                     switch (msg) {
@@ -68,6 +297,10 @@
                         default:
 //                            var obj = msg.parseJSON();
 //                            alert(obj.state);
+                            var count = cartCount();
+                            var heji = document.getElementById("heji");
+                            heji.innerHTML = "";
+                            heji.innerHTML = count;
 
                     }
                 },
@@ -75,26 +308,26 @@
                     alert(msg);
                 },
             });
-            nowCount = nowCount-1;
-            td_count.innerText=nowCount;
-            xiaoji.innerText=(nowCount*price);
+            nowCount = nowCount - 1;
+            td_count.innerText = nowCount;
+            xiaoji.innerText = (nowCount * price);
         }
     }
     //多一个参数，库存repertory
-    function addCount(price,id,repertory) {
+    function addCount(price, id, repertory) {
 //        alert(repertory);
-        var td_count = document.getElementById("c_"+id);
-        var xiaoji = document.getElementById("x_"+id);
+        var td_count = document.getElementById("c_" + id);
+        var xiaoji = document.getElementById("x_" + id);
         var nowCount = parseInt(td_count.innerText);
-        if (parseInt(repertory) > parseInt(nowCount)){
-            nowCount = nowCount+1;
+        if (parseInt(repertory) > parseInt(nowCount)) {
+            nowCount = nowCount + 1;
             $.ajax({
                 type: "POST",
                 url: "{:url('home/user/cartCommodityCount')}",
                 dataType: "json",
                 data: {
                     CartSpecificationId: id,
-                    type:"add"
+                    type: "add"
                 },
                 success: function (msg) {
                     switch (msg) {
@@ -107,21 +340,25 @@
                             break;
                         default:
 //                            alert(msg);
+                            var count = cartCount();
+                            var heji = document.getElementById("heji");
+                            heji.innerHTML = "";
+                            heji.innerHTML = count;
                     }
                 },
                 error: function (msg) {
                     alert(msg);
                 },
             });
-            td_count.innerText=nowCount;
-            xiaoji.innerText=(nowCount*price);
-        }else {
+            td_count.innerText = nowCount;
+            xiaoji.innerText = (nowCount * price);
+        } else {
             alert("已经到达购买上限");
         }
     }
 
     function deleteFromCart(id) {
-        if (confirm("你确定要从购物车中移除此商品？")){
+        if (confirm("你确定要从购物车中移除此商品？")) {
             $.ajax({
                 type: "POST",
                 url: "{:url('home/user/deleteCommodityFromCart')}",
@@ -132,8 +369,10 @@
                 success: function (msg) {
                     switch (msg) {
                         case "Success":
+                            var delete_tr = document.getElementById("gouwuche_" + id);
+                            delete_tr.parentNode.removeChild(delete_tr);
                             //移除成功！重新加载当前页面
-                            location.reload();
+//                            location.reload();
                             break;
                         case "IllegalRequest":
                             //非法请求
@@ -151,5 +390,84 @@
             });
         }
     }
+    //全选/全不选
+    function allCheck() {
+        var all_check = document.getElementById("all_check");
+        var xiaoji = document.getElementsByClassName('xiaoji');
+        var len = xiaoji.length;
+        var hi_checkId = document.getElementById("hi_checkId");
+
+        if (all_check.checked) {
+            hi_checkId.value = "";
+            var checkId = "";
+            for (var i = 0; i < len; i++) {
+                checkId = checkId + xiaoji[i].id + ";";
+            }
+            hi_checkId.value = checkId;
+
+            $("[name = one_check]:checkbox").attr("checked", true);
+        } else {
+            $("[name = one_check]:checkbox").attr("checked", false);
+            hi_checkId.value = "";
+        }
+        var count = cartCount();
+        var heji = document.getElementById("heji");
+        heji.innerHTML = "";
+        heji.innerHTML = count;
+//        alert(hi_checkId.value);
+    }
+
+    //统计合计
+    function cartCount() {
+//        var xiaoji = document.getElementsByClassName('xiaoji');
+//        var len = xiaoji.length;
+//        var count = 0;
+//        for (var i = 0 ;i < len ;i++){
+//            count =count + parseFloat(xiaoji[i].innerText);
+//        }
+//        return count;
+        var count = 0;
+        var hi_checkId = document.getElementById("hi_checkId");
+        if (hi_checkId.value != "") {
+            var str = hi_checkId.value.substring(0, hi_checkId.value.length - 1);
+            var id_array = str.split(";");
+            var len = id_array.length;
+            for (var i = 0; i < len; i++) {
+                var xiaoji = document.getElementById(id_array[i]);
+                count = count + parseFloat(xiaoji.innerText);
+            }
+        } else {
+            count = 0.00;
+        }
+        return count;
+    }
+
+    function checkDoing(id) {
+        var hi_checkId = document.getElementById("hi_checkId");
+        var trueId = "x_" + id;
+        if (hi_checkId.value.indexOf(id) > 0) {
+            hi_checkId.value = hi_checkId.value.replace(trueId + ";", "");
+//            alert("包含："+hi_checkId.value);
+        } else {
+            hi_checkId.value = hi_checkId.value + trueId + ";";
+//            alert("不包含："+hi_checkId.value);
+        }
+//        alert("最终值："+hi_checkId.value);
+        var count = cartCount();
+        var heji = document.getElementById("heji");
+        heji.innerHTML = "";
+        heji.innerHTML = count;
+    }
+
+    function orderPost() {
+        var hi_checkId = document.getElementById("hi_checkId");
+        if (hi_checkId.value == "") {
+            alert("请至少选中一件商品");
+        } else {
+            document.getElementById("CartSpecificationsPost").submit();
+        }
+
+    }
 </script>
+
 

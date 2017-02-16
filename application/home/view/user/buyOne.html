@@ -4,13 +4,13 @@
 <div>
     <span>选择地址</span><br/>
     {volist name="$user['address']" id="item"}
-     <input type="radio" name="addressId" id="rAddressId" value="{$item['id']}">
+    <input type="radio" name="addressId" id="rAddressId_{$item['id']}" value="{$item['id']}" onclick=changeAddress("{$item['id']}")>
     {$item['content']}({$item['user_name']} 收) {$item['phone']}
     <br/>
     {/volist}
 </div>
 
-<div>
+<div style="width: 90%">
     <span>确认订单信息</span><br/>
     <table class="table table-hover"  >
         <thead>
@@ -35,7 +35,7 @@
         </tr>
         </tbody>
     </table>
-    <a href="#" style="background-color: #d33724;color: #fff" onclick="postBuy()">提交订单</a>
+    <button type="button" class="btn btn-danger" style="float: right" onclick="postBuy()">提交订单</button>
 </div>
 <form id="post_bay" action="{:url('home/user/buyOneHandle')}" method="post">
     <!--标记规格的ID-->
@@ -47,9 +47,18 @@
 
 <script type="text/javascript">
 function postBuy() {
-    var id = document.getElementById("rAddressId").value;
+    var hi_addressId = document.getElementById("addressId");
+    if (hi_addressId.value == ""){
+        alert("请选择地址！");
+    }else {
+        $("#post_bay").submit();
+    }
+
+//        $("#post_bay").submit();
+}
+function changeAddress(addressId) {
+    var id = document.getElementById("rAddressId_"+addressId).value;
     document.getElementById("addressId").value = "";
     document.getElementById("addressId").value = id;
-    $("#post_bay").submit();
 }
 </script>

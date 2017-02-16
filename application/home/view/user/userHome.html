@@ -144,6 +144,19 @@
         bottom: 0;
         overflow: hidden;
     }
+
+    .s-bar {
+        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        color: #fff;
+        background: #a0cdeb;
+        border: #a0cdeb;
+        border-top: #e4eaee;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 11px 10px;
+        position: relative;
+        width: 86%;
+    }
 </style>
 <asidehome>
     <div class="left">
@@ -155,14 +168,17 @@
                 <div class="div2">
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a href="javascript:void(0)" onclick="changeMenu('collect')">我的收藏</a></div>
+                        <a href="{:url('home/user/userHome')}" style="color: #00a2d4;">我的收藏</a></div>
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a href="javascript:void(0)" onclick="changeMenu('order')">全部订单</a>
+                        <a href="{:url('home/user/userOrders',['type'=>'all'])}">全部订单</a>
                     </div>
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a href="javascript:void(0)" onclick="changeMenu('cart')">我的购物车</a></div>
+                        <a href="{:url('home/user/showCart')}">我的购物车</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userMessage')}">我的个人资料</a></div>
                     <div class="div2">
                         <div class="jbsz"></div>
                         <a href="">我的评价</a></div>
@@ -177,6 +193,7 @@
 </asidehome>
 <div id="myhomem">
     <div id="con">
+        <div style="height: 80px;"></div>
         <div id="box_userMsg">
             <div id="box_user">
                 <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
@@ -186,17 +203,17 @@
         </div>
         <table border="1" width="700px">
             <tr>
-                <th><a href="#">待付款<i style="color: red">{$order_0}</i></a></th>
-                <th><a href="#">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
-                <th><a href="#">待收货<i style="color: red">{$order_3}</i></a></th>
-                <th><a href="#">待评价<i style="color: red">0</i></a></th>
-                <th><a href="#">退款返修<i style="color: red">0</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">0</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
             </tr>
         </table>
         <div style="height: 10px"></div>
         <!--第一层开始【收藏】-->
         <div id="box_collects_content">
-            <span style="font-family: '楷体', '微软雅黑';font-size:30px;color: #9f191f">我收藏的宝贝</span>
+            <div class="s-bar">我收藏的宝贝</div>
             <div style="height: 10px"></div>
             <!--style="background-color: #00A2D4"-->
             <div id="box_collects">
@@ -237,121 +254,8 @@
             </div>
         </div>
         <!--第一层结束【收藏】-->
-
-        <!--第二层开始【我的订单】-->
-        <div id="box_order_content" style="display: none;">
-            <span style="font-family: '楷体', '微软雅黑';font-size:30px;color: #9f191f">我的订单</span>
-            <div style="height: 10px"></div>
-            {volist name="orders" id="order"}
-            <table border="1" style="table-layout: fixed;">
-                <tr>
-                    <th rowspan="3">
-                        <img src="{$imgRoot}{$order['orderSpecifications'][0]['specification']['commodity']['images'][0]['image']}"
-                             style="height: 90px;width: 80px;"/>
-                    </th>
-                    <td style="text-overflow: ellipsis;overflow:hidden;white-space:nowrap;">
-                        {$order['orderSpecifications'][0]['specification']['commodity']['title']}
-                    </td>
-                    <th rowspan="3">
-                        <div style="width: 100px"></div>
-                    </th>
-                    <th rowspan="3">
-                        {switch name="$order->getData('status')"}
-                        {case value="0"}
-                        待付款
-                        {/case}
-                        {case value="1"}
-                        待捡货
-                        {/case}
-                        {case value="2"}
-                        待发货
-                        {/case}
-                        {case value="3"}
-                        配送中
-                        {/case}
-                        {case value="4"}
-                        货到付款
-                        {/case}
-                        {default /}
-                        {/switch}
-                    </th>
-                    <th rowspan="3">
-                        <div style="width: 100px"></div>
-                    </th>
-                    <th rowspan="3">
-                        {switch name="$order->getData('status')"}
-                        {case value="0"}
-                        去付款
-                        {/case}
-                        {case value="4"}{/case}
-                        {default /}
-                        <a href="#" onclick=confirmReceipt("{$order['id']}")>确认收货</a>
-                        {/switch}
-                    </th>
-                </tr>
-                <tr>
-                    <td>规格：{$order['orderSpecifications'][0]['specification']['content']}</td>
-                </tr>
-                <tr>
-                    <td>下单时间：{:date('Y-m-d H:i:s',$order['order_time'])}</td>
-                </tr>
-            </table>
-            <hr/>
-            {/volist}
-        </div>
-        <!--第二层结束【我的订单】-->
-
-        <!--第三层开始【购物车】-->
-        <div id="box_cart_content" style="display: none;">
-            <span>我的购物车</span><br/>
-            <table class="table table-hover">
-                <thead>
-                <tr class="info">
-                    <th><label><input type="checkbox" id="all_check" onclick="allCheck()"/>全选</label></th>
-                    <th>店铺宝贝</th>
-                    <th>商品规格</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>小计</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!--item是购物车里的中间表-->
-                {volist name="cart['CartSpecifications']" id="item"}
-                <tr id="gouwuche_{$item['id']}">
-                    <td><input name="one_check" type="checkbox" onclick=checkDoing("{$item['id']}") /></td>
-                    <td>
-                        <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}"
-                             style="width: 50px; height: 50px">
-                        {$item['Specification']['commodity']['title']}
-                    </td>
-                    <td>{$item['Specification']['content']}</td>
-                    <td>{$item['Specification']['price']}</td>
-                    <td>
-                        <a href="#" onclick=minusCount("{$item['Specification']['price']}","{$item['id']}")>- </a>
-                        <span id="c_{$item['id']}">{$item['count']}</span>
-                        <a href="#"
-                           onclick=addCount("{$item['Specification']['price']}","{$item['id']}","{$item['Specification']['repertory']}")>
-                            +</a>
-                    </td>
-                    <td><span id="x_{$item['id']}" class="xiaoji">{$item['count']*$item['Specification']['price']}</span></td>
-                    <td><a href="#" onclick=deleteFromCart("{$item['id']}")><img
-                            src="__PUBLIC__/static/images/delete.png" width="20px;" height="20px"></a></td>
-                </tr>
-                {/volist}
-
-                </tbody>
-            </table>
-            <table style="float:right;">
-                <tr>
-                    <th colspan="1"></th>
-                    <th>合计：<span id="heji">00.00</span></th>
-                    <th><button style="background-color: #d33724;color: #fff" onclick="orderPost()">结算</button></th>
-                </tr>
-            </table>
-        </div>
-        <!--第三层结束【购物车】-->
+        <br/>
+        <div>{$userCollects->render()}</div>
     </div>
     <form action="{:url('home/user/placeOrder')}" method="post" id="CartSpecificationsPost">
         <input type="hidden" name="CartSpecificationsId" id="hi_checkId" value=""/>
@@ -372,7 +276,12 @@
                 success: function (msg) {
                     switch (msg) {
                         case "ReceiptSuccess":
-                            window.location = "{:url('home/user/orderDetailed?orderId=')}";
+                            var url = "{:url('home/user/orderDetailed?orderId=')}";
+                                var pot = url.indexOf(".");
+                                url = url.substring(0,pot);
+                                url = url+"?orderId="+orderId;
+//                                alert(url);
+                            window.location = url;
                             break;
                         case "PostError":
                             //非法请求
@@ -510,27 +419,6 @@
             },
         });
     }
-
-    //菜单切换
-    function changeMenu(type) {
-        switch (type) {
-            case "collect":
-                document.getElementById("box_cart_content").style.display = "none";//隐藏
-                document.getElementById("box_order_content").style.display = "none";//隐藏
-                document.getElementById("box_collects_content").style.display = "";//显
-                break;
-            case "order":
-                document.getElementById("box_cart_content").style.display = "none";//隐藏
-                document.getElementById("box_collects_content").style.display = "none";//隐藏
-                document.getElementById("box_order_content").style.display = "";//显
-                break;
-            case "cart":
-                document.getElementById("box_order_content").style.display = "none";//隐藏
-                document.getElementById("box_collects_content").style.display = "none";//隐藏
-                document.getElementById("box_cart_content").style.display = "";//显
-                break;
-        }
-    }
 </script>
 
 <!--购物车操作-->
@@ -661,17 +549,17 @@
         var hi_checkId = document.getElementById("hi_checkId");
 
         if (all_check.checked) {
-            hi_checkId.value="";
+            hi_checkId.value = "";
             var checkId = "";
-            for (var i = 0 ;i < len ;i++){
-                checkId = checkId+xiaoji[i].id+";";
+            for (var i = 0; i < len; i++) {
+                checkId = checkId + xiaoji[i].id + ";";
             }
             hi_checkId.value = checkId;
 
             $("[name = one_check]:checkbox").attr("checked", true);
         } else {
             $("[name = one_check]:checkbox").attr("checked", false);
-            hi_checkId.value="";
+            hi_checkId.value = "";
         }
         var count = cartCount();
         var heji = document.getElementById("heji");
@@ -691,28 +579,28 @@
 //        return count;
         var count = 0;
         var hi_checkId = document.getElementById("hi_checkId");
-        if (hi_checkId.value!=""){
-            var str = hi_checkId.value.substring(0,hi_checkId.value.length-1);
+        if (hi_checkId.value != "") {
+            var str = hi_checkId.value.substring(0, hi_checkId.value.length - 1);
             var id_array = str.split(";");
             var len = id_array.length;
-            for (var i = 0;i < len;i++){
+            for (var i = 0; i < len; i++) {
                 var xiaoji = document.getElementById(id_array[i]);
-                count =count + parseFloat(xiaoji.innerText);
+                count = count + parseFloat(xiaoji.innerText);
             }
-        }else {
+        } else {
             count = 0.00;
         }
         return count;
     }
-    
+
     function checkDoing(id) {
         var hi_checkId = document.getElementById("hi_checkId");
-        var trueId = "x_"+id;
-        if (hi_checkId.value.indexOf(id)>0){
-            hi_checkId.value = hi_checkId.value.replace(trueId+";","");
+        var trueId = "x_" + id;
+        if (hi_checkId.value.indexOf(id) > 0) {
+            hi_checkId.value = hi_checkId.value.replace(trueId + ";", "");
 //            alert("包含："+hi_checkId.value);
-        }else {
-            hi_checkId.value = hi_checkId.value+trueId+";";
+        } else {
+            hi_checkId.value = hi_checkId.value + trueId + ";";
 //            alert("不包含："+hi_checkId.value);
         }
 //        alert("最终值："+hi_checkId.value);
@@ -721,12 +609,12 @@
         heji.innerHTML = "";
         heji.innerHTML = count;
     }
-    
+
     function orderPost() {
         var hi_checkId = document.getElementById("hi_checkId");
-        if (hi_checkId.value==""){
+        if (hi_checkId.value == "") {
             alert("请至少选中一件商品");
-        }else{
+        } else {
             document.getElementById("CartSpecificationsPost").submit();
         }
 

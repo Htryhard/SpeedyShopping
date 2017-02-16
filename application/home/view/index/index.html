@@ -91,6 +91,21 @@
         overflow: hidden;
     }
 
+    .s-bar {
+        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        color: #fff;
+        background: #a0cdeb;
+        border: #a0cdeb;
+        border-top: #e4eaee;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 11px 10px;
+        position: relative;
+        width: 90%;
+        height:40px;
+        left:5%;
+    }
+
 </style>
 <asidehome>
     <div style="margin-left: 40px">
@@ -99,6 +114,7 @@
 </asidehome>
 <section id="myhomem">
     <div id="con">
+        <div style="height: 70px;"></div>
 <div style="width:600px;margin:0 auto;text-align:center;">
     <form class="form-group" role="search" action="{:url('home/commodity/search')}" method="get">
         <div class="col-md-10">
@@ -195,10 +211,8 @@
 <div style="height: 650px;width: 50px;background-color: #FFFFFF"></div>
 {/switch}
 
-<div style="width: 100%;height:40px;" >
-    <span style="font-family: 华文楷体;font-size: 25px;
-    color: #9f191f;position: relative;margin-left: 80px;margin-top: 50px;padding: 5px">
-    {$item->getData('content')}</span>
+<div class="s-bar">
+    {$item->getData('content')}
 </div>
 {volist name="$item['commodities']" id="commodity" offset="0" length='10'}
 

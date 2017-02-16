@@ -13,7 +13,7 @@
     <div class="preview">
         <div id="vertical" class="bigImg">
 
-            <img src="{$images[0]}" width="400" height="400" alt="" id="midimg"/>
+            <img src="/SpeedyShopping/public//uploads/commodity_images/{$images[0]}" width="400" height="400" alt="" id="midimg"/>
             <div style="display:none;" id="winSelector"></div>
         </div>
 
@@ -23,9 +23,9 @@
                 <ul>
                     {volist name="images" id="item"}
                     {eq name="$key" value="0"}
-                    <li id="onlickImg"><img src="{$item}" width="68" height="68" alt=""/></li>
+                    <li id="onlickImg"><img src="/SpeedyShopping/public//uploads/commodity_images/{$item}" width="68" height="68" alt=""/></li>
                     {else/}
-                    <li><img src="{$item}" width="68" height="68" alt=""/></li>
+                    <li><img src="/SpeedyShopping/public//uploads/commodity_images/{$item}" width="68" height="68" alt=""/></li>
                     {/eq}
                     {/volist}
                 </ul>
@@ -110,11 +110,11 @@
 
     <a href="#">
 
-        <section class="bordera" onmouseover="over_id('0');" onmouseout="out_id('0');">
+        <label class="bordera" onmouseover="over_id('0');" onmouseout="out_id('0');">
             <img class="img_xing" id="b0" src="/SpeedyShopping/public/wei/images/baixing.png"
                  style="width: 20px;height: 20px;">
             <button class="btn_guanzhu">关注</button>
-        </section>
+        </label><br/>
 
     </a>
 
