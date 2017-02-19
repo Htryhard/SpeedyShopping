@@ -22,7 +22,7 @@ class ThingController extends Controller
 {
 
     public function showIP(){
-        $counts = Count::all();
+        $counts = Count::where("id",">",0)->paginate(15);
         $this->assign("counts",$counts);
         return $this->fetch();
     }

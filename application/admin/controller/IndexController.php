@@ -17,6 +17,9 @@ class IndexController extends BaseController
 
     public function test()
     {
+        $user = Comm::getUserByEmail("admin@qq.com");
+
+
         echo "陈炳坤提交的";
     }
 

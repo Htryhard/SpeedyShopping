@@ -18,6 +18,15 @@ use think\Request;
 
 class UserController extends Controller
 {
+    public function logOut(){
+        if (User::isLogin("admin")){
+//            $user = User::getUserBySession("admin");
+            User::logOut("admin");
+            $this->redirect("admin/user/login");
+        }else{
+            return $this->error("用户未登录！");
+        }
+    }
     public function index(){
         // 获取查询信息
         $email = input('get.email');

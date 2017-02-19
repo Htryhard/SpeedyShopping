@@ -635,13 +635,15 @@
                 }
                 break;
             case "password":
-                var input_password = document.getElementById("input_password");
-                if (input_password.value != "") {
-                    postType = "password";
-                    postValue = input_password.value;
-                } else {
-                    alert("您还没有输入新密码哦");
-                }
+//                var input_password = document.getElementById("input_password");
+//                if (input_password.value != "") {
+//                    postType = "password";
+//                    postValue = input_password.value;
+//                } else {
+//                    alert("您还没有输入新密码哦");
+//                }
+                    alert("暂时允许修改密码！");
+                    return;
                 break;
             case "name":
                 var input_name = document.getElementById("input_name");

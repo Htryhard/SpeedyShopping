@@ -26,13 +26,6 @@ class CommodityController extends BaseController
      */
     public function index()
     {
-        //记录访问IP
-        $requestIP =Comm::getClientIP();
-        $requestDate = time();
-        $count = new Count();
-        $count->ipcontent = $requestIP;
-        $count->time = $requestDate;
-        $count->save();
 
 // 获取查询信息
         $title = input('get.title');

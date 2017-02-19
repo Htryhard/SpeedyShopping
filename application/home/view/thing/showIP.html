@@ -12,6 +12,8 @@
     <thead>
     <tr>
         <th>序号</th>
+        <th>姓名</th>
+        <th>访问模块</th>
         <th>IP</th>
         <th>访问时间</th>
     </tr>
@@ -19,12 +21,15 @@
     <tbody>
     {volist name="counts" id="item" key="key"}
     <tr>
-        <td>{$key}</td>
+        <td>{$item['id']}</td>
+        <td>{$item['user']}</td>
+        <td>{$item['modle']}</td>
         <td>{$item['ipcontent']}</td>
         <td>{:date('Y年m月d日 H:i:s',$item->getData('time'))}</td>
     </tr>
     {/volist}
     </tbody>
 </table>
+{$counts->render()}
 </body>
 </html>
