@@ -25,7 +25,7 @@ class TypeController extends BaseController
     public function index()
     {
         $types = Type::all();
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("admin");
         $this->assign("user",$user);
         $this->assign("types", $types);
         return $this->fetch();

@@ -4,6 +4,7 @@
     {load href="__PUBLIC__/login/login.css" /}
     {load href="__PUBLIC__/homestatic/css/myhome.css" /}
     {load href="__PUBLIC__/homestatic/js/dizhi.js" /}
+    {load href="__PUBLIC__/static/js/area.js" /}
 </block>
 <style>
     .div1 {
@@ -117,7 +118,7 @@
         left: 300px;
         top: 30px;
         right: 0px;
-        bottom: 50px;
+        bottom: 0px;
         overflow: hidden;
     }
 
@@ -197,7 +198,8 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="email">邮箱</label>
                             <div class="col-sm-6">
-                                <p class="col-sm-12 control-label" id="email">{$user->getData('email')}
+                                <p class="col-sm-12 control-label" id="email" onblur="alert('hhhhh')">
+                                    {$user->getData('email')}
                                 </p>
                             </div>
                             <div class="col-md-6" id="email_error"></div>
@@ -208,13 +210,24 @@
                             <div class="col-sm-6">
                                 <p class="col-sm-12 control-label">
                                     {eq name="$user->getData('nick_name')" value=""}
-                                    未设置
+                                    <span id="sp_nick_name">未设置</span>
                                     {else/}
-                                    $user->getData('nick_name')
+                                    <span id="sp_nick_name">{$user->getData('nick_name')}</span>
                                     {/eq}
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
+                                    <input type="text" id="input_nick_name" placeholder="请输入昵称"
+                                           style="display: none">
+                                    <a href="#"><span id="sp_re_nick_name" onclick="editMessage('nick_name')"
+                                                      class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="#"><span id="sp_post_nick_name" onclick="toPostMessage('nick_name')"
+                                                      class="glyphicon glyphicon-ok" style="display: none"></span></a>
+                                    <a href="#"><span id="sp_remove_nick_name" onclick="
+                                                   document.getElementById('sp_remove_nick_name').style.display='none';
+                                                   document.getElementById('input_nick_name').style.display='none';
+                                                   document.getElementById('sp_nick_name').style.display='inline';
+                                                   document.getElementById('sp_re_nick_name').style.display='inline';
+                                                   document.getElementById('sp_post_nick_name').style.display='none';"
+                                                      class="glyphicon glyphicon-remove"
+                                                      style="display: none"></span></a>
                                 </p>
                                 <input type="text" class="form-control" id="nick_name" name="nick_name"
                                        placeholder="请输入昵称" style="display: none">
@@ -225,10 +238,22 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="password">密码</label>
                             <div class="col-sm-6">
-                                <p class="col-sm-12 control-label">修改密码
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
+                                <p class="col-sm-12 control-label">
+                                    <span id="sp_password">修改密码</span>
+                                    <input type="text" id="input_password" placeholder="请输入新密码"
+                                           style="display: none">
+                                    <a href="#"><span id="sp_re_password" onclick="editMessage('password')"
+                                                      class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="#"><span id="sp_post_password" onclick="toPostMessage('password')"
+                                                      class="glyphicon glyphicon-ok" style="display: none"></span></a>
+                                    <a href="#"><span id="sp_remove_password" onclick="
+                                                   document.getElementById('sp_remove_password').style.display='none';
+                                                   document.getElementById('input_password').style.display='none';
+                                                   document.getElementById('sp_password').style.display='inline';
+                                                   document.getElementById('sp_re_password').style.display='inline';
+                                                   document.getElementById('sp_post_password').style.display='none';"
+                                                      class="glyphicon glyphicon-remove"
+                                                      style="display: none"></span></a>
                                 </p>
                                 <input type="password" class="form-control" id="password" name="password"
                                        placeholder="请输入密码" style="display: none">
@@ -239,10 +264,22 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="name">用户名</label>
                             <div class="col-sm-6">
-                                <p class="col-sm-12 control-label">{$user->getData('user_name')}
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
+                                <p class="col-sm-12 control-label">
+                                    <span id="sp_name">{$user->getData('user_name')}</span>
+                                    <input type="text" id="input_name" placeholder="请输入新用户名"
+                                           style="display: none">
+                                    <a href="#"><span id="sp_re_name" onclick="editMessage('name')"
+                                                      class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="#"><span id="sp_post_name" onclick="toPostMessage('name')"
+                                                      class="glyphicon glyphicon-ok" style="display: none"></span></a>
+                                    <a href="#"><span id="sp_remove_name" onclick="
+                                                   document.getElementById('sp_remove_name').style.display='none';
+                                                   document.getElementById('input_name').style.display='none';
+                                                   document.getElementById('sp_name').style.display='inline';
+                                                   document.getElementById('sp_re_name').style.display='inline';
+                                                   document.getElementById('sp_post_name').style.display='none';"
+                                                      class="glyphicon glyphicon-remove"
+                                                      style="display: none"></span></a>
                                 </p>
                                 <input type="text" class="form-control" id="name" name="name"
                                        placeholder="请输入用户名" style="display: none">
@@ -253,10 +290,22 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="phone">联系方式</label>
                             <div class="col-sm-6">
-                                <p class="col-sm-12 control-label">{$user->getData('phone')}
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
+                                <p class="col-sm-12 control-label">
+                                    <span id="sp_phone"> {$user->getData('phone')}</span>
+                                    <input type="text" id="input_phone" placeholder="请输入新用户名"
+                                           style="display: none">
+                                    <a href="#"><span id="sp_re_phone" onclick="editMessage('phone')"
+                                                      class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="#"><span id="sp_post_phone" onclick="toPostMessage('phone')"
+                                                      class="glyphicon glyphicon-ok" style="display: none"></span></a>
+                                    <a href="#"><span id="sp_remove_phone" onclick="
+                                                   document.getElementById('sp_remove_phone').style.display='none';
+                                                   document.getElementById('input_phone').style.display='none';
+                                                   document.getElementById('sp_phone').style.display='inline';
+                                                   document.getElementById('sp_re_phone').style.display='inline';
+                                                   document.getElementById('sp_post_phone').style.display='none';"
+                                                      class="glyphicon glyphicon-remove"
+                                                      style="display: none"></span></a>
                                 </p>
                                 <input type="text" class="form-control" id="phone" name="phone"
                                        placeholder="请输入联系方式" style="display: none">
@@ -268,13 +317,24 @@
                             <div class="col-sm-6">
                                 <p class="col-sm-50 control-label">
                                     {eq name="$user->getData('sbasb')" value=""}
-                                    这家伙很懒，神马都没留下。
+                                    <span id="sp_sbasb">这家伙很懒，神马都没留下。</span>
                                     {else/}
-                                    $user->getData('sbasb')
+                                    <span id="sp_sbasb">{$user->getData('sbasb')}</span>
                                     {/eq}
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
+                                    <input type="text" id="input_sbasb" placeholder="请输入个性签名"
+                                           style="display: none">
+                                    <a href="#"><span id="sp_re_sbasb" onclick="editMessage('sbasb')"
+                                                      class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="#"><span id="sp_post_sbasb" onclick="toPostMessage('sbasb')"
+                                                      class="glyphicon glyphicon-ok" style="display: none"></span></a>
+                                    <a href="#"><span id="sp_remove_sbasb" onclick="
+                                                   document.getElementById('sp_remove_sbasb').style.display='none';
+                                                   document.getElementById('input_sbasb').style.display='none';
+                                                   document.getElementById('sp_sbasb').style.display='inline';
+                                                   document.getElementById('sp_re_sbasb').style.display='inline';
+                                                   document.getElementById('sp_post_sbasb').style.display='none';"
+                                                      class="glyphicon glyphicon-remove"
+                                                      style="display: none"></span></a>
                                 </p>
                                 <input type="text" class="form-control" id="sbasb" name="sbasb"
                                        placeholder="请输入个性签名" style="display: none">
@@ -292,7 +352,7 @@
         </div>
 
         <div style="position:relative;right: 5px;width:88%">
-            <table class="table table-hover">
+            <table class="table table-hover" id="table_address">
                 <thead>
                 <tr>
                     <th>序号</th>
@@ -305,17 +365,21 @@
                 <tbody>
                 {volist name="$user['address']" id="address"}
                 <tr>
-                    <td>{$key}</td>
+                    <td>{$key+1}</td>
                     <td>{$address['user_name']}</td>
-                    <td id="td_con_address_{$address['id']}" ondblclick=editAddress("{$address['id']}")>
-                        {$address['content']}
-                        <div id="box_dizhi_{$address['id']}">
+                    <td>
+                        <span id="td_con_address_{$address['id']}" ondblclick=editAddress("{$address['id']}")>{$address['content']}</span>
+                        <div id="box_dizhi_{$address['id']}" style="display: none">
                             <select name="province" id="selProvince"
                                     onchange="getCity(this.options[this.selectedIndex].value)"
                                     class="userData">
                             </select>
                             <select name="city" id="selCity">
                             </select>
+                            <input type="text" name="xiangxi" placeholder="详细地址">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </a>
                         </div>
                     </td>
                     <td>{$address['phone']}</td>
@@ -324,11 +388,93 @@
                 {/volist}
                 </tbody>
             </table>
+            <table class="table table-hover" id="newAddress" style="display: none">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="text" id="addressName" placeholder="请输入姓名"></td>
+                    <td>
+                        <div class="info">
+                            <div>
+                                <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
+                                <select id="s_city" name="s_city"></select>&nbsp;&nbsp;
+                                <select id="s_county" name="s_county"></select>
+                            </div>
+                            <div id="show"></div>
+                        </div>
+                        <input type="text" id="new_xiangxi" placeholder="详细地址">
+                    </td>
+                    <td><input type="text" id="new_phone" placeholder="请输入联系方式"></td>
+                    <td>
+                        <a href="#" onclick="toNewAddress()"><span class="glyphicon glyphicon-ok"></span></a>
+                        <a href="#" onclick="document.getElementById('newAddress').style.display='none';"><span
+                                class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </table>
         </div>
-
+        <div>
+            <button type="button" class="btn btn-info"
+                    onclick="document.getElementById('newAddress').style.display='inline';">添加新地址
+            </button>
+        </div>
     </div>
 </div>
 
+<script type="text/javascript">
+    var Gid = document.getElementById;
+    var showArea = function () {
+        Gid('show').innerHTML = "<h3>" + Gid('s_province').value + " - " +
+                Gid('s_city').value + " - " +
+                Gid('s_county').value + "</h3>"
+    }
+    Gid('s_county').setAttribute('onchange', 'showArea()');
+    function toNewAddress() {
+        var addressName = document.getElementById("addressName");
+        var addressNameStr = addressName.value;
+        var s_province = $('#s_province option:selected').val();//选中的值
+        var s_city = $('#s_city option:selected').val();
+        var s_county = $('#s_county option:selected').val();
+        var new_xiangxi = document.getElementById("new_xiangxi");
+        var new_xiangxiStr = new_xiangxi.value;
+        var addressContent = "地址：" + s_province + " " + s_city + " " + s_county + " " + new_xiangxiStr;
+        var new_phone = document.getElementById("new_phone");
+        var new_phoneStr = new_phone.value;
+        if (addressNameStr != "" && addressContent != "" && new_phoneStr != "") {
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/user/addAddress')}",
+                dataType: "json",
+                data: {
+                    addressNameStr: addressNameStr,
+                    addressContent: addressContent,
+                    new_phoneStr: new_phoneStr
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "ReceiptSuccess":
+                            document.location.reload();//当前页面
+                            break;
+                        case "PostError":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    alert(msg);
+                },
+            });
+        } else {
+            alert('地址未填写完整！');
+        }
+    }
+</script>
+<script type="text/javascript">_init_area();</script>
 <script type="text/javascript">
     window.onload = function () {
         var options =
@@ -348,37 +494,37 @@
             reader.readAsDataURL(this.files[0]);
             this.files = [];
         })
-        document.querySelector('#topost').addEventListener('click', function () {
+        document.querySelector('#btnCrop').addEventListener('click', function () {
             var img = cropper.getDataURL();
             $('#hidd').val(img);
+            var imgBase64 = $('#hidd').val();
             $.ajax({
                 type: "POST",
-                url: "{:url('home/thing/')}",
+                url: "{:url('home/user/editIcon')}",
                 dataType: "json",
                 data: {
-                    userdata: $('#formdata').serializeArray()
+                    imgBase64: imgBase64
                 },
                 success: function (msg) {
 //                    alert(msg);
                     switch (msg) {
-                        case 'repetition':
-                            getlayout("other_error", "此邮箱已经被注册！");
+                        case 'success':
+                            document.location.reload();//当前页面
+                            alert("头像修改成功！");
                             break;
-                        case 'passwordNoFit':
-                            getlayout("other_error", "两次密码不一致！");
+                        case 'UploadsError':
+                            alert("上传失败！");
                             break;
-                        case 'error_notAjax':
+                        case 'PostError':
                             alert("提交方式出错！");
                             break;
-                        case 'succeed':
-                            window.location = "{:url('home/index/index')}";
+                        case 'ParameterError':
+                            alert("请求参数不全！");
                             break;
                         default:
                             getlayout("other_error", msg);
 
                     }
-//                    var u = "{:url('admin/label/index')}";
-//                    window.location = u;
                 },
             });
         })
@@ -389,7 +535,7 @@
             cropper.zoomOut();
         })
     };
-    $(function(){
+    $(function () {
         initProvince();
     });
 
@@ -405,12 +551,172 @@
         );
     }
 
+    //双击编辑地址
     function editAddress(addressId) {
 //        document.getElementById("EleId").style.display="none";
 //        document.getElementById("EleId").style.display="inline";
         var td_con_address = document.getElementById("td_con_address_" + addressId);
         td_con_address.style.display = "none";
         document.getElementById("box_dizhi_" + addressId).style.display = "inline";
+    }
+    //编辑个人信息
+    function editMessage(type) {
+        switch (type) {
+            case "nick_name":
+                var sp_nick_name = document.getElementById("sp_nick_name");
+                var input_nick_name = document.getElementById("input_nick_name");
+                var sp_re_nick_name = document.getElementById("sp_re_nick_name");
+                var sp_post_nick_name = document.getElementById("sp_post_nick_name");
+                document.getElementById('sp_remove_nick_name').style.display = 'inline';
+                sp_nick_name.style.display = "none";
+                input_nick_name.style.display = "inline";
+                sp_re_nick_name.style.display = "none";
+                sp_post_nick_name.style.display = "inline";
+                break;
+            case "password":
+                var sp_password = document.getElementById("sp_password");
+                var input_password = document.getElementById("input_password");
+                var sp_re_password = document.getElementById("sp_re_password");
+                var sp_post_password = document.getElementById("sp_post_password");
+                document.getElementById('sp_remove_password').style.display = 'inline';
+                sp_password.style.display = "none";
+                input_password.style.display = "inline";
+                sp_re_password.style.display = "none";
+                sp_post_password.style.display = "inline";
+                break;
+            case "name":
+                var sp_name = document.getElementById("sp_name");
+                var input_name = document.getElementById("input_name");
+                var sp_re_name = document.getElementById("sp_re_name");
+                var sp_post_name = document.getElementById("sp_post_name");
+                document.getElementById('sp_remove_name').style.display = 'inline';
+                sp_name.style.display = "none";
+                input_name.style.display = "inline";
+                sp_re_name.style.display = "none";
+                sp_post_name.style.display = "inline";
+                break;
+            case "phone":
+                var sp_phone = document.getElementById("sp_phone");
+                var input_phone = document.getElementById("input_phone");
+                var sp_re_phone = document.getElementById("sp_re_phone");
+                var sp_post_phone = document.getElementById("sp_post_phone");
+                document.getElementById('sp_remove_phone').style.display = 'inline';
+                sp_phone.style.display = "none";
+                input_phone.style.display = "inline";
+                sp_re_phone.style.display = "none";
+                sp_post_phone.style.display = "inline";
+                break;
+            case "sbasb":
+                var sp_sbasb = document.getElementById("sp_sbasb");
+                var input_sbasb = document.getElementById("input_sbasb");
+                var sp_re_sbasb = document.getElementById("sp_re_sbasb");
+                var sp_post_sbasb = document.getElementById("sp_post_sbasb");
+                document.getElementById('sp_remove_sbasb').style.display = 'inline';
+                sp_sbasb.style.display = "none";
+                input_sbasb.style.display = "inline";
+                sp_re_sbasb.style.display = "none";
+                sp_post_sbasb.style.display = "inline";
+                break;
+            default:
+                break;
+        }
+    }
+    function toPostMessage(type) {
+        var postType = "";
+        var postValue = "";
+        switch (type) {
+            case "nick_name":
+                var input_nick_name = document.getElementById("input_nick_name");
+                if (input_nick_name.value != "") {
+                    postType = "nick_name";
+                    postValue = input_nick_name.value;
+                } else {
+                    alert("您还没有输入任何昵称哦");
+                }
+                break;
+            case "password":
+                var input_password = document.getElementById("input_password");
+                if (input_password.value != "") {
+                    postType = "password";
+                    postValue = input_password.value;
+                } else {
+                    alert("您还没有输入新密码哦");
+                }
+                break;
+            case "name":
+                var input_name = document.getElementById("input_name");
+                if (input_name.value != "") {
+                    postType = "user_name";
+                    postValue = input_name.value;
+                } else {
+                    alert("您还没有输入新用户名哦");
+                }
+                break;
+            case "phone":
+                var input_phone = document.getElementById("input_phone");
+                if (input_phone.value != "") {
+                    postType = "phone";
+                    postValue = input_phone.value;
+                } else {
+                    alert("您还没有输入新联系方式哦");
+                }
+                break;
+            case "sbasb":
+                var input_sbasb = document.getElementById("input_sbasb");
+                if (input_sbasb.value != "") {
+                    postType = "sbasb";
+                    postValue = input_sbasb.value;
+                } else {
+                    alert("您还没有输入任何文字哦");
+                }
+                break;
+            default:
+                break;
+        }
+        $.ajax({
+            type: "POST",
+            url: "{:url('home/user/editMessage')}",
+            dataType: "json",
+            data: {
+                postType: postType,
+                postValue: postValue
+            },
+            success: function (msg) {
+                switch (msg) {
+                    case "success":
+                        var sp_success = document.getElementById("sp_" + type);
+                        sp_success.style.display = "inline";
+                        sp_success.innerText = "";
+                        sp_success.innerText = postValue;
+//                        document.getElementById("sp_nick_name");
+                        document.getElementById("input_" + type).style.display = "none";
+                        document.getElementById("sp_re_" + type).style.display = "inline";
+                        document.getElementById("sp_post_" + type).style.display = "none";
+                        document.getElementById('sp_remove_' + type).style.display = 'none';
+//                        alert("更新成功！");
+                        break;
+                    case "false":
+                        //数据更新失败
+                        alert("数据更新失败！");
+                        break;
+                    case "PostError":
+                        //非法请求
+                        alert("非法请求");
+                        break;
+                    case "ParameterError":
+                        //参数错误
+                        alert("参数错误！");
+                        break;
+                    default:
+                }
+            },
+            error: function (msg) {
+                alert(msg);
+            },
+        });
+    }
+    function addNewAddress() {
+
     }
 </script>
 

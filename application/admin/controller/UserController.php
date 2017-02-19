@@ -34,7 +34,7 @@ class UserController extends Controller
         } else {
             $users = $user->paginate($pageSize);
         }
-        $this->assign("user",User::getUserBySession());
+        $this->assign("user",User::getUserBySession("admin"));
         $this->assign("users",$users);
         return $this->fetch();
     }
@@ -49,7 +49,7 @@ class UserController extends Controller
         // 接收post信息
         $data = Request::instance()->post();
         // 直接调用M层方法，进行登录。
-        if (User::login($data['email'], $data['password'])) {
+        if (User::login($data['email'], $data['password'],"admin")) {
             return json("succeed");
         } else {
             return json('TheUserNameOrPasswordError');
@@ -106,7 +106,7 @@ class UserController extends Controller
             // 临时关闭布局
             $this->view->engine->layout(false);
             //只有管理员才能添加管理员，所以，必须传一个管理员过去
-            $this->assign("user",User::getUserBySession());
+            $this->assign("user",User::getUserBySession("admin"));
             return $this->fetch();
         }
     }

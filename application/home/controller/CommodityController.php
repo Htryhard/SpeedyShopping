@@ -20,7 +20,7 @@ class CommodityController extends Controller
 
     public function search()
     {
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("home");
         $userCollects = array();
         if ($user!=null){
             $userCollects = Collect::all(['user_id'=>$user->getData('id')]);
@@ -68,7 +68,7 @@ class CommodityController extends Controller
                 }
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-                $user = User::getUserBySession();
+                $user = User::getUserBySession("home");
                 $this->assign("user",$user);
                 $this->assign("commodity",$commodity);
                 $this->assign("parameters",$commodityParameters);

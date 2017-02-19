@@ -101,7 +101,7 @@ return [
     // 域名根，如thinkphp.cn
     'url_domain_root'        => '',
     // 是否自动转换URL中的控制器和操作名
-    'url_convert'            => true,
+    'url_convert'            => false,
     // 默认的访问控制器层
     'url_controller_layer'   => 'controller',
     // 表单请求类型伪装变量
@@ -213,11 +213,13 @@ return [
         // SESSION_ID的提交变量,解决flash上传跨域
         'var_session_id' => '',
         // SESSION 前缀
-        'prefix'         => 'think',
+        'prefix'         => 'module',
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
         // 是否自动开启 SESSION
         'auto_start'     => true,
+        //过期时间
+        'expire' =>600,
     ],
 
     // +----------------------------------------------------------------------

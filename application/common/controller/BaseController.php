@@ -21,10 +21,18 @@ class BaseController extends Controller
         parent::__construct();
         $this->request = $request;
 
+        $modle = $request->module();
+        $modle = strtolower($modle);
         // 验证用户是否登陆
         if (!$this->request->isAjax()){
-            if (!User::isLogin()) {
-                $this->redirect(url('home/user/login'));
+            if (!User::isLogin($modle)) {
+                if ($modle=="admin"){
+                    $this->redirect(url('admin/user/login'));
+                }elseif($modle=="home"){
+                    $this->redirect(url('home/thing/login'));
+                }else{
+                    return $this->error("请求的页面不存在！");
+                }
             }
         }
     }

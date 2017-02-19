@@ -24,7 +24,7 @@ class IndexController extends  Controller
 
 
 //        $this->assign("commodities",);
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("home");
         $userCollects = array();
         if ($user!=null){
             $userCollects = Collect::all(['user_id'=>$user->getData('id')]);

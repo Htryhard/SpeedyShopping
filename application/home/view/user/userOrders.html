@@ -157,6 +157,13 @@
         position: relative;
         width: 85%;
     }
+    .text-mod{
+        font-family: sans-serif;
+        color: #333;
+        text-decoration: none;
+        line-height: 1;
+        font-size: 15px;
+    }
 </style>
 <asidehome>
     <div class="left">
@@ -217,22 +224,21 @@
             <div class="s-bar">我的订单</div>
             <div style="height: 10px"></div>
             {volist name="orders" id="order"}
-
             <table width="85%" border="1" cellpadding="0" cellspacing="0" style="table-layout:fixed">
                 <tr>
-                    <th rowspan="3">
+                    <td rowspan="3">
                         <img src="{$imgRoot}{$order['orderSpecifications'][0]['specification']['commodity']['images'][0]['image']}"
                              style="height: 90px;width: 80px;"/>
-                    </th>
+                    </td>
                     <td style="text-overflow: ellipsis;overflow:hidden;width: 40%;">
                         <a href="{:url('home/user/orderDetailed',['orderId'=>$order['id']])}" style="color: black;font-family: 微软雅黑">
                             {$order['orderSpecifications'][0]['specification']['commodity']['title']}
                         </a>
                     </td>
-                    <th rowspan="3">
+                    <td rowspan="3">
                         <div style="width: 100px"></div>
-                    </th>
-                    <th rowspan="3">
+                    </td>
+                    <td rowspan="3">
                         {switch name="$order->getData('status')"}
                         {case value="0"}
                         <span class="label label-danger">待付款</span>
@@ -249,26 +255,45 @@
                         {case value="4"}
                         <span class="label label-info">货到付款</span>
                         {/case}
-                        {default /}
+                        {case value="5"}
                         <span class="label label-success">交易完成</span>
+                        {/case}
+                        {case value="7"}
+                        <span class="label label-info">交易关闭</span>
+                        {/case}
+                        {default /}
+
                         {/switch}
-                    </th>
-                    <th rowspan="3">
+                    </td>
+                    <td rowspan="3">
                         <div style="width: 100px"></div>
-                    </th>
-                    <th rowspan="3">
+                    </td>
+                    <td rowspan="3">
                         {switch name="$order->getData('status')"}
                         {case value="0"}
-                        <a type="button" class="btn btn-info" href="{:url('home/user/doPay',['orderId'=>$order->getData('id')])}">去付款</a>
+                        <a href="{:url('home/user/doPay',['orderId'=>$order->getData('id')])}" class="text-mod">去付款</a>
+                        <br/>
+                        <a href="#" class="text-mod" onclick=deleteOrder("cancel","{$order['id']}")>取消订单</a>
                         {/case}
-                        case value="1"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
-                        case value="2"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
-                        case value="3"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
+                        {case value="1"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
+                        {case value="2"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
+                        {case value="3"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
                         {case value="4"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
+                        {case value="5"}
+                        <a href="#" class="text-mod">去评价</a>
+                        <br/>
+                        <a href="#" class="text-mod">退换货</a>
+                        <br/>
+                        <a class="text-mod" href="#" onclick=deleteOrder("delete","{$order['id']}")>删除订单</a>
+                        {/case}
+                        {case value="7"}
+                        <a href="{:url('home/user/orderDetailed',['orderId'=>$order['id']])}" class="text-mod">订单详情</a>
+                        <br/>
+                        <a class="text-mod" href="#" onclick=deleteOrder("delete","{$order['id']}")>删除订单</a>
+                        {/case}
                         {default /}
-                        <button type="button" class="btn btn-default">退换货</button>
                         {/switch}
-                    </th>
+                    </td>
                 </tr>
                 <tr>
                     <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">规格：{$order['orderSpecifications'][0]['specification']['content']}</td>
@@ -327,6 +352,55 @@
                     alert(msg);
                 },
             });
+        }
+    }
+
+    function deleteOrder(type, orderId) {
+        if (type != "" && orderId != ""){
+            var t = "";
+            if (type=="delete"){
+                t="删除";
+            }else if (type=="cancel"){
+                t = "取消"
+            }
+            if (confirm("您确定要"+t+"此订单吗？")) {
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('home/user/deleteOrder')}",
+                    dataType: "json",
+                    data: {
+                        orderId: orderId,
+                        type:type
+                    },
+                    success: function (msg) {
+                        switch (msg) {
+                            case "success":
+                                document.location.reload();//当前页面
+                                break;
+                            case "PostError":
+                                //非法请求
+                                alert("非法请求");
+                                break;
+                            case "ParameterError":
+                                //参数错误
+                                alert("参数错误！");
+                                break;
+                            case "OrderNull":
+                                alert('这个订单从地球上消失了~~');
+                                break;
+                            case "TypeError":
+                                alert('类型错误！');
+                                break;
+                            default:
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    },
+                });
+            }
+        }else {
+            alert("参数错误！");
         }
     }
 </script>

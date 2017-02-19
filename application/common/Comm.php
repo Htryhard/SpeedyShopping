@@ -91,9 +91,9 @@ class Comm
      * 获取一个用户的base64头像
      * @return string
      */
-    public static function getUserIcon()
+    public static function getUserIcon($model)
     {
-        $user = User::getUserBySession();
+        $user = User::getUserBySession($model);
         $type = getimagesize(ROOT_PATH . $user->getData("icon"));//取得图片的大小，类型等
 //        dump($type);
         $fp = fopen(ROOT_PATH . $user->getData("icon"), "r") or die("Can't open file");
@@ -139,6 +139,9 @@ class Comm
      */
     public static function getUserByEmail($email)
     {
+        if ($email==""){
+            return null;
+        }
         $user = User::get(['email' => $email]);
         return $user;
     }

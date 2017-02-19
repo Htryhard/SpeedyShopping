@@ -49,7 +49,7 @@ class CommodityController extends BaseController
         } else {
             $commodities = $commodity->order('creation_time','desc')->paginate($pageSize);
         }
-        $this->assign("user",User::getUserBySession());
+        $this->assign("user",User::getUserBySession("admin"));
         $this->assign('commodities', $commodities);
         return $this->fetch();
     }
@@ -134,7 +134,7 @@ class CommodityController extends BaseController
             }
         } else {
             //渲染视图
-            $this->assign("user",User::getUserBySession());
+            $this->assign("user",User::getUserBySession("admin"));
             $this->assign("types", Type::all());
             return $this->fetch();
         }
@@ -187,7 +187,7 @@ class CommodityController extends BaseController
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-                $this->assign("user",User::getUserBySession());
+                $this->assign("user",User::getUserBySession("admin"));
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);
                 $this->assign("images", $commodityImages);
@@ -216,7 +216,7 @@ class CommodityController extends BaseController
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-                $this->assign("user",User::getUserBySession());
+                $this->assign("user",User::getUserBySession("admin"));
                 $this->assign("types", Type::all());
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);

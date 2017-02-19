@@ -25,35 +25,35 @@ use think\Request;
 class UserController extends BaseController
 {
 
-    //TODO:所有订单
+    //所有订单
     public function userOrders($type)
     {
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("home");
         $this->assign("user", $user);
 //        $orders = Order::all(["user_id"=>$user->getData('id')]);
 //        $type = input('get.type');
         $orders = null;
-        if ($type=="statu0"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>0])->paginate(6);
-        }elseif ($type=="statu1"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>1])->paginate(6);
-        }elseif ($type=="statu2"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>2])->paginate(6);
-        }elseif ($type=="statu3"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>3])->paginate(6);
-        }elseif ($type=="statu4"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>4])->paginate(6);
-        }elseif ($type=="statu5"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>5])->paginate(6);
-        }elseif ($type=="statu6"){
-            $orders = Order::where(['user_id'=>$user->getData('id'),'status'=>6])->paginate(6);
-        }else{
+        if ($type == "statu0") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 0])->order('order_time', 'desc')->paginate(6);
+        } elseif ($type == "statu1") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 1])->order('order_time', 'desc')->paginate(6);
+        } elseif ($type == "statu2") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 2])->order('order_time', 'desc')->paginate(6);
+        } elseif ($type == "statu3") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 3])->order('order_time', 'desc')->paginate(6);
+        } elseif ($type == "statu4") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 4])->order('order_time', 'desc')->paginate(6);
+        } elseif ($type == "statu5") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 5])->order('order_time', 'desc')->paginate(6);
+        } elseif ($type == "statu6") {
+            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 6])->order('order_time', 'desc')->paginate(6);
+        } else {
             //全部订单
-            $orders = Order::where("user_id", $user->getData('id'))->order('order_time','desc')->paginate(6);
+            $orders = Order::where("user_id", $user->getData('id'))->where("status","<>",8)->order('order_time', 'desc')->paginate(6);
         }
         $this->assign("orders", $orders);
 
-        $this->assign("status",$type);
+        $this->assign("status", $type);
         $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
         $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
@@ -86,13 +86,48 @@ class UserController extends BaseController
         $this->assign("order_4", $order_4);
         return $this->fetch();
     }
-    //TODO: ...
-    //TODO:用户的个人主页
+
+    //删除订单
+    public function deleteOrder()
+    {
+        if ($this->request->isAjax()) {
+            $orderId = $this->request->post("orderId");
+            $orderType = $this->request->post("type");
+            if ($orderId != "" && $orderType != "") {
+                $order = Order::get(["id"=>$orderId]);
+                if ($order != null){
+                    $statu = null;
+                    if ($orderType=="delete"){
+                        $statu = 8;
+                    }elseif ($orderType=="cancel"){
+                        $statu = 7;
+                    }else{
+                        //类型错误！
+                        return "TypeError";
+                    }
+                    $order->status = $statu;
+                    $order->save();
+                    return "success";
+                }else{
+                    //订单不存在
+                    return "OrderNull";
+                }
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            //请求方式错误
+            return "PostError";
+        }
+    }
+
+    //用户的个人主页
     public function userHome()
     {
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("home");
 //        $userCollects = Collect::all(["user_id" => $user->getData("id")]);
-        $userCollects = Collect::where(["user_id" => $user->getData("id")])->order("creation_time","desc")->paginate(10);
+        $userCollects = Collect::where(["user_id" => $user->getData("id")])->order("creation_time", "desc")->paginate(10);
         $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
         $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
@@ -131,17 +166,17 @@ class UserController extends BaseController
         return $this->fetch();
     }
 
-    //TODO:关注/取消关注商品
+    //关注/取消关注商品
     public function userCollect()
     {
         if ($this->request->isAjax()) {
-            if (User::isLogin()) {
+            if (User::isLogin("home")) {
                 $commodityId = $this->request->post("commodityId");
                 $commodity = Commodity::get(['id' => $commodityId]);
                 if ($commodity == null) {
                     return json("NotFindCommodity");//没有这件商品
                 }
-                $user = User::getUserBySession();
+                $user = User::getUserBySession("home");
                 $userCollect = Collect::get(['commodity_id' => $commodityId, 'user_id' => $user->getData('id')]);
                 if ($userCollect == null) {
                     //用户未收藏，此次操作是收藏
@@ -165,18 +200,18 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:加入购物车
+    //加入购物车
     public function addToCart()
     {
         if ($this->request->isAjax()) {
-            if (User::isLogin()) {
+            if (User::isLogin("home")) {
                 $commodityId = $this->request->post("commodityId");
                 $commodity = Commodity::get(['id' => $commodityId]);
                 if ($commodity == null) {
                     return json("NotFindCommodity");//没有这件商品
                 }
                 $specificationId = $this->request->post("specificationId");
-                $user = User::getUserBySession();
+                $user = User::getUserBySession("home");
                 $cart = Cart::get(['user_id' => $user->getData("id")]);
                 if ($specificationId == "") {
                     $specification = $commodity["specifications"];
@@ -225,10 +260,10 @@ class UserController extends BaseController
 
     }
 
-    //TODO:显示购物车
+    //显示购物车
     public function showCart()
     {
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("home");
         $cart = Cart::get(['user_id' => $user->getData("id")]);
         $this->assign("user", $user);
         $this->assign("cart", $cart);
@@ -265,7 +300,7 @@ class UserController extends BaseController
         return $this->fetch();
     }
 
-    //TODO:购物车内单件商品的数量加减
+    //购物车内单件商品的数量加减
     public function cartCommodityCount()
     {
         if ($this->request->isAjax()) {
@@ -304,7 +339,7 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:商品从购物车从移除
+    //商品从购物车从移除
     public function deleteCommodityFromCart()
     {
         if ($this->request->isAjax()) {
@@ -326,14 +361,29 @@ class UserController extends BaseController
      */
     public function addAddress()
     {
-        $user = User::getUserBySession();
-        $address = new Address();
-        $address->id = Comm::getNewGuid();
-        $address->phone = "077128384858";
-        $address->content = "广东广州天河区";
-        $address->user_name = "筑梦草根";
-        $address->user_id = $user['id'];
-        $address->save();
+        if ($this->request->isAjax()) {
+            $addressNameStr = $this->request->post("addressNameStr");
+            $addressContent = $this->request->post("addressContent");
+            $new_phoneStr = $this->request->post("new_phoneStr");
+            if ($new_phoneStr != "" && $addressContent != "" && $addressNameStr != "") {
+                $user = User::getUserBySession("home");
+                $address = new Address();
+                $address->id = Comm::getNewGuid();
+                $address->phone = $new_phoneStr;
+                $address->content = $addressContent;
+                $address->user_name = $addressNameStr;
+                $address->user_id = $user['id'];
+                $address->save();
+                return "ReceiptSuccess";
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            //请求方式错误
+            return "PostError";
+        }
+
     }
 
     /**
@@ -353,7 +403,7 @@ class UserController extends BaseController
                 $specification = Specification::get(['id' => $specificationId]);
                 if ($commodity != null && $specification != null) {
                     $this->assign("count", $count);
-                    $this->assign("user", User::getUserBySession());
+                    $this->assign("user", User::getUserBySession("home"));
                     $this->assign("commodity", $commodity);
                     $this->assign("specification", $specification);
                     return $this->fetch();
@@ -368,7 +418,7 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:处理下单(单个商品)
+    //处理下单(单个商品)
     public function buyOneHandle()
     {
         $count = Request::instance()->param("count");
@@ -385,7 +435,7 @@ class UserController extends BaseController
                     $order = new Order();
                     $order->id = Comm::getNewGuid();
                     $order->status = 0;
-                    $order->user_id = User::getUserBySession()['id'];
+                    $order->user_id = User::getUserBySession("home")['id'];
                     $order->address_id = $addressId;
                     $order->order_number = time();
                     $order->order_time = time();
@@ -413,7 +463,7 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:下单（多个商品的情况）
+    //下单（多个商品的情况）
     public function placeOrder()
     {
         $idStr = $this->request->post("CartSpecificationsId");
@@ -433,7 +483,7 @@ class UserController extends BaseController
                 }
             }
             if (count($CartSpecifications) != 0) {
-                $user = User::getUserBySession();
+                $user = User::getUserBySession("home");
                 $this->assign("user", $user);
                 $this->assign("CartSpecifications", $CartSpecifications);
                 $this->assign("cartspeId", $cartspeId);
@@ -446,10 +496,10 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:提交订单（多个商品情况下）
+    //提交订单（多个商品情况下）
     public function placeOrdersHandle()
     {
-        if (User::isLogin()) {
+        if (User::isLogin("home")) {
             //1购物车中间表的id（因为下单完成之后我们需要把它删除了）
             //1）数量
             //3）规格id
@@ -472,7 +522,7 @@ class UserController extends BaseController
                     $order = new Order();
                     $order->id = Comm::getNewGuid();
                     $order->status = 0;
-                    $order->user_id = User::getUserBySession()['id'];
+                    $order->user_id = User::getUserBySession("home")['id'];
                     $order->address_id = $addressId;
                     $order->order_number = time();
                     $order->order_time = time();
@@ -506,24 +556,24 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:用户个人资料
+    //用户个人资料
     public function userMessage()
     {
-        $user = User::getUserBySession();
+        $user = User::getUserBySession("home");
         $this->assign("user", $user);
         $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
         $this->assign("iconRoot", $iconRoot);
         return $this->fetch();
     }
 
-    //TODO:注销
+    //注销
     public function logOut()
     {
-        User::logOut();
+        User::logOut("home");
         $this->redirect(url('home/index/index'));
     }
 
-    //TODO:支付
+    //支付
     public function doPay($orderId)
     {
         if ($orderId != "") {
@@ -540,7 +590,7 @@ class UserController extends BaseController
 //                    return "AlreadyPaid";
 //                }
                 $this->assign("order", $order);
-                $this->assign("user", User::getUserBySession());
+                $this->assign("user", User::getUserBySession("home"));
                 return $this->fetch();
             } else {
                 //无法找到这个订单
@@ -554,26 +604,26 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:支付处理
+    //支付处理
     public function doPayHandle()
     {
         if ($this->request->isAjax()) {
             $password = $this->request->post("password");
             $orderId = $this->request->post("orderId");
             $order = Order::get(["id" => $orderId]);
-            $user = User::getUserBySession();
+            $user = User::getUserBySession("home");
             if ($user->getData("password") == User::encryptPassword($password)) {
                 if ($order != null) {
                     $flag = true;
                     foreach ($order['orderSpecifications'] as $item) {
                         $repertory = $item['specification']['repertory'];
-                        if ($item['count']>$repertory){
+                        if ($item['count'] > $repertory) {
                             $flag = false;
                             //库存不足
-                            return "UnderStock/【".$item['specification']['commodity']['title']."】库存不足，当前仅有 ".$repertory." 件";
+                            return "UnderStock/【" . $item['specification']['commodity']['title'] . "】库存不足，当前仅有 " . $repertory . " 件";
                         }
                     }
-                    if ($flag){
+                    if ($flag) {
                         foreach ($order['orderSpecifications'] as $item) {
                             $repertory = $item['specification']['repertory'];
                             $item['specification']['repertory'] = $repertory - $item['count'];
@@ -595,14 +645,14 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:订单详细
+    //订单详细
     public function orderDetailed($orderId)
     {
         if ($orderId != "") {
             $order = Order::get(['id' => $orderId]);
             if ($order != null) {
                 $this->assign("order", $order);
-                $this->assign("user", User::getUserBySession());
+                $this->assign("user", User::getUserBySession("home"));
                 return $this->fetch();
             } else {
                 //无法找到这个订单
@@ -616,39 +666,91 @@ class UserController extends BaseController
         }
     }
 
-    //TODO:确认收货
+    //确认收货
     public function confirmReceipt()
     {
-       if ($this->request->isAjax()){
-           $orderId = $this->request->post("orderId");
-           if ($orderId != "") {
-               $order = Order::get(['id' => $orderId]);
-               if ($order != null) {
-                   $order->status = 5;//交易完成
-                   $order->succeed_time = time();
-                   $order->save();
+        if ($this->request->isAjax()) {
+            $orderId = $this->request->post("orderId");
+            if ($orderId != "") {
+                $order = Order::get(['id' => $orderId]);
+                if ($order != null) {
+                    $order->status = 5;//交易完成
+                    $order->succeed_time = time();
+                    $order->save();
 
-                   foreach ($order["orderSpecifications"] as $item){
-                       $comm_count = $item['specification']['commodity']['staistics'];
-                       $item['specification']['commodity']->staistics = $comm_count+$item['count'];
-                       $item['specification']['commodity']->save();
-                   }
-                   //确认成功！
-                   return "ReceiptSuccess";
-               } else {
-                   //无法找到这个订单
-                return "OrderNull";
-               }
-           } else {
-               //参数不正确
-            return "ParameterError";
-           }
-       }else{
-           //请求方式错误
-           return "PostError";
-       }
+                    foreach ($order["orderSpecifications"] as $item) {
+                        $comm_count = $item['specification']['commodity']['staistics'];
+                        $item['specification']['commodity']->staistics = $comm_count + $item['count'];
+                        $item['specification']['commodity']->save();
+                    }
+                    //确认成功！
+                    return "ReceiptSuccess";
+                } else {
+                    //无法找到这个订单
+                    return "OrderNull";
+                }
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            //请求方式错误
+            return "PostError";
+        }
     }
 
+    //修改个人信息
+    public function editMessage()
+    {
+        if ($this->request->isAjax()) {
+            $postType = $this->request->post("postType");
+            $postValue = $this->request->post("postValue");
+            if ($postType != "" && $postValue != "") {
+                $user = User::getUserBySession("home");
+                $user->$postType = $postValue;
+                $result = $user->save();
+                if ($result !== false) {
+                    return 'success';
+                } else {
+                    return 'false';
+                }
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            //请求方式错误
+            return "PostError";
+        }
+    }
 
+    //修改头像
+    public function editIcon()
+    {
+        if ($this->request->isAjax()) {
+            $imgBase64 = $this->request->post("imgBase64");
+            if ($imgBase64 != "") {
+                $user = User::getUserBySession("home");
+                $userNewIconName = Comm::uploadsIcon($imgBase64);
+                if ($userNewIconName == false) {
+                    //上传失败
+                    return "UploadsError";
+                } else {
+                    $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "icon_images" . DS . $user->getData('icon');
+                    $user->icon = $userNewIconName;
+                    $user->save();
+                    //删除旧的头像
+                    unlink($oldUrl);
+                    return "success";
+                }
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            //请求方式错误
+            return "PostError";
+        }
+    }
 
 }

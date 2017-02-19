@@ -29,7 +29,7 @@ class ThingController extends Controller
 
     public function register()
     {
-        $this->assign("user",User::getUserBySession());
+        $this->assign("user",User::getUserBySession("home"));
         return $this->fetch();
     }
 
@@ -87,7 +87,7 @@ class ThingController extends Controller
 
     public function login()
     {
-        $this->assign("user",User::getUserBySession());
+        $this->assign("user",User::getUserBySession("home"));
         return $this->fetch();
     }
 
@@ -96,7 +96,7 @@ class ThingController extends Controller
         // 接收post信息
         $data = Request::instance()->post();
         // 直接调用M层方法，进行登录。
-        if (User::login($data['email'], $data['password'])) {
+        if (User::login($data['email'], $data['password'],"home")) {
             return json("succeed");
         } else {
             return json('TheUserNameOrPasswordError');
