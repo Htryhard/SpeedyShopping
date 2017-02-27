@@ -46,16 +46,8 @@
                         <td>地址:</td>
                         <td>
                             <div class="form-group ">
-                                <div class="info">
-                                    <div>
-                                        <select id="s_province" name="s_province"></select>&nbsp;&nbsp;
-                                        <select id="s_city" name="s_city"></select>&nbsp;&nbsp;
-                                        <select id="s_county" name="s_county"></select>
-                                    </div>
-                                    <div id="show"></div>
-                                </div>
-                                <div class="col-xs-3">
-                                    <input type="text" id="new_xiangxi" class="form-control" placeholder="详细地址">
+                                <div class="col-xs-5">
+                                    <input type="text" id="new_xiangxi" value="{$order['address']['content']}" class="form-control" placeholder="详细地址">
                                 </div>
                             </div>
                             <div class="col-xs-2">
@@ -83,7 +75,9 @@
                                 {volist name="$order['orderSpecifications']" id="item" key="key"}
                                 <tr>
                                     <td class="text-left">{$item['specification']['commodity']['title']}</td>
-                                    <td class="text-left">{$item['specification']['content']}</td>
+                                    <td class="text-left">
+                                        {$item['specification']['content']}
+                                    </td>
                                     <td class="text-left">{$item['specification']['price']}</td>
                                     <td class="text-left">
                                         <input name="spec[]" rel="77" value="77" type="hidden">

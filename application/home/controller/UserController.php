@@ -224,10 +224,10 @@ class UserController extends BaseController
                 }
                 //验证库存
                 if ($specification->getData("repertory") > 0) {
-
                     //验证是否有重复加入购物车的商品，有就在原来的基础上加一，没有就新建一条记录
                     $userSpecifications = $cart['CartSpecifications'];
                     $flag = false;
+
                     foreach ($userSpecifications as $item) {
                         if ($item['specification_id'] == $specification->getData('id')) {
                             $flag = true;
@@ -239,6 +239,7 @@ class UserController extends BaseController
                             $flag = false;
                         }
                     }
+
                     if (!$flag) {
                         $newSpecification = new CartSpecification();
                         $newSpecification->id = Comm::getNewGuid();

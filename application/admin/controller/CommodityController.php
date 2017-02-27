@@ -174,7 +174,7 @@ class CommodityController extends BaseController
                 $commodityImages = array();
                 $commodityImageObjects = $commodity['images'];
                 foreach ($commodityImageObjects as $imageObject) {
-                    $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
+                    $imgUrl = '/SpeedyShopping/public//uploads/commodity_images/' . $imageObject->getData("image");
                     array_push($commodityImages, $imgUrl);
                 }
 
@@ -203,7 +203,7 @@ class CommodityController extends BaseController
                 $commodityImages = array();
                 $commodityImageObjects = $commodity['images'];
                 foreach ($commodityImageObjects as $imageObject) {
-                    $imgUrl = '/speedyshopping/public//uploads/commodity_images/' . $imageObject->getData("image");
+                    $imgUrl = '/SpeedyShopping/public//uploads/commodity_images/' . $imageObject->getData("image");
                     array_push($commodityImages, $imgUrl);
                 }
 
