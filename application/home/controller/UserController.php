@@ -14,6 +14,8 @@ use app\common\model\Address;
 use app\common\model\Cart;
 use app\common\model\CartSpecification;
 use app\common\model\Collect;
+use app\common\model\Comment;
+use app\common\model\CommentImages;
 use app\common\model\Commodity;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
@@ -34,22 +36,22 @@ class UserController extends BaseController
 //        $type = input('get.type');
         $orders = null;
         if ($type == "statu0") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 0])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 0])->order('order_time', 'desc')->paginate(6);
         } elseif ($type == "statu1") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 1])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 1])->order('order_time', 'desc')->paginate(6);
         } elseif ($type == "statu2") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 2])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 2])->order('order_time', 'desc')->paginate(6);
         } elseif ($type == "statu3") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 3])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 3])->order('order_time', 'desc')->paginate(6);
         } elseif ($type == "statu4") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 4])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 4])->order('order_time', 'desc')->paginate(6);
         } elseif ($type == "statu5") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 5])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 5])->order('order_time', 'desc')->paginate(6);
         } elseif ($type == "statu6") {
-            $orders = Order::where("status","<>",8)->where(['user_id' => $user->getData('id'), 'status' => 6])->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 6])->order('order_time', 'desc')->paginate(6);
         } else {
             //全部订单
-            $orders = Order::where("user_id", $user->getData('id'))->where("status","<>",8)->order('order_time', 'desc')->paginate(6);
+            $orders = Order::where("user_id", $user->getData('id'))->where("status", "<>", 8)->order('order_time', 'desc')->paginate(6);
         }
         $this->assign("orders", $orders);
 
@@ -66,6 +68,7 @@ class UserController extends BaseController
         $order_2 = 0;//待发货
         $order_3 = 0;//配送中
         $order_4 = 0;//货到付款
+        $order_5 = 0;//交易已经完成（待评价）
         foreach ($user['orders'] as $order) {
             if ($order->getData('status') == 0) {
                 $order_0 = $order_0 + 1;
@@ -77,6 +80,8 @@ class UserController extends BaseController
                 $order_3 = $order_3 + 1;
             } elseif ($order->getData('status') == 4) {
                 $order_4 = $order_4 + 1;
+            } elseif ($order->getData('status') == 5) {
+                $order_5 = $order_5 + 1;
             }
         }
         $this->assign("order_0", $order_0);
@@ -84,6 +89,7 @@ class UserController extends BaseController
         $this->assign("order_2", $order_2);
         $this->assign("order_3", $order_3);
         $this->assign("order_4", $order_4);
+        $this->assign("order_5", $order_5);
         return $this->fetch();
     }
 
@@ -94,21 +100,21 @@ class UserController extends BaseController
             $orderId = $this->request->post("orderId");
             $orderType = $this->request->post("type");
             if ($orderId != "" && $orderType != "") {
-                $order = Order::get(["id"=>$orderId]);
-                if ($order != null){
+                $order = Order::get(["id" => $orderId]);
+                if ($order != null) {
                     $statu = null;
-                    if ($orderType=="delete"){
+                    if ($orderType == "delete") {
                         $statu = 8;
-                    }elseif ($orderType=="cancel"){
+                    } elseif ($orderType == "cancel") {
                         $statu = 7;
-                    }else{
+                    } else {
                         //类型错误！
                         return "TypeError";
                     }
                     $order->status = $statu;
                     $order->save();
                     return "success";
-                }else{
+                } else {
                     //订单不存在
                     return "OrderNull";
                 }
@@ -751,6 +757,83 @@ class UserController extends BaseController
         } else {
             //请求方式错误
             return "PostError";
+        }
+    }
+
+    //用户评论商品
+    public function comment($orderId)
+    {
+        if ($orderId != null) {
+            $order = Order::get(['id' => $orderId]);
+            if ($order == null) {
+                return $this->error('订单不存在！');
+            }
+            $user = User::getUserBySession("home");
+            $this->assign('order', $order);
+            $this->assign("user", $user);
+            return $this->fetch();
+        } else {
+            return $this->error("参数不全！");
+        }
+    }
+
+    /**
+     * 处理商品的评论
+     * @author 陈有欢
+     * @return \think\response\Json
+     */
+    public function commentHandle()
+    {
+        if ($this->request->isAjax()) {
+            $commentImgs = $this->request->post("commentImages");
+            $orderId = $this->request->post("orderId");
+            $specificationId = $this->request->post("specificationId");
+            $fenshu = $this->request->post("fenshu");
+            $commentContent = $this->request->post("content");
+            if ($orderId != "" && $specificationId != "" && $fenshu != "" && $commentContent != "") {
+                $user = User::getUserBySession("home");
+                $specification = Specification::get(['id' => $specificationId]);
+                if ($specification == null) {
+                    return json("SpecificationNull");
+                }
+                $commodityId = $specification['commodity']['id'];
+                //判断是否已经对这次购买的商品评论过
+                $comment = Comment::get(['order_id'=>$orderId,'user_id'=>$user->getData('id'),"specification_id"=>$specification->getData('id')]);
+                if ($comment!=null){
+                    return json("CommentRepeated");
+                }
+                $comment = new Comment();
+                $comment->id =Comm::getNewGuid();
+                $comment->content = $commentContent;
+                $comment->grade = $fenshu;
+                $comment->creation_time = time();
+                $comment->user_id = $user->getData("id");
+                $comment->commodity_id = $commodityId;
+                $comment->order_id = $orderId;
+                $comment->specification_id = $specification->getData('id');
+                $comment->status = 0;//0待审核，1通过并显示，2删除不显示
+                $comment->save();
+                if ($commentImgs != "") {
+                    //以约定的5个#号来分割
+                    $imgArray = explode("#####", $commentImgs);
+                    //分割会导致多出一个空元素，故移除最后一个空元素
+                    array_pop($imgArray);
+                    foreach ($imgArray as $item) {
+                        $commentImgPath = Comm::uploadsCommentImg($item, "uploads/comment_images/");
+                        $commentImageModle = new CommentImages();
+                        $commentImageModle->id =Comm::getNewGuid();
+                        $commentImageModle->image = $commentImgPath;
+                        $commentImageModle->comment_id = $comment->getData("id");
+                        $commentImageModle->save();
+                    }
+                }
+                return json("success");
+            } else {
+                //参数不正确
+                return json("ParameterError");
+            }
+        } else {
+            return json("PostError");
         }
     }
 

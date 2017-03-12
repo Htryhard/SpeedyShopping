@@ -13,9 +13,21 @@ use think\Model;
 
 class Comment extends Model
 {
-    public function commodity()
+    public function specification()
     {
-        return $this->belongsTo('commodity');
+        return $this->belongsTo('specification');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('user');
+    }
+
+//    public
+
+    public function commentImgs()
+    {
+        return $this->hasMany('CommentImages','comment_id','id');
     }
 
 }

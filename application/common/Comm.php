@@ -87,6 +87,39 @@ class Comm
 
     }
 
+
+    /**
+     * @author 陈有欢
+     * @param $base64Img
+     * @param $uppath 指定上传到的位置 例：uploads/icon_images/
+     * @return bool|string
+     */
+    public static function uploadsCommentImg($base64Img, $uppath)
+    {
+        //获取扩展名和文件名
+//        if (preg_match('/(?<=\/)[^\/]+(?=\;)/', $base64Img, $pregR))
+//            $streamFileType = '.' . $pregR[0];
+        $streamFileType = substr($base64Img,0,stripos($base64Img,";"));
+        $streamFileType = ".".substr($streamFileType,11);
+        //读取扩展名，如果于画板上来的，那一定是png，这句可以直接streamFileType 赋值png
+        //产生一个随机文件名（因为你base64上来肯定没有文件名，这里你可以自己设置一个也行）
+        $streamFileRand = date('YmdHis') . rand(1000, 9999);
+        $streamFilename = ROOT_PATH . "/public/" . $uppath . $streamFileRand . $streamFileType;
+        //存入数据库的位置
+        $path = $streamFileRand . $streamFileType;
+        //处理base64文本，用正则把第一个base64,之前的部分砍掉
+//        preg_match('/(?<=base64,)[\S|\s]+/', $base64Img, $streamForW);
+        $streamForW = substr($base64Img,stripos($base64Img,",")+1);
+        if (file_put_contents($streamFilename, base64_decode($streamForW)) === false) {
+//                //输出错误信息的
+//                Common::exitWithError("文件写入失败!","");
+            return false;
+        } else {
+            return $path;
+        }
+
+    }
+
     /**
      * 获取一个用户的base64头像
      * @return string
@@ -139,7 +172,7 @@ class Comm
      */
     public static function getUserByEmail($email)
     {
-        if ($email==""){
+        if ($email == "") {
             return null;
         }
         $user = User::get(['email' => $email]);
@@ -242,7 +275,8 @@ class Comm
      * @param $arr
      * @return array
      */
-    public static function getCommoditySpecificationsByForm($arr){
+    public static function getCommoditySpecificationsByForm($arr)
+    {
         $specificationContent = array();
         $specificationRepertory = array();
         $specificationPrice = array();
@@ -263,9 +297,9 @@ class Comm
         $specificationLen = count($specificationContent);
         for ($i = 0; $i < $specificationLen; $i++) {
             $cachearr = array();
-            array_push($cachearr,$specificationContent[$i]);
-            array_push($cachearr,$specificationRepertory[$i]);
-            array_push($cachearr,$specificationPrice[$i]);
+            array_push($cachearr, $specificationContent[$i]);
+            array_push($cachearr, $specificationRepertory[$i]);
+            array_push($cachearr, $specificationPrice[$i]);
             $specifications += [$i => $cachearr];
         }
         return $specifications;
@@ -283,7 +317,8 @@ class Comm
             foreach ($arr as $item) {
                 if ($item["name"] == "parameterValue" || $item["name"] == "parameterName"
                     || $item["name"] == "dirname" || $item["name"] == "specificationContent"
-                    || $item["name"] == "specificationRepertory" || $item["name"] == "specificationPrice") {
+                    || $item["name"] == "specificationRepertory" || $item["name"] == "specificationPrice"
+                ) {
                     continue;
                 }
                 $result += [$item['name'] => $item['value']];

@@ -2,17 +2,31 @@
 <block name="titel" xmlns="http://www.w3.org/1999/html"><title>确认订单!{$commodity->getData('title')}</title></block>
 <block name="resources"></block>
 <div>
-    <span>选择地址</span><br/>
+    <span>选择地址:</span><br/>
+
+    {php}
+    $address = count($user['address']);
+    {/php}
+
+    {switch name="address"}
+    {case value="0"}
+    <span>您还没有添加地址，快去<a href="{:url('home/user/userMessage')}">添加</a>一个吧！</span>
+    {/case}
+    {default /}
     {volist name="$user['address']" id="item"}
-    <input type="radio" name="addressId" id="rAddressId_{$item['id']}" value="{$item['id']}" onclick=changeAddress("{$item['id']}")>
+    <label>
+    <input type="radio" name="addressId" id="rAddressId_{$item['id']}" value="{$item['id']}"
+           onclick=changeAddress("{$item['id']}")>
     {$item['content']}({$item['user_name']} 收) {$item['phone']}
+    </label>
     <br/>
     {/volist}
+    {/switch}
 </div>
 
 <div style="width: 90%">
     <span>确认订单信息</span><br/>
-    <table class="table table-hover"  >
+    <table class="table table-hover">
         <thead>
         <tr class="info">
             <th>店铺宝贝</th>
@@ -25,7 +39,8 @@
         <tbody>
         <tr>
             <td>
-            <img src="__PUBLIC__/uploads/commodity_images/{$commodity['images'][0]['image']}" style="width: 50px; height: 50px">
+                <img src="__PUBLIC__/uploads/commodity_images/{$commodity['images'][0]['image']}"
+                     style="width: 50px; height: 50px">
                 {$commodity['title']}
             </td>
             <td>{$specification['content']}</td>
@@ -46,19 +61,19 @@
 </form>
 
 <script type="text/javascript">
-function postBuy() {
-    var hi_addressId = document.getElementById("addressId");
-    if (hi_addressId.value == ""){
-        alert("请选择地址！");
-    }else {
-        $("#post_bay").submit();
-    }
+    function postBuy() {
+        var hi_addressId = document.getElementById("addressId");
+        if (hi_addressId.value == "") {
+            alert("请选择地址！");
+        } else {
+            $("#post_bay").submit();
+        }
 
 //        $("#post_bay").submit();
-}
-function changeAddress(addressId) {
-    var id = document.getElementById("rAddressId_"+addressId).value;
-    document.getElementById("addressId").value = "";
-    document.getElementById("addressId").value = id;
-}
+    }
+    function changeAddress(addressId) {
+        var id = document.getElementById("rAddressId_" + addressId).value;
+        document.getElementById("addressId").value = "";
+        document.getElementById("addressId").value = id;
+    }
 </script>

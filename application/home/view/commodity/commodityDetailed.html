@@ -6,6 +6,10 @@
     {load href="__PUBLIC__/homestatic/css/spxiangxi.css" /}
     {load href="__PUBLIC__/homestatic/js/dizhi.js" /}
 
+    {load href="__PUBLIC__/static/css/jquery.lightbox.css" /}
+    {load href="__PUBLIC__/static/js/jquery.color.min.js" /}
+    {load href="__PUBLIC__/static/js/jquery.lightbox.min.js" /}
+
 </block>
 
 
@@ -13,7 +17,8 @@
     <div class="preview">
         <div id="vertical" class="bigImg">
 
-            <img src="/SpeedyShopping/public//uploads/commodity_images/{$images[0]}" width="400" height="400" alt="" id="midimg"/>
+            <img src="/SpeedyShopping/public//uploads/commodity_images/{$images[0]}" width="400" height="400" alt=""
+                 id="midimg"/>
             <div style="display:none;" id="winSelector"></div>
         </div>
 
@@ -23,9 +28,11 @@
                 <ul>
                     {volist name="images" id="item"}
                     {eq name="$key" value="0"}
-                    <li id="onlickImg"><img src="/SpeedyShopping/public//uploads/commodity_images/{$item}" width="68" height="68" alt=""/></li>
+                    <li id="onlickImg"><img src="/SpeedyShopping/public//uploads/commodity_images/{$item}" width="68"
+                                            height="68" alt=""/></li>
                     {else/}
-                    <li><img src="/SpeedyShopping/public//uploads/commodity_images/{$item}" width="68" height="68" alt=""/></li>
+                    <li><img src="/SpeedyShopping/public//uploads/commodity_images/{$item}" width="68" height="68"
+                             alt=""/></li>
                     {/eq}
                     {/volist}
                 </ul>
@@ -56,7 +63,10 @@
         font-weight: bold;
     }
 
-    input[type='radio']{display:inline-block; height:20px; }
+    input[type='radio'] {
+        display: inline-block;
+        height: 20px;
+    }
 
 </style>
 <section id="xxmain">
@@ -97,7 +107,7 @@
             {default /}
             <div id="{$vo['id']}">
                 <label onclick=showSpecification("{$vo['repertory']}","{$vo['price']}","{$vo['id']}")>
-                    <input name="Fruit" type="radio" value="" />{$vo['content']}</label>
+                    <input name="Fruit" type="radio" value=""/>{$vo['content']}</label>
             </div>
             {/switch}
 
@@ -132,7 +142,8 @@
     </div>
     <form id="post_bay" action="{:url('home/user/buyOne')}" method="post">
         <!--标记规格的ID-->
-        <input type="hidden" name="specificationId" id="specificationId" value="{$commodity['specifications'][0]['id']}">
+        <input type="hidden" name="specificationId" id="specificationId"
+               value="{$commodity['specifications'][0]['id']}">
         <input type="hidden" name="commodityId" value="{$commodity['id']}">
         <input type="hidden" name="count" id="count" value="">
     </form>
@@ -145,8 +156,44 @@
         <li id="li_comment" onclick="showContent('li_comment')"><a href="#">评价<i style="color: #d33724">({:count($commodity['comments'])})</i></a>
         </li>
     </ul>
-    <div id="ending">
+
+    <div id="box_describe">
         {$commodity->getData("describe")}
+    </div>
+
+    <div id="box_parameter" style="display: none">
+
+    </div>
+
+    <div id="box_comment" style="display: none">
+        {volist name="$commodity['comments']" id='comment' key='key'}
+        <table style="width: 90%">
+            <tr>
+                <td><img src="{$iconRoot.$comment['user']['icon']}" height="50" width="50" class="img-circle">
+                    {eq name="$comment['user']['nick_name']" value=""}
+                    匿名用户
+                    {else/}
+                    {$comment['user']['nick_name']}
+                    {/eq}
+                    <div style="float: right;padding:20px 0; ">{:date('Y年m月d日',$comment['creation_time'])}</div>
+                </td>
+            </tr>
+            <tr>
+                <td height="90">{$comment['content']}</td>
+            </tr>
+            <tr>
+                <td height="40" style="color: #9d9d9d">规格：{$comment['specification']['content']}</td>
+            </tr>
+            <tr>
+                <td>
+                {foreach name="$comment['commentImgs']" item="coImg"}
+                <img src="{$commentImg.$coImg['image']}" width="100" height="50" class="img-thumbnail" rel="lightbox-tour"/>
+                {/foreach}
+                </td>
+            </tr>
+        </table>
+        <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+        {/volist}
     </div>
 </asidefoot>
 <script type="text/javascript">
@@ -160,11 +207,20 @@
         li_3.setAttribute("class", "");
         li.setAttribute("class", "active");
 
-        var content = document.getElementById("ending");
-        content.innerHTML = "";
+        var box_describe = document.getElementById("box_describe");
+        var box_parameter = document.getElementById("box_parameter");
+        var box_comment = document.getElementById("box_comment");
+
         if (id == "li_describe") {
-            content.innerHTML = "{$commodity->getData('describe')}";
+            box_describe.style.display = "inline";
+            box_parameter.style.display = "none";
+            box_comment.style.display = "none";
+
         } else if (id == "li_parameter") {
+            box_describe.style.display = "none";
+            box_parameter.style.display = "inline";
+            box_comment.style.display = "none";
+            box_parameter.innerHTML = "";
             var str = "{volist name='parameters' id='item' key='key'}{$key}:{$item}-/{/volist}";
             var arrParas = [];
             var con = "";
@@ -176,9 +232,11 @@
                     con += "<span>" + arrParas[i] + "</span>&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
             }
-            content.innerHTML = con;
+            box_parameter.innerHTML = con;
         } else if (id == "li_comment") {
-
+            box_describe.style.display = "none";
+            box_parameter.style.display = "none";
+            box_comment.style.display = "inline";
         }
     }
 
@@ -249,7 +307,7 @@
             dataType: "json",
             data: {
                 commodityId: commodityId,
-                specificationId:specificationId
+                specificationId: specificationId
             },
             success: function (msg) {
                 switch (msg) {

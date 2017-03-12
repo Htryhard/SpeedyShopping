@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/2/27 9:27:01
+Date: 2017/3/13 0:19:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -104,8 +104,11 @@ CREATE TABLE `shopp_comment` (
   `id` char(36) NOT NULL,
   `content` text NOT NULL,
   `grade` double(2,0) NOT NULL COMMENT '星级1 2 3 4 5 6 7 8 9 10',
-  `creation_time` date NOT NULL,
+  `creation_time` char(255) NOT NULL,
   `user_id` char(36) NOT NULL,
+  `specification_id` char(36) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `order_id` char(36) NOT NULL,
   `commodity_id` char(36) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -116,7 +119,7 @@ CREATE TABLE `shopp_comment` (
 CREATE TABLE `shopp_comment_images` (
   `id` char(36) NOT NULL,
   `comment_id` char(36) NOT NULL,
-  `image` varchar(250) DEFAULT NULL,
+  `image` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -169,7 +172,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=469 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -261,6 +264,7 @@ CREATE TABLE `shopp_user` (
 -- Records 
 -- ----------------------------
 INSERT INTO `shopp_address` VALUES ('051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9', '077128384858', '广西壮族自治区 南宁市 良庆区 南晓镇', '5D754767-F3D5-1D93-E588-856B288B08CC', '你的大兄弟');
+INSERT INTO `shopp_address` VALUES ('5168B53E-A892-0D70-B992-75B65DC0ECE3', '1782008688', '广东省 广州市 天河区 棠下街道', '426D79CF-279A-2033-0A77-72166CC15CC1', '赖宝宝');
 INSERT INTO `shopp_address` VALUES ('58B47E1E-2AC2-3972-3294-48A8764F2A74', '077128384858', '广西壮族自治区 柳州市 柳州职业技术学院', '5D754767-F3D5-1D93-E588-856B288B08CC', '爱丽丝');
 INSERT INTO `shopp_address` VALUES ('7D930930-7979-70BC-D48B-6586FCAFE0B1', '077128384858', '广东广州天河区', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '筑梦草根');
 INSERT INTO `shopp_address` VALUES ('B1A6D755-B3FA-40BD-6500-0BB14CF4A303', '77889966', '地址：广东省 广州市 越秀区 越秀越秀', 'AA692D26-B786-D8A0-1420-F8F33264485C', '欢歌');
@@ -268,10 +272,11 @@ INSERT INTO `shopp_address` VALUES ('FCA8DF02-398F-5EC8-3549-C7EA83CB8DA7', '176
 INSERT INTO `shopp_cart` VALUES ('34383404-566F-C790-6BAB-48A85225AA1F', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D');
 INSERT INTO `shopp_cart` VALUES ('CD80475B-942E-E686-55D2-302363E3A2A3', '5D754767-F3D5-1D93-E588-856B288B08CC');
 INSERT INTO `shopp_cart` VALUES ('E1278ED5-CEE1-6CC4-D63A-788D82D8A4E8', 'AA692D26-B786-D8A0-1420-F8F33264485C');
-INSERT INTO `shopp_cart_specification` VALUES ('10250488-B7F2-0465-649F-929E490485E7', '1DEB1723-8394-4603-B617-24437A8DB27A', 'E1278ED5-CEE1-6CC4-D63A-788D82D8A4E8', '1');
+INSERT INTO `shopp_cart` VALUES ('F77903BE-80A4-B9BD-88F7-058666C0F8F1', '426D79CF-279A-2033-0A77-72166CC15CC1');
 INSERT INTO `shopp_cart_specification` VALUES ('4300D42F-93E5-EB46-41B0-008EC77F2ECC', '3FC5CCB0-0160-34C4-E181-C419F0070958', 'CD80475B-942E-E686-55D2-302363E3A2A3', '2');
 INSERT INTO `shopp_cart_specification` VALUES ('70B018BD-BC67-DED5-933C-033CFA1D09EE', '0503FD47-F7B9-53F3-B0E7-3BA8F5D10F05', 'E1278ED5-CEE1-6CC4-D63A-788D82D8A4E8', '2');
 INSERT INTO `shopp_cart_specification` VALUES ('7837CB85-6915-162E-B4DA-E8149E65209F', '1FFC4E4C-B777-D0B5-2B79-766B35713043', 'CD80475B-942E-E686-55D2-302363E3A2A3', '1');
+INSERT INTO `shopp_cart_specification` VALUES ('9974EBE9-BDA7-44F0-CA99-8CBE3DD99186', '293F5C8B-7ACC-89CF-198F-1087811B8C68', 'E1278ED5-CEE1-6CC4-D63A-788D82D8A4E8', '1');
 INSERT INTO `shopp_cart_specification` VALUES ('CA811C9A-974C-BF3A-726C-548A4FC8AA22', '3FC5CCB0-0160-34C4-E181-C419F0070958', '34383404-566F-C790-6BAB-48A85225AA1F', '1');
 INSERT INTO `shopp_cart_specification` VALUES ('DEAF10C1-E5CD-B8FB-FB3D-0AA01B997111', 'B3A7547B-21AE-FBA4-EBD0-28C1EE3E416E', '34383404-566F-C790-6BAB-48A85225AA1F', '1');
 INSERT INTO `shopp_collect` VALUES ('03E3EF9A-E301-A87F-0DD9-5EDEB894A13E', 'AA692D26-B786-D8A0-1420-F8F33264485C', '22B10E64-2792-9976-E179-2481FBD15CB5', '1487514885');
@@ -290,12 +295,16 @@ INSERT INTO `shopp_collect` VALUES ('C7A52854-542F-2F9D-214B-1A2FFF7FC2F2', '5D7
 INSERT INTO `shopp_collect` VALUES ('C8A15885-4628-EFB4-AEB6-6AB29CB61108', '5D754767-F3D5-1D93-E588-856B288B08CC', 'D2BCDC64-0970-3775-3193-6D870A490A84', '1487170036');
 INSERT INTO `shopp_collect` VALUES ('D9C5A264-E1CC-FCF0-14D8-4F34F15E0506', '5D754767-F3D5-1D93-E588-856B288B08CC', 'D5CD3549-48F1-F39A-F547-EF40372ECC5D', '1487170039');
 INSERT INTO `shopp_collect` VALUES ('DDA8EF38-2184-8F3B-532F-0F6774E3C741', '5D754767-F3D5-1D93-E588-856B288B08CC', '72387161-B237-7FC1-3FB3-E78C23533C5C', '1487170033');
+INSERT INTO `shopp_comment` VALUES ('B7901BAF-4807-1333-A844-CA4EEE7BB5AC', '啊啊啊啊啊！太差了！不能忍受！自拍太丑了！', '2', '1489333700', '426D79CF-279A-2033-0A77-72166CC15CC1', '1FFC4E4C-B777-D0B5-2B79-766B35713043', '0', '9C79A405-F753-8594-8393-05DBECA82001', '22B10E64-2792-9976-E179-2481FBD15CB5');
+INSERT INTO `shopp_comment` VALUES ('E4675E0C-8473-0603-9457-B6FED15D78AE', '不错不错！这是我的第一条评价！来几张自拍？！！', '4', '1489330853', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1FFC4E4C-B777-D0B5-2B79-766B35713043', '0', '3C93CD9C-E419-D68C-E389-FED4FCB4C447', '22B10E64-2792-9976-E179-2481FBD15CB5');
+INSERT INTO `shopp_comment_images` VALUES ('6B4A8DBA-24D4-20F1-2FAF-9BD7D96ED306', 'E4675E0C-8473-0603-9457-B6FED15D78AE', '201703122300538225.jpeg');
+INSERT INTO `shopp_comment_images` VALUES ('718B473B-DA15-474A-7FDA-F3221E4BCF22', 'E4675E0C-8473-0603-9457-B6FED15D78AE', '201703122300531901.jpeg');
 INSERT INTO `shopp_commodity` VALUES ('00D84306-7B0D-F027-28E4-09D70124D2CB', '包邮 韩国菲诗小铺双头自动旋转眉笔一字眉 防水防汗带眉刷非眉粉', '扁平型笔芯设计，扁平口保护笔芯！扁平眉笔可以大面积的均匀上色，笔芯软硬适中，使眉毛看起来更加自然。眉笔还有一个小技巧，深棕色系眉笔还可以做阴影哈！', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"The Face Shop\",\"\\u51c0\\u542b\\u91cf\":\"0.3g\",\"\\u5f69\\u5986\\u5206\\u7c7b\":\"\\u7709\\u7b14\",\"\\u529f\\u6548\":\"\\u9632\\u6c34 \\u9501\\u8272\",\"\\u4fdd\\u8d28\\u671f\":\"3\\u5e74\"}', '1486201101', '1517673600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0');
-INSERT INTO `shopp_commodity` VALUES ('1581855B-4F44-E6F1-8E95-59AD9A5A0C5D', '重庆磁器口手工陈建平陈麻花500g四川美食特产香酥糕点心零食天津 ', '磁器口排队那家！我们是厂家直接送货，质量保证！麻花是易碎物品，在快递过程中我们不能保证不碎，我们只能是保证要尽心尽力的包装好，追求完美的朋友希望慎重，谢谢！2包包邮，全场48元包邮（除新疆西藏内蒙等地）', '0', '{\"\\u5382\\u5740\":\"\\u91cd\\u5e86\\u5e02\\u6c99\\u576a\\u575d\\u533a\\u78c1\\u5668\\u53e3\\u6b63\\u885772\",\"\\u4fdd\\u8d28\\u671f\":\"270\"}', '1487261125', '1550332800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
+INSERT INTO `shopp_commodity` VALUES ('1581855B-4F44-E6F1-8E95-59AD9A5A0C5D', '重庆磁器口手工陈建平陈麻花500g四川美食特产香酥糕点心零食天津 ', '磁器口排队那家！我们是厂家直接送货，质量保证！麻花是易碎物品，在快递过程中我们不能保证不碎，我们只能是保证要尽心尽力的包装好，追求完美的朋友希望慎重，谢谢！2包包邮，全场48元包邮（除新疆西藏内蒙等地）', '1', '{\"\\u5382\\u5740\":\"\\u91cd\\u5e86\\u5e02\\u6c99\\u576a\\u575d\\u533a\\u78c1\\u5668\\u53e3\\u6b63\\u885772\",\"\\u4fdd\\u8d28\\u671f\":\"270\"}', '1487261125', '1550332800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('179149C6-2255-FAA2-F9F8-CA6608080FAA', '电器插头挂钩 电源线插座支架收纳整理架 创意百货 2个装 ', '极有家认证[优质网店]：11年好店，权威认证，买退无忧', '0', '{\"\\u627f\\u91cd\":\"1kg\\u4ee5\\u4e0b\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u68d5\\u8272 \\u767d\\u8272 \\u9ed1\\u8272 \\u7eff\\u8272\",\"\\u5438\\u9644\\u65b9\\u5f0f\":\"\\u7c98\\u80f6\",\"\\u6750\\u8d28\":\"\\u5851\\u6599\"}', '1486199439', '1580745600', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('1C26D516-A5F1-7C2E-7158-8A658A3F9083', '27寸大屏2K液晶电脑显示器 IPS高清1080PS4游戏制图显示屏HDMI ', '                                                            27寸大屏幕 IPS屏 高清分辨率 游戏 PS4                                                 ', '4', '{\"\\u5236\\u9020\\u5546\\u540d\\u79f0\":\"\\u6df1\\u5733\\u5e02\\u540e\\u601d\\u79d1\\u6280\\u6709\\u9650\\u516c\\u53f8\",\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u6db2\\u6676\\u663e\\u793a\\u5668\",\"\\u578b\\u53f7\":\"BKA270\",\"\\u6444\\u50cf\\u5934\\u7c7b\\u578b\":\"\\u65e0\\u6444\\u50cf\\u5934\",\"\\u7535\\u6c60\":\"6000\\u6beb\\u5b89\"}', '1482860943', '1483718400', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('21B3CE06-EBCB-ECA1-E311-88D1C759C156', '韩国deHub吸盘衣帽挂钩 厨房浴室卧室尖头无痕免钉不掉落挂钩百货 ', '①钩子为加长型，可挂带子很款的包包。②可贴大头贴，公司logo。③细小的尖头可穿很小的孔洞。④适合挂各种东西，只有您想不到的，没有挂不了的。⑤承重力5kg，粗糙面也可用。⑥ 重点是：此款还包邮哦，亲！', '0', '{\"\\u54c1\\u724c\":\"deHub\",\"\\u627f\\u91cd\":\"3kg(\\u4e0d\\u542b)-5kg\\uff08\\u542b\\uff09\",\"\\u8d27\\u53f7\":\"AHK60\",\"\\u5438\\u9644\\u65b9\\u5f0f\":\"\\u5438\\u76d8\",\"\\u6750\\u8d28\":\"\\u5851\\u6599\"}', '1486199169', '1580745600', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0');
-INSERT INTO `shopp_commodity` VALUES ('22B10E64-2792-9976-E179-2481FBD15CB5', 'Apple/苹果 iPhone 7 Plus 苹果7 5.5寸国行港版现货 7p 7代手机 ', '新iphone特性：新增亮面黑，压力感应HOME键，ip67级防水防尘，1200w像素光学防抖，全新A10处理器，续航提升，立体扬声器 ，lightning耳机接入方式，双摄像头。 现货发！按订单顺序发货', '1', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"iPhone 7 Plus\",\"iPhone 7 Plus\":\" 5.5\\u82f1\\u5bf8\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"32GB 128GB 256GB\",\"\\u539a\\u5ea6\":\"7.3 \\u6beb\\u7c73 (0.29 \\u82f1\\u5bf8)\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200 \\u4e07\\u50cf\\u7d20\\u5e7f\\u89d2\\u53ca\\u957f\"}', '1484925630', '1486742400', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0');
+INSERT INTO `shopp_commodity` VALUES ('22B10E64-2792-9976-E179-2481FBD15CB5', 'Apple/苹果 iPhone 7 Plus 苹果7 5.5寸国行港版现货 7p 7代手机 ', '新iphone特性：新增亮面黑，压力感应HOME键，ip67级防水防尘，1200w像素光学防抖，全新A10处理器，续航提升，立体扬声器 ，lightning耳机接入方式，双摄像头。 现货发！按订单顺序发货', '2', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"iPhone 7 Plus\",\"iPhone 7 Plus\":\" 5.5\\u82f1\\u5bf8\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"32GB 128GB 256GB\",\"\\u539a\\u5ea6\":\"7.3 \\u6beb\\u7c73 (0.29 \\u82f1\\u5bf8)\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200 \\u4e07\\u50cf\\u7d20\\u5e7f\\u89d2\\u53ca\\u957f\"}', '1484925630', '1486742400', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('241411DE-FEBB-E3B4-4FE8-F73BDE54B32B', 'AEJE 5.1家庭影院音响套装家用ktv音箱客厅低音炮蓝牙hdmi功放机 ', 'AEJE发烧高清震撼5.1家庭影院 ● 含一台高清多功能蓝牙5.1功放 + 一套AEJE原装品质高清5.1音箱 ● 功放支持DTS/杜比解码、HDMI高清3入1出端口、单独6声道支持有/无源炮、内置蓝牙、USB、双人同时K歌，FM收音等【可用淘金币抵钱】升级功放享大优惠 ● 下单立赠7件套', '0', '{\"CCC\\u8bc1\\u4e66\\u7f16\\u53f7\":\"2013010802653540\",\"\\u4f4e\\u97f3\\u97f3\\u7bb1\\u4e2a\\u6570\":\"1\\u4e2a\",\"\\u4e2d\\u7f6e(\\u4e3b\\u97f3)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"1\\u4e2a\",\"\\u524d\\u7f6e(\\u5de6\\u53f3)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"2\\u4e2a\",\"\\u540e\\u7f6e(\\u73af\\u7ed5)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"2\\u4e2a\",\"\\u4e3b\\u673a\\u7c7b\\u578b\":\"\\u4ec5\\u6709\\u529f\\u653e\\u65e0\\u789f\\u673a\",\"\\u89c6\\u9891\\u8fde\\u63a5\\u65b9\\u5f0f\":\"HDMI \\u8272\\u5dee\\u5206\\u91cf\",\"\\u97f3\\u6548\\u6a21\\u5f0f\":\"DTS Dolby Digital\"}', '1486188726', '1580745600', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('25AA487A-1A8F-A2A1-E1B5-78EA0EEC85A3', '拉夏贝尔2017春款新品 条纹方领九分袖衬衫式连衣裙10012162 ', '拉夏贝尔2017春款新品 条纹方领九分袖衬衫式连衣裙10012162 ', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u68c9100%\",\"\\u9500\\u552e\\u6e20\\u9053\\u7c7b\\u578b\":\"\\u5546\\u573a\\u540c\\u6b3e\"}', '1484975106', '1579536000', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('26C82144-FCFB-AA3A-150D-2640FFF623F2', '制ZPLPKK 2017春季新款女士中长款舒适羽绒服修身毛领外套 ', '制ZPLPKK 2017春季新款女士中长款舒适羽绒服修身毛领外套 ', '0', '{\"\\u4e0a\\u5e02\\u5e74\\u4efd\\u5b63\\u8282\":\"2017\\u5e74\\u6625\\u5b63\",\"\\u539a\\u8584\":\"\\u5e38\\u89c4\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u7c98\\u80f6\\u7ea4\\u7ef4(\\u7c98\\u7ea4)51% \\u805a\\u916f\\u7ea4\"}', '1484975592', '1548345600', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
@@ -306,7 +315,7 @@ INSERT INTO `shopp_commodity` VALUES ('47D002AB-DFA4-11CF-52FB-398122144EF1', '�
 INSERT INTO `shopp_commodity` VALUES ('4CF00EB1-8CBA-C3D9-F93F-DF01511391BE', '原封现货 现货速发Meizu/魅族 魅蓝X全网通4G八核智能手机 ', '全新白色现货！！送包邮+延保！！推荐选购套餐，搭使用更方便。 拒绝黄牛，每人限购1台相同类似地址多拍只发一台！双I2活动，现货大礼！！', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"Meizu\\/\\u9b45\\u65cf \\u9b45\\u84ddX\",\"CPU\\u54c1\\u724c\":\"\\u8054\\u53d1\\u79d1\",\"CPU\\u578b\\u53f7\":\"Helio P20\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200\\u4e07\",\"\\u8fd0\\u884c\\u5185\\u5b58RAM\":\"3GB\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"32GB\"}', '1487260706', '1581782400', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('511676D4-6E5E-A943-02D2-23838D8A4B2A', '卡丝拉狄 中年大衣女装中国风撞色绣花立领长袖宽松毛呢女士外套 ', '卡丝拉狄 中年大衣女装中国风撞色绣花立领长袖宽松毛呢女士外套 ', '0', '{\"\\u6d41\\u884c\\u5143\\u7d20\\/\\u5de5\\u827a\":\"\\u7ee3\\u82b1\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u9ec4\\u8272 \\u9ed1\\u8272 \\u84dd\\u8272\",\"\\u9886\\u5b50\":\"\\u7acb\\u9886\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\"\\u4e00\\u7c92\\u6263\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u7f8a\\u6bdb50% \\u805a\\u916f\\u7ea4\\u7ef450%\"}', '1484978091', '1585843200', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('6275F89C-A2A1-8B7B-A259-94926A84C442', '良品铺子手造麻薯干吃汤圆糕点点心特产美食小吃零食大礼包 组合', '良品铺子祝大家新春快乐大吉大利 咕叽咕叽 ', '1', '{\"\\u751f\\u4ea7\\u8bb8\\u53ef\\u8bc1\\u7f16\\u53f7\":\"QS4401 2401 2230 \",\"\\u50a8\\u85cf\\u65b9\\u6cd5\":\"\\u8bf7\\u7f6e\\u4e8e\\u9634\\u51c9\\u5e72\\u71e5\\u5904\",\"\\u4fdd\\u8d28\\u671f\":\"180 \\u5929\",\"\\u98df\\u54c1\\u6dfb\\u52a0\\u5242\":\"\\u5355\\uff0c\\u53cc\\u7518\\u6cb9\\u8102\\u80aa\\u9178\\u916f\",\"\\u51c0\\u542b\\u91cf\":\"1050g\"}', '1486187304', '1517673600', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
-INSERT INTO `shopp_commodity` VALUES ('629BAE4F-B30D-D852-BFE6-A43A373A2ED8', '家庭居家宿舍寝室必备懒人神器实用创意家居生活日用品小百货商品 ', '自动挤牙膏套装，漱口杯，自动挤牙膏，牙膏家三合一。爱上刷牙，而且是很漂亮的摆件，安装简单，拆洗容易，质量保证，送朋友很好的礼物', '0', '{\"\\u54c1\\u724c\":\"\\u9752\\u9f99\\u9999\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u89c1\\u89c4\\u683c\"}', '1486199874', '', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0');
+INSERT INTO `shopp_commodity` VALUES ('629BAE4F-B30D-D852-BFE6-A43A373A2ED8', '家庭居家宿舍寝室必备懒人神器实用创意家居生活日用品小百货商品 ', '自动挤牙膏套装，漱口杯，自动挤牙膏，牙膏家三合一。爱上刷牙，而且是很漂亮的摆件，安装简单，拆洗容易，质量保证，送朋友很好的礼物', '1', '{\"\\u54c1\\u724c\":\"\\u9752\\u9f99\\u9999\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u89c1\\u89c4\\u683c\"}', '1486199874', '', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('6D025479-654E-5D3F-2B6D-ECF783A2D918', '骆驼男装 2017春季新品青年时尚立领商务休闲外套纯色运动风衣男 ', '骆驼男装 2017春季新品青年时尚立领商务休闲外套纯色运动风衣男 ', '0', '{\"\\u54c1\\u724c\":\"Camel\\/\\u9a86\\u9a7c\",\"\\u57fa\\u7840\\u98ce\\u683c\":\"\\u65f6\\u5c1a\\u90fd\\u5e02\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u68c9100%\",\"\\u4e0a\\u5e02\\u5e74\\u4efd\\u5b63\\u8282\":\"2017\\u5e74\\u6625\\u5b63\"}', '1484978236', '1390320000', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('6FFC6691-7F05-8AB8-B1E1-5C839BB4F446', '正版钢铁是怎样炼成的 原著经典世界名著外国外小说文学青少版 少儿童书籍畅销书阅读 初中学生小学生课外必读物图书', '《钢铁是怎样炼成的》被誉为“影响历史的百部经典之一”，“影响中国近代社会的经典译作”。保尔那顽强坚韧，奋发向上的人格力量，对我们的青少年，对我们的民族来说，是永远具有特殊意义的宝贵财富', '0', '{\"     \\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u94a2\\u94c1\\u662f\\u600e\\u6837\\u70bc\\u6210\\u7684\",\"\\u51fa\\u7248\\u793e\\u540d\\u79f0\":\"\\u4e2d\\u56fd\\u6587\\u8054\\u51fa\\u7248\\u793e\",\"\\u4f5c\\u8005\":\"\\u5965\\u65af\\u7279\\u6d1b\\u592b\\u65af\\u57fa\",\"ISBN\\u7f16\\u53f7\":\"9787519006129\"}', '1484925988', '1486742400', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('72387161-B237-7FC1-3FB3-E78C23533C5C', '韩国the saem得鲜口红不脱色咬唇妆哑光豆沙色唇膏大红姨妈色雾面 ', '这款只能按出，不能按进，用多少按多少，千万不要为了满足自己好奇心狂按，否则口红就回去不了哦', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"The Saem\",\"\\u662f\\u5426\\u4e3a\\u7279\\u6b8a\\u7528\\u9014\\u5316\\u5986\\u54c1\":\"\\u5426\",\"\\u529f\\u6548\":\"\\u6ecb\\u6da6 \\u4fdd\\u6e7f\",\"\\u9002\\u5408\\u80a4\\u8d28\":\"\\u4efb\\u4f55\\u80a4\\u8d28\",\"\\u4fdd\\u8d28\\u671f\":\"3\\u5e74\"}', '1486200570', '1517673600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0');
@@ -315,7 +324,7 @@ INSERT INTO `shopp_commodity` VALUES ('753C793E-1F5D-1DC7-4103-A23D23E016C2', '�
 INSERT INTO `shopp_commodity` VALUES ('89C19CC9-AADE-EF8F-3D2A-FD244AC2C51D', '御食园茯苓夹饼500g北京特产传统茯苓饼美食小吃糕点心零食品', '御食园多口味茯苓夹饼！独立小包装！', '0', '{\"\\u4fdd\\u8d28\\u671f\":\"360\",\"\\u51c0\\u542b\\u91cf\":\"500g\"}', '1487261350', '1518796800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('8C5CBC3B-C3A0-F078-2DC1-DD276D203A5E', '新品现货 Meizu/魅族 魅蓝note5全网通4G智能手机note5', '全新白色16G现货！！送快递包邮+延保一年！！推荐选购套餐，搭使用更方便。 拒绝黄牛，每人限购1台相同类似地址多拍只发一台！', '0', '{\"\\u673a\\u8eab\\u989c\\u8272\":\"\\u5168\\u7f51\\u901a\\u767d\\u8272\",\"\\u9b45\\u65cf\\u578b\\u53f7\":\"\\u9b45\\u84ddnote5\",\"\\u5206\\u8fa8\\u7387\":\"1920x1080\",\"\\u8fd0\\u884c\\u5185\\u5b58RAM\":\" 3GB 4GB\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1300\\u4e07\"}', '1484983552', '1548259200', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('900AA834-8BF4-9826-3239-01487EF71BED', '卡丝拉狄 中年大衣女装中国风撞色绣花立领长袖宽松毛呢女士外套 ', '卡丝拉狄 中年大衣女装中国风撞色绣花立领长袖宽松毛呢女士外套 ', '0', '{\"\\u6d41\\u884c\\u5143\\u7d20\\/\\u5de5\\u827a\":\"\\u7ee3\\u82b1\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u9ec4\\u8272 \\u9ed1\\u8272 \\u84dd\\u8272\",\"\\u9886\\u5b50\":\"\\u7acb\\u9886\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\"\\u4e00\\u7c92\\u6263\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u7f8a\\u6bdb50% \\u805a\\u916f\\u7ea4\\u7ef450%\"}', '1484978092', '1585843200', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
-INSERT INTO `shopp_commodity` VALUES ('92BAFEFD-CCE6-03EF-60A8-DF9954DDDCA9', '湖南特产麻辣猪蹄熟食 香辣猪脚卤味特色肉类零食真空装美食小吃 ', '湖南特产麻辣猪蹄熟食 香辣猪脚卤味特色肉类零食真空装美食小吃', '0', '{\"\\u51c0\\u542b\\u91cf\":\"210g\",\"\\u4fdd\\u8d28\\u671f\":\"15\"}', '1487261632', '1550332800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
+INSERT INTO `shopp_commodity` VALUES ('92BAFEFD-CCE6-03EF-60A8-DF9954DDDCA9', '湖南特产麻辣猪蹄熟食 香辣猪脚卤味特色肉类零食真空装美食小吃 ', '湖南特产麻辣猪蹄熟食 香辣猪脚卤味特色肉类零食真空装美食小吃', '1', '{\"\\u51c0\\u542b\\u91cf\":\"210g\",\"\\u4fdd\\u8d28\\u671f\":\"15\"}', '1487261632', '1550332800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('934AE8D8-B061-C383-3FE1-6566C597B7F4', '明治雪吻草莓绿茶牛奶可可豆年货巧克力62g 送男女友批发小吃零食 ', '巧克力', '0', '{\"\\u50a8\\u85cf\\u65b9\\u6cd5\":\"\\u7f6e\\u4e8e\\u9634\\u51c9\\u5e72\\u71e5\\u5904\",\"\\u6210\\u5206\\u542b\\u91cf\":\"26%\",\"\\u98df\\u54c1\\u53e3\\u5473\":\"\\u725b\\u5976\\u53e3\\u5473 \\u8349\\u8393\\u53e3\\u5473 \\u7cbe\\u9009\\u53ef\\u53ef\",\"\\u5305\\u88c5\\u79cd\\u7c7b\":\"\\u76d2\\u88c5\",\"\\u662f\\u5426\\u542b\\u6709\\u4ee3\\u53ef\\u53ef\\u8102\":\"\\u5426\",\"\\u4ea7\\u5730\":\"\\u4e2d\\u56fd\\u5927\\u9646\",\"\\u4fdd\\u8d28\\u671f\":\"300\\u5929\"}', '1484577647', '1486742400', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('96A28FC7-E21C-2185-D3BC-4DD5FE91ADB7', 'SPAO明星AOA同款女式休闲高领套头毛衣韩版针织衫线衫SAKW64TG04 ', '毛衣', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u805a\\u4e19\\u70ef\\u8148\\u7ea4\\u7ef4(\\u8148\\u7eb6)100%\",\"\\u8863\\u957f\":\"\\u5e38\\u89c4\\u6b3e\",\"\\u8896\\u957f\":\"\\u957f\\u8896\",\"\\u54c1\\u724c\":\"SPAO\",\"\\u5c3a\\u7801\":\"S M L\"}', '1484578225', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0');
 INSERT INTO `shopp_commodity` VALUES ('AE6D4A9D-7257-836A-2687-8EE3B440594E', 'BONOSIDAN 水光补水面膜10片 白皙补水保湿滋润嫩肤水光针面膜 ', 'BONOSIDAN 水光补水面膜10片 白皙补水保湿滋润嫩肤水光针面膜 ', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"BONOSIDAN\",\"\\u9762\\u819c\\u5206\\u7c7b\":\"\\u8d34\\u7247\\u5f0f\",\"\\u5316\\u5986\\u54c1\\u51c0\\u542b\\u91cf\":\"10\\u7247\",\"\\u54c1\\u540d\":\"\\u6c34\\u5149\\u9762\\u819c\"}', '1486200249', '1549209600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0');
@@ -556,6 +565,301 @@ INSERT INTO `shopp_count` VALUES ('170', '::1', '1487926759', '欢歌', 'home/Us
 INSERT INTO `shopp_count` VALUES ('171', '::1', '1487926785', '欢歌', 'home/User/userMessage');
 INSERT INTO `shopp_count` VALUES ('172', '::1', '1487927039', '欢歌', 'home');
 INSERT INTO `shopp_count` VALUES ('173', '::1', '1487927721', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('174', '::1', '1489159217', '', 'home');
+INSERT INTO `shopp_count` VALUES ('175', '::1', '1489159233', '', 'home');
+INSERT INTO `shopp_count` VALUES ('176', '::1', '1489159248', '', 'home');
+INSERT INTO `shopp_count` VALUES ('177', '::1', '1489159288', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('178', '::1', '1489159296', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('179', '::1', '1489159397', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('180', '::1', '1489159427', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('181', '::1', '1489159659', '', 'home');
+INSERT INTO `shopp_count` VALUES ('182', '::1', '1489159835', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('183', '::1', '1489159846', '', 'home');
+INSERT INTO `shopp_count` VALUES ('184', '::1', '1489160067', '', 'home');
+INSERT INTO `shopp_count` VALUES ('185', '::1', '1489160108', '', 'home');
+INSERT INTO `shopp_count` VALUES ('186', '::1', '1489160133', '', 'home');
+INSERT INTO `shopp_count` VALUES ('187', '::1', '1489160153', '', 'home');
+INSERT INTO `shopp_count` VALUES ('188', '::1', '1489160187', '', 'home');
+INSERT INTO `shopp_count` VALUES ('189', '::1', '1489160839', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('190', '::1', '1489160844', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('191', '::1', '1489162054', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('192', '::1', '1489162260', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('193', '::1', '1489162263', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('194', '::1', '1489162311', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('195', '::1', '1489162313', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('196', '::1', '1489162321', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('197', '::1', '1489162913', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('198', '::1', '1489162916', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('199', '::1', '1489162919', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('200', '::1', '1489162923', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('201', '::1', '1489163018', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('202', '::1', '1489163069', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('203', '::1', '1489163113', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('204', '::1', '1489163152', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('205', '::1', '1489163183', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('206', '::1', '1489163247', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('207', '::1', '1489163304', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('208', '::1', '1489163335', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('209', '::1', '1489163339', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('210', '::1', '1489163365', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('211', '::1', '1489198675', '', 'home');
+INSERT INTO `shopp_count` VALUES ('212', '::1', '1489198703', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('213', '::1', '1489198706', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('214', '::1', '1489198711', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('215', '::1', '1489198716', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('216', '::1', '1489198740', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('217', '::1', '1489200364', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('218', '::1', '1489200376', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('219', '::1', '1489200379', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('220', '::1', '1489200385', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('221', '::1', '1489200407', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('222', '::1', '1489200411', '欢歌', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('223', '::1', '1489200425', '欢歌', 'home/User/placeOrder');
+INSERT INTO `shopp_count` VALUES ('224', '::1', '1489200442', '欢歌', 'home/User/placeOrdersHandle');
+INSERT INTO `shopp_count` VALUES ('225', '::1', '1489200443', '欢歌', 'home/User/doPay');
+INSERT INTO `shopp_count` VALUES ('226', '::1', '1489200475', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('227', '::1', '1489200481', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('228', '::1', '1489200484', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('229', '::1', '1489200492', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('230', '::1', '1489200497', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('231', '::1', '1489200502', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('232', '::1', '1489200505', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('233', '::1', '1489200512', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('234', '::1', '1489200527', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('235', '::1', '1489200534', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('236', '::1', '1489200537', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('237', '::1', '1489200540', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('238', '::1', '1489201230', '欢歌', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('239', '::1', '1489201235', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('240', '::1', '1489202376', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('241', '::1', '1489202380', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('242', '::1', '1489202383', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('243', '::1', '1489202386', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('244', '::1', '1489202660', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('245', '::1', '1489202759', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('246', '::1', '1489202800', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('247', '::1', '1489202854', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('248', '::1', '1489202905', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('249', '::1', '1489202981', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('250', '::1', '1489203015', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('251', '::1', '1489203177', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('252', '::1', '1489203180', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('253', '::1', '1489206400', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('254', '::1', '1489206429', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('255', '::1', '1489206458', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('256', '::1', '1489206525', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('257', '::1', '1489206658', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('258', '::1', '1489206810', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('259', '::1', '1489206991', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('260', '::1', '1489207037', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('261', '::1', '1489207084', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('262', '::1', '1489207126', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('263', '::1', '1489207245', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('264', '::1', '1489207479', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('265', '::1', '1489207551', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('266', '::1', '1489207731', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('267', '::1', '1489208020', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('268', '::1', '1489208076', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('269', '::1', '1489208242', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('270', '::1', '1489208256', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('271', '::1', '1489208435', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('272', '::1', '1489208699', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('273', '::1', '1489208706', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('274', '::1', '1489208840', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('275', '::1', '1489209257', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('276', '::1', '1489209380', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('277', '::1', '1489209408', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('278', '::1', '1489209427', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('279', '::1', '1489212860', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('280', '::1', '1489212953', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('281', '::1', '1489212978', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('282', '::1', '1489213035', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('283', '::1', '1489214964', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('284', '::1', '1489214968', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('285', '::1', '1489214970', '欢歌', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('286', '::1', '1489214982', '欢歌', 'home/User/placeOrder');
+INSERT INTO `shopp_count` VALUES ('287', '::1', '1489214995', '欢歌', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('288', '::1', '1489215971', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('289', '::1', '1489215975', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('290', '::1', '1489218119', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('291', '::1', '1489218120', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('292', '::1', '1489218121', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('293', '::1', '1489218122', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('294', '::1', '1489218123', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('295', '::1', '1489218124', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('296', '::1', '1489218125', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('297', '::1', '1489218126', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('298', '::1', '1489218127', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('299', '::1', '1489218128', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('300', '::1', '1489218129', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('301', '::1', '1489218130', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('302', '::1', '1489218131', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('303', '::1', '1489218132', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('304', '::1', '1489218133', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('305', '::1', '1489218134', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('306', '::1', '1489218135', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('307', '::1', '1489218136', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('308', '::1', '1489220667', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('309', '::1', '1489220773', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('310', '::1', '1489220815', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('311', '::1', '1489220838', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('312', '::1', '1489221876', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('313', '::1', '1489222084', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('314', '::1', '1489222168', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('315', '::1', '1489222269', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('316', '::1', '1489222340', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('317', '::1', '1489222914', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('318', '::1', '1489222991', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('319', '::1', '1489223547', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('320', '::1', '1489223583', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('321', '::1', '1489240631', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('322', '::1', '1489240815', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('323', '::1', '1489240864', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('324', '::1', '1489241577', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('325', '::1', '1489241810', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('326', '::1', '1489242077', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('327', '::1', '1489243337', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('328', '::1', '1489243429', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('329', '::1', '1489243438', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('330', '::1', '1489243479', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('331', '::1', '1489243821', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('332', '::1', '1489243895', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('333', '::1', '1489244041', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('334', '::1', '1489244073', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('335', '::1', '1489244123', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('336', '::1', '1489244139', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('337', '::1', '1489244163', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('338', '::1', '1489244215', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('339', '::1', '1489244475', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('340', '::1', '1489244533', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('341', '::1', '1489244570', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('342', '::1', '1489244717', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('343', '::1', '1489244819', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('344', '::1', '1489244941', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('345', '::1', '1489245011', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('346', '::1', '1489245198', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('347', '::1', '1489245206', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('348', '::1', '1489245225', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('349', '::1', '1489245276', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('350', '::1', '1489245286', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('351', '::1', '1489245467', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('352', '::1', '1489246682', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('353', '::1', '1489246715', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('354', '::1', '1489246798', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('355', '::1', '1489246816', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('356', '::1', '1489246860', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('357', '::1', '1489246986', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('358', '::1', '1489247776', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('359', '::1', '1489247874', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('360', '::1', '1489247876', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('361', '::1', '1489248839', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('362', '::1', '1489248865', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('363', '::1', '1489248954', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('364', '::1', '1489249027', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('365', '::1', '1489249128', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('366', '::1', '1489249201', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('367', '::1', '1489249290', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('368', '::1', '1489249421', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('369', '::1', '1489249560', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('370', '::1', '1489249655', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('371', '::1', '1489249963', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('372', '::1', '1489250007', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('373', '127.0.0.1', '1489286514', '', 'home');
+INSERT INTO `shopp_count` VALUES ('374', '127.0.0.1', '1489286538', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('375', '127.0.0.1', '1489286541', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('376', '127.0.0.1', '1489286548', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('377', '127.0.0.1', '1489286552', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('378', '127.0.0.1', '1489287063', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('379', '127.0.0.1', '1489287145', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('380', '127.0.0.1', '1489287257', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('381', '127.0.0.1', '1489287584', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('382', '127.0.0.1', '1489287679', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('383', '127.0.0.1', '1489287749', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('384', '::1', '1489288133', '', 'home');
+INSERT INTO `shopp_count` VALUES ('385', '::1', '1489288154', 'test3', 'home');
+INSERT INTO `shopp_count` VALUES ('386', '::1', '1489288157', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('387', '127.0.0.1', '1489288280', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('388', '127.0.0.1', '1489288526', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('389', '127.0.0.1', '1489288560', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('390', '127.0.0.1', '1489289680', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('391', '127.0.0.1', '1489289685', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('392', '127.0.0.1', '1489289690', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('393', '127.0.0.1', '1489289884', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('394', '127.0.0.1', '1489289939', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('395', '127.0.0.1', '1489290033', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('396', '127.0.0.1', '1489290086', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('397', '127.0.0.1', '1489290098', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('398', '127.0.0.1', '1489290100', '欢歌', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('399', '127.0.0.1', '1489290102', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('400', '127.0.0.1', '1489290108', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('401', '127.0.0.1', '1489290112', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('402', '::1', '1489291192', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('403', '::1', '1489303236', 'test3', 'home');
+INSERT INTO `shopp_count` VALUES ('404', '127.0.0.1', '1489303735', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('405', '127.0.0.1', '1489303738', '欢歌', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('406', '127.0.0.1', '1489303761', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('407', '127.0.0.1', '1489304325', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('408', '127.0.0.1', '1489304331', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('409', '127.0.0.1', '1489304335', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('410', '127.0.0.1', '1489304368', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('411', '127.0.0.1', '1489304730', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('412', '127.0.0.1', '1489304935', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('413', '::1', '1489304942', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('414', '::1', '1489304953', 'test3', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('415', '127.0.0.1', '1489304969', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('416', '127.0.0.1', '1489304974', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('417', '127.0.0.1', '1489304993', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('418', '::1', '1489305001', 'test3', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('419', '::1', '1489305003', 'test3', 'home');
+INSERT INTO `shopp_count` VALUES ('420', '::1', '1489305006', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('421', '::1', '1489305009', 'test3', 'home/User/logOut');
+INSERT INTO `shopp_count` VALUES ('422', '::1', '1489305010', '', 'home');
+INSERT INTO `shopp_count` VALUES ('423', '::1', '1489305026', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('424', '::1', '1489305030', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('425', '::1', '1489305035', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('426', '::1', '1489305040', '欢歌', 'home/User/logOut');
+INSERT INTO `shopp_count` VALUES ('427', '::1', '1489305041', '', 'home');
+INSERT INTO `shopp_count` VALUES ('428', '127.0.0.1', '1489305365', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('429', '127.0.0.1', '1489305369', '欢歌', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('430', '127.0.0.1', '1489305373', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('431', '127.0.0.1', '1489305377', '欢歌', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('432', '127.0.0.1', '1489305381', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('433', '127.0.0.1', '1489305393', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('434', '127.0.0.1', '1489305395', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('435', '127.0.0.1', '1489305428', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('436', '127.0.0.1', '1489305431', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('437', '127.0.0.1', '1489305480', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('438', '127.0.0.1', '1489305483', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('439', '127.0.0.1', '1489305692', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('440', '127.0.0.1', '1489305695', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('441', '127.0.0.1', '1489305701', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('442', '127.0.0.1', '1489330816', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('443', '127.0.0.1', '1489330929', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('444', '::1', '1489332962', 'test3', 'home');
+INSERT INTO `shopp_count` VALUES ('445', '::1', '1489332970', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('446', '::1', '1489333109', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('447', '::1', '1489333119', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('448', '::1', '1489333124', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('449', '::1', '1489333282', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('450', '::1', '1489333314', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('451', '::1', '1489333328', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('452', '::1', '1489333440', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('453', '::1', '1489333493', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('454', '::1', '1489333495', 'test3', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('455', '::1', '1489333550', 'test3', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('456', '::1', '1489333562', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('457', '::1', '1489333602', 'test3', 'home/User/buyOne');
+INSERT INTO `shopp_count` VALUES ('458', '::1', '1489333611', 'test3', 'home/User/buyOneHandle');
+INSERT INTO `shopp_count` VALUES ('459', '::1', '1489333612', 'test3', 'home/User/doPay');
+INSERT INTO `shopp_count` VALUES ('460', '::1', '1489333621', 'test3', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('461', '::1', '1489333627', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('462', '::1', '1489333631', 'test3', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('463', '::1', '1489333637', 'test3', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('464', '::1', '1489333642', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('465', '::1', '1489333645', 'test3', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('466', '::1', '1489333648', 'test3', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('467', '::1', '1489333704', 'test3', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('468', '::1', '1489333706', 'test3', 'home');
 INSERT INTO `shopp_order` VALUES ('002A3943-1C0F-C7D5-2E8E-843092C42207', '8', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486928638', '1486928638', '1486934981', '1486940350', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 INSERT INTO `shopp_order` VALUES ('06DE34DB-81C7-35AA-35DE-DDB0C0DCB7CE', '8', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486320379', '1486320379', '1486320379', '1486940875', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 INSERT INTO `shopp_order` VALUES ('1DE8F15F-D8EC-F7C7-A464-9B0154E538FE', '7', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486936049', '1486936049', '', '', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
@@ -565,6 +869,7 @@ INSERT INTO `shopp_order` VALUES ('34A29099-7509-2711-DB8B-A52FF906CEF5', '0', '
 INSERT INTO `shopp_order` VALUES ('3C93CD9C-E419-D68C-E389-FED4FCB4C447', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1487517560', '1487517560', '1487517583', '1487517859', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order` VALUES ('3D6DBFA3-624E-69DB-E8DE-5D26B9E33968', '8', '5D754767-F3D5-1D93-E588-856B288B08CC', '1483776627', '1483776627', '1483776627', '1486940826', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 INSERT INTO `shopp_order` VALUES ('54B92280-7863-9F48-9D86-2972EA033AD2', '0', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '1486923646', '1486923646', '', '', '7D930930-7979-70BC-D48B-6586FCAFE0B1');
+INSERT INTO `shopp_order` VALUES ('5938D6D9-2212-5919-DD3B-3E8704DC4B1D', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1489200442', '1489200442', '1489200474', '1489200526', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order` VALUES ('5B3090F7-E227-9F8E-81CC-0424AEA3EA8D', '0', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '1486978133', '1486978133', '', '', '7D930930-7979-70BC-D48B-6586FCAFE0B1');
 INSERT INTO `shopp_order` VALUES ('614902A7-65A8-8737-03B8-E98E3E97ED47', '7', '5D754767-F3D5-1D93-E588-856B288B08CC', '1487169471', '1487169471', '', '', '58B47E1E-2AC2-3972-3294-48A8764F2A74');
 INSERT INTO `shopp_order` VALUES ('6FFF93BA-9091-25F5-3C1C-DFD230A85B8C', '5', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486935287', '1486935287', '1486935297', '1486966296', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
@@ -572,6 +877,7 @@ INSERT INTO `shopp_order` VALUES ('79FC2A10-C36A-0BBB-25EC-0CFE8BFE4A65', '8', '
 INSERT INTO `shopp_order` VALUES ('8EE36734-9211-7E96-5650-7CB4B4BD06F0', '5', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '1486935683', '1486935683', '1486935715', '1486966564', '7D930930-7979-70BC-D48B-6586FCAFE0B1');
 INSERT INTO `shopp_order` VALUES ('997871B2-88BA-5201-E149-A243DDECAD0B', '5', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486935375', '1486935375', '1486935383', '1486966443', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 INSERT INTO `shopp_order` VALUES ('9BFCB3B0-EE92-C174-CAFC-1533256480A6', '1', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1487514954', '1487514954', '1487514963', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
+INSERT INTO `shopp_order` VALUES ('9C79A405-F753-8594-8393-05DBECA82001', '5', '426D79CF-279A-2033-0A77-72166CC15CC1', '1489333611', '1489333611', '1489333620', '1489333636', '5168B53E-A892-0D70-B992-75B65DC0ECE3');
 INSERT INTO `shopp_order` VALUES ('A21CEFEB-941D-2320-E3AB-1B8DE27F0CCD', '0', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486935702', '1486935702', '', '', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
 INSERT INTO `shopp_order` VALUES ('A806658C-175B-3262-5D7F-2C9E5BAED126', '1', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '1487064157', '1487064157', '1487064850', '', '7D930930-7979-70BC-D48B-6586FCAFE0B1');
 INSERT INTO `shopp_order` VALUES ('A8C1C3F1-D321-AFD8-CB83-04EE30D8FF16', '0', '5D754767-F3D5-1D93-E588-856B288B08CC', '1486935520', '1486935520', '', '', '051403B4-7CAA-66DF-FE3B-BEADD0FFE1E9');
@@ -605,6 +911,7 @@ INSERT INTO `shopp_order_specification` VALUES ('74FF2DCC-9212-6134-5019-4391A24
 INSERT INTO `shopp_order_specification` VALUES ('7792EA1D-AE37-5D5A-37E5-A6274179FCE4', '9BFCB3B0-EE92-C174-CAFC-1533256480A6', '9F2AA23F-FD6B-CC49-55F8-EF5F403D4296', '1');
 INSERT INTO `shopp_order_specification` VALUES ('7B32A40C-D97B-5F96-1D41-03ABD5C70069', '5B3090F7-E227-9F8E-81CC-0424AEA3EA8D', '1FFC4E4C-B777-D0B5-2B79-766B35713043', '1');
 INSERT INTO `shopp_order_specification` VALUES ('87DE2264-B46E-BC7B-1DE2-2C5B97E02889', 'EF3451E4-4BAA-64FE-6B4F-DBA7306B02D1', '1FFC4E4C-B777-D0B5-2B79-766B35713043', '1');
+INSERT INTO `shopp_order_specification` VALUES ('986B74B8-FC44-A168-883A-9F51E21AF0FB', '5938D6D9-2212-5919-DD3B-3E8704DC4B1D', '16153B58-A253-C18F-5783-DE72935811F0', '1');
 INSERT INTO `shopp_order_specification` VALUES ('9D9E8D6C-587D-C176-D6D6-0780580CDF8B', 'F96859EE-C0A1-F02B-7626-756D5726D13A', '0E034B9B-648E-48D1-78D6-B0D615B6E06F', '1');
 INSERT INTO `shopp_order_specification` VALUES ('9E1E8D1E-F327-2D45-58C0-D3D0221E97FB', '79FC2A10-C36A-0BBB-25EC-0CFE8BFE4A65', '0E034B9B-648E-48D1-78D6-B0D615B6E06F', '1');
 INSERT INTO `shopp_order_specification` VALUES ('9F752439-490A-2D84-7849-4A8E6DE9EFD1', '2C2A8D0E-D4EC-5900-3FD3-60A96B96D797', '1FFC4E4C-B777-D0B5-2B79-766B35713043', '1');
@@ -618,6 +925,9 @@ INSERT INTO `shopp_order_specification` VALUES ('B3A5CD19-8EBB-14BE-4F9C-B5005D9
 INSERT INTO `shopp_order_specification` VALUES ('BF926568-A1E4-1638-0654-00A26FDF08E9', '614902A7-65A8-8737-03B8-E98E3E97ED47', '3BA5EB3D-0119-1B55-2C0C-402066D4EC65', '1');
 INSERT INTO `shopp_order_specification` VALUES ('C33A4E96-FBFB-BACD-4DD2-3FBD7CF7FA41', '6FFF93BA-9091-25F5-3C1C-DFD230A85B8C', 'B3A7547B-21AE-FBA4-EBD0-28C1EE3E416E', '10');
 INSERT INTO `shopp_order_specification` VALUES ('D6584EDA-941B-B907-3FA3-0F40514A7437', '1DE8F15F-D8EC-F7C7-A464-9B0154E538FE', '1D359FA7-6C41-BB91-95DB-55EAF84BB9E4', '1');
+INSERT INTO `shopp_order_specification` VALUES ('E55C68A3-F65B-ABE0-D950-187666487CCF', '9C79A405-F753-8594-8393-05DBECA82001', '1FFC4E4C-B777-D0B5-2B79-766B35713043', '1');
+INSERT INTO `shopp_order_specification` VALUES ('EA871C59-47D4-3263-7622-727956D28C93', '5938D6D9-2212-5919-DD3B-3E8704DC4B1D', '191DD5A3-480A-47AA-CC18-3DFBE0B1BEDB', '1');
+INSERT INTO `shopp_order_specification` VALUES ('EBE880F0-77C1-FFB5-FD77-DF3420ADFD36', '5938D6D9-2212-5919-DD3B-3E8704DC4B1D', '1DEB1723-8394-4603-B617-24437A8DB27A', '1');
 INSERT INTO `shopp_order_specification` VALUES ('F197E9C1-E8DF-8A54-CDA1-65A5578D38CB', 'D7371CBC-5041-42E4-143E-D7027243118B', '06E57510-C770-4863-BAAD-BDA23210E8A4', '1');
 INSERT INTO `shopp_order_specification` VALUES ('F21DB3F5-DEE1-A56C-2F79-28DDA35E88A4', '54B92280-7863-9F48-9D86-2972EA033AD2', '3FC5CCB0-0160-34C4-E181-C419F0070958', '1');
 INSERT INTO `shopp_order_specification` VALUES ('F5C28001-D372-0856-0DE1-5D7ED902E9A0', 'E53680DC-072C-6267-3D60-63F8D5360164', '1D359FA7-6C41-BB91-95DB-55EAF84BB9E4', '1');
@@ -635,13 +945,13 @@ INSERT INTO `shopp_specification` VALUES ('0E034B9B-648E-48D1-78D6-B0D615B6E06F'
 INSERT INTO `shopp_specification` VALUES ('0EF2F6DF-6CAE-7DEE-9507-F4DC2C913AFB', '官方标配 :金色', '2500', '2100', 'C3E30939-86EB-730F-900E-17B582155781');
 INSERT INTO `shopp_specification` VALUES ('119CD58F-4126-CF58-BEC2-1567ADB34E05', '1800x2000mm', '2000', '200', 'D708E35B-239A-0E3B-3988-B7EA5C3A3066');
 INSERT INTO `shopp_specification` VALUES ('143FDD53-49C8-A58C-CEC6-740FD97D479E', '1件', '179', '200', 'FEF2C2E1-6304-F2CF-C1C7-EA18C9C219EC');
-INSERT INTO `shopp_specification` VALUES ('16153B58-A253-C18F-5783-DE72935811F0', '巧克力', '15', '15', '1581855B-4F44-E6F1-8E95-59AD9A5A0C5D');
+INSERT INTO `shopp_specification` VALUES ('16153B58-A253-C18F-5783-DE72935811F0', '巧克力', '15', '14', '1581855B-4F44-E6F1-8E95-59AD9A5A0C5D');
 INSERT INTO `shopp_specification` VALUES ('1789246F-6560-1F5D-2584-704C0918A719', 'M LS M', '2000', '100', '753C793E-1F5D-1DC7-4103-A23D23E016C2');
 INSERT INTO `shopp_specification` VALUES ('1850CE46-B67D-FC73-EAE3-D8F79EA95FE2', '套餐一', '1709', '17', '4CF00EB1-8CBA-C3D9-F93F-DF01511391BE');
-INSERT INTO `shopp_specification` VALUES ('191DD5A3-480A-47AA-CC18-3DFBE0B1BEDB', '微辣', '19', '166', '92BAFEFD-CCE6-03EF-60A8-DF9954DDDCA9');
+INSERT INTO `shopp_specification` VALUES ('191DD5A3-480A-47AA-CC18-3DFBE0B1BEDB', '微辣', '19', '165', '92BAFEFD-CCE6-03EF-60A8-DF9954DDDCA9');
 INSERT INTO `shopp_specification` VALUES ('1D359FA7-6C41-BB91-95DB-55EAF84BB9E4', '黑色', '2799', '0', 'DBDD6F97-71D8-FF7D-843F-33A2DA965DE1');
-INSERT INTO `shopp_specification` VALUES ('1DEB1723-8394-4603-B617-24437A8DB27A', '三好学生', '28', '688', '629BAE4F-B30D-D852-BFE6-A43A373A2ED8');
-INSERT INTO `shopp_specification` VALUES ('1FFC4E4C-B777-D0B5-2B79-766B35713043', '官方标配1台', '7000', '2299', '22B10E64-2792-9976-E179-2481FBD15CB5');
+INSERT INTO `shopp_specification` VALUES ('1DEB1723-8394-4603-B617-24437A8DB27A', '三好学生', '28', '687', '629BAE4F-B30D-D852-BFE6-A43A373A2ED8');
+INSERT INTO `shopp_specification` VALUES ('1FFC4E4C-B777-D0B5-2B79-766B35713043', '官方标配1台', '7000', '2298', '22B10E64-2792-9976-E179-2481FBD15CB5');
 INSERT INTO `shopp_specification` VALUES ('209CF837-B514-76ED-4839-BF003468C806', '420L', '250', '5200', 'FF815C07-E3C4-C632-F29C-42FE92C32AF9');
 INSERT INTO `shopp_specification` VALUES ('2627F13D-D154-2456-B832-88CB1B3A365E', 'AEJE 5.1家庭影院音响套装', '1988', '166', '241411DE-FEBB-E3B4-4FE8-F73BDE54B32B');
 INSERT INTO `shopp_specification` VALUES ('293F5C8B-7ACC-89CF-198F-1087811B8C68', '草莓味120g', '20', '67', 'F51D327E-3EFE-0E64-BA0A-E122DB83F189');
@@ -722,6 +1032,7 @@ INSERT INTO `shopp_type` VALUES ('B619C389-BE62-40B1-0F25-4B5E60B356D2', '家电
 INSERT INTO `shopp_type` VALUES ('D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '日常用品');
 INSERT INTO `shopp_type` VALUES ('F994FC1C-7A5F-16A6-70E4-1672633B13D6', '美妆');
 INSERT INTO `shopp_type` VALUES ('FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '图书');
+INSERT INTO `shopp_user` VALUES ('426D79CF-279A-2033-0A77-72166CC15CC1', 'test3@qq.com', 'test3', '5162736a116c118de3794a98cfbad7a17da14180', null, '3333', '201703121108522629.png', '', null);
 INSERT INTO `shopp_user` VALUES ('5D754767-F3D5-1D93-E588-856B288B08CC', 'admin@qq.com', 'admin', '0ec0cebaee2a51bb93589ef32bb8341a228f320d', null, '11111', '201702181841206215.png', '', null);
 INSERT INTO `shopp_user` VALUES ('98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', 'test1@qq.com', '张三', '0cff20526af50e37b8fe8c49313f2ae1a1e622ab', '张三疯', '7788', '201702130142467173.png', '有个性！没签名！', null);
-INSERT INTO `shopp_user` VALUES ('AA692D26-B786-D8A0-1420-F8F33264485C', 'home@qq.com', '欢歌', '67f8fabb2588f0458e77a71eed57eccc3c6771f3', null, '66666', '201702192157572704.png', '', null);
+INSERT INTO `shopp_user` VALUES ('AA692D26-B786-D8A0-1420-F8F33264485C', 'home@qq.com', '欢歌', '67f8fabb2588f0458e77a71eed57eccc3c6771f3', '诡异的微笑', '66666', '201702192157572704.png', '', null);

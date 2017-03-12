@@ -69,6 +69,10 @@ class CommodityController extends Controller
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
                 $user = User::getUserBySession("home");
+                $commentImg = "/SpeedyShopping/public//uploads/comment_images/";
+                $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+                $this->assign("iconRoot", $iconRoot);
+                $this->assign("commentImg",$commentImg);
                 $this->assign("user",$user);
                 $this->assign("commodity",$commodity);
                 $this->assign("parameters",$commodityParameters);

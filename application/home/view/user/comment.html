@@ -1,0 +1,432 @@
+{layout name="layout" /}
+<block name="titel"><title>评价</title></block>
+<block name="resources">
+    {load href="__PUBLIC__/static/js/startScore.js" /}
+</block>
+
+<style>
+    ol.tb-rate-nav-steps {
+        *zoom: 1;
+        overflow: hidden;
+        margin: 20px 0;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    ol.tb-rate-nav-steps li.done {
+        color: #F60;
+        background-color: #FFE6BA;
+        background-position: 100% -46px;
+    }
+
+    ol.tb-rate-nav-steps li.last-current {
+        color: #FFF;
+        background-color: #F60;
+        background-position: 100% -161px;
+    }
+
+    ol.tb-rate-nav-steps li.last-current {
+        color: #FFF;
+    }
+
+    ol.tb-rate-nav-steps li {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 23px;
+        text-align: center;
+        color: #404040;
+    }
+
+    ol.tb-rate-nav-steps li.current-prev {
+        background-position: 100% -23px !important;
+    }
+
+    ol.tb-rate-nav-steps li {
+        float: left;
+        background: #e4e4e4 url(//assets.alicdn.com/sys/common/img/flow_steps_bg.png) no-repeat 100% 0;
+        font-size: 14px;
+        font-weight: 700;
+        height: 23px;
+        line-height: 23px;
+        text-align: center;
+        color: #404040;
+        padding: 0 15px 0 0;
+        overflow: hidden;
+        width: 222px;
+    }
+
+    body, li, p, ul {
+        margin: 0;
+        padding: 0;
+        font: 12px/1 Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    }
+
+    ul, li, ol {
+        list-style: none;
+    }
+
+    /* 重置文本格式元素 */
+    a {
+        text-decoration: none;
+        cursor: pointer;
+        color: #333333;
+        font-size: 14px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .clearfix::after {
+        display: block;
+        content: '';
+        height: 0;
+        overflow: hidden;
+        clear: both;
+    }
+
+    /*星星样式*/
+    .content {
+        width: 600px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+
+    .title {
+        font-size: 14px;
+        background: #dfdfdf;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .block {
+        width: 100%;
+        margin: 0 0 20px 0;
+        padding-top: 10px;
+        padding-left: 50px;
+        line-height: 21px;
+    }
+
+    .block .star_score {
+        float: left;
+    }
+
+    .star_list {
+        height: 21px;
+        margin: 50px;
+        line-height: 21px;
+    }
+
+    .block p, .block .attitude {
+        padding-left: 20px;
+        line-height: 21px;
+        display: inline-block;
+    }
+
+    .block p span {
+        color: #C00;
+        font-size: 16px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+    .star_score {
+        background: url(/SpeedyShopping/public/static/images/stark2.png);
+        width: 160px;
+        height: 21px;
+        position: relative;
+    }
+
+    .star_score a {
+        height: 21px;
+        display: block;
+        text-indent: -999em;
+        position: absolute;
+        left: 0;
+    }
+
+    .star_score a:hover {
+        background: url(/SpeedyShopping/public/static/images/stars2.png);
+        left: 0;
+    }
+
+    .star_score a.clibg {
+        background: url(/SpeedyShopping/public/static/images/stars2.png);
+        left: 0;
+    }
+
+    /*#starttwo .star_score { background:url(images/starky.png);}*/
+    /*#starttwo .star_score a:hover{ background:url(images/starsy.png);left:0;}*/
+    /*#starttwo .star_score a.clibg{ background:url(images/starsy.png);left:0;}*/
+    /*星星样式*/
+    .show_number {
+        padding-left: 50px;
+        padding-top: 20px;
+    }
+
+    .show_number li {
+        width: 240px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-right: 5px;
+        margin-bottom: 20px;
+    }
+
+    .atar_Show {
+        background: url(/SpeedyShopping/public/static/images/stark2.png);
+        width: 160px;
+        height: 21px;
+        position: relative;
+        float: left;
+    }
+
+    .atar_Show p {
+        background: url(/SpeedyShopping/public/static/images/stars2.png);
+        left: 0;
+        height: 21px;
+        width: 134px;
+    }
+
+    .show_number li span {
+        display: inline-block;
+        line-height: 21px;
+    }
+</style>
+<ol class="tb-rate-nav-steps">
+    <li class="done"><span class="first">1. 确认订单信息</span></li>
+    <li class="done"><span>2. 付款到周边送</span></li>
+    <li class="done current-prev"><span>3. 确认收货</span></li>
+    <li class="last-current"><strong>4. 评价</strong></li>
+</ol>
+
+<select onchange="selectCommodity()" id="select_commodity">
+    {volist name="order['orderSpecifications']" id="OSitem"}
+    <option value="{$OSitem['specification']['id']}">
+        <span>{$OSitem['specification']['commodity']['title']}</span>
+    </option>
+    {/volist}
+</select>
+
+<p class="title">为您购买到的宝贝评个分吧</p>
+<div id="startone" class="block clearfix">
+    <div class="star_score"></div>
+    <p style="float:left;">您的评分：<span class="fenshu" id="grade"></span> 分</p>
+    <div class="attitude"></div>
+</div>
+<div>
+    <label>
+        <textarea cols="50" rows="6" style="border:1px #000 solid;" id="comment_content"></textarea>
+    </label>
+</div>
+<div>
+    添加图片：<input type="file" id="selFile" multiple="true" onchange="getPicFile()"/>
+    <button type="button" class="btn btn-success" style="width: 70px" onclick="postComment()">提交</button>
+    <br/></div>
+<span id="showInfo"></span>
+
+<script>
+    scoreFun($("#startone"))
+    scoreFun($("#starttwo"), {
+        fen_d: 22,//每一个a的宽度
+        ScoreGrade: 5//a的个数 10或者
+    })
+</script>
+<script type="text/javascript">
+    /**
+     * 选择商品
+     */
+    function selectCommodity() {
+        var select_commodity = document.getElementById("select_commodity");
+
+    }
+</script>
+<script type="text/javascript">
+    var arrayFile = [];
+    /**
+     * 将用户选择的图片文件显示出来预览
+     * @author 陈有欢
+     */
+    function getPicFile() {
+        var filelist = document.getElementById("selFile");
+        if (filelist.files.length == 0) {
+            alert("请选择图片")
+        } else {
+            for (var i = 0; i < filelist.files.length; i++) {
+                var file = filelist.files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    alert(file.name + " 只能上传图片文件！")
+                    continue;
+                }
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var index = Math.ceil(Math.random() * 10000);
+                    arrayFile[index] = e.target.result;
+                    document.getElementById("showInfo").innerHTML +=
+                        "<div style='display:inline;float: left'><div><img src=" + e.target.result + " width=200 height=150 style='padding-right:50px;padding-bottom:20px'/></div>" +
+                        "<div><a href='#' onclick=deteleImg('" + index + "')>删除</a></div></div>";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+    //删除一个正在预览中的图片
+    function deteleImg(index) {
+//        var img = arrayFile[index];
+//        document.getElementById("showOnclik").innerHTML = "";
+//        document.getElementById("showOnclik").innerHTML +=
+//            "<img src=" + img + " width=200 height=150 style='padding-right:50px;padding-bottom:20px'/><br/>";
+
+        document.getElementById("showInfo").innerHTML = "";
+        arrayFile = remove(arrayFile, index);
+        var val = "";
+        for (var base64Item in arrayFile) {
+            val +=
+                "<div style='display:inline;float: left'><div><img src=" + arrayFile[base64Item] + " width=200 height=150 style='padding-right:50px;padding-bottom:20px'/></div>" +
+                "<div><a href='#' onclick=deteleImg('" + base64Item + "')>删除</a></div></div>";
+        }
+        document.getElementById("showInfo").innerHTML = val;
+    }
+    /**
+     * js自定义从一个数组中根据下标值移除一个数组，返回新的数组
+     * @author 陈有欢
+     * @param array
+     * @param index
+     * @returns {Array}
+     */
+    function remove(array, index) {
+        var NewArray = [];
+        var val = array[index];
+        for (var item in array) {
+            if (array[item] == val) {
+                continue;
+            } else {
+                NewArray[item] = array[item];
+            }
+        }
+        return NewArray;
+    }
+
+    /**
+     * 提交评论
+     */
+    function postComment() {
+//        var select_commodity = document.getElementById("select_commodity");
+        var orderId = "{$order['id']}";
+        var grade = document.getElementById("grade");
+        var specificationId =$('#select_commodity option:selected') .val();//选中的值
+        var fenshu = grade.innerText;
+        var content =$("#comment_content").val();
+        if (specificationId==""){
+            alert("商品规格的ID不能为空");
+            return;
+        }
+        if (fenshu==""){
+            alert("亲！！请先给宝贝打分儿吧！")
+            return;
+        }
+        if (content==""){
+            alert("亲！！收到的宝贝咋样呢？说两句吧！")
+            return;
+        }
+
+        var ImagesStr = "";
+        for (var index in arrayFile){
+            var base64 = arrayFile[index];
+            ImagesStr += base64+"#####"
+        }
+        //JSON.stringify(arrayFile)
+
+        $.ajax({
+            type: "POST",
+            url: "{:url('home/user/commentHandle')}",
+            dataType: "json",
+            data: {
+                orderId: orderId,
+                specificationId:specificationId,
+                fenshu:fenshu,
+                content:content,
+                commentImages:ImagesStr
+            },
+            success: function (msg) {
+                switch (msg) {
+                    case "ReceiptSuccess":
+//                        var url = "{:url('home/user/orderDetailed?orderId=')}";
+//                        var pot = url.indexOf(".");
+//                        url = url.substring(0,pot);
+//                        url = url+"?orderId="+orderId;
+////                                alert(url);
+//                        window.location = url;
+                        break;
+                    case "PostError":
+                        //非法请求
+                        alert("非法请求");
+                        break;
+                    case "ParameterError":
+                        //参数错误
+                        alert("参数错误！");
+                        break;
+                    case "OrderNull":
+                        alert('这个订单从地球上消失了~~');
+                        break;
+                    default:
+                }
+            },
+            error: function (msg) {
+                console.log(msg);
+//                alert(msg);
+            },
+        });
+//        alert("订单ID："+orderId+"规格id:"+specificationId+"  分数："+fenshu+"  内容："+content);
+    }
+</script>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var oStar = document.getElementById("star");
+        var aLi = oStar.getElementsByTagName("li");
+        var oUl = oStar.getElementsByTagName("ul")[0];
+        var oSpan = oStar.getElementsByTagName("span")[1];
+        var oP = oStar.getElementsByTagName("p")[0];
+        var i = iScore = iStar = 0;
+        var aMsg = [
+            "很不满意|差得太离谱，与卖家描述的严重不符，非常不满",
+            "不满意|部分有破损，与卖家描述的不符，不满意",
+            "一般|质量一般，没有卖家描述的那么好",
+            "满意|质量不错，与卖家描述的基本一致，还是挺满意的",
+            "非常满意|质量非常好，与卖家描述的完全一致，非常满意"
+        ]
+        for (i = 1; i <= aLi.length; i++) {
+            aLi[i - 1].index = i;
+            //鼠标移过显示分数
+            aLi[i - 1].onmouseover = function () {
+                fnPoint(this.index);
+                //浮动层显示
+                oP.style.display = "block";
+                //计算浮动层位置
+                oP.style.left = oUl.offsetLeft + this.index * this.offsetWidth - 104 + "px";
+                //匹配浮动层文字内容
+                oP.innerHTML = "<em><b>" + this.index + "</b> 分 " + aMsg[this.index - 1].match(/(.+)\|/)[1] + "</em>" + aMsg[this.index - 1].match(/\|(.+)/)[1]
+            };
+            //鼠标离开后恢复上次评分
+            aLi[i - 1].onmouseout = function () {
+                fnPoint();
+                //关闭浮动层
+                oP.style.display = "none"
+            };
+            //点击后进行评分处理
+            aLi[i - 1].onclick = function () {
+                iStar = this.index;
+                oP.style.display = "none";
+                oSpan.innerHTML = "<strong>" + (this.index) + " 分</strong> (" + aMsg[this.index - 1].match(/\|(.+)/)[1] + ")"
+            }
+        }
+        //评分处理
+        function fnPoint(iArg) {
+            //分数赋值
+            iScore = iArg || iStar;
+            for (i = 0; i < aLi.length; i++) aLi[i].className = i < iScore ? "on" : "";
+        }
+    };
+</script>

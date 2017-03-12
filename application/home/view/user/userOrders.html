@@ -213,7 +213,7 @@
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a></th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">0</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu5'])}">待评价<i style="color: red">{$order_5}</i></a></th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
             </tr>
         </table>
@@ -280,7 +280,7 @@
                         {case value="3"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
                         {case value="4"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
                         {case value="5"}
-                        <a href="#" class="text-mod">去评价</a>
+                        <a href="{:url('home/user/comment',['orderId'=>$order['id']])}" class="text-mod">去评价</a>
                         <br/>
                         <a href="#" class="text-mod">退换货</a>
                         <br/>
