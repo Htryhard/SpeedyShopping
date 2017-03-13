@@ -298,10 +298,6 @@
                         </button>
                         {/case}
                         {case value="5"}
-                        <a href="{:url('home/user/comment',['orderId'=>$order['id']])}" class="text-mod">去评价</a>
-                        <br/>
-                        <a href="#" class="text-mod">退换货</a>
-                        <br/>
                         <a class="text-mod" href="#" onclick=deleteOrder("delete","{$order['id']}")>删除订单</a>
                         {/case}
                         {case value="7"}
@@ -315,7 +311,7 @@
                 </tr>
                 <tr>
                     <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">
-                        规格：{$order['orderSpecifications'][0]['specification']['content']}
+                        规格：{$order['orderSpecifications'][0]['specificationcontent']}
                     </td>
                 </tr>
                 <tr>

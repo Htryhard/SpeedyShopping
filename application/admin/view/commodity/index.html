@@ -36,7 +36,13 @@
         <td>{$item['type']['content']}</td>
         <td>{:date('Y-m-d ',$item->getData('creation_time'))}</td>
         <td>{$item->getData('staistics')}</td>
-        <td>{$item->getData('grade')}</td>
+        <td>
+            {if condition="($item->getData('grade') == 0)"}
+            0
+            {else /}
+            {$item->getData('grade')/$item->getData('staistics')}
+            {/if}
+        </td>
         <td>
             <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> |
             <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">编辑</a>

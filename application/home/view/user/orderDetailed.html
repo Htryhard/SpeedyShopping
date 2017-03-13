@@ -36,6 +36,7 @@
             <th>单价</th>
             <th>数量</th>
             <th>小计</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -46,10 +47,16 @@
                      style="width: 50px; height: 50px" class="img-rounded">
                 {$orderSpecifications['specification']['commodity']['title']}
             </td>
-            <td>{$orderSpecifications['specification']['content']}</td>
-            <td>{$orderSpecifications['specification']['price']}</td>
+            <td>{$orderSpecifications['specificationcontent']}</td>
+            <td>{$orderSpecifications['price']}</td>
             <td>{$orderSpecifications['count']}</td>
-            <td class="td_xiaoji">{$orderSpecifications['count']*$orderSpecifications['specification']['price']}</td>
+            <td class="td_xiaoji">{$orderSpecifications['count']*$orderSpecifications['price']}</td>
+            <td>
+                <a href="{:url('home/user/comment',['orderId'=>$order['id'],'specificationId'=>$orderSpecifications['specification']['id']])}" class="text-mod">去评价</a>
+                <br/>
+                <a href="{:url('home/user/refunds',['orderId'=>$order['id'],'specificationId'=>$orderSpecifications['specification']['id']])}" class="text-mod">退换货</a>
+                <br/>
+            </td>
         </tr>
         {/volist}
         </tbody>

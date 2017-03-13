@@ -36,7 +36,7 @@
     <tr>
         <td>{$key}</td>
         <td>{$item->getData('order_number')}</td>
-        <td>{:date('Y-m-d H:m:i',$item->getData('order_time'))}</td>
+        <td>{:date('Y年m月d日 H:m:i',$item->getData('order_time'))}</td>
         <td>{$item['address']['user_name']}</td>
         <td>{$item['address']['phone']}</td>
         <td>{$item->status}</td>

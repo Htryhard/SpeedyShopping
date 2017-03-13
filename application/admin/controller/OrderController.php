@@ -79,10 +79,15 @@ class OrderController extends BaseController
         if ($user != null && $order != null) {
             $this->assign("user", $user);
             $this->assign("order", $order);
+
             return $this->fetch();
         } else {
             return $this->error("订单不存在或者登陆已过期，请重新登陆！");
         }
+    }
+
+    public function editOrderHandle(){
+
     }
 
 

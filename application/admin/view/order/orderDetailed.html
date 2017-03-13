@@ -3,7 +3,7 @@
 <block name="resources">
 
 </block>
-<div class="container">
+<div class="panel panel-default" >
     <div style="page-break-after: always;">
         <h1 class="text-center">订单信息</h1>
         <table class="table table-bordered">
@@ -67,10 +67,10 @@
             <tr>
                 <td>{$key}</td>
                 <td>{$item['specification']['commodity']['title']}</td>
-                <td>{$item['specification']['content']}</td>
+                <td>{$item['specificationcontent']}</td>
                 <td>{$item['count']}</td>
-                <td>{$item['specification']['price']}</td>
-                <td class="text-right">{$item['count']*$item['specification']['price']}</td>
+                <td>{$item['price']}</td>
+                <td class="text-right">{$item['count']*$item['price']}</td>
             </tr>
             {/volist}
             </tbody>

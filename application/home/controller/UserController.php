@@ -19,6 +19,7 @@ use app\common\model\CommentImages;
 use app\common\model\Commodity;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
+use app\common\model\Refunds;
 use app\common\model\Specification;
 use app\common\model\User;
 use think\Controller;
@@ -455,6 +456,8 @@ class UserController extends BaseController
                     $orderSpecification->id = Comm::getNewGuid();
                     $orderSpecification->order_id = $order['id'];
                     $orderSpecification->count = $count;
+                    $orderSpecification->price = $specification->getData("price");
+                    $orderSpecification->specificationcontent = $specification['content'];
                     $orderSpecification->specification_id = $specification['id'];
                     $orderSpecification->save();
 
@@ -543,6 +546,8 @@ class UserController extends BaseController
                         $orderSpecification->id = Comm::getNewGuid();
                         $orderSpecification->order_id = $order['id'];
                         $orderSpecification->count = $item['count'];
+                        $orderSpecification->price = $item['Specification']['price'];
+                        $orderSpecification->specificationcontent = $item['Specification']['content'];
                         $orderSpecification->specification_id = $item['Specification']['id'];
                         $orderSpecification->save();
 
@@ -761,16 +766,20 @@ class UserController extends BaseController
     }
 
     //用户评论商品
-    public function comment($orderId)
+    public function comment($orderId, $specificationId)
     {
-        if ($orderId != null) {
+        if ($orderId != null && $specificationId != null) {
             $order = Order::get(['id' => $orderId]);
-            if ($order == null) {
-                return $this->error('订单不存在！');
+            $specification = Specification::get(["id" => $specificationId]);
+            if ($order == null && $specification != null) {
+                return $this->error('订单或者商品不存在！');
             }
             $user = User::getUserBySession("home");
             $this->assign('order', $order);
             $this->assign("user", $user);
+            $this->assign("specification", $specification);
+            $imgRoot = "/SpeedyShopping/public//uploads/commodity_images/";
+            $this->assign("imgRoot", $imgRoot);
             return $this->fetch();
         } else {
             return $this->error("参数不全！");
@@ -798,12 +807,18 @@ class UserController extends BaseController
                 }
                 $commodityId = $specification['commodity']['id'];
                 //判断是否已经对这次购买的商品评论过
-                $comment = Comment::get(['order_id'=>$orderId,'user_id'=>$user->getData('id'),"specification_id"=>$specification->getData('id')]);
-                if ($comment!=null){
+                $comment = Comment::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "specification_id" => $specification->getData('id')]);
+                if ($comment != null) {
                     return "CommentRepeated";
                 }
+                $commodity = Commodity::get(['id'=>$commodityId]);
+                $grade = $commodity->getData("grade");
+                $grade = $grade+$fenshu;
+                $commodity->grade = $grade;
+                $commodity->save();
+
                 $comment = new Comment();
-                $comment->id =Comm::getNewGuid();
+                $comment->id = Comm::getNewGuid();
                 $comment->content = $commentContent;
                 $comment->grade = $fenshu;
                 $comment->creation_time = time();
@@ -821,7 +836,7 @@ class UserController extends BaseController
                     foreach ($imgArray as $item) {
                         $commentImgPath = Comm::uploadsCommentImg($item, "uploads/comment_images/");
                         $commentImageModle = new CommentImages();
-                        $commentImageModle->id =Comm::getNewGuid();
+                        $commentImageModle->id = Comm::getNewGuid();
                         $commentImageModle->image = $commentImgPath;
                         $commentImageModle->comment_id = $comment->getData("id");
                         $commentImageModle->save();
@@ -835,6 +850,76 @@ class UserController extends BaseController
         } else {
             return "PostError";
         }
+    }
+
+    /**
+     * 退换货
+     * @param $orderId
+     * @param $specificationId
+     * @return mixed|void
+     */
+    public function refunds($orderId, $specificationId)
+    {
+        if ($orderId != null && $specificationId != null) {
+            $order = Order::get(['id' => $orderId]);
+            $specification = Specification::get(["id" => $specificationId]);
+            if ($order == null && $specification != null) {
+                return $this->error('订单或者商品不存在！');
+            }
+            $user = User::getUserBySession("home");
+            $this->assign('order', $order);
+            $this->assign("user", $user);
+            $this->assign("specification", $specification);
+            $imgRoot = "/SpeedyShopping/public//uploads/commodity_images/";
+            $this->assign("imgRoot", $imgRoot);
+            return $this->fetch();
+        } else {
+            return $this->error("参数不全！");
+        }
+    }
+
+    /**
+     * 退换货处理
+     * @return string
+     */
+    public function refundsHandle()
+    {
+        if ($this->request->isAjax()) {
+            $select_type = $this->request->post("select_type");
+            $orderId = $this->request->post("orderId");
+            $specificationId = $this->request->post("specificationId");
+            $refunds_content = $this->request->post("refunds_content");
+            if ($orderId != "" && $specificationId != "" && $select_type != "" && $refunds_content != "") {
+                $user = User::getUserBySession("home");
+                $specification = Specification::get(['id' => $specificationId]);
+                if ($specification == null) {
+                    return "SpecificationNull";
+                }
+                $commodityId = $specification['commodity']['id'];
+                //判断是否已经对这次购买的商品进行退换货操作过
+                $refund = Refunds::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "specification_id" => $specification->getData('id')]);
+                if ($refund != null) {
+                    return "RefundsRepeated";
+                }
+                $refund = new Refunds();
+                $refund->id = Comm::getNewGuid();
+                $refund->type = $select_type;
+                $refund->content = $refunds_content;
+                $refund->creation_time = time();
+                $refund->user_id = $user->getData("id");
+                $refund->order_id = $orderId;
+                $refund->specification_id = $specification->getData('id');
+                $refund->status = 0;//0待审核，1，2
+                $refund->save();
+                return "success";
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            return "PostError";
+        }
+
     }
 
 }

@@ -1,0 +1,95 @@
+{layout name="layout" /}
+<block name="titel"><title>退换货申请</title></block>
+<block name="resources"></block>
+<div>
+    <table>
+        <tr>
+            <td rowspan="2">
+                <img src="{$imgRoot.$specification['commodity']['images'][0]['image']}" width="150" height="100"
+                     class='img-rounded'>
+            </td>
+            <td>
+                <span>【{$specification['commodity']['title']}】</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;<span style="color: slategray">规格：{$specification['content']}</span>
+                &nbsp;<span style="color: slategray">数量：
+                {volist name="order['orderSpecifications']" id="ospecifications"}
+                    {eq name="ospecifications['specification_id']" value="$specification['id']"}
+                        {$ospecifications['count']}
+                    {/eq}
+                {/volist}
+
+            </span>
+                &nbsp;<span style="color: slategray">单价：{$specification['price']}元</span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<label>退换类型：</label>
+<select style="width: 150px" id="select_type">
+    <option value="0">返修</option>
+    <option value="1">退货</option>
+    <option value="2">换货</option>
+</select>
+<br/>
+<label>描述您退换的原因：</label>
+<div>
+    <label>
+        <textarea cols="50" rows="6" style="border:1px #000 solid;" id="refunds_content"></textarea>
+    </label>
+</div>
+<button type="button" class="btn btn-success" style="width: 70px" onclick="postRefunds()">提交</button>
+
+<script type="text/javascript">
+    function postRefunds() {
+        var refunds_content = $("#refunds_content").val();
+        var select_type = $("#select_type").val();
+        var orderId = "{$order['id']}";
+        var specificationId = "{$specification['id']}";
+        if (refunds_content != "" && select_type != "") {
+            $.ajax({
+                type: "POST",
+                url: "{:url('home/user/refundsHandle')}",
+                dataType: "json",
+                data: {
+                    orderId: orderId,
+                    specificationId: specificationId,
+                    select_type: select_type,
+                    refunds_content: refunds_content
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "success":
+                            alert("您的申请已经提交，请耐心等待管理员审核！");
+                            break;
+                        case "PostError":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        case "SpecificationNull":
+                            alert("没有找到此规格！");
+                            break;
+                        case "RefundsRepeated":
+                            alert('亲！您已经对此商品申请过退货了，请耐心等待管理员审核~~');
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+//                alert(msg);
+                },
+            });
+        } else {
+            alert("请您描述您的理由！");
+        }
+    }
+</script>

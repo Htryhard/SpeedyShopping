@@ -199,13 +199,23 @@
     <li class="last-current"><strong>4. 评价</strong></li>
 </ol>
 
-<select onchange="selectCommodity()" id="select_commodity">
-    {volist name="order['orderSpecifications']" id="OSitem"}
-    <option value="{$OSitem['specification']['id']}">
-        <span>{$OSitem['specification']['commodity']['title']}</span>
-    </option>
-    {/volist}
-</select>
+<div>
+    <table>
+        <tr>
+            <td rowspan="2">
+                <img src="{$imgRoot.$specification['commodity']['images'][0]['image']}" width="150" height="100" class='img-rounded'>
+            </td>
+            <td>
+                <span>【{$specification['commodity']['title']}】</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;<span style="color: slategray">规格：{$specification['content']}</span>
+            </td>
+        </tr>
+    </table>
+</div>
 
 <p class="title">为您购买到的宝贝评个分吧</p>
 <div id="startone" class="block clearfix">
@@ -230,15 +240,6 @@
         fen_d: 22,//每一个a的宽度
         ScoreGrade: 5//a的个数 10或者
     })
-</script>
-<script type="text/javascript">
-    /**
-     * 选择商品
-     */
-    function selectCommodity() {
-        var select_commodity = document.getElementById("select_commodity");
-
-    }
 </script>
 <script type="text/javascript">
     var arrayFile = [];
@@ -314,7 +315,7 @@
 //        var select_commodity = document.getElementById("select_commodity");
         var orderId = "{$order['id']}";
         var grade = document.getElementById("grade");
-        var specificationId = $('#select_commodity option:selected').val();//选中的值
+        var specificationId = "{$specification['id']}";//选中的值
         var fenshu = grade.innerText;
         var content = $("#comment_content").val();
         if (specificationId == "") {
