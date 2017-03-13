@@ -88,7 +88,7 @@ class OrderController extends BaseController
 
     public function editOrderHandle(){
         $commodities = $this->request->param("commodities");
-        var_dump(json_encode($commodities));
+        var_dump(json_decode($commodities));
 
     }
 
