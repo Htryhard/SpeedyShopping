@@ -187,7 +187,6 @@
             dataType: "json",
             data: {
                 orderId: orderId,
-                specificationId: specificationId,
                 receiptName: receiptName,
                 new_xiangxi: new_xiangxi,
                 mobile: mobile,
@@ -202,6 +201,7 @@
 //                        url = url+"?orderId="+orderId;
 ////                                alert(url);
 //                        window.location = url;
+                        alert("订单修改成功！");
                         break;
                     case "PostError":
                         //非法请求
@@ -211,8 +211,8 @@
                         //参数错误
                         alert("参数错误！");
                         break;
-                    case "SpecificationNull":
-                        alert("没有找到此规格！");
+                    case "OrderError":
+                        alert("没有找到此商品！");
                         break;
                     case "CommentRepeated":
                         alert('亲！您已经对商品评论过了~~');
