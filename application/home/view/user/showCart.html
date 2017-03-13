@@ -146,7 +146,7 @@
     }
 
     .s-bar {
-        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
         color: #fff;
         background: #a0cdeb;
         border: #a0cdeb;
@@ -195,16 +195,19 @@
         <div style="height: 80px;"></div>
         <div id="box_userMsg">
             <div id="box_user">
-                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
+                <img src="{$iconRoot.$user['icon']}" height="90" width="90" class="img-circle">&nbsp;&nbsp;&nbsp;
                 <span><a href="{:url('home/user/userMessage')}">{$user['user_name']}</a></span>
             </div>
             <div id="box_userSta"></div>
         </div>
         <table border="1" width="700px">
             <tr>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a>
+                </th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">0</i></a></th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
             </tr>
@@ -216,7 +219,8 @@
             <table class="table table-hover">
                 <thead>
                 <tr class="info">
-                    <td style="font-size: 10px"><label><input type="checkbox" id="all_check" onclick="allCheck()"/>全选</label></td>
+                    <td style="font-size: 10px"><input type="checkbox" id="all_check"
+                                                              onclick="allCheck()"/></td>
                     <td>店铺宝贝</td>
                     <td>商品规格</td>
                     <td>单价</td>
@@ -232,7 +236,7 @@
                     <td><input name="one_check" type="checkbox" onclick=checkDoing("{$item['id']}")></td>
                     <td>
                         <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}"
-                             style="width: 50px; height: 50px">
+                             style="width: 50px; height: 50px" class="img-rounded">
                         <span style="font-size: 16px">{$item['Specification']['commodity']['title']}</span>
                     </td>
                     <td>{$item['Specification']['content']}</td>
@@ -258,7 +262,8 @@
                     <th colspan="1"></th>
                     <th>合计：<span id="heji">00.00</span> 元</th>
                     <th>
-                        &nbsp;<button type="button" class="btn btn-danger" onclick="orderPost()">结算</button>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger" onclick="orderPost()">结算</button>
                     </th>
                 </tr>
             </table>

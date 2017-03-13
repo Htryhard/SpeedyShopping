@@ -4,7 +4,8 @@
 <div>
     <span>选择地址</span><br/>
     {volist name="$user['address']" id="item"}
-    <input type="radio" name="addressId" id="rAddressId_{$item['id']}" value="{$item['id']}" onclick=changeAddress("{$item['id']}")>
+    <input type="radio" name="addressId" id="rAddressId_{$item['id']}" value="{$item['id']}"
+           onclick=changeAddress("{$item['id']}")>
     {$item['content']}({$item['user_name']} 收) {$item['phone']}
     <br/>
     {/volist}
@@ -12,7 +13,7 @@
 
 <div style="width: 90%">
     <span>确认订单信息</span><br/>
-    <table class="table table-hover"  >
+    <table class="table table-hover">
         <thead>
         <tr class="info">
             <th>店铺宝贝</th>
@@ -26,7 +27,8 @@
         {volist name="CartSpecifications" id="item"}
         <tr>
             <td>
-                <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}" style="width: 50px; height: 50px">
+                <img src="__PUBLIC__/uploads/commodity_images/{$item['Specification']['commodity']['images'][0]['image']}"
+                     style="width: 50px; height: 50px" class="img-rounded">
                 {$item['Specification']['commodity']['title']}
             </td>
             <td>{$item['Specification']['content']}</td>
@@ -48,14 +50,14 @@
 <script type="text/javascript">
     function postBuy() {
         var hi_addressId = document.getElementById("addressId");
-        if (hi_addressId.value == ""){
+        if (hi_addressId.value == "") {
             alert("请选择地址！");
-        }else {
+        } else {
             $("#post_bay").submit();
         }
     }
     function changeAddress(addressId) {
-        var id = document.getElementById("rAddressId_"+addressId).value;
+        var id = document.getElementById("rAddressId_" + addressId).value;
         document.getElementById("addressId").value = "";
         document.getElementById("addressId").value = id;
     }

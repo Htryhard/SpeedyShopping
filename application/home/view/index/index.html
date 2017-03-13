@@ -220,7 +220,7 @@
     <!--class="conten_margin col-md-"-->
     <div class="conten_margin">
         <a href="{:url('home/commodity/commodityDetailed?id='.$commodity->getData('id'))}">
-            <img src="{$imgRoot}{$commodity.images[0]['image']}" style="height: 220px;width: 180px;"/></a>
+            <img src="{$imgRoot}{$commodity.images[0]['image']}" style="height: 220px;width: 180px;" class="img-rounded"/></a>
         <section class="pricea">&yen;{$commodity['specifications'][0]['price']}</section>
         <section class="titlea">{$commodity.title}</section>
         <section class="pingjiaa">已有<i class="pingjiab">{$commodity['staistics']}</i>人购买</section>

@@ -146,7 +146,7 @@
     }
 
     .s-bar {
-        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
         color: #fff;
         background: #a0cdeb;
         border: #a0cdeb;
@@ -157,7 +157,8 @@
         position: relative;
         width: 85%;
     }
-    .text-mod{
+
+    .text-mod {
         font-family: sans-serif;
         color: #333;
         text-decoration: none;
@@ -203,17 +204,21 @@
         <div style="height: 80px;"></div>
         <div id="box_userMsg">
             <div id="box_user">
-                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
+                <img src="{$iconRoot.$user['icon']}" height="90" width="90" class="img-circle">&nbsp;&nbsp;&nbsp;
                 <span><a href="{:url('home/user/userMessage')}">{$user['user_name']}</a></span>
             </div>
             <div id="box_userSta"></div>
         </div>
         <table border="1" width="700px">
             <tr>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu5'])}">待评价<i style="color: red">{$order_5}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu5'])}">待评价<i style="color: red">{$order_5}</i></a>
+                </th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
             </tr>
         </table>
@@ -228,10 +233,11 @@
                 <tr>
                     <td rowspan="3">
                         <img src="{$imgRoot}{$order['orderSpecifications'][0]['specification']['commodity']['images'][0]['image']}"
-                             style="height: 90px;width: 80px;"/>
+                             style="height: 90px;width: 80px;" class="img-rounded"/>
                     </td>
                     <td style="text-overflow: ellipsis;overflow:hidden;width: 40%;">
-                        <a href="{:url('home/user/orderDetailed',['orderId'=>$order['id']])}" style="color: black;font-family: 微软雅黑">
+                        <a href="{:url('home/user/orderDetailed',['orderId'=>$order['id']])}"
+                           style="color: black;font-family: 微软雅黑">
                             {$order['orderSpecifications'][0]['specification']['commodity']['title']}
                         </a>
                     </td>
@@ -275,10 +281,22 @@
                         <br/>
                         <a href="#" class="text-mod" onclick=deleteOrder("cancel","{$order['id']}")>取消订单</a>
                         {/case}
-                        {case value="1"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
-                        {case value="2"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
-                        {case value="3"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
-                        {case value="4"}<button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货</button>{/case}
+                        {case value="1"}
+                        <button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货
+                        </button>
+                        {/case}
+                        {case value="2"}
+                        <button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货
+                        </button>
+                        {/case}
+                        {case value="3"}
+                        <button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货
+                        </button>
+                        {/case}
+                        {case value="4"}
+                        <button type="button" class="btn btn-info" onclick=confirmReceipt("{$order['id']}")>确认收货
+                        </button>
+                        {/case}
                         {case value="5"}
                         <a href="{:url('home/user/comment',['orderId'=>$order['id']])}" class="text-mod">去评价</a>
                         <br/>
@@ -296,10 +314,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">规格：{$order['orderSpecifications'][0]['specification']['content']}</td>
+                    <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">
+                        规格：{$order['orderSpecifications'][0]['specification']['content']}
+                    </td>
                 </tr>
                 <tr>
-                    <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">下单时间：{:date('Y-m-d H:i:s',$order['order_time'])}</td>
+                    <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">下单时间：{:date('Y-m-d
+                        H:i:s',$order['order_time'])}
+                    </td>
                 </tr>
             </table>
             <hr/>
@@ -329,8 +351,8 @@
                         case "ReceiptSuccess":
                             var url = "{:url('home/user/orderDetailed?orderId=')}";
                             var pot = url.indexOf(".");
-                            url = url.substring(0,pot);
-                            url = url+"?orderId="+orderId;
+                            url = url.substring(0, pot);
+                            url = url + "?orderId=" + orderId;
 //                                alert(url);
                             window.location = url;
                             break;
@@ -356,21 +378,21 @@
     }
 
     function deleteOrder(type, orderId) {
-        if (type != "" && orderId != ""){
+        if (type != "" && orderId != "") {
             var t = "";
-            if (type=="delete"){
-                t="删除";
-            }else if (type=="cancel"){
+            if (type == "delete") {
+                t = "删除";
+            } else if (type == "cancel") {
                 t = "取消"
             }
-            if (confirm("您确定要"+t+"此订单吗？")) {
+            if (confirm("您确定要" + t + "此订单吗？")) {
                 $.ajax({
                     type: "POST",
                     url: "{:url('home/user/deleteOrder')}",
                     dataType: "json",
                     data: {
                         orderId: orderId,
-                        type:type
+                        type: type
                     },
                     success: function (msg) {
                         switch (msg) {
@@ -399,7 +421,7 @@
                     },
                 });
             }
-        }else {
+        } else {
             alert("参数错误！");
         }
     }

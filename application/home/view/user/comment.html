@@ -72,7 +72,6 @@
         text-decoration: none;
         cursor: pointer;
         color: #333333;
-        font-size: 14px;
     }
 
     a:hover {
@@ -264,8 +263,8 @@
                     var index = Math.ceil(Math.random() * 10000);
                     arrayFile[index] = e.target.result;
                     document.getElementById("showInfo").innerHTML +=
-                        "<div style='display:inline;float: left'><div><img src=" + e.target.result + " width=200 height=150 style='padding-right:50px;padding-bottom:20px'/></div>" +
-                        "<div><a href='#' onclick=deteleImg('" + index + "')>删除</a></div></div>";
+                        "<div style='display:inline;float: left'><div><img src=" + e.target.result + " width=200 height=150 style='padding-right:50px;padding-bottom:20px' class='img-rounded'/></div>" +
+                        "<div><a href='#' onclick=deteleImg('" + index + "')><img src='__PUBLIC__/static/images/delete.png' width='20px;'height='20px'></a></div></div>";
                 };
                 reader.readAsDataURL(file);
             }
@@ -283,8 +282,8 @@
         var val = "";
         for (var base64Item in arrayFile) {
             val +=
-                "<div style='display:inline;float: left'><div><img src=" + arrayFile[base64Item] + " width=200 height=150 style='padding-right:50px;padding-bottom:20px'/></div>" +
-                "<div><a href='#' onclick=deteleImg('" + base64Item + "')>删除</a></div></div>";
+                "<div style='display:inline;float: left'><div><img src=" + arrayFile[base64Item] + " width=200 height=150 style='padding-right:50px;padding-bottom:20px' class='img-rounded'/></div>" +
+                "<div><a href='#' onclick=deteleImg('" + base64Item + "')><img src='__PUBLIC__/static/images/delete.png' width='20px;'height='20px'></a></div></div>";
         }
         document.getElementById("showInfo").innerHTML = val;
     }
@@ -315,26 +314,26 @@
 //        var select_commodity = document.getElementById("select_commodity");
         var orderId = "{$order['id']}";
         var grade = document.getElementById("grade");
-        var specificationId =$('#select_commodity option:selected') .val();//选中的值
+        var specificationId = $('#select_commodity option:selected').val();//选中的值
         var fenshu = grade.innerText;
-        var content =$("#comment_content").val();
-        if (specificationId==""){
+        var content = $("#comment_content").val();
+        if (specificationId == "") {
             alert("商品规格的ID不能为空");
             return;
         }
-        if (fenshu==""){
+        if (fenshu == "") {
             alert("亲！！请先给宝贝打分儿吧！")
             return;
         }
-        if (content==""){
+        if (content == "") {
             alert("亲！！收到的宝贝咋样呢？说两句吧！")
             return;
         }
 
         var ImagesStr = "";
-        for (var index in arrayFile){
+        for (var index in arrayFile) {
             var base64 = arrayFile[index];
-            ImagesStr += base64+"#####"
+            ImagesStr += base64 + "#####"
         }
         //JSON.stringify(arrayFile)
 
@@ -344,14 +343,14 @@
             dataType: "json",
             data: {
                 orderId: orderId,
-                specificationId:specificationId,
-                fenshu:fenshu,
-                content:content,
-                commentImages:ImagesStr
+                specificationId: specificationId,
+                fenshu: fenshu,
+                content: content,
+                commentImages: ImagesStr
             },
             success: function (msg) {
                 switch (msg) {
-                    case "ReceiptSuccess":
+                    case "success":
 //                        var url = "{:url('home/user/orderDetailed?orderId=')}";
 //                        var pot = url.indexOf(".");
 //                        url = url.substring(0,pot);
@@ -367,8 +366,11 @@
                         //参数错误
                         alert("参数错误！");
                         break;
-                    case "OrderNull":
-                        alert('这个订单从地球上消失了~~');
+                    case "SpecificationNull":
+                        alert("没有找到此规格！");
+                        break;
+                    case "CommentRepeated":
+                        alert('亲！您已经对商品评论过了~~');
                         break;
                     default:
                 }

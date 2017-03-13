@@ -196,7 +196,7 @@
         <div style="height: 80px;"></div>
         <div id="box_userMsg">
             <div id="box_user">
-                <img src="{$iconRoot.$user['icon']}" height="80px" width="80px">&nbsp;&nbsp;&nbsp;
+                <img src="{$iconRoot.$user['icon']}" height="90" width="90" class="img-circle">&nbsp;&nbsp;&nbsp;
                 <span><a href="{:url('home/user/userMessage')}">{$user['user_name']}</a></span>
             </div>
             <div id="box_userSta"></div>
@@ -223,7 +223,7 @@
                 <div class="conten_margin" id="box_{$item['commodity']['id']}">
                     <a href="{:url('home/commodity/commodityDetailed?id='.$item['commodity']['id'])}">
                         <img src="{$imgRoot}{$item['commodity']['images'][0]['image']}"
-                             style="height: 220px;width: 180px;"/></a>
+                             style="height: 220px;width: 180px;" class="img-rounded"/></a>
                     <section class="pricea">&yen;{$item['commodity']['specifications'][0]['price']}</section>
                     <section class="titlea">{$item['commodity']['title']}</section>
                     <section class="pingjiaa">已有<i class="pingjiab">{:count($item['commodity']['comments'])}</i>人评价

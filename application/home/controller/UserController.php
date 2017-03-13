@@ -780,7 +780,7 @@ class UserController extends BaseController
     /**
      * 处理商品的评论
      * @author 陈有欢
-     * @return \think\response\Json
+     * @return string
      */
     public function commentHandle()
     {
@@ -794,13 +794,13 @@ class UserController extends BaseController
                 $user = User::getUserBySession("home");
                 $specification = Specification::get(['id' => $specificationId]);
                 if ($specification == null) {
-                    return json("SpecificationNull");
+                    return "SpecificationNull";
                 }
                 $commodityId = $specification['commodity']['id'];
                 //判断是否已经对这次购买的商品评论过
                 $comment = Comment::get(['order_id'=>$orderId,'user_id'=>$user->getData('id'),"specification_id"=>$specification->getData('id')]);
                 if ($comment!=null){
-                    return json("CommentRepeated");
+                    return "CommentRepeated";
                 }
                 $comment = new Comment();
                 $comment->id =Comm::getNewGuid();
@@ -827,13 +827,13 @@ class UserController extends BaseController
                         $commentImageModle->save();
                     }
                 }
-                return json("success");
+                return "success";
             } else {
                 //参数不正确
-                return json("ParameterError");
+                return "ParameterError";
             }
         } else {
-            return json("PostError");
+            return "PostError";
         }
     }
 
