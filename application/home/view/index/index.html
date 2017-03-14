@@ -73,7 +73,7 @@
     }
 
     .img_xing {
-        vertical-align:middle;
+        vertical-align: middle;
     }
 
     .btn_guanzhu {
@@ -82,9 +82,10 @@
         vertical-align: middle;
         font-size: 13px;
     }
-    #myhomem{
+
+    #myhomem {
         position: absolute;
-        left: 300px;
+        left: 120px;
         top: 30px;
         right: 0px;
         bottom: 0;
@@ -92,7 +93,7 @@
     }
 
     .s-bar {
-        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
         color: #fff;
         background: #a0cdeb;
         border: #a0cdeb;
@@ -102,279 +103,283 @@
         padding: 11px 10px;
         position: relative;
         width: 90%;
-        height:40px;
-        left:5%;
+        height: 40px;
+        left: 5%;
     }
 
 </style>
 <asidehome>
     <div style="margin-left: 40px">
-    {include file="./left"/}
+        {include file="./left"/}
     </div>
 </asidehome>
 <section id="myhomem">
     <div id="con">
         <div style="height: 70px;"></div>
-<div style="width:600px;margin:0 auto;text-align:center;">
-    <form class="form-group" role="search" action="{:url('home/commodity/search')}" method="get">
-        <div class="col-md-10">
-            <input type="text" style="height: 50px" class="form-control" name="title" placeholder="Search"
-                   value="{:input('get.title')}">
+        <div style="width:600px;margin:0 auto;text-align:center;">
+            <form class="form-group" role="search" action="{:url('home/commodity/search')}" method="get">
+                <div class="col-md-10">
+                    <input type="text" style="height: 50px" class="form-control" name="title" placeholder="Search"
+                           value="{:input('get.title')}">
+                </div>
+                <button type="submit" style="height: 50px" class="btn btn-success">&nbsp;搜&nbsp;索&nbsp;</button>
+
+            </form>
         </div>
-        <button type="submit" style="height: 50px" class="btn btn-success">&nbsp;搜&nbsp;索&nbsp;</button>
+        <div style="height: 5px;"></div>
+        <div class="box">
+            <div class="pic">
+                <ul>
 
-    </form>
-</div>
-<div style="height: 5px;"></div>
-<div class="box">
-    <div class="pic">
-        <ul>
+                    <li style="background:url( '__PUBLIC__/lunbo/images/bg.jpg')center">
+                        <img class="img1" src="__PUBLIC__/lunbo/images/text1.png"/>
+                        <img class="img2" src="__PUBLIC__/lunbo/images/con1.png"/>
+                    </li>
+                    <li style="background:url('__PUBLIC__/lunbo/images/bg2.jpg') center">
+                        <img class="img1" src="__PUBLIC__/lunbo/images/text2.png"/>
+                        <img class="img2" src="__PUBLIC__/lunbo/images/con2.png"/>
+                    </li>
+                    <li style="background:url('__PUBLIC__/lunbo/images/bg3.jpg') center">
+                        <img class="img1" src="__PUBLIC__/lunbo/images/text3.png"/>
+                        <img class="img2" src="__PUBLIC__/lunbo/images/con3.png"/>
+                    </li>
+                    <li style="background:url('__PUBLIC__/lunbo/images/bg4.jpg') center">
+                        <img class="img1" src="__PUBLIC__/lunbo/images/text4.png"/>
+                        <img class="img2" src="__PUBLIC__/lunbo/images/con4.png"/>
+                    </li>
+                    <li style="background:url('__PUBLIC__/lunbo/images/bg5.jpg') center">
+                        <img class="img1" src="__PUBLIC__/lunbo/images/text5.png"/>
+                        <img class="img2" src="__PUBLIC__/lunbo/images/con5.png"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="lunbonav">
+                <ul>
+                    <li class="bg"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
 
-            <li style="background:url( '__PUBLIC__/lunbo/images/bg.jpg')center">
-                <img class="img1" src="__PUBLIC__/lunbo/images/text1.png"/>
-                <img class="img2" src="__PUBLIC__/lunbo/images/con1.png"/>
-            </li>
-            <li style="background:url('__PUBLIC__/lunbo/images/bg2.jpg') center">
-                <img class="img1" src="__PUBLIC__/lunbo/images/text2.png"/>
-                <img class="img2" src="__PUBLIC__/lunbo/images/con2.png"/>
-            </li>
-            <li style="background:url('__PUBLIC__/lunbo/images/bg3.jpg') center">
-                <img class="img1" src="__PUBLIC__/lunbo/images/text3.png"/>
-                <img class="img2" src="__PUBLIC__/lunbo/images/con3.png"/>
-            </li>
-            <li style="background:url('__PUBLIC__/lunbo/images/bg4.jpg') center">
-                <img class="img1" src="__PUBLIC__/lunbo/images/text4.png"/>
-                <img class="img2" src="__PUBLIC__/lunbo/images/con4.png"/>
-            </li>
-            <li style="background:url('__PUBLIC__/lunbo/images/bg5.jpg') center">
-                <img class="img1" src="__PUBLIC__/lunbo/images/text5.png"/>
-                <img class="img2" src="__PUBLIC__/lunbo/images/con5.png"/>
-            </li>
-        </ul>
-    </div>
-    <div class="lunbonav">
-        <ul>
-            <li class="bg"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
-</div>
+        <script type="text/javascript">
+            var i = -1;
+            var time = 0;
+            junmper();
+            function junmper() {
+                i++;
+                if (i > 4)
+                    i = 0;
+                $(".nav ul li").eq(i).addClass("bg").siblings().removeClass("bg");
+                $(".pic ul li").eq(i).fadeIn(100).siblings().fadeOut(100);
+                $(".pic ul li").eq(i).find(".img1").css({left: "-760px"});
+                $(".pic ul li").eq(i).find(".img2").css({display: "none", left: "-15px"});
+                $(".pic ul li").eq(i).find(".img1").animate({left: "0px"}, 500, function () {
+                    $(".pic ul li").eq(i).find(".img2").css("display", "block");
+                    $(".pic ul li").eq(i).find(".img2").animate({left: "0px"}, 500);
+                });
 
-<script type="text/javascript">
-    var i = -1;
-    var time = 0;
-    junmper();
-    function junmper() {
-        i++;
-        if (i > 4)
-            i = 0;
-        $(".nav ul li").eq(i).addClass("bg").siblings().removeClass("bg");
-        $(".pic ul li").eq(i).fadeIn(100).siblings().fadeOut(100);
-        $(".pic ul li").eq(i).find(".img1").css({left: "-760px"});
-        $(".pic ul li").eq(i).find(".img2").css({display: "none", left: "-15px"});
-        $(".pic ul li").eq(i).find(".img1").animate({left: "0px"}, 500, function () {
-            $(".pic ul li").eq(i).find(".img2").css("display", "block");
-            $(".pic ul li").eq(i).find(".img2").animate({left: "0px"}, 500);
-        });
-
-    }
-    time = setInterval("junmper()", 3700);
-    $(".nav ul li").click(function () {
-        i = $(this).index();
-        $(".nav ul li").eq(i).addClass("bg").siblings().removeClass("bg");
-        $(".pic ul li").eq(i).fadeIn(100).siblings().fadeOut(100);
-        $(".pic ul li").eq(i).find(".img1").css({left: "-760px"});
-        $(".pic ul li").eq(i).find(".img2").css({display: "none", left: "-15px"});
-        $(".pic ul li").eq(i).find(".img1").animate({left: "0px"}, 500, function () {
-            $(".pic ul li").eq(i).find(".img2").css("display", "block");
-            $(".pic ul li").eq(i).find(".img2").animate({left: "0px"}, 500);
-        });
-
-    })
-    $(".nav ul li").hover(function () {
-        clearInterval(time);
-    }, function () {
-        time = setInterval("junmper()", 3700);
-    })
-</script>
-<div style="height: 10px;"></div>
-
-{volist name="types" id="item"}
-
-{switch name="$key"}
-{case value="0"}
-{/case}
-{default /}
-<div style="height: 650px;width: 50px;background-color: #FFFFFF"></div>
-{/switch}
-
-<div class="s-bar">
-    {$item->getData('content')}
-</div>
-{volist name="$item['commodities']" id="commodity" offset="0" length='10'}
-
-<div  style="position: relative;margin-left: 90px">
-    <!--class="conten_margin col-md-"-->
-    <div class="conten_margin">
-        <a href="{:url('home/commodity/commodityDetailed?id='.$commodity->getData('id'))}">
-            <img src="{$imgRoot}{$commodity.images[0]['image']}" style="height: 220px;width: 180px;" class="img-rounded"/></a>
-        <section class="pricea">&yen;{$commodity['specifications'][0]['price']}</section>
-        <section class="titlea">{$commodity.title}</section>
-        <section class="pingjiaa">已有<i class="pingjiab">{$commodity['staistics']}</i>人购买</section>
-
-        <section class="bordera" onmouseover=over_id("x_{$commodity['id']}"); onmouseout=out_id("x_{$commodity['id']}");
-                 onclick=userCollect("{$commodity['id']}")>
-
-            {php}
-            $flag = false;
-            if(count($userCollects)==0){
-            $flag = false;
             }
-            foreach ($userCollects as $collect){
-                if($collect['commodity_id']==$commodity['id']){
-            $flag = true;
-            break;
-            }else{
-            $flag = false;
-            }
-            }
-            $imgId = "x_".$commodity["id"];
-            if($flag){
-            echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/hongxing.png" style="width: 20px;height: 20px;">';
-            }else{
-            echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/baixing.png" style="width: 20px;height: 20px;">';
-            }
-            {/php}
-            <button class="btn_guanzhu">关注</button>
-        </section>
-        <section class="borderb" onmouseover=over_aid("g_{$commodity['id']}"); onmouseout=out_aid("g_{$commodity['id']}"); onclick=addToCart("{$commodity['id']}")>
-            <img class="img_xing" id="g_{$commodity['id']}" src="__PUBLIC__/wei/images/baigouwuche.png"
-                 style="width: 20px;height: 20px;">
-            <button class="btn_guanzhu">加入购物车</button>
-        </section>
+            time = setInterval("junmper()", 3700);
+            $(".nav ul li").click(function () {
+                i = $(this).index();
+                $(".nav ul li").eq(i).addClass("bg").siblings().removeClass("bg");
+                $(".pic ul li").eq(i).fadeIn(100).siblings().fadeOut(100);
+                $(".pic ul li").eq(i).find(".img1").css({left: "-760px"});
+                $(".pic ul li").eq(i).find(".img2").css({display: "none", left: "-15px"});
+                $(".pic ul li").eq(i).find(".img1").animate({left: "0px"}, 500, function () {
+                    $(".pic ul li").eq(i).find(".img2").css("display", "block");
+                    $(".pic ul li").eq(i).find(".img2").animate({left: "0px"}, 500);
+                });
 
-    </div>
-</div>
-{/volist}
+            })
+            $(".nav ul li").hover(function () {
+                clearInterval(time);
+            }, function () {
+                time = setInterval("junmper()", 3700);
+            })
+        </script>
+        <div style="height: 10px;"></div>
 
-<br/>
-{/volist}
+        {volist name="types" id="item"}
+
+        {switch name="$key"}
+        {case value="0"}
+        {/case}
+        {default /}
+        <div style="height: 650px;width: 50px;background-color: #FFFFFF"></div>
+        {/switch}
+
+        <div class="s-bar">
+            {$item->getData('content')}
+        </div>
+        {volist name="$item['commodities']" id="commodity" offset="0" length='10'}
+        <div style="position: relative;margin-left: 90px">
+            <!--class="conten_margin col-md-"-->
+            <div class="conten_margin">
+                <a href="{:url('home/commodity/commodityDetailed?id='.$commodity->getData('id'))}">
+                    <img src="{$imgRoot}{$commodity.images[0]['image']}" style="height: 220px;width: 180px;"
+                         class="img-rounded"/></a>
+                <section class="pricea">&yen;{$commodity['specifications'][0]['price']}</section>
+                <section class="titlea">{$commodity.title}</section>
+                <section class="pingjiaa">已有<i class="pingjiab">{$commodity['staistics']}</i>人购买</section>
+
+                <section class="bordera" onmouseover=over_id("x_{$commodity['id']}");
+                         onmouseout=out_id("x_{$commodity['id']}");
+                         onclick=userCollect("{$commodity['id']}")>
+
+                    {php}
+                    $flag = false;
+                    if(count($userCollects)==0){
+                    $flag = false;
+                    }
+                    foreach ($userCollects as $collect){
+                    if($collect['commodity_id']==$commodity['id']){
+                    $flag = true;
+                    break;
+                    }else{
+                    $flag = false;
+                    }
+                    }
+                    $imgId = "x_".$commodity["id"];
+                    if($flag){
+                    echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/hongxing.png"
+                               style="width: 20px;height: 20px;">';
+                    }else{
+                    echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/baixing.png"
+                               style="width: 20px;height: 20px;">';
+                    }
+                    {/php}
+                    <button class="btn_guanzhu">关注</button>
+                </section>
+                <section class="borderb" onmouseover=over_aid("g_{$commodity['id']}");
+                         onmouseout=out_aid("g_{$commodity['id']}"); onclick=addToCart("{$commodity['id']}")>
+                    <img class="img_xing" id="g_{$commodity['id']}" src="__PUBLIC__/wei/images/baigouwuche.png"
+                         style="width: 20px;height: 20px;">
+                    <button class="btn_guanzhu">加入购物车</button>
+                </section>
+
+            </div>
+        </div>
+        {/volist}
+
+        <br/>
+        {/volist}
 
 
-<script type="text/javascript">
-    //关注（心）图标处理
-    function over_id(id) {
-        var img = document.getElementById(id);
-        var imgOldSrc = img.getAttribute("src");
-        if (imgOldSrc.indexOf("baixing")>0){
-            img.src="__PUBLIC__/wei/images/hongxing.png";
-        }else {
-            img.src="__PUBLIC__/wei/images/baixing.png";
-        }
+        <script type="text/javascript">
+            //关注（心）图标处理
+            function over_id(id) {
+                var img = document.getElementById(id);
+                var imgOldSrc = img.getAttribute("src");
+                if (imgOldSrc.indexOf("baixing") > 0) {
+                    img.src = "__PUBLIC__/wei/images/hongxing.png";
+                } else {
+                    img.src = "__PUBLIC__/wei/images/baixing.png";
+                }
 //        document.getElementById(id).src = "__PUBLIC__/wei/images/hongxing.png"
-    }
-    function out_id(id) {
-        var img = document.getElementById(id);
-        var imgOldSrc = img.getAttribute("src");
-        if (imgOldSrc.indexOf("baixing")>0){
-            img.src="__PUBLIC__/wei/images/hongxing.png";
-        }else {
-            img.src="__PUBLIC__/wei/images/baixing.png";
-        }
-    }
-    //购物车图标处理
-    function over_aid(id) {
-        document.getElementById(id).src = "__PUBLIC__/wei/images/honggouwuche.png"
-    }
-    function out_aid(id) {
-        document.getElementById(id).src = "__PUBLIC__/wei/images/baigouwuche.png"
-    }
+            }
+            function out_id(id) {
+                var img = document.getElementById(id);
+                var imgOldSrc = img.getAttribute("src");
+                if (imgOldSrc.indexOf("baixing") > 0) {
+                    img.src = "__PUBLIC__/wei/images/hongxing.png";
+                } else {
+                    img.src = "__PUBLIC__/wei/images/baixing.png";
+                }
+            }
+            //购物车图标处理
+            function over_aid(id) {
+                document.getElementById(id).src = "__PUBLIC__/wei/images/honggouwuche.png"
+            }
+            function out_aid(id) {
+                document.getElementById(id).src = "__PUBLIC__/wei/images/baigouwuche.png"
+            }
 
-    //收藏功能
-    function userCollect(commodityId) {
-        var img = document.getElementById("x_"+commodityId);
-        $.ajax({
-            type: "POST",
-            url: "{:url('home/user/userCollect')}",
-            dataType: "json",
-            data: {
-                commodityId: commodityId
-            },
-            success: function (msg) {
-                switch (msg) {
-                    case "AddCollectSuccess":
-                            alert("收藏成功！");
-                        img.src="__PUBLIC__/wei/images/hongxing.png";
-                        break;
-                    case "CancelCollectSuccess":
-                        alert("期待您下次的宠幸！");
-                        img.src="__PUBLIC__/wei/images/baixing.png";
-                        break;
-                    case "IllegalRequest":
-                        //非法请求
-                            alert("非法请求");
-                        break;
-                    case "UserNotLogin":
-                        window.location = "{:url('home/thing/login')}";
-                        break;
-                    case "NotFindCommodity":
-                        alert('这件宝贝从地球上消失了~~');
-                        break;
-                    default:
+            //收藏功能
+            function userCollect(commodityId) {
+                var img = document.getElementById("x_" + commodityId);
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('home/user/userCollect')}",
+                    dataType: "json",
+                    data: {
+                        commodityId: commodityId
+                    },
+                    success: function (msg) {
+                        switch (msg) {
+                            case "AddCollectSuccess":
+                                alert("收藏成功！");
+                                img.src = "__PUBLIC__/wei/images/hongxing.png";
+                                break;
+                            case "CancelCollectSuccess":
+                                alert("期待您下次的宠幸！");
+                                img.src = "__PUBLIC__/wei/images/baixing.png";
+                                break;
+                            case "IllegalRequest":
+                                //非法请求
+                                alert("非法请求");
+                                break;
+                            case "UserNotLogin":
+                                window.location = "{:url('home/thing/login')}";
+                                break;
+                            case "NotFindCommodity":
+                                alert('这件宝贝从地球上消失了~~');
+                                break;
+                            default:
+                                alert(msg);
+
+                        }
+                    },
+                    error: function (msg) {
                         alert(msg);
+                    },
+                });
+            }
 
-                }
-            },
-            error: function (msg) {
-                alert(msg);
-            },
-        });
-    }
+            //添加到购物车
+            function addToCart(commodityId) {
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('home/user/addToCart')}",
+                    dataType: "json",
+                    data: {
+                        commodityId: commodityId,
+                        specificationId: ""
+                    },
+                    success: function (msg) {
+                        switch (msg) {
+                            case "AddCartSuccess":
+                                alert("添加进购物车成功！");
+                                break;
+                            case "NotRepertory":
+                                alert("库存不足！店小二正在急忙补货中！");
+                                break;
+                            case "NotFindSpecification":
+                                alert("规格参数不正确");
+                                break;
+                            case "IllegalRequest":
+                                //非法请求
+                                alert("非法请求");
+                                break;
+                            case "UserNotLogin":
+                                window.location = "{:url('home/thing/login')}";
+                                break;
+                            case "NotFindCommodity":
+                                alert('这件宝贝从地球上消失了~~');
+                                break;
+                            default:
 
-    //添加到购物车
-    function addToCart(commodityId) {
-        $.ajax({
-            type: "POST",
-            url: "{:url('home/user/addToCart')}",
-            dataType: "json",
-            data: {
-                commodityId: commodityId,
-                specificationId:""
-            },
-            success: function (msg) {
-                switch (msg) {
-                    case "AddCartSuccess":
-                        alert("添加进购物车成功！");
-                        break;
-                    case "NotRepertory":
-                        alert("库存不足！店小二正在急忙补货中！");
-                        break;
-                    case "NotFindSpecification":
-                        alert("规格参数不正确");
-                        break;
-                    case "IllegalRequest":
-                        //非法请求
-                        alert("非法请求");
-                        break;
-                    case "UserNotLogin":
-                        window.location = "{:url('home/thing/login')}";
-                        break;
-                    case "NotFindCommodity":
-                        alert('这件宝贝从地球上消失了~~');
-                        break;
-                    default:
-
-                }
-            },
-            error: function (msg) {
-                alert(msg);
-            },
-        });
-    }
-</script>
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    },
+                });
+            }
+        </script>
 
     </div>
 </section>

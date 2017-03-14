@@ -34,7 +34,7 @@
         <td>{$key}</td>
         <td>{$item->getData('title')}</td>
         <td>{$item['type']['content']}</td>
-        <td>{:date('Y-m-d ',$item->getData('creation_time'))}</td>
+        <td>{:date('Y年m月d日',$item->getData('creation_time'))}</td>
         <td>{$item->getData('staistics')}</td>
         <td>
             {if condition="($item->getData('grade') == 0)"}

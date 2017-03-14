@@ -22,10 +22,11 @@
                      style="width: 50px; height: 50px" class="img-rounded">
                 {$orderSpecifications['specification']['commodity']['title']}
             </td>
-            <td>{$orderSpecifications['specification']['content']}</td>
-            <td>{$orderSpecifications['specification']['price']}</td>
+            <td>{$orderSpecifications['specificationcontent']}</td>
+            <td>{$orderSpecifications['price']}</td>
             <td>{$orderSpecifications['count']}</td>
-            <td class="td_xiaoji">{$orderSpecifications['count']*$orderSpecifications['specification']['price']}</td>
+            <td class="td_xiaoji">
+                {$orderSpecifications['count']*$orderSpecifications['price']}</td>
         </tr>
         {/volist}
         </tbody>
@@ -33,7 +34,7 @@
     <div id="box_heji">
         本订单共消费：<span id="sp_heji" style="color: red">0</span>元
     </div>
-    <div id="box_address">
+    <div id="box_address" style="border:2px dashed #F00;margin:10px 10px 10px auto;Padding:10px 10px 10px 10px;">
         收货人：{$order['address']['user_name']}<br/>
         联系方式：{$order['address']['phone']}<br/>
         配送至：{$order['address']['content']}<br/>

@@ -24,9 +24,8 @@ asidehome{
     width:300px;
     position:fixed;
     top:80px;
-    left:0px;
+    left:20px;
     bottom:100px;
-    margin-left: 150px;
 
 
 
@@ -44,12 +43,9 @@ asidehome{
 #con{
     height:100%;
     overflow:auto;
-
     /*或者*/
     overflow-x:hidden;
     overflow-y:scroll;
-
-
     background-color:#fff;
     color:#000000;
 }

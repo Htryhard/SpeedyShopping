@@ -11,6 +11,8 @@ namespace app\admin\controller;
 
 use app\common\controller\BaseController;
 use app\common\model\Order;
+use app\common\model\OrderSpecification;
+use app\common\model\Specification;
 use app\common\model\User;
 
 class OrderController extends BaseController
@@ -86,28 +88,32 @@ class OrderController extends BaseController
         }
     }
 
+    /**
+     * 保存编辑好的订单
+     * @return string
+     */
     public function editOrderHandle()
     {
         if ($this->request->isAjax()) {
             $commodities = $this->request->post("commodities");//二维数组，即多个规格组
             /**
              * 格式为：
-            array (size=3)
-            0 =>
-            array (size=3)
-            0 => string 'DA7CCCC7-2474-D9E5-EC31-4F41FDC62502' (length=36) //规格ID
-            1 => string '100' (length=3)  //价格
-            2 => string '1' (length=1)  //数量
-            1 =>
-            array (size=3)
-            0 => string '467E4794-E139-9D4C-A001-648467AE4B50' (length=36)
-            1 => string '199' (length=3)
-            2 => string '1' (length=1)
-            2 =>
-            array (size=3)
-            0 => string '718C679A-4D05-CC4A-6844-81B655A150D0' (length=36)
-            1 => string '1699' (length=4)
-            2 => string '1' (length=1)
+             * array (size=3)
+             * 0 =>
+             * array (size=3)
+             * 0 => string 'DA7CCCC7-2474-D9E5-EC31-4F41FDC62502' (length=36) //规格ID
+             * 1 => string '100' (length=3)  //价格
+             * 2 => string '1' (length=1)  //数量
+             * 1 =>
+             * array (size=3)
+             * 0 => string '467E4794-E139-9D4C-A001-648467AE4B50' (length=36)
+             * 1 => string '199' (length=3)
+             * 2 => string '1' (length=1)
+             * 2 =>
+             * array (size=3)
+             * 0 => string '718C679A-4D05-CC4A-6844-81B655A150D0' (length=36)
+             * 1 => string '1699' (length=4)
+             * 2 => string '1' (length=1)
              *
              *
              * */
@@ -122,24 +128,24 @@ class OrderController extends BaseController
             }
             $order = Order::get(['id' => $orderId]);
             if ($order != null) {
+                //TODO:目前这个地址修改方式存在不合理的地方，
+                //TODO:一旦卖家修改收货地址，会把用户的地址改掉,需要在订单中新增收货人、收货地址、联系电话、邮编等属性
                 $address = $order['address'];
                 $address->phone = $mobile;
                 $address->content = $new_xiangxi;
                 $address->user_name = $receiptName;
                 $address->save();
 
+                //把数据更新上去
                 $orderSpecifications = $order['orderSpecifications'];
                 $osLen = count($orderSpecifications);
                 for ($i = 0; $i < $osLen; $i++) {
                     $orspItem = $orderSpecifications[$i];
-                    $comLen = count($commodities);
-                    for ($j = 0; $j < $comLen; $j++) {
-                        if ($orspItem['specification_id'] == $commodities[$j][0]) {
-                            $orspItem->price=$commodities[$j][1];//价格
-                            $orspItem->count=$commodities[$j][2];//数量
-                            $orspItem->save();
-                        }
-                    }
+                    $orspItem->specification_id = $commodities[$i][0];
+                    $orspItem->count = $commodities[$i][2];//数量
+                    $orspItem->price = $commodities[$i][1];//价格
+                    $orspItem->specificationcontent = Specification::get(['id' => $commodities[$i][0]])->getData('content');//规格内容
+                    $orspItem->save();
                 }
                 return "success";
             } else {
@@ -151,6 +157,30 @@ class OrderController extends BaseController
             return "PostError";
         }
 
+    }
+
+
+    // 删除订单中的某件商品
+    public function editOrderDeleteHandle()
+    {
+        if ($this->request->isAjax()) {
+            $specificationId = $this->request->post("specificationId");
+            $orderId = $this->request->post("orderId");
+            $orderSpecification = OrderSpecification::get(['order_id' => $orderId,
+                'specification_id' => $specificationId]);
+            if ($orderSpecification != null) {
+                $orderSpecification->delete();
+                return "success";
+            } else {
+                $this->redirect(url("home/error/postError", ['code' => "410", 'msg' => "此商品已经不存在！"]));
+            }
+        } else {
+            $this->redirect(url("home/error/postError", ['code' => "400", 'msg' => "请求方式错误！"]));
+        }
+    }
+
+    public function refunds()
+    {
     }
 
 

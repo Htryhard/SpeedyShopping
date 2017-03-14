@@ -457,8 +457,8 @@ class UserController extends BaseController
                     $orderSpecification->order_id = $order['id'];
                     $orderSpecification->count = $count;
                     $orderSpecification->price = $specification->getData("price");
-                    $orderSpecification->specificationcontent = $specification['content'];
-                    $orderSpecification->specification_id = $specification['id'];
+                    $orderSpecification->specificationcontent = $specification->getData("content");
+                    $orderSpecification->specification_id = $specification->getData("id");
                     $orderSpecification->save();
 
                     $this->redirect("home/user/doPay", ['orderId' => $order->getData("id")]);

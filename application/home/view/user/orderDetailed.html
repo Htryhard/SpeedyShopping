@@ -2,32 +2,55 @@
 <block name="titel"><title>订单明细</title></block>
 <block name="resources"></block>
 
-<div id="box_address">
-    收货人：{$order['address']['user_name']}<br/>
-    联系方式：{$order['address']['phone']}<br/>
-    配送至：{$order['address']['content']}<br/>
-</div>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <td colspan="4"><b>收货信息</b></td>
+    </tr>
+    <tr>
+        <td>收件人</td>
+        <td>{$order['address']['user_name']}</td>
+        <td>单号</td>
+        <td>{$order['order_number']}</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>收货地址</td>
+        <td>{$order['address']['content']}</td>
+        <td>支付时间</td>
+        <td>
+            {eq name="$order['pay_time']" value=""}
+            {else/}
+            {:date('Y年m月d日 H:i:s',$order['pay_time'])}
+            {/eq}
+        </td>
+    </tr>
+    <tr>
+        <td>联系方式</td>
+        <td>{$order['address']['phone']}</td>
+        <td>订单生成时间</td>
+        <td>
+            {:date('Y年m月d日 H:i:s',$order['order_time'])}
+        </td>
+    </tr>
+    <tr>
+        <td>订单状态</td>
+        <td>{$order['status']}</td>
+        <td>交易完成时间</td>
+        <td>
+            {eq name="$order['succeed_time']" value=""}
+            {else/}
+            {:date('Y年m月d日 H:i:s',$order['succeed_time'])}
+            {/eq}
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <div>
-    订单号：{$order['order_number']}<br/>
-    订单生成时间：{:date('Y-m-d H:i:s',$order['order_time'])}<br/>
-    支付时间：
-    {eq name="$order['pay_time']" value=""}
-    {else/}
-    {:date('Y-m-d H:i:s',$order['pay_time'])}
-    {/eq}
-    <br/>
-    交易完成时间：
-    {eq name="$order['succeed_time']" value=""}
-    {else/}
-    {:date('Y-m-d H:i:s',$order['succeed_time'])}
-    {/eq}
-    <br/>
-    状态：{$order['status']}
-</div>
-
-<div>
-    <span>订单信息</span><br/>
+    <span>商品列表</span><br/>
     <table class="table table-hover">
         <thead>
         <tr class="info">

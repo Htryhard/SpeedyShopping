@@ -107,7 +107,7 @@
                                                        onpaste="this.value=this.value.replace(/[^\d.]/g,'')"
                                                        type="text"></td>
                                             <td class="text-left"><a href="javascript:void(0)"
-                                                                     onclick="javascript:$(this).parent().parent().remove();">删除</a>
+                                                                     onclick=removeCommodity("{$item['specification_id']}","{$order['id']}")>删除</a>
                                             </td>
                                         </tr>
                                         {/volist}
@@ -146,7 +146,9 @@
 //        alert(key);
         var select_text_price = $("#select_text_price" + key).val(pirce);
     }
-
+    /**
+     * 提交修改的信息（不包括删除）
+     */
     function checkSubmit() {
         //收货人姓名
         var receiptName = $("#consignee").val();
@@ -235,6 +237,48 @@
 //                console.log("内容："+commodities[j][x]);
 //            }
 //        }
+    }
+
+    function removeCommodity(specificationId, orderId) {
+        if (specificationId != "") {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/order/editOrderDeleteHandle')}",
+                dataType: "json",
+                data: {
+                    orderId: orderId,
+                    specificationId: specificationId
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "success":
+                            document.location.reload();//当前页面
+                            break;
+                        case "PostError":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        case "OrderError":
+                            alert("没有找到此商品！");
+                            break;
+                        case "CommentRepeated":
+                            alert('亲！您已经对商品评论过了~~');
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+//                alert(msg);
+                },
+            });
+        } else {
+            console.log("参数错误！");
+        }
     }
 </script>
 <script type="text/javascript">
