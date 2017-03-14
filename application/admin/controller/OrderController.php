@@ -12,6 +12,7 @@ namespace app\admin\controller;
 use app\common\controller\BaseController;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
+use app\common\model\Refunds;
 use app\common\model\Specification;
 use app\common\model\User;
 
@@ -179,9 +180,24 @@ class OrderController extends BaseController
         }
     }
 
-    public function refunds()
+    public function refunds($type)
     {
-
+        if ($type==""){
+            return $this->error("参数不全！");
+        }else{
+            $refunds = null;
+            switch ($type){
+                case "all":
+                    $refunds = Refunds::getAllRefunds();
+                    break;
+                case "":
+                    break;
+                default:
+            }
+            $this->assign("user",User::getUserBySession("admin"));
+            $this->assign("refunds",$refunds);
+            return $this->fetch();
+        }
     }
 
 

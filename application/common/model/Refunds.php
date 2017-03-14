@@ -23,6 +23,11 @@ class Refunds extends Model
         return $this->belongsTo('Specification');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('user');
+    }
+
     /**
      * 读取器
      * @param $value
@@ -30,7 +35,16 @@ class Refunds extends Model
      */
     public function getTypeAttr($value)
     {
-        $type = [0=>'返修',1=>'换货',2=>'退货'];
+        $type = [0=>'返修',1=>'换货',2=>'退货',3=>"申请取消",4=>'已处理'];
         return $type[$value];
+    }
+
+    /**
+     * 返回所有的退换货单，如果没有就返回空
+     * @return false|static[]
+     */
+    public static function getAllRefunds(){
+        $refunds = Refunds::all();
+        return $refunds;
     }
 }

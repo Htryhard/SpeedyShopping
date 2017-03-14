@@ -6,16 +6,12 @@
 <h3 style="color: #000000" align="center">退换货单</h3>
 <div style="float: right" class="btn btn-default">
     <select id="se_status" onchange="orderType()">
-        <option id="op_all">所有订单</option>
-        <option id="op_statu0">待付款</option>
-        <option id="op_statu1">待捡货</option>
-        <option id="op_statu2">待发货</option>
-        <option id="op_statu3">配送中</option>
-        <option id="op_statu4">货到付款</option>
-        <option id="op_statu5">交易完成</option>
-        <option id="op_statu6">退换货中</option>
-        <option id="op_statu7">交易关闭</option>
-        <option id="op_statu8">用户的删除订单</option>
+        <option id="op_all">所有申请</option>
+        <option id="op_statu0">返修</option>
+        <option id="op_statu1">退货</option>
+        <option id="op_statu2">换货</option>
+        <option id="op_statu3">申请取消</option>
+        <option id="op_statu4">已处理</option>
     </select>
 </div>
 <div id="box_table_content"></div>
@@ -24,34 +20,33 @@
     <tr class="info">
         <th>序号</th>
         <th>订单号</th>
-        <th>下单时间</th>
-        <th>收货人</th>
+        <th>姓名</th>
         <th>联系电话</th>
-        <th>订单状态</th>
+        <th>申请时间</th>
+        <th>类型</th>
         <th>操作</th>
     </tr>
     </thead>
     <tbody>
-    {volist name="orders" id="item" key="key"}
+    {volist name="refunds" id="refund" key="key"}
     <tr>
         <td>{$key}</td>
-        <td>{$item->getData('order_number')}</td>
-        <td>{:date('Y年m月d日 H:i:s',$item->getData('order_time'))}</td>
-        <td>{$item['address']['user_name']}</td>
-        <td>{$item['address']['phone']}</td>
-        <td>{$item->status}</td>
+        <td>{$refund['order']['order_number']}</td>
+        <td>{$refund['order']['address']['user_name']}</td>
+        <td>{$refund['order']['address']['phone']}</td>
+        <td>{:date('Y年m月d日 H:i:s',$refund['creation_time'])}</td>
+        <td>{$refund->type}</td>
         <td>
-            <a href="{:url('admin/order/orderDetailed?id='.$item->getData('id'))}">详细</a>
+            <a href="{:url('admin/order/orderDetailed?id='.$refund->getData('id'))}">详细</a>
         </td>
     </tr>
     {/volist}
     </tbody>
 </table>
-<div>{$orders->render()}</div>
 
 <script type="text/javascript">
     $(function () {
-        var type = "{$type}";
+        var type = "";
         document.getElementById("op_"+type).selected = true;
     });
     function orderType() {
