@@ -182,11 +182,11 @@ class OrderController extends BaseController
 
     public function refunds($type)
     {
-        if ($type==""){
+        if ($type == "") {
             return $this->error("参数不全！");
-        }else{
+        } else {
             $refunds = null;
-            switch ($type){
+            switch ($type) {
                 case "all":
                     $refunds = Refunds::getAllRefunds();
                     break;
@@ -194,10 +194,16 @@ class OrderController extends BaseController
                     break;
                 default:
             }
-            $this->assign("user",User::getUserBySession("admin"));
-            $this->assign("refunds",$refunds);
+            $this->assign("user", User::getUserBySession("admin"));
+            $this->assign("refunds", $refunds);
             return $this->fetch();
         }
+    }
+
+    //发货单
+    public function sendGoods()
+    {
+
     }
 
 
