@@ -42,7 +42,8 @@ class Order extends Model
     //获取已付款但未发货的订单
     public static function getOrdersForPayment()
     {
-        $orders = Order::where("status", "=", 1)->where("status", "=", 4)->order('order_time', 'desc')->paginate(15);
+        $orders = Order::where("status=1 OR status=4")->order('order_time', 'desc')->paginate(15);
+        return $orders;
     }
 
 }

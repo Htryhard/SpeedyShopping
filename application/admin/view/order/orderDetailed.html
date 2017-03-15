@@ -78,11 +78,74 @@
             <tr>
                 <td colspan="6" class="text-center"><input class="btn btn-default noprint" type="submit"
                                                            onclick="window.print();" value="打印">
-                    <a type="button" class="btn btn-danger" href="{:url('admin/Order/editOrder',['orderId'=>$item['order_id']])}">修改订单</a>
+                    <a type="button" class="btn btn-danger" href="{:url('admin/Order/editOrder',['orderId'=>$item['order_id']])}">
+                        修改订单</a>
+
+
+                    {php}
+                    if($order->getData('status')==1){
+                    echo "<a type='button' class='btn btn-info' href='#' onclick=toGetGoods('".$order["id"]."')>去捡货</a>";
+                    }else if($order->getData('status')==2){
+                    echo "<a type='button' class='btn btn-success' href='#' onclick=toSendGoods('".$order["id"]."')>去发货</a>";
+                    }
+                    {/php}
                 </td>
             </tr>
             </tfoot>
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    function toGetGoods(orderId) {
+        if (confirm("请确保订单信息无误再进行捡货！！")) {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/order/editOrderStatus')}",
+                dataType: "json",
+                data: {
+                    type:"getGoods",
+                    orderId: orderId
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "success":
+                            document.location.reload();//当前页面
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+//                alert(msg);
+                },
+            });
+        }
+    }
+    function toSendGoods(orderId) {
+        if (confirm("此订单捡货完成了吗？请确保捡货完成再发货！！")) {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/order/editOrderStatus')}",
+                dataType: "json",
+                data: {
+                    type:"sendGoods",
+                    orderId: orderId
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "success":
+                            document.location.reload();//当前页面
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+//                alert(msg);
+                },
+            });
+        }
+    }
+</script>
 

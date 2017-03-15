@@ -1,0 +1,61 @@
+{layout name="layout" /}
+<block name="title"><title>发货单</title></block>
+<block name="resources">
+
+</block>
+<h3 style="color: #000000" align="center">发货单</h3>
+<div style="float: right" class="btn btn-default">
+    <select id="se_status" onchange="orderType()">
+        <option id="op_all">所有订单</option>
+        <option id="op_statu0">待捡货</option>
+        <option id="op_statu1">货到付款</option>
+    </select>
+</div>
+<div id="box_table_content"></div>
+<table class="table table-hover">
+    <thead>
+    <tr class="info">
+        <th>序号</th>
+        <th>订单号</th>
+        <th>下单时间</th>
+        <th>收货人</th>
+        <th>联系电话</th>
+        <th>订单状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="orders" id="order" key="key"}
+    <tr>
+        <td>{$key}</td>
+        <td>{$order['order_number']}</td>
+        <td>{:date('Y年m月d日 H:i:s',$order['order_time'])}</td>
+        <td>{$order['address']['user_name']}</td>
+        <td>{$order['address']['phone']}</td>
+        <td>{$order->status}</td>
+        <td>
+            <a href="{:url('admin/order/orderDetailed?id='.$order->getData('id'))}">详细</a>
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        var type = "";
+        document.getElementById("op_"+type).selected = true;
+    });
+    function orderType() {
+        //获取被选中的option标签
+        var vsId = $('#se_status option:selected').attr("id");
+        vsId = vsId.replace("op_","");
+//        alert(vsId);
+        var url = "{:url('admin/Order/orderIndex?type=')}";
+        var pot = url.indexOf(".");
+        url = url.substring(0,pot);
+        url = url+"/type/"+vsId;
+//                                alert(url);
+        window.location = url;
+    }
+</script>

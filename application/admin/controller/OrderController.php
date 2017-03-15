@@ -123,6 +123,7 @@ class OrderController extends BaseController
             $receiptName = $this->request->post("receiptName");//收货人姓名
             $new_xiangxi = $this->request->post("new_xiangxi");//收货人地址
             $mobile = $this->request->post("mobile");//收货人电话
+            $status2_8 = $this->request->post("status2_8");//更新状态
             if (count($commodities) == 0 || $orderId == "" || $receiptName == "" || $new_xiangxi == "" || $mobile == "") {
                 //参数不全
                 return "ParameterError";
@@ -203,7 +204,31 @@ class OrderController extends BaseController
     //发货单
     public function sendGoods()
     {
+        $orders = Order::getOrdersForPayment();
+        echo count($orders);
+        $this->assign("orders", $orders);
+        $this->assign("user", User::getUserBySession("admin"));
+        return $this->fetch();
+    }
 
+    //更新订单的状态
+    public function editOrderStatus()
+    {
+        if ($this->request->isAjax()){
+            $orderId = $this->request->post("orderId");
+            $type = $this->request->post("type");
+            $order = Order::get(['id'=>$orderId]);
+            if ($type=="" || $order==null){
+                $this->redirect(url("home/error/postError", ['code' => "404", 'msg' => "请求的参数不存在！"]));
+            }else{
+                $oldStatus = $order->getData('status');
+                $order->status = $oldStatus+1;
+                $order->save();
+                return "success";
+            }
+        }else{
+            $this->redirect(url("home/error/postError", ['code' => "400", 'msg' => "请求方式错误！"]));
+        }
     }
 
 
