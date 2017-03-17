@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/3/16 星期四 下午 6:15:47
+Date: 2017/3/17 星期五 下午 5:54:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;

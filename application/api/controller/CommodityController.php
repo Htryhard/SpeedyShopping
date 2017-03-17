@@ -15,8 +15,11 @@ use think\Controller;
 class CommodityController extends Controller
 {
     public function getAllCommodity(){
+        header("Cache-control:max-age=5");
         $commodities = Commodity::all();
         return json($commodities);
     }
+
+    public function getCommodities(){}
 
 }
