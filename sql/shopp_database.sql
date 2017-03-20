@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/3/17 ������ ���� 5:54:45
+Date: 2017/3/20 ����һ ���� 6:17:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -173,7 +173,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1186 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1225 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -319,6 +319,8 @@ INSERT INTO `shopp_commodity` VALUES ('22B10E64-2792-9976-E179-2481FBD15CB5', 'A
 INSERT INTO `shopp_commodity` VALUES ('241411DE-FEBB-E3B4-4FE8-F73BDE54B32B', 'AEJE 5.1家庭影院音响套装家用ktv音箱客厅低音炮蓝牙hdmi功放机 ', 'AEJE发烧高清震撼5.1家庭影院 ● 含一台高清多功能蓝牙5.1功放 + 一套AEJE原装品质高清5.1音箱 ● 功放支持DTS/杜比解码、HDMI高清3入1出端口、单独6声道支持有/无源炮、内置蓝牙、USB、双人同时K歌，FM收音等【可用淘金币抵钱】升级功放享大优惠 ● 下单立赠7件套', '0', '{\"CCC\\u8bc1\\u4e66\\u7f16\\u53f7\":\"2013010802653540\",\"\\u4f4e\\u97f3\\u97f3\\u7bb1\\u4e2a\\u6570\":\"1\\u4e2a\",\"\\u4e2d\\u7f6e(\\u4e3b\\u97f3)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"1\\u4e2a\",\"\\u524d\\u7f6e(\\u5de6\\u53f3)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"2\\u4e2a\",\"\\u540e\\u7f6e(\\u73af\\u7ed5)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"2\\u4e2a\",\"\\u4e3b\\u673a\\u7c7b\\u578b\":\"\\u4ec5\\u6709\\u529f\\u653e\\u65e0\\u789f\\u673a\",\"\\u89c6\\u9891\\u8fde\\u63a5\\u65b9\\u5f0f\":\"HDMI \\u8272\\u5dee\\u5206\\u91cf\",\"\\u97f3\\u6548\\u6a21\\u5f0f\":\"DTS Dolby Digital\"}', '1486188726', '1580745600', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('25AA487A-1A8F-A2A1-E1B5-78EA0EEC85A3', '拉夏贝尔2017春款新品 条纹方领九分袖衬衫式连衣裙10012162 ', '拉夏贝尔2017春款新品 条纹方领九分袖衬衫式连衣裙10012162 ', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u68c9100%\",\"\\u9500\\u552e\\u6e20\\u9053\\u7c7b\\u578b\":\"\\u5546\\u573a\\u540c\\u6b3e\"}', '1484975106', '1579536000', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('26C82144-FCFB-AA3A-150D-2640FFF623F2', '制ZPLPKK 2017春季新款女士中长款舒适羽绒服修身毛领外套 ', '制ZPLPKK 2017春季新款女士中长款舒适羽绒服修身毛领外套 ', '0', '{\"\\u4e0a\\u5e02\\u5e74\\u4efd\\u5b63\\u8282\":\"2017\\u5e74\\u6625\\u5b63\",\"\\u539a\\u8584\":\"\\u5e38\\u89c4\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u7c98\\u80f6\\u7ea4\\u7ef4(\\u7c98\\u7ea4)51% \\u805a\\u916f\\u7ea4\"}', '1484975592', '1548345600', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
+INSERT INTO `shopp_commodity` VALUES ('28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '四大名著 新课标必读 28000多名读者热评 ', '本套丛书包含《红楼梦》《三国演义》《水浒传》《西游记》，这四部著作可谓家喻户晓，在我国有着深远的影响，是汉语文学中不可多得的佳作。其中的故事、场景，已经深深地影响了中国人的思想观念、价值取向。四部著作以其极高的艺术水平、细致的人物刻画和丰富的思想内涵为历代读者所称道。\r\n     本丛书由北京市基层教育骨干教师主编，拥有强大的编写团队（作者均为知名高校中文系博士、硕士），以简洁上口的白话表达，译写、改写；去其糟粕、取其精华，专业插画师在通读文本基础上绘制精美插图，清晰详尽的知识点拓展，双色印刷编排，非常符合青少年阅读心里和阅读习惯。\r\n\r\n     丛书由国内知名的儿童文学作家、上海师范大学教授梅子涵先生写序并推荐。可谓“经典中的经典”。', '0', '{\"\\u5370\\u5237\\u65f6\\u95f4\":\"2013\\u5e7409\\u670801\\u65e5\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"23356962\"}', '1490004693', '1584633600', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '1943ADB5-3D24-9A39-9A6B-CE12DDA17C00.png');
+INSERT INTO `shopp_commodity` VALUES ('2D089988-6636-BF15-676F-15A6AED0433F', '打火机与公主裙 ', '我有我的国王，我是他不二之臣，我愿为他摇旗呐喊 ，也愿为他战死沙场。年度*受欢迎作者Twentine*之作，同名影视剧重磅打造中！ 春风得意每满150减50 文艺分会场>> ', '0', '{\"\\u7248 \\u6b21\":\"1\",\"\\u9875 \\u6570\":\"352\",\"\\u5b57 \\u6570\":\"2000000\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"9787555247630\",\"\":\"\"}', '1489979760', '1532880000', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '6DF8D5B2-81CB-1E08-822D-968B1FB61778.png');
 INSERT INTO `shopp_commodity` VALUES ('37B10231-4225-C269-DB28-F1C40A6CA448', '雪纺白衬衫女长袖韩版休闲百搭职业女装秋冬季加绒加厚保暖衬衣寸', '衬衫', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u805a\\u916f\\u7ea4\\u7ef495% \\u805a\\u6c28\\u916f\\u5f39\\u6027\\u7ea4\",\"\\u670d\\u88c5\\u7248\\u578b\":\"\\u4fee\\u8eab\",\"\\u98ce\\u683c\":\"\\u901a\\u52e4\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\" \\u5355\\u6392\\u591a\\u6263\",\"\\u5c3a\\u7801\":\"S M L XL XXL 3XL 4XL\"}', '1484576598', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('38B3FE41-5AB1-F2AF-3446-7E07D8DD8851', '64G/128G顶配【送VR电源+12期分期】Xiaomi/小米 小米Max手机 MIX ', '正品保障，支持官网验货，全国联保！买就送：7H级纳米防爆膜，保护壳，延保一年等！小米MAX配置一览：①:顶配为4G运行内存+128G存储闪存；②:6.44英寸大屏黄金尺寸，④:全网通3.0，4G+；⑤:1600万像素，5片式镜头，f2.0光圈；⑥:4850mAh', '0', '{\"CPU\\u578b\\u53f7\":\"\\u9a81\\u9f99650\",\"\\u4ea7\\u54c1\\u540d\\u79f0:\":\"\\u5c0f\\u7c73Max\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u952e\\u76d8\\u7c7b\\u578b\":\"\\u865a\\u62df\\u89e6\\u5c4f\\u952e\\u76d8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1600\\u4e07\"}', '1484983134', '1611849600', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('433DA60D-5065-1301-48B8-76D1BB06CDF0', '现货当天发Huawei/华为 Mate 9 Pro保时捷4G曲屏手机正品mate9pro ', '【华为Mate9Pro原装正品手机现货当天发，下单再送购机豪礼】【收到货晒图分享美照有送好礼哦】(主图具体礼品以套餐为准】', '0', '{\"\\u54c1\\u724c\":\"\\u534e\\u4e3a\",\"cpu\":\"G71 MP8 + \\u5fae\\u667a\\u6838i6\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8 2k\\u53cc\\u66f2\\u9762\",\"\\u6444\\u50cf\\u5934\":\"\\u524d800\\u4e07 + \\u540e2000\\u4e07 + 1200\\u4e07\\u50cf\\u7d20\",\"\\u7535\\u6c60\\u5bb9\\u91cf\":\"4000mah\"}', '1486186369', '1580745600', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
@@ -362,6 +364,7 @@ INSERT INTO `shopp_commodity` VALUES ('F7BC08D4-A15A-0784-3456-04EE6D29C689', '�
 INSERT INTO `shopp_commodity` VALUES ('FB498C2A-0CB1-403B-A836-D602ABC96AB8', '秋冬季健身服男套装健身房三四五件套运动透气速干长袖跑步紧身衣', '秋冬季健身服男套装健身房三四五件套运动透气速干长袖跑步紧身衣', '0', '{\"\\u4e0a\\u88c5\\u6b3e\\u5f0f\":\"\\u957f\\u8896\",\"\\u529f\\u80fd\":\"\\u5438\\u6e7f\\u6392\\u6c57 \\u901f\\u5e72 \\u900f\\u6c14 \\u8d85\\u5f3a\\u5f39\\u6027\",\"\\u5c3a\\u7801\":\"M L XL XXL\",\"\\u4e0b\\u88c5\\u88e4\\u957f\":\"\\u957f\\u88e4\"}', '1484576146', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('FEF2C2E1-6304-F2CF-C1C7-EA18C9C219EC', '2017春装新款女韩版时尚鱼尾红裙子小香风明星同款蕾丝红色连衣裙 ', '连衣裙', '0', '{\"\\u8896\\u578b\":\"\\u5e38\\u89c4\",\"\\u6d41\\u884c\\u5143\\u7d20\":\"\\u62fc\\u63a5 \\u62c9\\u94fe \\u857e\\u4e1d\",\"\\u8863\\u95e8\\u895f\":\"\\u5957\\u5934\",\"\\u56fe\\u6848\":\"\\u7eaf\\u8272\",\"\\u88d9\\u957f\":\"\\u4e2d\\u88d9\",\"\\u8170\\u578b:\":\"\\u9ad8\\u8170\"}', '1484577839', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('FF815C07-E3C4-C632-F29C-42FE92C32AF9', '充电式便携榨汁杯电动迷你果汁杯玻璃料理杯多功能小型榨汁机家用', '充电式便携榨汁杯电动迷你果汁杯玻璃料理杯多功能小型榨汁机家用', '0', '{\"\\u4e00\\u6b21\\u6027\\u6700\\u5927\\u51fa\\u6c41\\u91cf\":\"400ml\\u4ee5\\u4e0b\",\"\\u69a8\\u6c41\\u673a\\u9644\\u52a0\\u529f\\u80fd\":\"\\u51b0 \\u5e72\\u78e8 \\u6405\\u62cc \\u548c\\u9762 \\u6253\",\"\\u679c\\u8089\\u6e23\\u6ed3\\u76d2\\u5bb9\\u91cf\":\"500ml\\u4ee5\\u4e0b\\uff08\\u542b500m\",\"\\u54c1\\u724c\":\"\\u897f\\u5e03\\u6717\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u5ae9\\u7c89\\u8272 \\u679c\\u7eff\\u8272 \\u67e0\\u6aac\\u9ec4 \",\"\\u529f\\u7387\":\"150W\"}', '1484984403', '1611849600', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
+INSERT INTO `shopp_commodity_images` VALUES ('02B0D106-9139-0BF9-7EF1-12B48BE43E19', '2D089988-6636-BF15-676F-15A6AED0433F', '23411573-FF7B-A732-2F2D-7CFEC60B9109.png');
 INSERT INTO `shopp_commodity_images` VALUES ('031079F7-1308-1180-A3D9-504B0B64D018', '8C5CBC3B-C3A0-F078-2DC1-DD276D203A5E', '809FA808-4676-EC6A-66CA-7728D782977E.png');
 INSERT INTO `shopp_commodity_images` VALUES ('043D01FA-3E52-D8C8-BFC8-62FF7AAD4019', '47D002AB-DFA4-11CF-52FB-398122144EF1', '91BA1E29-61B8-1429-794B-120B85D4BCB8.png');
 INSERT INTO `shopp_commodity_images` VALUES ('04DD0F41-D172-FE71-3715-524E36125CBD', 'AE6D4A9D-7257-836A-2687-8EE3B440594E', '235F5B9E-5EFF-11B5-988A-CCF7C72FCBB4.png');
@@ -410,6 +413,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('3B41DE1D-48B2-FA19-2B99-10E7A957CF
 INSERT INTO `shopp_commodity_images` VALUES ('3F53DCF9-A0C8-123E-52E0-A34E0257EA92', 'FF815C07-E3C4-C632-F29C-42FE92C32AF9', 'B4216472-9070-32EE-F833-C6807B97C17A.png');
 INSERT INTO `shopp_commodity_images` VALUES ('435EEAF5-2AB9-64EB-57C9-794551A71153', '4CF00EB1-8CBA-C3D9-F93F-DF01511391BE', '340ABD1C-58C6-1082-EBB9-29F88B8D122D.png');
 INSERT INTO `shopp_commodity_images` VALUES ('43C3C1CD-050B-4EFD-3AE6-937684AAC3A5', '47D002AB-DFA4-11CF-52FB-398122144EF1', '214C8BC5-6D12-E1C6-5AAC-9D83171AA85F.png');
+INSERT INTO `shopp_commodity_images` VALUES ('43FD15FE-3419-FEDB-5347-ECE24F0CAFCA', '2D089988-6636-BF15-676F-15A6AED0433F', '6DF8D5B2-81CB-1E08-822D-968B1FB61778.png');
 INSERT INTO `shopp_commodity_images` VALUES ('448D5193-E176-BE27-2C94-2A4EF5A25361', '00D84306-7B0D-F027-28E4-09D70124D2CB', '3075CA8D-C9E4-EDD1-4610-F262E3E86ECF.png');
 INSERT INTO `shopp_commodity_images` VALUES ('45F3D285-124F-63AF-B128-5ADBB4692750', 'E1A02C6D-C1C6-A748-983D-A236648BDCD4', '238A1288-FFBC-5FD4-A0DE-B53F79BA48BD.png');
 INSERT INTO `shopp_commodity_images` VALUES ('461A2944-7E38-B809-4386-5A8E1DF1C54C', 'D678064A-D80E-EFA2-4A01-873583FF3E9B', '4042AB5A-85B8-F240-358A-498D65B8B369.png');
@@ -417,6 +421,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('48AEC2D0-9DFE-9A4C-277D-A09693DD35
 INSERT INTO `shopp_commodity_images` VALUES ('48F200D0-CDF2-8267-F997-B8D3D9DC695F', 'D5CD3549-48F1-F39A-F547-EF40372ECC5D', '06CBE955-8C6F-C711-2626-60359FBF0D94.png');
 INSERT INTO `shopp_commodity_images` VALUES ('49E34B1F-55BF-F51C-BFCC-C4AC3E567A79', '72387161-B237-7FC1-3FB3-E78C23533C5C', '9D2E4D3E-C307-D5FC-9D1B-DC13D90C5801.png');
 INSERT INTO `shopp_commodity_images` VALUES ('4B1DAF4E-E804-8D5F-D1E4-71DE07ED958A', 'BEC94BE7-D1A0-D643-6B2D-2FAA1F68B2FD', 'A498C8BD-22B8-E9A1-B055-53A77674DF9E.png');
+INSERT INTO `shopp_commodity_images` VALUES ('4B87F5AF-938E-5946-3356-3485D9245844', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '3846486E-A2A3-DD53-1502-60D712122F39.png');
 INSERT INTO `shopp_commodity_images` VALUES ('4BBBE5E4-175D-9494-8E08-12210559C8DB', 'B7391928-0D76-8E49-8911-CF772446F9C1', 'CDE7891C-9AA6-54C1-FA8A-09B3EAD2D1A6.png');
 INSERT INTO `shopp_commodity_images` VALUES ('4D08BCE4-1787-E5FF-EBE2-9B678882ECD5', '241411DE-FEBB-E3B4-4FE8-F73BDE54B32B', '1BFCFED4-8456-65EC-CABF-F531767DA996.png');
 INSERT INTO `shopp_commodity_images` VALUES ('4EA5B7D2-6440-F687-C75B-F5287F516512', 'B4052C46-F17D-CBD1-4BCF-29DF877B6FA5', '22CF38EA-18FF-9F7C-BEBF-6C94F389062C.png');
@@ -435,6 +440,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('5A5E2BF3-F7A1-944F-67C2-A0072B795A
 INSERT INTO `shopp_commodity_images` VALUES ('5F3DDB72-DE2A-6A74-75BF-56C716B7D861', 'FB498C2A-0CB1-403B-A836-D602ABC96AB8', '8823B821-3A03-FB0C-633F-D60EED429CE2.png');
 INSERT INTO `shopp_commodity_images` VALUES ('640C1B5B-5692-7FCA-0892-D95FAC4A1498', '629BAE4F-B30D-D852-BFE6-A43A373A2ED8', 'B0BE1894-B02E-C1CB-6E8C-A1EF9836DAA2.png');
 INSERT INTO `shopp_commodity_images` VALUES ('643F82EF-7F61-3C9B-6C76-62D5255C2557', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', 'B3195156-9300-44C5-56FB-552D8D67FFD7.png');
+INSERT INTO `shopp_commodity_images` VALUES ('6685CE35-D941-FE7B-E3B9-82064F081032', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '109F016B-58BD-7648-0449-5061D3662A8B.png');
 INSERT INTO `shopp_commodity_images` VALUES ('67281DD3-34A5-9FA1-1E74-E7FB6F0D5CE2', '6FFC6691-7F05-8AB8-B1E1-5C839BB4F446', '33C5B3E9-5A00-6B10-3CDF-B5DAE2F38165.png');
 INSERT INTO `shopp_commodity_images` VALUES ('673D94FA-01E2-6F9F-D35F-9F87C3CA22F7', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', '6350699E-CD5B-DC0A-198C-78320274A619.png');
 INSERT INTO `shopp_commodity_images` VALUES ('68682B3E-4C3A-2653-9172-AAADA17E6E43', '629BAE4F-B30D-D852-BFE6-A43A373A2ED8', '2015B558-5D42-A24F-ADD8-A218F198AADA.png');
@@ -447,6 +453,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('71C7A57B-9009-C51E-05E6-F04994140E
 INSERT INTO `shopp_commodity_images` VALUES ('732BE371-9B32-4E16-6DC7-FB01B28A04CA', '511676D4-6E5E-A943-02D2-23838D8A4B2A', '23067377-7E94-10E7-5C34-21645A37329D.png');
 INSERT INTO `shopp_commodity_images` VALUES ('73BACA15-167F-C310-7BBE-63F0E1D6E824', 'AE6D4A9D-7257-836A-2687-8EE3B440594E', '70232E37-76E7-E8C4-B951-5EF7679CC00D.png');
 INSERT INTO `shopp_commodity_images` VALUES ('7867AD6A-E236-F756-33CD-51C7874B5CD4', 'B5037D54-D3D0-F1EE-5939-523BCBF8F2C6', 'ADB51A5B-975A-5C4B-20C9-2ED42A64D0A1.png');
+INSERT INTO `shopp_commodity_images` VALUES ('7941B3EB-B8EC-4D31-DFE9-144C3398DD46', '2D089988-6636-BF15-676F-15A6AED0433F', '927D140D-EB1F-D98E-CE5C-9DD929FED54E.png');
 INSERT INTO `shopp_commodity_images` VALUES ('7AB05D8B-E47E-11B3-5D04-65A1F207FC7A', 'EE5D2613-2760-F18C-A447-B8E744FF509D', '8297B86A-D2A5-D1DB-24C9-4D4CB92D3A07.png');
 INSERT INTO `shopp_commodity_images` VALUES ('7B5A092C-F92E-3032-40DB-80299977754D', '37B10231-4225-C269-DB28-F1C40A6CA448', 'B1146293-F799-9106-575F-C4B6C0B1AF73.png');
 INSERT INTO `shopp_commodity_images` VALUES ('7CF79B74-B70C-B0EB-2B98-A2ED8A983D11', 'FF815C07-E3C4-C632-F29C-42FE92C32AF9', 'FBD41B53-220E-6EDF-57C7-F40EF67E6B4F.png');
@@ -472,6 +479,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('9DFBE04C-CA62-7FD7-580D-CB875B0001
 INSERT INTO `shopp_commodity_images` VALUES ('9ECA2961-DC76-0605-52AB-6F4094EA951F', '179149C6-2255-FAA2-F9F8-CA6608080FAA', 'D07AC7DA-6F17-9EC6-EA9C-7DDE1A466D43.png');
 INSERT INTO `shopp_commodity_images` VALUES ('A0C78B47-0606-A78D-FAB7-9D0E27CCB771', '179149C6-2255-FAA2-F9F8-CA6608080FAA', '3EC38AD2-1CC7-0373-78A4-032EEA15B676.png');
 INSERT INTO `shopp_commodity_images` VALUES ('A0D58D68-BDDB-F909-CBB6-494C75BB1206', 'D2BCDC64-0970-3775-3193-6D870A490A84', '6CB82C67-F8A9-BFE2-8F59-21524B90D7A4.png');
+INSERT INTO `shopp_commodity_images` VALUES ('A206D89D-4B0E-DE89-3540-47EF6F3EDB4C', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '7C095CDE-A08F-17E4-B073-75725BCC04DA.png');
 INSERT INTO `shopp_commodity_images` VALUES ('A258E03C-C85F-A856-DF40-6842D6CCF63C', '96A28FC7-E21C-2185-D3BC-4DD5FE91ADB7', 'FAF79646-6C06-14DD-58C2-493F260D9448.png');
 INSERT INTO `shopp_commodity_images` VALUES ('A26C6F8F-62BD-7011-4728-1A8C06C0B59B', 'F7BC08D4-A15A-0784-3456-04EE6D29C689', '2A3D0094-9CDB-F12F-7789-5FA986097EF5.png');
 INSERT INTO `shopp_commodity_images` VALUES ('A4A73C7A-46AD-F92B-DC43-F6279FB5306E', '1C26D516-A5F1-7C2E-7158-8A658A3F9083', 'C48809C5-1916-F829-8490-3A99D06CC7C8.png');
@@ -486,6 +494,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('B24B6CA7-B4B4-A6AE-170F-1F31568EE8
 INSERT INTO `shopp_commodity_images` VALUES ('B2D87EB9-9A0D-A577-77AF-24138822CAD7', '21B3CE06-EBCB-ECA1-E311-88D1C759C156', '0F916C0D-AE01-944F-6AE1-F0931811FC38.png');
 INSERT INTO `shopp_commodity_images` VALUES ('B40B3100-E0B7-498D-8F39-3B19F9BB325F', 'B7391928-0D76-8E49-8911-CF772446F9C1', 'D57F1CAC-A569-558D-B9C4-0365447AA8E0.png');
 INSERT INTO `shopp_commodity_images` VALUES ('B4166F4B-E34C-A579-45EB-25BE37104937', '433DA60D-5065-1301-48B8-76D1BB06CDF0', 'BA5A4691-D21F-9516-EE0F-736228662D95.png');
+INSERT INTO `shopp_commodity_images` VALUES ('B4339413-D5A6-E1DB-5931-CCD56B703891', '2D089988-6636-BF15-676F-15A6AED0433F', '014ABA05-3A66-B41B-CDBE-14FFFD7DC4E2.png');
 INSERT INTO `shopp_commodity_images` VALUES ('B53D8581-817D-B622-F3C3-DE249C6AEB34', '241411DE-FEBB-E3B4-4FE8-F73BDE54B32B', '4D0C74AC-FBA4-4229-0820-36C4EE9E11E1.png');
 INSERT INTO `shopp_commodity_images` VALUES ('B8B0CDEC-2F40-DD0D-E3F8-C752D05F99E0', '1581855B-4F44-E6F1-8E95-59AD9A5A0C5D', '080CA9D6-CD5A-9D18-471C-167F94F71703.png');
 INSERT INTO `shopp_commodity_images` VALUES ('B9FF52B8-95F2-18E8-55A5-994465A1CDA6', '96A28FC7-E21C-2185-D3BC-4DD5FE91ADB7', 'B8227999-745C-4AB6-C95D-C57E1924AED8.png');
@@ -522,6 +531,7 @@ INSERT INTO `shopp_commodity_images` VALUES ('ED0BCE47-3943-26D8-B892-761CEF6997
 INSERT INTO `shopp_commodity_images` VALUES ('ED2B445C-4844-0E94-C2C5-990971DC81E4', '6275F89C-A2A1-8B7B-A259-94926A84C442', 'CF2FFDF4-2229-9D44-523E-10DDA3138F86.png');
 INSERT INTO `shopp_commodity_images` VALUES ('ED60B1A2-A44A-F830-BF16-6300ED800322', 'D678064A-D80E-EFA2-4A01-873583FF3E9B', 'DDDC1140-0CE9-3A1C-CA05-DA867E9A6750.png');
 INSERT INTO `shopp_commodity_images` VALUES ('EDD1DE37-1BBB-E76B-40C7-59A2D7753B54', 'F51D327E-3EFE-0E64-BA0A-E122DB83F189', '8E362734-3D60-5F96-211C-2001A835B13E.png');
+INSERT INTO `shopp_commodity_images` VALUES ('EE4AD4EF-2C0A-3334-6A55-0707F48E9FB9', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', 'EB9C3F18-0424-8630-923C-3FE05FB7B439.png');
 INSERT INTO `shopp_commodity_images` VALUES ('F1E81D5D-8330-5595-EED8-19F1805C1FBE', 'E1A02C6D-C1C6-A748-983D-A236648BDCD4', '89F7EE4C-1CA5-9245-D06E-EA9439918A75.png');
 INSERT INTO `shopp_commodity_images` VALUES ('F2560095-2487-8A82-7317-A2B4A69DAB4B', 'AE6D4A9D-7257-836A-2687-8EE3B440594E', '8C293BCC-337D-EB61-3960-2F4064D9109D.png');
 INSERT INTO `shopp_commodity_images` VALUES ('F25E0629-8307-4807-5AD8-A664EC90AD00', 'B763DD16-2E58-C493-0434-3952FA160C17', '68068479-31AB-11C9-6827-04F61B03BF3F.png');
@@ -1588,6 +1598,45 @@ INSERT INTO `shopp_count` VALUES ('1182', '::1', '1489650212', '欢歌', 'admin/
 INSERT INTO `shopp_count` VALUES ('1183', '::1', '1489659031', '欢歌', 'admin/Commodity/index');
 INSERT INTO `shopp_count` VALUES ('1184', '::1', '1489659040', '欢歌', 'admin/Index/testUUID');
 INSERT INTO `shopp_count` VALUES ('1185', '::1', '1489659249', '欢歌', 'admin/Index/test');
+INSERT INTO `shopp_count` VALUES ('1186', '::1', '1489979426', '欢歌', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1187', '::1', '1489979430', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1188', '::1', '1489979756', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1189', '::1', '1489979757', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1190', '::1', '1489979758', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1191', '::1', '1489979759', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1192', '::1', '1489982181', '欢歌', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1193', '::1', '1490001586', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1194', '::1', '1490001650', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1195', '::1', '1490001662', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1196', '::1', '1490001669', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1197', '::1', '1490001680', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1198', '::1', '1490001686', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1199', '::1', '1490001732', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1200', '::1', '1490001763', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1201', '::1', '1490001783', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1202', '::1', '1490001819', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1203', '::1', '1490001928', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1204', '::1', '1490002221', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1205', '::1', '1490002237', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1206', '::1', '1490002262', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1207', '::1', '1490002323', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1208', '::1', '1490002695', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1209', '::1', '1490002773', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1210', '::1', '1490002837', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1211', '::1', '1490002950', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1212', '::1', '1490003008', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1213', '::1', '1490003048', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1214', '::1', '1490003608', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1215', '::1', '1490003627', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1216', '::1', '1490003967', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1217', '::1', '1490003986', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1218', '::1', '1490004513', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1219', '::1', '1490004689', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1220', '::1', '1490004690', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1221', '::1', '1490004691', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1222', '::1', '1490004692', '欢歌', 'admin/Commodity/uploadImage');
+INSERT INTO `shopp_count` VALUES ('1223', '::1', '1490004730', '欢歌', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('1224', '::1', '1490004846', '欢歌', 'admin/Index/testUUID');
 INSERT INTO `shopp_order` VALUES ('FB3BB516-36C7-8267-7D3D-28AFF1CEB4E1', '3', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1489549662', '1489549662', '1489549686', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order_specification` VALUES ('E7192815-4943-FF64-067F-D2C6E5AA19C4', 'FB3BB516-36C7-8267-7D3D-28AFF1CEB4E1', '16153B58-A253-C18F-5783-DE72935811F0', '1', '15', '巧克力');
 INSERT INTO `shopp_refunds` VALUES ('E9D50F5D-20BE-7044-D185-162761AA3C24', 'C5F9E72E-411D-EBE1-BB9B-C03F32FB9685', '2', '摄像头不好用！运输中刮花了！要求换一个！', '9657C994-4A08-5876-ABD5-E7472867E8DB', '1489485998', '0', 'AA692D26-B786-D8A0-1420-F8F33264485C');
@@ -1647,12 +1696,14 @@ INSERT INTO `shopp_specification` VALUES ('896FE607-CCC9-A127-D58D-2107ABF157F9'
 INSERT INTO `shopp_specification` VALUES ('8BABF928-1F7F-06CA-4EED-C9719DE65CAC', '白色', '4', '200', '179149C6-2255-FAA2-F9F8-CA6608080FAA');
 INSERT INTO `shopp_specification` VALUES ('8DC8D527-3111-C885-E49C-C3FFE4778F78', '组合1050g', '35', '200', '6275F89C-A2A1-8B7B-A259-94926A84C442');
 INSERT INTO `shopp_specification` VALUES ('946EEAB5-63B3-F191-6D30-97E7C7DAFD77', '海盗王子', '28', '566', '629BAE4F-B30D-D852-BFE6-A43A373A2ED8');
+INSERT INTO `shopp_specification` VALUES ('9BC0A861-E019-15A1-1C13-BE5780F9F497', '官方', '23', '69', '2D089988-6636-BF15-676F-15A6AED0433F');
 INSERT INTO `shopp_specification` VALUES ('9F2AA23F-FD6B-CC49-55F8-EF5F403D4296', '6G运存+128G内存玫瑰金', '8999', '39', '433DA60D-5065-1301-48B8-76D1BB06CDF0');
 INSERT INTO `shopp_specification` VALUES ('9FFCC357-5CB0-26CC-5361-7D8E012C6E35', '香辣', '20', '200', '92BAFEFD-CCE6-03EF-60A8-DF9954DDDCA9');
 INSERT INTO `shopp_specification` VALUES ('A024260D-F1BD-ED7E-2672-990E92B46CEB', 'M码', '356', '200', '6D025479-654E-5D3F-2B6D-ECF783A2D918');
 INSERT INTO `shopp_specification` VALUES ('A5240E16-887D-D01F-1779-26E854A18728', '官方标配 :黑色', '2800', '200', 'C3E30939-86EB-730F-900E-17B582155781');
 INSERT INTO `shopp_specification` VALUES ('A62E9C78-0F79-2C43-C99E-10265F6922D5', '套餐二', '1809', '10', '4CF00EB1-8CBA-C3D9-F93F-DF01511391BE');
 INSERT INTO `shopp_specification` VALUES ('A927A4FD-79FA-7DE2-F15C-2EEDDD0A5EC5', '四件套', '178', '200', 'FB498C2A-0CB1-403B-A836-D602ABC96AB8');
+INSERT INTO `shopp_specification` VALUES ('AAE81ABF-8011-E8C1-EED8-7AB540AF94EE', '官方', '299', '12', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF');
 INSERT INTO `shopp_specification` VALUES ('ACF18B6E-E144-8F47-ED60-EB9A447C7A9B', '深棕色', '20', '66', '00D84306-7B0D-F027-28E4-09D70124D2CB');
 INSERT INTO `shopp_specification` VALUES ('B0EB8443-EC51-0147-8158-48E572A864AF', '4G运存+64G内存玫瑰金', '5099', '30', '433DA60D-5065-1301-48B8-76D1BB06CDF0');
 INSERT INTO `shopp_specification` VALUES ('B3A7547B-21AE-FBA4-EBD0-28C1EE3E416E', 'X9官方标配', '2589', '184', 'B4052C46-F17D-CBD1-4BCF-29DF877B6FA5');

@@ -33,16 +33,16 @@ class CommodityController extends BaseController
         $commodity = new Commodity();
         // 定制查询信息
         if (!empty($title)) {
-            $commodities = $commodity->where('title', 'like', '%' . $title . '%')->order('creation_time','desc')->paginate($pageSize, false,
+            $commodities = $commodity->where('title', 'like', '%' . $title . '%')->order('creation_time', 'desc')->paginate($pageSize, false,
                 [
                     'query' => [
                         'title' => $title,
                     ],
                 ]);
         } else {
-            $commodities = $commodity->order('creation_time','desc')->paginate($pageSize);
+            $commodities = $commodity->order('creation_time', 'desc')->paginate($pageSize);
         }
-        $this->assign("user",User::getUserBySession("admin"));
+        $this->assign("user", User::getUserBySession("admin"));
         $this->assign('commodities', $commodities);
         return $this->fetch();
     }
@@ -60,6 +60,7 @@ class CommodityController extends BaseController
             $commodityImages = Comm::getCommodityImagesNameByForm($commodityData);
             $commodityParameters = Comm::analysisParameter($commodityData);
             $commodityData = Comm::analysisCommodityForm($commodityData);
+            $commodityIcon = $data['commodityIcon'];
 
 //            echo "图片：";
 //            dump($commodityImages);
@@ -73,7 +74,7 @@ class CommodityController extends BaseController
             if (count($commodityImages) > 0) {
                 if (count($commodityParameters) > 0) {
                     if (count($commodityData) > 0) {
-                        if (count($commoditySpecifications)>0) {
+                        if (count($commoditySpecifications) > 0) {
                             $commodity = new Commodity();
                             $commodity->id = Comm::getNewGuid();
                             $commodity->title = $commodityData["title"];
@@ -86,6 +87,9 @@ class CommodityController extends BaseController
                             $commodity->grade = 0;
                             $commodity->states = 0;//0代表没上架
                             if ($commodity->validate(true)->save($commodity->getData())) {
+                                $iconName = Comm::uploadsCommentImg($commodityIcon, "uploads/commodity_images/");
+                                $commodity->icon = $iconName;
+                                $commodity->save();
                                 //此循环是保存商品的图片
                                 foreach ($commodityImages as $image) {
                                     $commodityImage = new CommodityImages();
@@ -127,7 +131,7 @@ class CommodityController extends BaseController
             }
         } else {
             //渲染视图
-            $this->assign("user",User::getUserBySession("admin"));
+            $this->assign("user", User::getUserBySession("admin"));
             $this->assign("types", Type::all());
             return $this->fetch();
         }
@@ -180,7 +184,7 @@ class CommodityController extends BaseController
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-                $this->assign("user",User::getUserBySession("admin"));
+                $this->assign("user", User::getUserBySession("admin"));
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);
                 $this->assign("images", $commodityImages);
@@ -209,7 +213,7 @@ class CommodityController extends BaseController
 
                 //构造商品的参数
                 $commodityParameters = Comm::jsonToArr($commodity->getData("parameter"));
-                $this->assign("user",User::getUserBySession("admin"));
+                $this->assign("user", User::getUserBySession("admin"));
                 $this->assign("types", Type::all());
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);
@@ -251,7 +255,7 @@ class CommodityController extends BaseController
                 $commodity->parameter = Comm::toJson($commodityParameters);
 
                 if ($commodity->validate(true)->save($commodity->getData())) {
-                    if ($commodityImages[0] != ""){
+                    if ($commodityImages[0] != "") {
                         foreach ($commodityImages as $image) {
                             $commodityImage = new CommodityImages();
                             $commodityImage->id = Comm::getNewGuid();
@@ -263,7 +267,7 @@ class CommodityController extends BaseController
                             Comm::moveFile($newUrl, $oldUrl);
                         }
                     }
-                    foreach ($commodity['specifications'] as $item){
+                    foreach ($commodity['specifications'] as $item) {
                         $item->delete();
                     }
                     //此循环是保存商品新的规格

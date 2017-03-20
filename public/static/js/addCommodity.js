@@ -186,7 +186,8 @@ $(function () {
                 url: "addCommodity",
                 dataType: "json",
                 data: {
-                    commodityData: $('#commodityData').serializeArray()
+                    commodityData: $('#commodityData').serializeArray(),
+                    commodityIcon:$("#commodity_icon_base64").val()
                 },
                 success: function (msg) {
 

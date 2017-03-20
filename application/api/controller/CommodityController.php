@@ -47,6 +47,16 @@ class CommodityController extends Controller
 
     }
 
+    public function getNewsCommodities()
+    {
+        $commodity = new Commodity();
+        // 使用闭包查询
+        $commodities = Commodity::all(function ($query) {
+            $query->where('states','0')->order('creation_time', 'desc');
+        });
+        return json($commodities);
+    }
+
     /**
      * 根据商品ID获取商品图片
      * @return \think\response\Json
@@ -55,22 +65,23 @@ class CommodityController extends Controller
     {
         //商品ID
         $where = Request::instance()->get("where");
-        if ($where!=""){
-            $commoditiyImages = CommodityImages::all(['commodity_id'=>$where]);
+        if ($where != "") {
+            $commoditiyImages = CommodityImages::all(['commodity_id' => $where]);
             return json($commoditiyImages);
-        }else{
-            return json(["error"=>"参数错误！"]);
+        } else {
+            return json(["error" => "参数错误！"]);
         }
     }
 
-    public function getSpecificationForCommodity(){
+    public function getSpecificationForCommodity()
+    {
         //商品ID
         $where = Request::instance()->get("where");
-        if ($where!=""){
-            $specificationes = Commodity::get(['id'=>$where])['specifications'];
+        if ($where != "") {
+            $specificationes = Commodity::get(['id' => $where])['specifications'];
             return json($specificationes);
-        }else{
-            return json(["error"=>"参数错误！"]);
+        } else {
+            return json(["error" => "参数错误！"]);
         }
     }
 

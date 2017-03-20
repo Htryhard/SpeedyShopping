@@ -11,6 +11,7 @@ namespace app\api\controller;
 
 use app\common\model\Type;
 use think\Controller;
+use think\Request;
 
 class TypeController extends Controller
 {
@@ -19,6 +20,20 @@ class TypeController extends Controller
         header("Cache-control:max-age=5");
         $type = Type::all();
         return json($type);
+    }
+
+    public function getCommoditiesForType()
+    {
+        //分类ID
+        $typeId = Request::instance()->get("typeId");
+        $type = Type::get(['id' => $typeId]);
+        if ($type != null) {
+            $commodities = $type['commodities'];
+            return json($commodities);
+        } else {
+            return json(['error' => '还没有电影哦~'], 404);
+        }
+
     }
 
 }
