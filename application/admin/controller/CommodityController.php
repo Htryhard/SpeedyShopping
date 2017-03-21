@@ -113,6 +113,7 @@ class CommodityController extends BaseController
                                         return $specification->getError();
                                     }
                                 }
+                                return "success";
                             } else {
                                 return $commodity->getError();
                             }
@@ -218,6 +219,7 @@ class CommodityController extends BaseController
                 $this->assign("commodity", $commodity);
                 $this->assign("parameters", $commodityParameters);
                 $this->assign("images", $commodityImages);
+                $this->assign("imageUrl", '/SpeedyShopping/public//uploads/commodity_images/');
                 return $this->fetch();
             } else {
                 return "商品不存在";
@@ -240,13 +242,24 @@ class CommodityController extends BaseController
                 $commodityImages = Comm::getCommodityImagesNameByForm($commodityData);
                 $commodityParameters = Comm::analysisParameter($commodityData);
                 $commodityData = Comm::analysisCommodityForm($commodityData);
-
-                echo "图片：";
-                dump($commodityImages);
+                $commodityIconBase64 = $data['commodityIcon'];
+//                echo "图片：";
+//                dump($commodityImages);
 //                echo "<br/>参数：";
 //                dump($commodityParameters);
 //                echo "<br/>商品：";
 //                dump($commodityData);
+
+                $imageUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "commodity_images" . DS . $commodity->getData("icon");
+                //保存商品封面图 1）判断有无更新封面图
+                if ($commodityIconBase64 != "") {
+                    $CommodityIcon = Comm::uploadsCommentImg($commodityIconBase64, "uploads/commodity_images/");
+                    $commodity->icon = $CommodityIcon;
+                    $commodity->save();
+                    unlink($imageUrl);
+                }
+
+                //2)无则不操作，有则删除旧的，上传新的
 
                 $commodity->title = $commodityData["title"];
                 $commodity->describe = $commodityData["describe"];
@@ -282,6 +295,7 @@ class CommodityController extends BaseController
                             return $specification->getError();
                         }
                     }
+                    return "success";
                 } else {
                     return $commodity->getError();
                 }

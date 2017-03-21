@@ -190,7 +190,11 @@ $(function () {
                     commodityIcon:$("#commodity_icon_base64").val()
                 },
                 success: function (msg) {
-
+                    switch (msg){
+                        case "success":
+                            alert("商品添加成功！")
+                            break;
+                    }
                 },
             });
             $("#dirname").val("");
