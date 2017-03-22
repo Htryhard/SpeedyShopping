@@ -27,4 +27,21 @@ class UserController extends Controller
         }
     }
 
+    public function getUserAddress()
+    {
+        $userId = Request::instance()->post("userId");
+//        if (User::isLogin("home")){
+//
+//        }else{
+//
+//        }
+        $user = User::get(['id' => $userId]);
+        if ($user != null) {
+            $address = $user['address'];
+            return json($address);
+        } else {
+            return json("usernull");
+        }
+    }
+
 }
