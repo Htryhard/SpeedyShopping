@@ -11,6 +11,36 @@ use app\common\model\User;
 
 class Comm
 {
+
+
+    /**
+     * 与安卓端协商好协议，传上来的specificationIds格式为：
+     * specificationId1,count1;specificationId2,count2;...
+     * 其中specificationId为规格ID
+     * count为用户购买的数量
+     * 服务端要针对此进行解析
+     *
+     * 此解析函数返回的是一个一维数组，数组的键既是规格ID，
+     * 数组的值是购买此商品规格的数量
+     *
+     * 如果解析出错则返回空数组
+     * @param $specificationIds
+     * @return array
+     */
+    public static function analysisApiOrder($specificationIds)
+    {
+        $spIdAndCountArray = array();
+        $specificationIdAndCount = explode(';', $specificationIds);
+        $specificationIdAndCount = array_pop($specificationIdAndCount);
+        $len = count($specificationIdAndCount);
+        for ($i = 0; $i < $len; $i++) {
+            $spIdAndCouns = $specificationIdAndCount[$i];
+            $spIdAndCouns = explode(",", $spIdAndCouns);
+            $spIdAndCountArray += [$spIdAndCouns[0] => $spIdAndCouns[1]];
+        }
+        return $spIdAndCountArray;
+    }
+
     //获取访问IP
     public static function getClientIP()
     {

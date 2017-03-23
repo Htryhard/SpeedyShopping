@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/3/21 –«∆⁄∂˛ œ¬ŒÁ 6:02:43
+Date: 2017/3/23 –«∆⁄Àƒ œ¬ŒÁ 5:56:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -173,7 +173,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1271 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1272 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -1687,6 +1687,7 @@ INSERT INTO `shopp_count` VALUES ('1267', '::1', '1490061185', 'Ê¨¢Ê≠å', 'admin/
 INSERT INTO `shopp_count` VALUES ('1268', '::1', '1490061186', 'Ê¨¢Ê≠å', 'admin/Commodity/uploadImage');
 INSERT INTO `shopp_count` VALUES ('1269', '::1', '1490062353', 'Ê¨¢Ê≠å', 'admin/Commodity/addCommodity');
 INSERT INTO `shopp_count` VALUES ('1270', '::1', '1490062367', 'Ê¨¢Ê≠å', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1271', '::1', '1490249104', '', 'home');
 INSERT INTO `shopp_order` VALUES ('FB3BB516-36C7-8267-7D3D-28AFF1CEB4E1', '3', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1489549662', '1489549662', '1489549686', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order_specification` VALUES ('E7192815-4943-FF64-067F-D2C6E5AA19C4', 'FB3BB516-36C7-8267-7D3D-28AFF1CEB4E1', '16153B58-A253-C18F-5783-DE72935811F0', '1', '15', 'Â∑ßÂÖãÂäõ');
 INSERT INTO `shopp_refunds` VALUES ('E9D50F5D-20BE-7044-D185-162761AA3C24', 'C5F9E72E-411D-EBE1-BB9B-C03F32FB9685', '2', 'ÊëÑÂÉèÂ§¥‰∏çÂ•ΩÁî®ÔºÅËøêËæì‰∏≠ÂàÆËä±‰∫ÜÔºÅË¶ÅÊ±ÇÊç¢‰∏Ä‰∏™ÔºÅ', '9657C994-4A08-5876-ABD5-E7472867E8DB', '1489485998', '0', 'AA692D26-B786-D8A0-1420-F8F33264485C');

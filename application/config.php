@@ -172,6 +172,13 @@ return [
 //        // 日志记录级别
 //        'level' => [],
 //    ],
+    'log'     =>  [
+        'type'                  =>  'socket',
+        'host'                  =>  'localhost',
+        'show_included_files'   =>  true,
+        'force_client_ids'      =>  ['slog_b6d7ef'],
+        'allow_client_ids'      =>  ['slog_b6d7ef'],
+    ],
 
     'log'     =>  [
         'type'                  =>  'socket',

@@ -11,6 +11,7 @@ namespace app\api\controller;
 
 use app\common\model\Commodity;
 use app\common\model\CommodityImages;
+use app\common\model\Specification;
 use think\Controller;
 use think\Request;
 
@@ -52,7 +53,7 @@ class CommodityController extends Controller
         $commodity = new Commodity();
         // 使用闭包查询
         $commodities = Commodity::all(function ($query) {
-            $query->where('states','0')->order('creation_time', 'desc');
+            $query->where('states', '0')->order('creation_time', 'desc');
         });
         return json($commodities);
     }
@@ -73,6 +74,10 @@ class CommodityController extends Controller
         }
     }
 
+    /**
+     * 根据商品ID获取商品所有的规格
+     * @return \think\response\Json
+     */
     public function getSpecificationForCommodity()
     {
         //商品ID
@@ -83,6 +88,25 @@ class CommodityController extends Controller
         } else {
             return json(["error" => "参数错误！"]);
         }
+    }
+
+    /**
+     * 根据安卓端上传的规格ID列表（格式：规格ID1;规格ID2;...）
+     * 返回对应的商品列表（不需处理重复值）
+     * @return \think\response\Json
+     */
+    public function getCommodityBySpecification()
+    {
+        $speIDs = Request::instance()->get("speIds");
+        $commodities = array();
+        $speArray = explode(";", $speIDs);
+        array_pop($speArray);
+        foreach ($speArray as $spid) {
+            $specification = Specification::get(['id' => $spid]);
+            $commodity = $specification['commodity'];
+            $commodities[] = $commodity;
+        }
+        return json($commodities);
     }
 
 }
