@@ -62,13 +62,26 @@ class UserController extends Controller
             $cartSpecifications = $cart["CartSpecifications"];
             $specifications = array();
             $commodities = array();
+
+            $cartArray = array();
             foreach ($cartSpecifications as $cartSpecification) {
                 array_push($specifications, $cartSpecification['Specification']);
                 array_push($commodities, $cartSpecification['Specification']['commodity']);
+
+                $cartItem = array();
+                $cartItem += ['cartSpecificationId' =>$cartSpecification['id']];
+                $cartItem += ['specificationId' =>$cartSpecification['Specification']['id']];
+                $cartItem += ['cartId' =>$cart['id']];
+                $cartItem += ['commmodityId' =>$cartSpecification['Specification']['commodity']['id']];
+                $cartItem += ['commmodityTitle' =>$cartSpecification['Specification']['commodity']['title']];
+                $cartItem += ['commmodityIcon' =>$cartSpecification['Specification']['commodity']['icon']];
+                $cartItem += ['specificationContent' =>$cartSpecification['Specification']['content']];
+                $cartItem += ['cartSpecificationCount' =>$cartSpecification['count']];
+                $cartItem += ['specificationPrice' =>$cartSpecification['Specification']['price']];
+
+                array_push($cartArray, $cartItem);
             }
-
-
-
+            return json($cartArray);
         } else {
             return json("usernull");
         }
