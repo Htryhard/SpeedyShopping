@@ -31,11 +31,9 @@ class OrderController extends Controller
         $user = User::get(['id' => $userId]);
         $spIdAndCountArray = Comm::analysisApiOrder($specificationIds);
         $address = Address::get(['id' => $addressId]);
-        if ($user != null && count($spIdAndCountArray) > 0 && $address != null)
-        {
+        if ($user != null && count($spIdAndCountArray) > 0 && $address != null) {
 
         }
-
 
     }
 

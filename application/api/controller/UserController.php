@@ -53,6 +53,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 根据用户ID，以json形式返回该用户的购物车列表
+     * @return \think\response\Json
+     */
     public function getCart()
     {
         $userId = Request::instance()->get("userId");
@@ -62,7 +66,6 @@ class UserController extends Controller
             $cartSpecifications = $cart["CartSpecifications"];
             $specifications = array();
             $commodities = array();
-
             $cartArray = array();
             foreach ($cartSpecifications as $cartSpecification) {
                 array_push($specifications, $cartSpecification['Specification']);
