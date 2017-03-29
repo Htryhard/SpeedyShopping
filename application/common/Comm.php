@@ -7,11 +7,40 @@
  */
 namespace app\common;
 
+use app\common\model\Specification;
 use app\common\model\User;
 
 class Comm
 {
 
+
+    /**
+     * 根据安卓端协商好协议，传上来的specificationIds格式为：
+     * specificationId1,count1;specificationId2,count2;...
+     * 检查库存量，如果库存少于用户购买的数量，则返回库存不足的商品，如果都满足用户购买的数量，则返回null
+     * @param $specificationIds
+     * @return null
+     */
+    public static function checkRepertory($specificationIds)
+    {
+        $commodity = null;
+        $specificationIdAndCount = explode(';', $specificationIds);
+        array_pop($specificationIdAndCount);
+        $len = count($specificationIdAndCount);
+        for ($i = 0; $i < $len; $i++) {
+            $spIdAndCouns = $specificationIdAndCount[$i];
+            $spIdAndCouns = explode(",", $spIdAndCouns);
+            $specificationId = $spIdAndCouns[0];
+            $specification = Specification::get(["id" => $specificationId]);
+            //检查库存
+            if ($specification->getData("repertory") < $spIdAndCouns[1]) {
+                $commodity = $specification['commodity'];
+                break;
+            }
+        }
+
+        return $commodity;
+    }
 
     /**
      * 与安卓端协商好协议，传上来的specificationIds格式为：
@@ -31,7 +60,7 @@ class Comm
     {
         $spIdAndCountArray = array();
         $specificationIdAndCount = explode(';', $specificationIds);
-        $specificationIdAndCount = array_pop($specificationIdAndCount);
+        array_pop($specificationIdAndCount);
         $len = count($specificationIdAndCount);
         for ($i = 0; $i < $len; $i++) {
             $spIdAndCouns = $specificationIdAndCount[$i];
