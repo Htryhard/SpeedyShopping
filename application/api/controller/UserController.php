@@ -9,6 +9,7 @@
 namespace app\api\controller;
 
 
+use app\common\Comm;
 use app\common\model\Cart;
 use app\common\model\User;
 use think\Controller;
@@ -72,21 +73,73 @@ class UserController extends Controller
                 array_push($commodities, $cartSpecification['Specification']['commodity']);
 
                 $cartItem = array();
-                $cartItem += ['cartSpecificationId' =>$cartSpecification['id']];
-                $cartItem += ['specificationId' =>$cartSpecification['Specification']['id']];
-                $cartItem += ['cartId' =>$cart['id']];
-                $cartItem += ['commmodityId' =>$cartSpecification['Specification']['commodity']['id']];
-                $cartItem += ['commmodityTitle' =>$cartSpecification['Specification']['commodity']['title']];
-                $cartItem += ['commmodityIcon' =>$cartSpecification['Specification']['commodity']['icon']];
-                $cartItem += ['specificationContent' =>$cartSpecification['Specification']['content']];
-                $cartItem += ['cartSpecificationCount' =>$cartSpecification['count']];
-                $cartItem += ['specificationPrice' =>$cartSpecification['Specification']['price']];
+                $cartItem += ['cartSpecificationId' => $cartSpecification['id']];
+                $cartItem += ['specificationId' => $cartSpecification['Specification']['id']];
+                $cartItem += ['cartId' => $cart['id']];
+                $cartItem += ['commmodityId' => $cartSpecification['Specification']['commodity']['id']];
+                $cartItem += ['commmodityTitle' => $cartSpecification['Specification']['commodity']['title']];
+                $cartItem += ['commmodityIcon' => $cartSpecification['Specification']['commodity']['icon']];
+                $cartItem += ['specificationContent' => $cartSpecification['Specification']['content']];
+                $cartItem += ['cartSpecificationCount' => $cartSpecification['count']];
+                $cartItem += ['specificationPrice' => $cartSpecification['Specification']['price']];
 
                 array_push($cartArray, $cartItem);
             }
             return json($cartArray);
         } else {
             return json("usernull");
+        }
+    }
+
+    /**
+     * 编辑用户个人信息
+     * @return \think\response\Json
+     */
+    public function editMessage()
+    {
+        $userId = Request::instance()->post("userId");
+        $type = Request::instance()->post("type");
+        $value = Request::instance()->post("value");
+        $user = User::get(["id" => $userId]);
+        if ($user != null && $value != "") {
+
+            switch ($type) {
+                case "NickName":
+                    $user->nick_name = $value;
+                    break;
+                case "Sbasb":
+                    $user->sbasb = $value;
+                    break;
+                case "UserName":
+                    $user->user_name = $value;
+                    break;
+                case "EditUserIcon":
+                    $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "icon_images" . DS . $user->getData('icon');
+                    $user->icon = Comm::uploadsIconForAPI($value);
+                    $user->save();
+                    //删除旧的头像
+                    unlink($oldUrl);
+                    break;
+                case "EditPassword":
+                    $data = explode("-;-", $value);
+                    $oldPassword = $data[0];
+                    $newPassword = $data[1];
+                    $flag = $user->checkPassword($oldPassword);
+                    if ($flag) {
+                        //密码正确，可以更改
+                        $user->password = User::encryptPassword($newPassword);
+                    } else {
+                        //密码不正确
+                        return json("");
+                    }
+                    break;
+                default:
+                    break;
+            }
+            $user->save();
+            return json($user);
+        } else {
+            return json("用户不存在");
         }
     }
 
