@@ -11,6 +11,7 @@ namespace app\api\controller;
 
 use app\common\Comm;
 use app\common\model\Cart;
+use app\common\model\CartSpecification;
 use app\common\model\User;
 use think\Controller;
 use think\Request;
@@ -140,6 +141,48 @@ class UserController extends Controller
             return json($user);
         } else {
             return json("用户不存在");
+        }
+    }
+
+    public function cartAddOrReduce()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $type = Request::instance()->post("type");
+        $cartSpecificationId = Request::instance()->post("cartSpecificationId");
+        $position = Request::instance()->post("position");
+
+        $user = User::get(["id" => $userId]);
+        $cartSpecification = CartSpecification::get(["id" => $cartSpecificationId]);
+        if ($user != null && $cartSpecification != null && $type != "" && $position != "") {
+            $specification = $cartSpecification["Specification"];
+            $repertory = $specification["repertory"];
+            $oldCount = $cartSpecification["count"];
+            if ($type == "Add") {
+                if (($oldCount + 1) < $repertory) {
+                    $cartSpecification->count = $oldCount + 1;
+                    $cartSpecification->save();
+                    $data["position"] = $position;
+                    $data["code"] = 200;
+                    $data["count"] = $cartSpecification->getData("count");
+                    return json($data);
+                }
+            }
+            if ($type == "Reduce") {
+                if (($oldCount - 1) != 0) {
+                    $cartSpecification->count = $oldCount - 1;
+                    $cartSpecification->save();
+                    $data["position"] = $position;
+                    $data["code"] = 200;
+                    $data["count"] = $cartSpecification->getData("count");
+                    return json($data);
+                }
+            }
+            $data["position"] = "";
+            $data["code"] = 404;
+            $data["count"] = "";
+            return json($data);
+
         }
     }
 

@@ -162,4 +162,46 @@ class OrderController extends Controller
 
     }
 
+    public function getAllOrder()
+    {
+        $data = array();
+        $orderSpeArr = array();
+        $userId = Request::instance()->post("userId");
+        $user = User::get(['id' => $userId]);
+        if ($user != null) {
+            $orderArr = $user["orders"];
+            if (count($orderArr) > 0) {
+                foreach ($orderArr as $order) {
+                    $orderSpecifications = $order["orderSpecifications"];
+                    foreach ($orderSpecifications as $orderSpecification) {
+                        $commodity = $orderSpecification["specification"]["commodity"];
+                        $specification = $orderSpecification["specification"];
+                        $returnData = array();
+                        $returnData["id"] = $orderSpecification["id"];
+                        $returnData["order_id"] = $order["id"];
+                        $returnData["specification_id"] = $specification["id"];
+                        $returnData["commodityId"] = $commodity["id"];
+                        $returnData["count"] = $orderSpecification['count'];
+                        $returnData["price"] = $orderSpecification["price"];
+                        $returnData["specificationcontent"] = $orderSpecification["specificationcontent"];
+                        $returnData["commodityIcon"] = $commodity["icon"];
+                        $returnData["commodityTitle"] = $commodity["title"];
+                        array_push($orderSpeArr, $returnData);
+                    }
+                }
+            }
+            $data["orders"] =$this->getOrders($userId);
+            $data["orderSpecifications"] = $orderSpeArr;
+            return json($data);
+        } else {
+            return json("用户不存在！");
+        }
+    }
+
+    public function getOrders($userId)
+    {
+        $user = User::get(['id' => $userId]);
+        return $user["orders"];
+    }
+
 }
