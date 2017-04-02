@@ -12,6 +12,9 @@ namespace app\api\controller;
 use app\common\Comm;
 use app\common\model\Cart;
 use app\common\model\CartSpecification;
+use app\common\model\Collect;
+use app\common\model\Commodity;
+use app\common\model\Specification;
 use app\common\model\User;
 use think\Controller;
 use think\Request;
@@ -144,6 +147,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 购物车中加减商品数量
+     * @return \think\response\Json
+     */
     public function cartAddOrReduce()
     {
         $data = array();
@@ -183,6 +190,139 @@ class UserController extends Controller
             $data["count"] = "";
             return json($data);
 
+        }
+    }
+
+    /**
+     * 获取收藏列表
+     * @return string|\think\response\Json
+     */
+    public function getCllects()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $user = User::get(["id" => $userId]);
+        if ($user != null) {
+            $collects = Collect::all(["user_id" => $user->getData("id")]);
+            foreach ($collects as $collect) {
+                $commodity = $collect["commodity"];
+                $item = array();
+                $item["id"] = $collect->getData("id");
+                $item["user_id"] = $collect->getData("user_id");
+                $item["creation_time"] = $collect->getData("creation_time");
+                $item["commodity"] = $commodity;
+                $item["priceRange"] = $this->getMinPrice($collect["commodity_id"]);
+                array_push($data, $item);
+            }
+            return json($data);
+        } else {
+            return "用户不存在！";
+        }
+    }
+
+    /**
+     * 获取一个商品中最低的价格
+     * @param $commodityId
+     * @return mixed
+     */
+    public function getMinPrice($commodityId)
+    {
+        $commodity = Commodity::get(["id" => $commodityId]);
+        $spes = $commodity["specifications"];
+        $min = $spes[0]["price"];
+        foreach ($spes as $spe) {
+            if ($spe["price"] < $min) {
+                $min = $spe["price"];
+            }
+        }
+        return $min;
+    }
+
+    public function isCollection()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $commodityId = Request::instance()->post("commodityId");
+        $user = User::get(["id" => $userId]);
+        $commodity = Commodity::get(["id" => $commodityId]);
+        if ($user != null && $commodity != null) {
+            $collect = Collect::get(["user_id" => $user->getData("id"), "commodity_id" => $commodity->getData("id")]);
+            if ($collect != null) {
+                $data["code"] = 202;//已经收藏
+                return json($data);
+            } else {
+                $data["code"] = 402;//没有收藏
+                return json($data);
+            }
+        } else {
+            $data["code"] = 402;//没有收藏
+            return json($data);
+        }
+    }
+
+    public function userCollection()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $commodityId = Request::instance()->post("commodityId");
+        $type = Request::instance()->post("type");
+        $user = User::get(["id" => $userId]);
+        $commodity = Commodity::get(["id" => $commodityId]);
+        if ($user != null && $commodity != null && $type != "") {
+            $collect = Collect::get(["user_id" => $user->getData("id"), "commodity_id" => $commodity->getData("id")]);
+            if ($type == "add") {
+                if ($collect == null) {
+                    $collect = new Collect();
+                    $collect->id = Comm::getNewGuid();
+                    $collect->user_id = $user->getData('id');
+                    $collect->commodity_id = $commodityId;
+                    $collect->creation_time = time();
+                    $collect->save();
+                    $data["code"] = 203;//已经成功添加收藏
+                    return json($data);
+                }
+            }
+            if ($type == "remove") {
+                if ($collect != null) {
+                    $collect->delete();
+                    $data["code"] = 204;//已经成功移除收藏
+                    return json($data);
+                }
+            }
+        } else {
+            $data["code"] = 403;
+            return json($data);
+        }
+    }
+
+    public function addToCart()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $specificationId = Request::instance()->post("specificationId");
+        $count = Request::instance()->post("count");
+        $user = User::get(["id" => $userId]);
+        $specification = Specification::get(["id" => $specificationId]);
+        if ($user != null && $specification != null && $count != "") {
+            $cart = Cart::get(["user_id" => $user->getData("id")]);
+            $cartSpecification = CartSpecification::get(["specification_id" => $specification->getData("id")]);
+            if ($cartSpecification != null) {
+                $oldCount = $cartSpecification->getData("count");
+                $cartSpecification->count = $oldCount + $count;
+                $cartSpecification->save();
+            } else {
+                $cartSpecification = new CartSpecification();
+                $cartSpecification->id = Comm::getNewGuid();
+                $cartSpecification->specification_id = $specification->getData('id');
+                $cartSpecification->cart_id = $cart->getData("id");
+                $cartSpecification->count = $count;
+                $cartSpecification->save();
+            }
+            $data["code"] = 200;
+            return json($data);
+        } else {
+            $data["code"] = 404;
+            return json($data);
         }
     }
 
