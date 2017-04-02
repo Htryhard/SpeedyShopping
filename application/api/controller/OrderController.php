@@ -11,6 +11,7 @@ namespace app\api\controller;
 use app\common\Comm;
 use app\common\model\Address;
 use app\common\model\CartSpecification;
+use app\common\model\Comment;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
 use app\common\model\Specification;
@@ -167,9 +168,48 @@ class OrderController extends Controller
         $data = array();
         $orderSpeArr = array();
         $userId = Request::instance()->post("userId");
+        $type = Request::instance()->post("type");
         $user = User::get(['id' => $userId]);
         if ($user != null) {
-            $orderArr = $user["orders"];
+            $orderArr = array();
+            $orders = $user["orders"];
+            if ($type == "All" || $type == "") {
+                //全部订单
+                foreach ($orders as $item) {
+                    if ($item->getData("status") != 8) {
+                        array_push($orderArr, $item);
+                    }
+                }
+            } else if ($type == "Obligation") {
+                //待付款
+                foreach ($orders as $item) {
+                    if ($item->getData("status") == 0) {
+                        array_push($orderArr, $item);
+                    }
+                }
+            } else if ($type == "Receiv") {
+                //待收货
+                foreach ($orders as $item) {
+                    if ($item->getData("status") >= 1 && $item->getData("status") <= 4) {
+                        array_push($orderArr, $item);
+                    }
+                }
+            } else if ($type == "Assess") {
+                //待评价
+                foreach ($orders as $val) {
+                    if ($val->getData("status") != 8) {
+                        $orderSpes = $val["orderSpecifications"];
+                        foreach ($orderSpes as $orderSpe) {
+                            $comment = Comment::get(["order_id" => $val["id"], "specification_id" => $orderSpe["specification_id"]]);
+                            if ($comment == null) {
+                                array_push($orderArr, $val);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (count($orderArr) > 0) {
                 foreach ($orderArr as $order) {
                     $orderSpecifications = $order["orderSpecifications"];
@@ -190,7 +230,7 @@ class OrderController extends Controller
                     }
                 }
             }
-            $data["orders"] =$this->getOrders($userId);
+            $data["orders"] = $this->getOrders($userId, $type);
             $data["orderSpecifications"] = $orderSpeArr;
             return json($data);
         } else {
@@ -198,10 +238,70 @@ class OrderController extends Controller
         }
     }
 
-    public function getOrders($userId)
+    public function getOrders($userId, $type)
     {
         $user = User::get(['id' => $userId]);
-        return $user["orders"];
+
+        $orderArr = array();
+        $orders = $user["orders"];
+        if ($type == "All" || $type == "") {
+            //全部订单
+            foreach ($orders as $item) {
+                if ($item->getData("status") != 8) {
+                    array_push($orderArr, $item);
+                }
+            }
+        } else if ($type == "Obligation") {
+            //待付款
+            foreach ($orders as $item) {
+                if ($item->getData("status") == 0) {
+                    array_push($orderArr, $item);
+                }
+            }
+        } else if ($type == "Receiv") {
+            //待收货
+            foreach ($orders as $item) {
+                if ($item->getData("status") >= 1 && $item->getData("status") <= 4) {
+                    array_push($orderArr, $item);
+                }
+            }
+        } else if ($type == "Assess") {
+            //待评价
+            foreach ($orders as $val) {
+                if ($val->getData("status") != 8) {
+                    $orderSpes = $val["orderSpecifications"];
+                    foreach ($orderSpes as $orderSpe) {
+                        $comment = Comment::get(["order_id" => $val["id"], "specification_id" => $orderSpe["specification_id"]]);
+                        if ($comment == null) {
+                            array_push($orderArr, $val);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $orderArr;
+    }
+
+    public function handleOrder()
+    {
+        $userId = Request::instance()->post("userId");
+        $orderId = Request::instance()->post("orderId");
+        $type = Request::instance()->post("type");
+        $user = User::get(["id" => $userId]);
+        $order = Order::get(["id" => $orderId]);
+        if ($user != null && $order != null && $type != "") {
+            if ($type == "confirm") {
+                $order->status = 5;
+            } else if ($type == "cancel") {
+                $order->status = 7;
+            } else if ($type == "detele") {
+                $order->status = 8;
+            }
+            $order->save();
+            return json($order);
+        }
     }
 
 }

@@ -13,7 +13,10 @@ use app\common\Comm;
 use app\common\model\Cart;
 use app\common\model\CartSpecification;
 use app\common\model\Collect;
+use app\common\model\Comment;
 use app\common\model\Commodity;
+use app\common\model\Order;
+use app\common\model\Refunds;
 use app\common\model\Specification;
 use app\common\model\User;
 use think\Controller;
@@ -328,7 +331,66 @@ class UserController extends Controller
 
     public function initUser()
     {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $user = User::get(["id" => $userId]);
+        if ($user != null) {
+            $orders = $user["orders"];
+            $comments = Comment::all(["user_id" => $user->getData("id")]);
+            $refunds = Refunds::all(["user_id" => $user->getData("id")]);
+            //待付款
+            $obligation = 0;
+            //待收货
+            $receiv = 0;
+            //待评价
+            $assess = 0;
+            //退换货
+            $customer = count($refunds);
 
+            //精确到订单商品规格
+            $orderSpes = 0;
+            foreach ($orders as $order) {
+                switch ($order->getData("status")) {
+                    case 0:
+                        $obligation = $obligation + 1;
+                        break;
+                    case 1:
+                        $receiv = $receiv + 1;
+                        break;
+                    case 2:
+                        $receiv = $receiv + 1;
+                        break;
+                    case 3:
+                        $receiv = $receiv + 1;
+                        break;
+                    case 4:
+                        $receiv = $receiv + 1;
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+//                        $customer = $customer + 1;
+                        break;
+                    default:
+                        break;
+                }
+                $orderSpecifications = $order["orderSpecifications"];
+                $orderSpes = $orderSpes + count($orderSpecifications);
+            }
+
+            $len = count($comments);
+            if ($orderSpes == $len) {
+                $assess = 0;
+            } else if ($orderSpes > $len) {
+                $assess = $orderSpes - $len;
+            }
+
+            $data["obligation"] = $obligation;
+            $data["receiv"] = $receiv;
+            $data["assess"] = $assess;
+            $data["customer"] = $customer;
+            return json($data);
+        }
     }
 
 }
