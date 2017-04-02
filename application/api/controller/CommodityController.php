@@ -109,4 +109,46 @@ class CommodityController extends Controller
         return json($commodities);
     }
 
+    public function getComments()
+    {
+        $data = array();
+        $commodityId = Request::instance()->post("commodityId");
+        $commodity = Commodity::get(["id" => $commodityId]);
+        if ($commodity != null) {
+            $comments = $commodity["comments"];
+            foreach ($comments as $comment) {
+                $comData = array();
+                $comData["id"] = $comment["id"];
+                $comData["content"] = $comment["content"];
+                $comData["grade"] = $comment["grade"];
+                $comData["creation_time"] = $comment["creation_time"];
+
+                $user = $comment["user"];
+                $comData["user_name"] = $user["nick_name"];
+                $comData["user_icon"] = $user["icon"];
+
+                $specification = $comment["specification"];
+                if ($specification == null) {
+                    $comData["specification_content"] = "";
+                } else {
+                    $comData["specification_content"] = $specification["content"];
+                }
+
+                $comData["status"] = $comment["status"];
+                $comData["order_id"] = $comment["order_id"];
+                $comData["commodity_id"] = $comment["commodity_id"];
+
+                $Images = array();
+                foreach ($comment["commentImgs"] as $img) {
+                    array_push($Images, $img["image"]);
+                }
+                $comData["commentIcons"] = $Images;
+
+                array_push($data, $comData);
+            }
+
+            return json($data);
+        }
+    }
+
 }
