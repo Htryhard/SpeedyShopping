@@ -350,32 +350,34 @@ class UserController extends Controller
             //精确到订单商品规格
             $orderSpes = 0;
             foreach ($orders as $order) {
-                switch ($order->getData("status")) {
-                    case 0:
-                        $obligation = $obligation + 1;
-                        break;
-                    case 1:
-                        $receiv = $receiv + 1;
-                        break;
-                    case 2:
-                        $receiv = $receiv + 1;
-                        break;
-                    case 3:
-                        $receiv = $receiv + 1;
-                        break;
-                    case 4:
-                        $receiv = $receiv + 1;
-                        break;
-                    case 5:
-                        break;
-                    case 6:
+                if ($order->getData("status") != 8 && $order->getData("status") != 7) {
+                    switch ($order->getData("status")) {
+                        case 0:
+                            $obligation = $obligation + 1;
+                            break;
+                        case 1:
+                            $receiv = $receiv + 1;
+                            break;
+                        case 2:
+                            $receiv = $receiv + 1;
+                            break;
+                        case 3:
+                            $receiv = $receiv + 1;
+                            break;
+                        case 4:
+                            $receiv = $receiv + 1;
+                            break;
+                        case 5:
+                            break;
+                        case 6:
 //                        $customer = $customer + 1;
-                        break;
-                    default:
-                        break;
+                            break;
+                        default:
+                            break;
+                    }
+                    $orderSpecifications = $order["orderSpecifications"];
+                    $orderSpes = $orderSpes + count($orderSpecifications);
                 }
-                $orderSpecifications = $order["orderSpecifications"];
-                $orderSpes = $orderSpes + count($orderSpecifications);
             }
 
             $len = count($comments);

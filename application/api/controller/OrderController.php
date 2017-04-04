@@ -197,7 +197,7 @@ class OrderController extends Controller
             } else if ($type == "Assess") {
                 //待评价
                 foreach ($orders as $val) {
-                    if ($val->getData("status") != 8) {
+                    if ($val->getData("status") != 8 && $val->getData("status") != 7) {
                         $orderSpes = $val["orderSpecifications"];
                         foreach ($orderSpes as $orderSpe) {
                             $comment = Comment::get(["order_id" => $val["id"], "specification_id" => $orderSpe["specification_id"]]);
@@ -268,7 +268,7 @@ class OrderController extends Controller
         } else if ($type == "Assess") {
             //待评价
             foreach ($orders as $val) {
-                if ($val->getData("status") != 8) {
+                if ($val->getData("status") != 8 && $val->getData("status") != 7) {
                     $orderSpes = $val["orderSpecifications"];
                     foreach ($orderSpes as $orderSpe) {
                         $comment = Comment::get(["order_id" => $val["id"], "specification_id" => $orderSpe["specification_id"]]);
