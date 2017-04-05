@@ -18,9 +18,9 @@ class Refunds extends Model
         return $this->belongsTo('order');
     }
 
-    public function specification()
+    public function OrderSpecification()
     {
-        return $this->belongsTo('Specification');
+        return $this->belongsTo('OrderSpecification');
     }
 
     public function user()

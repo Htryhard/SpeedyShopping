@@ -5,25 +5,18 @@
     <table>
         <tr>
             <td rowspan="2">
-                <img src="{$imgRoot.$specification['commodity']['images'][0]['image']}" width="150" height="100"
+                <img src="{$imgRoot.$orderSpecification['specification']['commodity']['images'][0]['image']}" width="150" height="100"
                      class='img-rounded'>
             </td>
             <td>
-                <span>【{$specification['commodity']['title']}】</span>
+                <span>【{$orderSpecification['specification']['commodity']['title']}】</span>
             </td>
         </tr>
         <tr>
             <td>
-                &nbsp;<span style="color: slategray">规格：{$specification['content']}</span>
-                &nbsp;<span style="color: slategray">数量：
-                {volist name="order['orderSpecifications']" id="ospecifications"}
-                    {eq name="ospecifications['specification_id']" value="$specification['id']"}
-                        {$ospecifications['count']}
-                    {/eq}
-                {/volist}
-
-            </span>
-                &nbsp;<span style="color: slategray">单价：{$specification['price']}元</span>
+                &nbsp;<span style="color: slategray">规格：{$orderSpecification['specificationcontent']}</span>
+                &nbsp;<span style="color: slategray">数量：{$orderSpecification['count']}</span>
+                &nbsp;<span style="color: slategray">单价：{$orderSpecification['price']}元</span>
             </td>
         </tr>
     </table>
@@ -49,7 +42,7 @@
         var refunds_content = $("#refunds_content").val();
         var select_type = $("#select_type").val();
         var orderId = "{$order['id']}";
-        var specificationId = "{$specification['id']}";
+        var orderSpecificationId = "{$orderSpecification['id']}";
         if (refunds_content != "" && select_type != "") {
             $.ajax({
                 type: "POST",
@@ -57,7 +50,7 @@
                 dataType: "json",
                 data: {
                     orderId: orderId,
-                    specificationId: specificationId,
+                    orderSpecificationId: orderSpecificationId,
                     select_type: select_type,
                     refunds_content: refunds_content
                 },

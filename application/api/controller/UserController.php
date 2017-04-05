@@ -16,6 +16,7 @@ use app\common\model\Collect;
 use app\common\model\Comment;
 use app\common\model\Commodity;
 use app\common\model\Order;
+use app\common\model\OrderSpecification;
 use app\common\model\Refunds;
 use app\common\model\Specification;
 use app\common\model\User;
@@ -329,6 +330,10 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * 初始化用户的首页
+     * @return \think\response\Json
+     */
     public function initUser()
     {
         $data = array();
@@ -391,6 +396,123 @@ class UserController extends Controller
             $data["receiv"] = $receiv;
             $data["assess"] = $assess;
             $data["customer"] = $customer;
+            return json($data);
+        }
+    }
+
+    public function customerService()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $orderSpecificationId = Request::instance()->post("orderSpecificationId");
+        $orderId = Request::instance()->post("orderId");
+        $content = Request::instance()->post("content");
+        $type = Request::instance()->post("type");
+
+        $user = User::get(["id" => $userId]);
+        $order = Order::get(["id" => $orderId]);
+        $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
+        if ($user != null && $order != null && $orderSpecification != null) {
+            $refund = Refunds::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "order_specification_id" => $orderSpecification->getData('id')]);
+            if ($refund != null) {
+                $data["statu"] = "RefundsRepeated";
+                $data["data"] = $this->getRefundArr($refund, $orderSpecification);
+                return json($data);
+            } else {
+                $refund = new Refunds();
+                $refund->id = Comm::getNewGuid();
+                switch ($type) {
+                    case "repair"://返修
+                        $refund->type = 0;
+                        break;
+                    case "goods_rejected"://退货
+                        $refund->type = 2;
+                        break;
+                    case "exchange_goods"://换货
+                        $refund->type = 1;
+                        break;
+                    default:
+                        break;
+                }
+                $refund->content = $content;
+                $refund->creation_time = time();
+                $refund->user_id = $user->getData("id");
+                $refund->order_id = $orderId;
+                $refund->order_specification_id = $orderSpecification->getData('id');
+                $refund->status = 0;//0待审核，1，2
+                $refund->save();
+
+//                $refundForApi = array();
+//                $refundForApi["id"] = $refund->getData("id");
+//                $refundForApi["type"] = $refund->getData("type");
+//                $refundForApi["content"] = $refund->getData("content");
+//                $refundForApi["order_id"] = $refund->getData("order_id");
+//                $refundForApi["creation_time"] = $refund->getData("creation_time");
+//                $refundForApi["status"] = $refund->getData("status");
+//
+//                $refundForApi["commmodityTitle"] = $orderSpecification['specification']['commodity']['title'];
+//                $refundForApi["commmodityIcon"] = $orderSpecification['specification']['commodity']['icon'];
+//                $refundForApi["specificationContent"] = $orderSpecification->getData('specificationcontent');
+//                $refundForApi["cartSpecificationCount"] = $orderSpecification->getData('count');
+//                $refundForApi["specificationPrice"] = $orderSpecification->getData('price');
+//                $refundForApi["order_date"] = $refund['order']['order_time'];
+
+                $data["statu"] = "success";
+                $data["data"] = $this->getRefundArr($refund, $orderSpecification);
+                return json($data);
+            }
+        } else {
+            $data["statu"] = "fail";
+            $data["data"] = "";
+            return json($data);
+        }
+    }
+
+    public function getRefundArr($refund, $orderSpecification)
+    {
+        $refundForApi = array();
+        $refundForApi["id"] = $refund->getData("id");
+        $refundForApi["type"] = $refund->getData("type");
+        $refundForApi["content"] = $refund->getData("content");
+        $refundForApi["order_id"] = $refund->getData("order_id");
+        $refundForApi["creation_time"] = $refund->getData("creation_time");
+        $refundForApi["status"] = $refund->getData("status");
+
+        $refundForApi["commmodityTitle"] = $orderSpecification['specification']['commodity']['title'];
+        $refundForApi["commmodityIcon"] = $orderSpecification['specification']['commodity']['icon'];
+        $refundForApi["specificationContent"] = $orderSpecification->getData('specificationcontent');
+        $refundForApi["cartSpecificationCount"] = $orderSpecification->getData('count');
+        $refundForApi["specificationPrice"] = $orderSpecification->getData('price');
+        $refundForApi["order_date"] = $refund['order']['order_time'];
+        return $refundForApi;
+
+    }
+
+    public function getAllRefunds()
+    {
+        $data = array();
+        $userId = Request::instance()->post("userId");
+        $user = User::get(["id" => $userId]);
+        if ($user != null) {
+            $refunds = Refunds::all(["user_id" => $user->getData("id")]);
+            foreach ($refunds as $refund) {
+                $refundForApi = array();
+                $refundForApi["id"] = $refund->getData("id");
+                $refundForApi["type"] = $refund->getData("type");
+                $refundForApi["content"] = $refund->getData("content");
+                $refundForApi["order_id"] = $refund->getData("order_id");
+                $refundForApi["creation_time"] = $refund->getData("creation_time");
+                $refundForApi["status"] = $refund->getData("status");
+
+                $refundForApi["commmodityTitle"] = $refund['OrderSpecification']['specification']['commodity']['title'];
+                $refundForApi["commmodityIcon"] = $refund['OrderSpecification']['specification']['commodity']['icon'];
+                $refundForApi["specificationContent"] = $refund['OrderSpecification']['specificationcontent'];
+                $refundForApi["cartSpecificationCount"] = $refund['OrderSpecification']['count'];
+                $refundForApi["specificationPrice"] = $refund['OrderSpecification']['price'];
+                $refundForApi["order_date"] = $refund['order']['order_time'];
+
+                array_push($data, $refundForApi);
+            }
             return json($data);
         }
     }

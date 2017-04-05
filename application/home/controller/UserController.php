@@ -855,21 +855,21 @@ class UserController extends BaseController
     /**
      * 退换货
      * @param $orderId
-     * @param $specificationId
+     * @param $orderSpecificationId
      * @return mixed|void
      */
-    public function refunds($orderId, $specificationId)
+    public function refunds($orderId, $orderSpecificationId)
     {
-        if ($orderId != null && $specificationId != null) {
+        if ($orderId != null && $orderSpecificationId != null) {
             $order = Order::get(['id' => $orderId]);
-            $specification = Specification::get(["id" => $specificationId]);
-            if ($order == null && $specification != null) {
+            $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
+            if ($order == null && $orderSpecification != null) {
                 return $this->error('订单或者商品不存在！');
             }
             $user = User::getUserBySession("home");
             $this->assign('order', $order);
             $this->assign("user", $user);
-            $this->assign("specification", $specification);
+            $this->assign("orderSpecification", $orderSpecification);
             $imgRoot = "/SpeedyShopping/public//uploads/commodity_images/";
             $this->assign("imgRoot", $imgRoot);
             return $this->fetch();
@@ -887,17 +887,17 @@ class UserController extends BaseController
         if ($this->request->isAjax()) {
             $select_type = $this->request->post("select_type");
             $orderId = $this->request->post("orderId");
-            $specificationId = $this->request->post("specificationId");
+            $orderSpecificationId = $this->request->post("orderSpecificationId");
             $refunds_content = $this->request->post("refunds_content");
-            if ($orderId != "" && $specificationId != "" && $select_type != "" && $refunds_content != "") {
+            if ($orderId != "" && $orderSpecificationId != "" && $select_type != "" && $refunds_content != "") {
                 $user = User::getUserBySession("home");
-                $specification = Specification::get(['id' => $specificationId]);
-                if ($specification == null) {
+                $orderSpecification = OrderSpecification::get(['id' => $orderSpecificationId]);
+                if ($orderSpecification == null) {
                     return "SpecificationNull";
                 }
-                $commodityId = $specification['commodity']['id'];
+                $commodityId = $orderSpecification['specification']['commodity']['id'];
                 //判断是否已经对这次购买的商品进行退换货操作过
-                $refund = Refunds::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "specification_id" => $specification->getData('id')]);
+                $refund = Refunds::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "order_specification_id" => $orderSpecification->getData('id')]);
                 if ($refund != null) {
                     return "RefundsRepeated";
                 }
@@ -908,7 +908,7 @@ class UserController extends BaseController
                 $refund->creation_time = time();
                 $refund->user_id = $user->getData("id");
                 $refund->order_id = $orderId;
-                $refund->specification_id = $specification->getData('id');
+                $refund->order_specification_id = $orderSpecification->getData('id');
                 $refund->status = 0;//0待审核，1，2
                 $refund->save();
                 return "success";
