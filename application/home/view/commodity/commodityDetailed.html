@@ -182,17 +182,19 @@
                 <td height="90">{$comment['content']}</td>
             </tr>
             <tr>
-                <td height="40" style="color: #9d9d9d">规格：{$comment['specification']['content']}</td>
+                <td height="40" style="color: #9d9d9d">规格：{$comment['OrderSpecification']['specification']['content']}
+                </td>
             </tr>
             <tr>
                 <td>
-                {foreach name="$comment['commentImgs']" item="coImg"}
-                <img src="{$commentImg.$coImg['image']}" width="100" height="50" class="img-thumbnail" rel="lightbox-tour"/>
-                {/foreach}
+                    {foreach name="$comment['commentImgs']" item="coImg"}
+                    <img src="{$commentImg.$coImg['image']}" width="100" height="50" class="img-thumbnail"
+                         rel="lightbox-tour"/>
+                    {/foreach}
                 </td>
             </tr>
         </table>
-        <hr style="height:1px;border:none;border-top:1px dashed #0066CC;" />
+        <hr style="height:1px;border:none;border-top:1px dashed #0066CC;"/>
         {/volist}
     </div>
 </asidefoot>

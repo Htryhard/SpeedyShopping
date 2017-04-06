@@ -14,6 +14,7 @@ use app\common\model\Cart;
 use app\common\model\CartSpecification;
 use app\common\model\Collect;
 use app\common\model\Comment;
+use app\common\model\CommentImages;
 use app\common\model\Commodity;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
@@ -515,6 +516,117 @@ class UserController extends Controller
             }
             return json($data);
         }
+    }
+
+    public function postComment()
+    {
+        $date = array();
+        $userId = Request::instance()->post("userId");
+        $orderSpecificationId = Request::instance()->post("orderSpecificationId");
+        $rating = Request::instance()->post("rating");
+        $commentContnet = Request::instance()->post("commentContnet");
+        $imgBase64s = Request::instance()->post("imgBase64s");
+
+        $user = User::get(["id" => $userId]);
+        $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
+
+        if ($user != null && $orderSpecification != null && $rating != "" && $commentContnet != "") {
+            //判断是否已经对这次购买的商品评论过
+            $comment = Comment::get(['user_id' => $user->getData('id'), "order_specification_id" => $orderSpecification->getData('id')]);
+            if ($comment != null) {
+                $date["statu"] = "CommentRepeated";
+                $date["data"] = "";
+                return json($date);
+            }
+            $commodity = $orderSpecification["specification"]["commodity"];
+            $grade = $commodity["grade"];
+            $grade = (double)$grade + (double)$rating;
+            $commodity->grade = $grade;
+            $commodity->save();
+
+            $comment = new Comment();
+            $comment->id = Comm::getNewGuid();
+            $comment->content = $commentContnet;
+            $comment->grade = $rating;
+            $comment->creation_time = time();
+            $comment->user_id = $user->getData("id");
+            $comment->commodity_id = $commodity["id"];
+            $comment->order_id = $orderSpecification["order"]["id"];
+            $comment->order_specification_id = $orderSpecification->getData('id');
+            $comment->status = 0;//0待审核，1通过并显示，2删除不显示
+            $comment->save();
+
+            if ($imgBase64s != "") {
+                //以约定的5个#号来分割
+                $imgArray = explode("#####", $imgBase64s);
+                //分割会导致多出一个空元素，故移除最后一个空元素
+                array_pop($imgArray);
+                foreach ($imgArray as $item) {
+                    $commentImgPath = Comm::uploadsCommentImgsForAPI($item);
+                    $commentImageModle = new CommentImages();
+                    $commentImageModle->id = Comm::getNewGuid();
+                    $commentImageModle->image = $commentImgPath;
+                    $commentImageModle->comment_id = $comment->getData("id");
+                    $commentImageModle->save();
+                }
+            }
+            $date["statu"] = "success";
+            $date["data"] = "评论发表成功！";
+            return json($date);
+
+        }
+        $date["statu"] = "ParameterError";
+        $date["data"] = "参数不全，可能是订单已经丢失";
+        return json($date);
+
+    }
+
+    public function userAllComment()
+    {
+        $date = array();
+        $commenDatas = array();
+        $userId = Request::instance()->post("userId");
+        $user = User::get(["id" => $userId]);
+        if ($user != null) {
+            $comments = Comment::all(["user_id" => $userId]);
+            if (count($comments) > 0) {
+
+                foreach ($comments as $comment) {
+                    $commenArr = array();
+                    $commenArr["id"] = $comment->getData("id");
+                    $commenArr["count"] = $comment["OrderSpecification"]["count"];
+                    $commenArr["price"] = $comment["OrderSpecification"]["price"];
+                    $commenArr["specificationcontent"] = $comment["OrderSpecification"]["specificationcontent"];
+                    $commenArr["ordeSpecificationId"] = $comment["OrderSpecification"]["id"];
+                    $commenArr["order_date"] = $comment["OrderSpecification"]["order"]["order_time"];
+                    $commenArr["commodityIcon"] = $comment["OrderSpecification"]["specification"]["commodity"]["icon"];
+                    $commenArr["commodityTitle"] = $comment["OrderSpecification"]["specification"]["commodity"]["title"];
+                    $commenArr["commodityId"] = $comment["OrderSpecification"]["specification"]["commodity"]["id"];
+                    $commenArr["commentContent"] = $comment->getData("content");
+
+                    $imgs = array();
+                    foreach ($comment["commentImgs"] as $commentImg) {
+                        array_push($imgs, $commentImg["image"]);
+                    }
+                    $commenArr["commentIcons"] = $imgs;
+
+                    array_push($commenDatas, $commenArr);
+                }
+
+                $date["statu"] = "Success";
+                $date["data"] = $commenDatas;
+                return json($date);
+            } else {
+                $date["statu"] = "NullData";
+                $date["data"] = "";
+                return json($date);
+            }
+        } else {
+            $date["statu"] = "NullUser";
+            $date["data"] = "";
+            return json($date);
+        }
+
     }
 
 }

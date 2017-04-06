@@ -13,9 +13,9 @@ use think\Model;
 
 class Comment extends Model
 {
-    public function specification()
+    public function OrderSpecification()
     {
-        return $this->belongsTo('specification');
+        return $this->belongsTo('OrderSpecification');
     }
 
     public function user()
@@ -23,11 +23,9 @@ class Comment extends Model
         return $this->belongsTo('user');
     }
 
-//    public
-
     public function commentImgs()
     {
-        return $this->hasMany('CommentImages','comment_id','id');
+        return $this->hasMany('CommentImages', 'comment_id', 'id');
     }
 
 }

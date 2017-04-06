@@ -127,11 +127,11 @@ class CommodityController extends Controller
                 $comData["user_name"] = $user["nick_name"];
                 $comData["user_icon"] = $user["icon"];
 
-                $specification = $comment["specification"];
-                if ($specification == null) {
+                $orderSpecification = $comment['OrderSpecification'];
+                if ($orderSpecification == null) {
                     $comData["specification_content"] = "";
                 } else {
-                    $comData["specification_content"] = $specification["content"];
+                    $comData["specification_content"] = $orderSpecification["specificationcontent"];
                 }
 
                 $comData["status"] = $comment["status"];

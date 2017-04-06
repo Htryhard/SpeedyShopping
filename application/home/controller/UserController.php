@@ -766,18 +766,18 @@ class UserController extends BaseController
     }
 
     //用户评论商品
-    public function comment($orderId, $specificationId)
+    public function comment($orderId, $orderSpecificationId)
     {
-        if ($orderId != null && $specificationId != null) {
+        if ($orderId != null && $orderSpecificationId != null) {
             $order = Order::get(['id' => $orderId]);
-            $specification = Specification::get(["id" => $specificationId]);
-            if ($order == null && $specification != null) {
+            $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
+            if ($order == null && $orderSpecification != null) {
                 return $this->error('订单或者商品不存在！');
             }
             $user = User::getUserBySession("home");
             $this->assign('order', $order);
             $this->assign("user", $user);
-            $this->assign("specification", $specification);
+            $this->assign("orderSpecification", $orderSpecification);
             $imgRoot = "/SpeedyShopping/public//uploads/commodity_images/";
             $this->assign("imgRoot", $imgRoot);
             return $this->fetch();
@@ -796,24 +796,24 @@ class UserController extends BaseController
         if ($this->request->isAjax()) {
             $commentImgs = $this->request->post("commentImages");
             $orderId = $this->request->post("orderId");
-            $specificationId = $this->request->post("specificationId");
+            $orderSpecificationId = $this->request->post("orderSpecificationId");
             $fenshu = $this->request->post("fenshu");
             $commentContent = $this->request->post("content");
-            if ($orderId != "" && $specificationId != "" && $fenshu != "" && $commentContent != "") {
+            if ($orderId != "" && $orderSpecificationId != "" && $fenshu != "" && $commentContent != "") {
                 $user = User::getUserBySession("home");
-                $specification = Specification::get(['id' => $specificationId]);
-                if ($specification == null) {
+                $orderSpecification = OrderSpecification::get(['id' => $orderSpecificationId]);
+                if ($orderSpecification == null) {
                     return "SpecificationNull";
                 }
-                $commodityId = $specification['commodity']['id'];
+                $commodityId = $orderSpecification['specification']['commodity']['id'];
                 //判断是否已经对这次购买的商品评论过
-                $comment = Comment::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "specification_id" => $specification->getData('id')]);
+                $comment = Comment::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "order_specification_id" => $orderSpecification->getData('id')]);
                 if ($comment != null) {
                     return "CommentRepeated";
                 }
-                $commodity = Commodity::get(['id'=>$commodityId]);
+                $commodity = Commodity::get(['id' => $commodityId]);
                 $grade = $commodity->getData("grade");
-                $grade = $grade+$fenshu;
+                $grade = $grade + $fenshu;
                 $commodity->grade = $grade;
                 $commodity->save();
 
@@ -825,7 +825,7 @@ class UserController extends BaseController
                 $comment->user_id = $user->getData("id");
                 $comment->commodity_id = $commodityId;
                 $comment->order_id = $orderId;
-                $comment->specification_id = $specification->getData('id');
+                $comment->order_specification_id = $orderSpecification->getData('id');
                 $comment->status = 0;//0待审核，1通过并显示，2删除不显示
                 $comment->save();
                 if ($commentImgs != "") {

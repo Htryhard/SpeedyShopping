@@ -203,15 +203,16 @@
     <table>
         <tr>
             <td rowspan="2">
-                <img src="{$imgRoot.$specification['commodity']['images'][0]['image']}" width="150" height="100" class='img-rounded'>
+                <img src="{$imgRoot.$orderSpecification['specification']['commodity']['images'][0]['image']}"
+                     width="150" height="100" class='img-rounded'>
             </td>
             <td>
-                <span>【{$specification['commodity']['title']}】</span>
+                <span>【{$orderSpecification['specification']['commodity']['title']}】</span>
             </td>
         </tr>
         <tr>
             <td>
-                &nbsp;<span style="color: slategray">规格：{$specification['content']}</span>
+                &nbsp;<span style="color: slategray">规格：{$orderSpecification['specificationcontent']}</span>
             </td>
         </tr>
     </table>
@@ -315,10 +316,10 @@
 //        var select_commodity = document.getElementById("select_commodity");
         var orderId = "{$order['id']}";
         var grade = document.getElementById("grade");
-        var specificationId = "{$specification['id']}";//选中的值
+        var orderSpecificationId = "{$orderSpecification['id']}";//选中的值
         var fenshu = grade.innerText;
         var content = $("#comment_content").val();
-        if (specificationId == "") {
+        if (orderSpecificationId == "") {
             alert("商品规格的ID不能为空");
             return;
         }
@@ -344,7 +345,7 @@
             dataType: "json",
             data: {
                 orderId: orderId,
-                specificationId: specificationId,
+                orderSpecificationId: orderSpecificationId,
                 fenshu: fenshu,
                 content: content,
                 commentImages: ImagesStr

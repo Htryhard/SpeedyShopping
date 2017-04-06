@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/4/5 ������ ���� 6:11:49
+Date: 2017/4/6 ������ ���� 6:26:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,7 +106,7 @@ CREATE TABLE `shopp_comment` (
   `grade` double(2,0) NOT NULL COMMENT '星级1 2 3 4 5 6 7 8 9 10',
   `creation_time` char(255) NOT NULL,
   `user_id` char(36) NOT NULL,
-  `specification_id` char(36) NOT NULL,
+  `order_specification_id` char(36) NOT NULL,
   `status` varchar(10) NOT NULL,
   `order_id` char(36) NOT NULL,
   `commodity_id` char(36) NOT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1455 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1480 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -314,13 +314,10 @@ INSERT INTO `shopp_collect` VALUES ('C8A15885-4628-EFB4-AEB6-6AB29CB61108', '5D7
 INSERT INTO `shopp_collect` VALUES ('D9C5A264-E1CC-FCF0-14D8-4F34F15E0506', '5D754767-F3D5-1D93-E588-856B288B08CC', 'D5CD3549-48F1-F39A-F547-EF40372ECC5D', '1487170039');
 INSERT INTO `shopp_collect` VALUES ('DDA8EF38-2184-8F3B-532F-0F6774E3C741', '5D754767-F3D5-1D93-E588-856B288B08CC', '72387161-B237-7FC1-3FB3-E78C23533C5C', '1487170033');
 INSERT INTO `shopp_collect` VALUES ('E15310D0-8D62-B658-1627-BE3F7560D2B9', 'AA692D26-B786-D8A0-1420-F8F33264485C', 'C3E30939-86EB-730F-900E-17B582155781', '1491013058');
-INSERT INTO `shopp_comment` VALUES ('820C8AB5-E75A-8C8F-1696-54FD048F9F7B', '这是非常好的一个屏幕啊！装逼啦！', '4', '1491114211', 'AA692D26-B786-D8A0-1420-F8F33264485C', '64D63924-E57B-C610-6CEF-4E528BE1D391', '0', '9C37472C-EAAD-6298-5335-F08AA95EE596', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
-INSERT INTO `shopp_comment` VALUES ('C0A475A4-9EA6-20AD-B8FD-0A3ABBB1D285', '非常棒！来看看效果吧！', '4', '1491116073', '5D754767-F3D5-1D93-E588-856B288B08CC', '64D63924-E57B-C610-6CEF-4E528BE1D391', '0', 'D4C47261-28F9-601F-A516-F3270C883468', '1C26D516-A5F1-7C2E-7158-8A658A3F9083');
-INSERT INTO `shopp_comment` VALUES ('FEFEE7A9-9629-72A5-6434-C682E22F1A05', '勉勉强强，图我就不上了，买了自己懂', '2', '1491152768', 'AA692D26-B786-D8A0-1420-F8F33264485C', '8F1748AD-30E8-7A09-D78D-7ACAE9E8F711', '0', '5F3E8B10-9CC9-CAA0-BA24-D7057450511A', '61F54F17-89B5-A2B6-2A20-353A55A4F6D5');
-INSERT INTO `shopp_comment_images` VALUES ('6CDB0A80-2038-8889-29D9-3F0D4335408C', 'C0A475A4-9EA6-20AD-B8FD-0A3ABBB1D285', 'DDF42A44-ACBA-5007-64B9-CF32FD2131E3.jpeg');
-INSERT INTO `shopp_comment_images` VALUES ('78802A49-8AE8-524B-5458-2DBC69A3CEE4', 'C0A475A4-9EA6-20AD-B8FD-0A3ABBB1D285', '4A2073B3-1A1F-5F19-8856-A7477B75FAA1.jpeg');
-INSERT INTO `shopp_comment_images` VALUES ('BE25FF2C-EB9B-B352-D462-23B19A1AF62A', '820C8AB5-E75A-8C8F-1696-54FD048F9F7B', 'A3950838-CCCE-FB21-6991-A356B0042541.png');
-INSERT INTO `shopp_comment_images` VALUES ('C3D43FC6-ECCB-2528-470F-74DFA77C7374', 'C0A475A4-9EA6-20AD-B8FD-0A3ABBB1D285', '9A6CE1F0-4118-5860-BED6-07A4F2696C27.jpeg');
+INSERT INTO `shopp_comment` VALUES ('47F90750-5407-F814-B943-09E2D3AD1731', '里LOL花菜', '5', '1491464752', 'AA692D26-B786-D8A0-1420-F8F33264485C', 'C874EC9F-166A-A5DA-8900-145395C77D2F', '0', '974ACA29-C405-8BDD-80C6-2E083C8260C5', '72599D9A-E2FE-0D2C-B74A-DBDE17AA0E2E');
+INSERT INTO `shopp_comment_images` VALUES ('0A6D39C5-9AB1-B4FE-AE90-6EC6FC0EC0F5', '47F90750-5407-F814-B943-09E2D3AD1731', 'F9FD35B5-1A2D-99D2-37D9-43415B15EB6E.png');
+INSERT INTO `shopp_comment_images` VALUES ('C3B184C5-09B9-8727-5C0F-E0F5266AE18C', '47F90750-5407-F814-B943-09E2D3AD1731', '9AD56960-D59B-BC05-C318-45D51A6934C6.png');
+INSERT INTO `shopp_comment_images` VALUES ('D30BDA82-83B8-D94C-6944-70C6B0F4C6BC', '47F90750-5407-F814-B943-09E2D3AD1731', '543551AF-4CA2-BBDC-BC45-B3AB83B57BE6.png');
 INSERT INTO `shopp_commodity` VALUES ('00D84306-7B0D-F027-28E4-09D70124D2CB', '包邮 韩国菲诗小铺双头自动旋转眉笔一字眉 防水防汗带眉刷非眉粉', '扁平型笔芯设计，扁平口保护笔芯！扁平眉笔可以大面积的均匀上色，笔芯软硬适中，使眉毛看起来更加自然。眉笔还有一个小技巧，深棕色系眉笔还可以做阴影哈！', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"The Face Shop\",\"\\u51c0\\u542b\\u91cf\":\"0.3g\",\"\\u5f69\\u5986\\u5206\\u7c7b\":\"\\u7709\\u7b14\",\"\\u529f\\u6548\":\"\\u9632\\u6c34 \\u9501\\u8272\",\"\\u4fdd\\u8d28\\u671f\":\"3\\u5e74\"}', '1486201101', '1517673600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('1581855B-4F44-E6F1-8E95-59AD9A5A0C5D', '重庆磁器口手工陈建平陈麻花500g四川美食特产香酥糕点心零食天津 ', '                    磁器口排队那家！我们是厂家直接送货，质量保证！麻花是易碎物品，在快递过程中我们不能保证不碎，我们只能是保证要尽心尽力的包装好，追求完美的朋友希望慎重，谢谢！2包包邮，全场48元包邮（除新疆西藏内蒙等地）                ', '0', '{\"\\u5382\\u5740\":\"\\u91cd\\u5e86\\u5e02\\u6c99\\u576a\\u575d\\u533a\\u78c1\\u5668\\u53e3\\u6b63\\u885772\",\"\\u4fdd\\u8d28\\u671f\":\"270\"}', '1487261125', '1550332800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0', 'AA55FB3D-7512-7C3A-8ED9-5133660998E7.png');
 INSERT INTO `shopp_commodity` VALUES ('179149C6-2255-FAA2-F9F8-CA6608080FAA', '电器插头挂钩 电源线插座支架收纳整理架 创意百货 2个装 ', '极有家认证[优质网店]：11年好店，权威认证，买退无忧', '0', '{\"\\u627f\\u91cd\":\"1kg\\u4ee5\\u4e0b\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u68d5\\u8272 \\u767d\\u8272 \\u9ed1\\u8272 \\u7eff\\u8272\",\"\\u5438\\u9644\\u65b9\\u5f0f\":\"\\u7c98\\u80f6\",\"\\u6750\\u8d28\":\"\\u5851\\u6599\"}', '1486199439', '1580745600', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
@@ -344,7 +341,7 @@ INSERT INTO `shopp_commodity` VALUES ('629BAE4F-B30D-D852-BFE6-A43A373A2ED8', '�
 INSERT INTO `shopp_commodity` VALUES ('6D025479-654E-5D3F-2B6D-ECF783A2D918', '骆驼男装 2017春季新品青年时尚立领商务休闲外套纯色运动风衣男 ', '骆驼男装 2017春季新品青年时尚立领商务休闲外套纯色运动风衣男 ', '0', '{\"\\u54c1\\u724c\":\"Camel\\/\\u9a86\\u9a7c\",\"\\u57fa\\u7840\\u98ce\\u683c\":\"\\u65f6\\u5c1a\\u90fd\\u5e02\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u68c9100%\",\"\\u4e0a\\u5e02\\u5e74\\u4efd\\u5b63\\u8282\":\"2017\\u5e74\\u6625\\u5b63\"}', '1484978236', '1390320000', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('6FFC6691-7F05-8AB8-B1E1-5C839BB4F446', '正版钢铁是怎样炼成的 原著经典世界名著外国外小说文学青少版 少儿童书籍畅销书阅读 初中学生小学生课外必读物图书', '《钢铁是怎样炼成的》被誉为“影响历史的百部经典之一”，“影响中国近代社会的经典译作”。保尔那顽强坚韧，奋发向上的人格力量，对我们的青少年，对我们的民族来说，是永远具有特殊意义的宝贵财富', '0', '{\"     \\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u94a2\\u94c1\\u662f\\u600e\\u6837\\u70bc\\u6210\\u7684\",\"\\u51fa\\u7248\\u793e\\u540d\\u79f0\":\"\\u4e2d\\u56fd\\u6587\\u8054\\u51fa\\u7248\\u793e\",\"\\u4f5c\\u8005\":\"\\u5965\\u65af\\u7279\\u6d1b\\u592b\\u65af\\u57fa\",\"ISBN\\u7f16\\u53f7\":\"9787519006129\"}', '1484925988', '1486742400', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('72387161-B237-7FC1-3FB3-E78C23533C5C', '韩国the saem得鲜口红不脱色咬唇妆哑光豆沙色唇膏大红姨妈色雾面 ', '这款只能按出，不能按进，用多少按多少，千万不要为了满足自己好奇心狂按，否则口红就回去不了哦', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"The Saem\",\"\\u662f\\u5426\\u4e3a\\u7279\\u6b8a\\u7528\\u9014\\u5316\\u5986\\u54c1\":\"\\u5426\",\"\\u529f\\u6548\":\"\\u6ecb\\u6da6 \\u4fdd\\u6e7f\",\"\\u9002\\u5408\\u80a4\\u8d28\":\"\\u4efb\\u4f55\\u80a4\\u8d28\",\"\\u4fdd\\u8d28\\u671f\":\"3\\u5e74\"}', '1486200570', '1517673600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
-INSERT INTO `shopp_commodity` VALUES ('72599D9A-E2FE-0D2C-B74A-DBDE17AA0E2E', 'Apple/苹果 iPhone 6s Plus 苹果6S 5.5香港/美国/官换全新 ', '支持花呗分期 购买送膜+手机壳 iPhone6S五大预测：1，机身材质采用7000铝合金，不再出现弯曲门。2，屏幕加入Force Touch压感触控技术。3，全新A9处理器CPU及GPU。4，2GB的RAM搭配IOS9。5，全新的1200万像素主摄像头。', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"Apple\\/\\u82f9\\u679c iPhone 6s Plus\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8\",\"\\u4e0a\\u5e02\\u65f6\\u95f4\":\"2015\\u5e749\\u6708\",\"CPU\\u54c1\\u724c\":\"Apple\\/\\u82f9\\u679c\",\"CPU\\u578b\\u53f7\":\"\\u5176\\u4ed6\",\"Apple\\u578b\\u53f7\":\"iPhone 6s Plus\",\"\\u7f51\\u7edc\\u7c7b\\u578b\":\"4G+\\u5168\\u7f51\\u901a\",\"\\u673a\\u8eab\\u989c\\u8272\":\"\\u73ab\\u7470\\u91d1 \\u9ed1\\u8272 \\u94f6\\u8272 \\u91d1\\u8272\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200\\u4e07\",\"\\u64cd\\u4f5c\\u7cfb\\u7edf\":\"IOS9\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"16GB 64GB 128GB\",\"\\u539a\\u5ea6\":\"7.3\\u6beb\\u7c73\\uff080.29\\u82f1\\u5bf8\\uff09\",\"\\u5206\\u8fa8\\u7387\":\"1920 x 1080 \\u50cf\\u7d20\\u5206\\u8fa8\\u7387\"}', '1484979335', '1514563200', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
+INSERT INTO `shopp_commodity` VALUES ('72599D9A-E2FE-0D2C-B74A-DBDE17AA0E2E', 'Apple/苹果 iPhone 6s Plus 苹果6S 5.5香港/美国/官换全新 ', '支持花呗分期 购买送膜+手机壳 iPhone6S五大预测：1，机身材质采用7000铝合金，不再出现弯曲门。2，屏幕加入Force Touch压感触控技术。3，全新A9处理器CPU及GPU。4，2GB的RAM搭配IOS9。5，全新的1200万像素主摄像头。', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"Apple\\/\\u82f9\\u679c iPhone 6s Plus\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8\",\"\\u4e0a\\u5e02\\u65f6\\u95f4\":\"2015\\u5e749\\u6708\",\"CPU\\u54c1\\u724c\":\"Apple\\/\\u82f9\\u679c\",\"CPU\\u578b\\u53f7\":\"\\u5176\\u4ed6\",\"Apple\\u578b\\u53f7\":\"iPhone 6s Plus\",\"\\u7f51\\u7edc\\u7c7b\\u578b\":\"4G+\\u5168\\u7f51\\u901a\",\"\\u673a\\u8eab\\u989c\\u8272\":\"\\u73ab\\u7470\\u91d1 \\u9ed1\\u8272 \\u94f6\\u8272 \\u91d1\\u8272\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200\\u4e07\",\"\\u64cd\\u4f5c\\u7cfb\\u7edf\":\"IOS9\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"16GB 64GB 128GB\",\"\\u539a\\u5ea6\":\"7.3\\u6beb\\u7c73\\uff080.29\\u82f1\\u5bf8\\uff09\",\"\\u5206\\u8fa8\\u7387\":\"1920 x 1080 \\u50cf\\u7d20\\u5206\\u8fa8\\u7387\"}', '1484979335', '1514563200', '035979B6-A44A-32EA-646F-28A51C607A73', '19', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('753C793E-1F5D-1DC7-4103-A23D23E016C2', '歌莉娅女装 2017春季新品V领长袖毛呢外套长款171R6E490 ', '歌莉娅女装 2017春季新品V领长袖毛呢外套长款171R6E490 ', '0', '{\"\\u8d27\\u53f7\":\"171R6E490\",\"\\u670d\\u88c5\\u7248\\u578b\":\" \\u76f4\\u7b52\",\" \\u76f4\\u7b52\":\"\\u6697\\u6263\",\"\\u6697\\u6263\":\"\\u6697\\u6263\"}', '1484977693', '1581091200', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('89C19CC9-AADE-EF8F-3D2A-FD244AC2C51D', '御食园茯苓夹饼500g北京特产传统茯苓饼美食小吃糕点心零食品', '                    御食园多口味茯苓夹饼！独立小包装！                ', '0', '{\"\\u4fdd\\u8d28\\u671f\":\"360\",\"\\u51c0\\u542b\\u91cf\":\"500g\"}', '1487261350', '1518796800', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0', '55C34CAB-6FAD-608F-7778-C2DAE4819FD9.png');
 INSERT INTO `shopp_commodity` VALUES ('8C5CBC3B-C3A0-F078-2DC1-DD276D203A5E', '新品现货 Meizu/魅族 魅蓝note5全网通4G智能手机note5', '全新白色16G现货！！送快递包邮+延保一年！！推荐选购套餐，搭使用更方便。 拒绝黄牛，每人限购1台相同类似地址多拍只发一台！', '0', '{\"\\u673a\\u8eab\\u989c\\u8272\":\"\\u5168\\u7f51\\u901a\\u767d\\u8272\",\"\\u9b45\\u65cf\\u578b\\u53f7\":\"\\u9b45\\u84ddnote5\",\"\\u5206\\u8fa8\\u7387\":\"1920x1080\",\"\\u8fd0\\u884c\\u5185\\u5b58RAM\":\" 3GB 4GB\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1300\\u4e07\"}', '1484983552', '1548259200', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
@@ -1882,6 +1879,31 @@ INSERT INTO `shopp_count` VALUES ('1451', '::1', '1491382571', '欢歌', 'admin/
 INSERT INTO `shopp_count` VALUES ('1452', '::1', '1491382582', '欢歌', 'admin/Order/orderDetailed');
 INSERT INTO `shopp_count` VALUES ('1453', '::1', '1491385366', '欢歌', 'admin/Order/refunds');
 INSERT INTO `shopp_count` VALUES ('1454', '::1', '1491385369', '欢歌', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('1455', '::1', '1491444767', '', 'home');
+INSERT INTO `shopp_count` VALUES ('1456', '::1', '1491444781', 'admin', 'home');
+INSERT INTO `shopp_count` VALUES ('1457', '::1', '1491444783', 'admin', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('1458', '::1', '1491444787', 'admin', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('1459', '::1', '1491444793', 'admin', 'home/User/logOut');
+INSERT INTO `shopp_count` VALUES ('1460', '::1', '1491444794', '', 'home');
+INSERT INTO `shopp_count` VALUES ('1461', '::1', '1491444811', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('1462', '::1', '1491444815', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('1463', '::1', '1491444818', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('1464', '::1', '1491444821', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('1465', '::1', '1491444824', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('1466', '::1', '1491461485', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('1467', '::1', '1491461743', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('1468', '::1', '1491461746', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('1469', '::1', '1491461748', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('1470', '::1', '1491461750', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('1471', '::1', '1491461753', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('1472', '::1', '1491461794', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('1473', '::1', '1491461820', '欢歌', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('1474', '::1', '1491461823', '欢歌', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('1475', '::1', '1491461825', '欢歌', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('1476', '::1', '1491461827', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('1477', '::1', '1491462151', '欢歌', 'home/User/comment');
+INSERT INTO `shopp_count` VALUES ('1478', '::1', '1491462186', '欢歌', 'home');
+INSERT INTO `shopp_count` VALUES ('1479', '::1', '1491465633', '欢歌', 'home/User/userHome');
 INSERT INTO `shopp_order` VALUES ('974ACA29-C405-8BDD-80C6-2E083C8260C5', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491382143', '1491382143', '1491382150', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order_specification` VALUES ('C874EC9F-166A-A5DA-8900-145395C77D2F', '974ACA29-C405-8BDD-80C6-2E083C8260C5', '3BE1F4C9-E437-BAD8-9019-423F492CF6B8', '1', '2999', '16G/玫瑰金');
 INSERT INTO `shopp_refunds` VALUES ('BDDE27E9-09EC-BD1B-1EDB-B0274C19CBF0', 'C874EC9F-166A-A5DA-8900-145395C77D2F', '1', '24323123', '974ACA29-C405-8BDD-80C6-2E083C8260C5', '1491382839', '0', 'AA692D26-B786-D8A0-1420-F8F33264485C');

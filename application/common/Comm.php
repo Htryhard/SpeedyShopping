@@ -206,6 +206,31 @@ class Comm
     }
 
     /**
+     * api上传评论图片的方式
+     * @param $base64Icon
+     * @return bool|string
+     */
+    public static function uploadsCommentImgsForAPI($base64Icon)
+    {
+        $streamFileType = ".png";
+        //产生一个随机文件名（因为你base64上来肯定没有文件名，这里你可以自己设置一个也行）
+        $streamFileRand = Comm::getNewGuid();
+        $streamFilename = ROOT_PATH . "/public/uploads/comment_images/" . $streamFileRand . $streamFileType;
+        //存入数据库的位置
+        $path = $streamFileRand . $streamFileType;
+
+        //处理base64文本
+        if (file_put_contents($streamFilename, base64_decode($base64Icon)) === false) {
+//                //这是我自己的一个静态类，输出错误信息的，你可以换成你的程序
+//                Common::exitWithError("文件写入失败!","");
+            return false;
+        } else {
+            return $path;
+        }
+
+    }
+
+    /**
      * 获取一个用户的base64头像
      * @return string
      */
