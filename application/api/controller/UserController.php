@@ -10,6 +10,7 @@ namespace app\api\controller;
 
 
 use app\common\Comm;
+use app\common\model\Address;
 use app\common\model\Cart;
 use app\common\model\CartSpecification;
 use app\common\model\Collect;
@@ -627,6 +628,60 @@ class UserController extends Controller
             return json($date);
         }
 
+    }
+
+    public function editAddress()
+    {
+        $data = array();
+        $addressId = Request::instance()->post("addressId");
+        $userId = Request::instance()->post("userId");
+        $name = Request::instance()->post("name");
+        $content = Request::instance()->post("content");
+        $phone = Request::instance()->post("phone");
+
+        $address = Address::get(['id' => $addressId]);
+        $user = User::get(["id" => $userId]);
+
+        if ($user != null && $name != "" && $content != "" && $phone != "") {
+            if ($address != null) {
+                $address->phone = $phone;
+                $address->content = $content;
+                $address->user_name = $name;
+                $address->save();
+            } else {
+                $address = new Address();
+                $address->id = Comm::getNewGuid();
+                $address->phone = $phone;
+                $address->content = $content;
+                $address->user_name = $name;
+                $address->user_id = $userId;
+                $address->save();
+            }
+            $date["statu"] = "Success";
+            $date["data"] = $address;
+            return json($date);
+        } else {
+            $date["statu"] = "NullParameter";
+            $date["data"] = "";
+            return json($date);
+        }
+
+    }
+
+    public function getRefund()
+    {
+        $orderSpecificationId = Request::instance()->post("orderSpecificationId");
+        $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
+        $refund = Refunds::get(["order_specification_id" => $orderSpecificationId]);
+        if ($refund != null) {
+            $date["statu"] = "Success";
+            $date["data"] = $this->getRefundArr($refund, $orderSpecification);;
+            return json($date);
+        } else {
+            $date["statu"] = "NullRefund";
+            $date["data"] = "";
+            return json($date);
+        }
     }
 
 }
