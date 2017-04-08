@@ -31,7 +31,7 @@ class TypeController extends Controller
             $commodities = $type['commodities'];
             return json($commodities);
         } else {
-            return json(['error' => '还没有电影哦~'], 404);
+            return json(['error' => '还没有分类哦~'], 404);
         }
 
     }

@@ -21,6 +21,7 @@ use app\common\model\Order;
 use app\common\model\OrderSpecification;
 use app\common\model\Refunds;
 use app\common\model\Specification;
+use app\common\model\Type;
 use app\common\model\User;
 use think\Controller;
 use think\Request;
@@ -682,6 +683,58 @@ class UserController extends Controller
             $date["data"] = "";
             return json($date);
         }
+    }
+
+    public function initHomeTyep()
+    {
+        $type = Request::instance()->get("type");
+        $commodities = null;
+        //states=0说明商品没有下架1或者删除2
+        switch ($type) {
+            case "Recommend":
+                //推荐购
+                $commodities = Commodity::where("states=0")->order('grade', 'desc')->paginate(30);
+                break;
+            case "LifeSupermarket":
+                //生活超市
+                //暂时写死
+                $type = Type::get(['id' => "A2AF9D4A-D613-0A44-353C-F015BB16F24A"]);
+                if ($type != null)
+                    $commodities = $type['commodities'];
+                break;
+            case "CarRental":
+                //租车
+                //暂时写死
+                $type = Type::get(['id' => "C2CFEB29-044B-1003-2BBA-F0EBF3F1CA3B"]);
+                if ($type != null)
+                    $commodities = $type['commodities'];
+                break;
+            case "TakeOutFood":
+                //外卖
+                //暂时写死
+                $type = Type::get(['id' => "E310BC0C-CBB9-5D9B-B198-EE79D1D2A875"]);
+                if ($type != null)
+                    $commodities = $type['commodities'];
+                break;
+            case "DoorToDoorService":
+                //上门维修
+                //暂时写死
+                $type = Type::get(['id' => "D85D8F1F-D978-E0E3-DEE5-6B6F1C93255A"]);
+                if ($type != null)
+                    $commodities = $type['commodities'];
+                break;
+            case "SalesVolume":
+                //销量购
+                $commodities = Commodity::where("states=0")->order('staistics', 'desc')->paginate(30);
+                break;
+            case "":
+                break;
+            default:
+                break;
+        }
+
+        return json($commodities);
+
     }
 
 }
