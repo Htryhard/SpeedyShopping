@@ -676,7 +676,7 @@ class UserController extends Controller
         $refund = Refunds::get(["order_specification_id" => $orderSpecificationId]);
         if ($refund != null) {
             $date["statu"] = "Success";
-            $date["data"] = $this->getRefundArr($refund, $orderSpecification);;
+            $date["data"] = $this->getRefundArr($refund, $orderSpecification);
             return json($date);
         } else {
             $date["statu"] = "NullRefund";
