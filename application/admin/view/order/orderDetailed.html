@@ -85,12 +85,18 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="6" class="text-center"><input class="btn btn-default noprint" type="submit"
-                                                           onclick="window.print();" value="打印">
+                <td colspan="6" class="text-center">
+                    <a type="button" class="btn btn-danger" href="" disabled='disabled'>订单状态：{$order['status']}</a>
+
+                    <input class="btn btn-default noprint" type="submit"
+                           onclick="window.print();" value="打印">
+
+                    {eq name="$order->getData('status')" value="5"}
+                    {else/}
                     <a type="button" class="btn btn-danger"
                        href="{:url('admin/Order/editOrder',['orderId'=>$item['order_id']])}">
                         修改订单</a>
-
+                    {/eq}
 
                     {php}
                     if($order->getData('status')==1){
