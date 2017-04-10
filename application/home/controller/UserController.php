@@ -771,6 +771,9 @@ class UserController extends BaseController
         if ($orderId != null && $orderSpecificationId != null) {
             $order = Order::get(['id' => $orderId]);
             $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
+            if ($order->getData("status") != 5) {
+                return $this->redirect(url("home/error/postError?code=404&msg=订单未完成！不能进行评价！"));
+            }
             if ($order == null && $orderSpecification != null) {
                 return $this->error('订单或者商品不存在！');
             }
@@ -805,6 +808,11 @@ class UserController extends BaseController
                 if ($orderSpecification == null) {
                     return "SpecificationNull";
                 }
+
+                if ($orderSpecification["order"]["status"] != 5) {
+                    return "NoPermission";
+                }
+
                 $commodityId = $orderSpecification['specification']['commodity']['id'];
                 //判断是否已经对这次购买的商品评论过
                 $comment = Comment::get(['order_id' => $orderId, 'user_id' => $user->getData('id'), "order_specification_id" => $orderSpecification->getData('id')]);

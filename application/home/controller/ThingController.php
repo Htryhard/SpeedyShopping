@@ -11,6 +11,7 @@ namespace app\home\controller;
 
 use app\common\Comm;
 use app\common\controller\BaseController;
+use app\common\model\AuthGroup;
 use app\common\model\Cart;
 use app\common\model\Commodity;
 use app\common\model\Count;
@@ -21,19 +22,21 @@ use think\Request;
 class ThingController extends Controller
 {
 
-    public function showIP(){
-        $counts = Count::where("id",">",0)->paginate(15);
-        $this->assign("counts",$counts);
+    public function showIP()
+    {
+        $counts = Count::where("id", ">", 0)->paginate(15);
+        $this->assign("counts", $counts);
         return $this->fetch();
     }
 
     public function register()
     {
-        $this->assign("user",User::getUserBySession("home"));
+        $this->assign("user", User::getUserBySession("home"));
         return $this->fetch();
     }
 
-    public function registerHandle(){
+    public function registerHandle()
+    {
 
         if ($this->request->isAjax()) {
             $data = Request::instance()->param();
@@ -65,6 +68,8 @@ class ThingController extends Controller
             $user->user_name = $username;
             $user->password = User::encryptPassword($password);
             $user->phone = $phone;
+            $auth = AuthGroup::get(["rules" => "user"]);
+            $user->role_id = $auth->getData("id");
 
             if ($user->validate(true)->save($user->getData())) {
                 $user->icon = Comm::uploadsIcon($userdata['base64Icon']);
@@ -87,7 +92,7 @@ class ThingController extends Controller
 
     public function login()
     {
-        $this->assign("user",User::getUserBySession("home"));
+        $this->assign("user", User::getUserBySession("home"));
         return $this->fetch();
     }
 
@@ -96,7 +101,7 @@ class ThingController extends Controller
         // 接收post信息
         $data = Request::instance()->post();
         // 直接调用M层方法，进行登录。
-        if (User::login($data['email'], $data['password'],"home")) {
+        if (User::login($data['email'], $data['password'], "home")) {
             return json("succeed");
         } else {
             return json('TheUserNameOrPasswordError');

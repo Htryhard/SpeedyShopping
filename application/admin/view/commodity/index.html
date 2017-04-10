@@ -1,5 +1,11 @@
 {layout name="layout" /}
 <block name="title"><title>所有商品</title></block>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li class="active">所有商品</li>
+</ol>
+
 <div class="row" style="float: right">
     <div class="col-xs-12">
         <form class="form-inline">
@@ -22,7 +28,7 @@
         <th>序号</th>
         <th>标题</th>
         <th>类型</th>
-        <th>上架时间</th>
+        <th>状态</th>
         <th>销量</th>
         <th>评分</th>
         <th>操作</th>
@@ -34,7 +40,7 @@
         <td>{$key}</td>
         <td>{$item->getData('title')}</td>
         <td>{$item['type']['content']}</td>
-        <td>{:date('Y年m月d日',$item->getData('creation_time'))}</td>
+        <td>{$item['states']}</td>
         <td>{$item->getData('staistics')}</td>
         <td>
             {if condition="($item->getData('grade') == 0)"}

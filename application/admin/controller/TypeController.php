@@ -26,7 +26,7 @@ class TypeController extends BaseController
     {
         $types = Type::all();
         $user = User::getUserBySession("admin");
-        $this->assign("user",$user);
+        $this->assign("user", $user);
         $this->assign("types", $types);
         return $this->fetch();
     }
@@ -42,6 +42,27 @@ class TypeController extends BaseController
             $type->save($type->getData());
         }
 
+    }
+
+    public function editType()
+    {
+        if ($this->request->isAjax()) {
+            //
+            $content = $this->request->post("content");
+            $typeId = $this->request->post("typeId");
+            $type = Type::get(["id" => $typeId]);
+            if ($type != null && $content != "") {
+                $type->content = $content;
+                $type->save();
+                return "Success";
+            }else{
+                //提交方式出错
+                return "ParameterError";
+            }
+        } else {
+            //提交方式出错
+            return "PostError";
+        }
     }
 
 

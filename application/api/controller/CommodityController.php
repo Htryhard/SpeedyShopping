@@ -33,7 +33,7 @@ class CommodityController extends Controller
         $commodity = new Commodity();
         $where = Request::instance()->get("where");
         if ($where != "") {
-            $commodities = $commodity->where('title', 'like', '%' . $where . '%')->where('out_time', '>', time())->select();
+            $commodities = $commodity->where('title', 'like', '%' . $where . '%')->where('out_time', '>', time())->where('states', '=', 0)->select();
         } else {
             $commodities = Commodity::all(function ($query) {
 //            $query->where('out_time', '>', time())->order('id', 'desc');

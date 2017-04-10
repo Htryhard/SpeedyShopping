@@ -4,14 +4,20 @@
     {load href="__PUBLIC__/static/js/cropbox-min.js" /}
 </block>
 
-    <style>
+<style>
 
-        nav#nav  ul li a:hover{
-            background: #ebebeb;
-        }
-    </style>
+    nav#nav ul li a:hover {
+        background: #ebebeb;
+    }
+</style>
 
-<div style="height: 100px"></div>
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li class="active">添加管理员</li>
+</ol>
+
+<div style="height: 50px"></div>
+
 <div class="container">
     <div class="row col-md-1"></div>
     <form class="form-horizontal" role="form" action="{:url('admin/user/register')}" method="post" id="formdata">
@@ -90,12 +96,12 @@
 <script type="text/javascript">
     window.onload = function () {
         var options =
-        {
-            imageBox: '.imageBox',
-            thumbBox: '.thumbBox',
-            spinner: '.spinner',
-            imgSrc: '__PUBLIC__/static/images/avatar.png'
-        }
+            {
+                imageBox: '.imageBox',
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: '__PUBLIC__/static/images/avatar.png'
+            }
         var cropper = new cropbox(options);
         document.querySelector('#file').addEventListener('change', function () {
             var reader = new FileReader();
@@ -153,7 +159,7 @@
         $("#" + elid).parent().removeClass("has-success");
         $("#" + elid).parent().addClass("has-error");
         $("#" + elid).append(
-                "<font style='color:red;font-weight:bold;'><span class='glyphicon glyphicon-remove'></span> " + str + "</font>"
+            "<font style='color:red;font-weight:bold;'><span class='glyphicon glyphicon-remove'></span> " + str + "</font>"
         );
     }
 </script>

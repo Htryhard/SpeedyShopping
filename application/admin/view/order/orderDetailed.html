@@ -3,7 +3,16 @@
 <block name="resources">
 
 </block>
-<div class="panel panel-default" >
+
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li>
+        <a href="{:url('admin/Order/orderIndex',['type'=>'all'])}">所有订单</a></li>
+    <li class="active">订单信息</li>
+</ol>
+
+<div class="panel panel-default">
     <div style="page-break-after: always;">
         <h1 class="text-center">订单信息</h1>
         <table class="table table-bordered">
@@ -78,7 +87,8 @@
             <tr>
                 <td colspan="6" class="text-center"><input class="btn btn-default noprint" type="submit"
                                                            onclick="window.print();" value="打印">
-                    <a type="button" class="btn btn-danger" href="{:url('admin/Order/editOrder',['orderId'=>$item['order_id']])}">
+                    <a type="button" class="btn btn-danger"
+                       href="{:url('admin/Order/editOrder',['orderId'=>$item['order_id']])}">
                         修改订单</a>
 
 
@@ -86,7 +96,12 @@
                     if($order->getData('status')==1){
                     echo "<a type='button' class='btn btn-info' href='#' onclick=toGetGoods('".$order["id"]."')>去捡货</a>";
                     }else if($order->getData('status')==2){
-                    echo "<a type='button' class='btn btn-success' href='#' onclick=toSendGoods('".$order["id"]."')>去发货</a>";
+                    echo "<a type='button' class='btn btn-success' href='#'
+                             onclick=toSendGoods('".$order["id"]."')>去发货</a>";
+                    }else if($order->getData('status')==0){
+                    echo "<a type='button' class='btn btn-primary' href='#' disabled='disabled'>待付款</a>";
+                    }else if($order->getData('status')==4){
+                    echo "<a type='button' class='btn btn-info' href='#' onclick=toGetGoods('".$order["id"]."')>去捡货</a>";
                     }
                     {/php}
                 </td>
@@ -104,7 +119,7 @@
                 url: "{:url('admin/order/editOrderStatus')}",
                 dataType: "json",
                 data: {
-                    type:"getGoods",
+                    type: "getGoods",
                     orderId: orderId
                 },
                 success: function (msg) {
@@ -129,7 +144,7 @@
                 url: "{:url('admin/order/editOrderStatus')}",
                 dataType: "json",
                 data: {
-                    type:"sendGoods",
+                    type: "sendGoods",
                     orderId: orderId
                 },
                 success: function (msg) {

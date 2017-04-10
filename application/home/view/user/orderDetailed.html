@@ -50,6 +50,58 @@
 </table>
 
 <div>
+    <span>物流信息：</span><br/>
+
+    {switch name="$order->getData('status')"}
+    {case value="0"}
+    <span class="text-danger">待付款...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    {/case}
+
+    {case value="1"}
+    <span class="text-danger">待付款...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-warning">待捡货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    {/case}
+
+    {case value="2"}
+    <span class="text-danger">待付款...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-warning">待捡货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-info">待发货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    {/case}
+
+    {case value="3"}
+    <span class="text-danger">待付款...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-warning">待捡货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-info">待发货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-success">配送中...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    {/case}
+
+    {case value="5"}
+    <span class="text-danger">待付款...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-warning">待捡货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-info">待发货...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-success">配送中...</span>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="text-primary">交易成功！</span>{/case}
+    {default /}default
+    {/switch}
+
+
+</div>
+
+<div>
     <span>商品列表</span><br/>
     <table class="table table-hover">
         <thead>
@@ -75,10 +127,14 @@
             <td>{$orderSpecifications['count']}</td>
             <td class="td_xiaoji">{$orderSpecifications['count']*$orderSpecifications['price']}</td>
             <td>
+
+                {if condition="($orderSpecifications['order']->getData('status')==5)"}
                 <a href="{:url('home/user/comment',['orderId'=>$order['id'],'orderSpecificationId'=>$orderSpecifications['id']])}"
                    class="text-mod">
                     <span class="label label-success">去评价</span>
                 </a>
+                {else /}
+                {/if}
                 <br/>
                 <a href="{:url('home/user/refunds',['orderId'=>$order['id'],'orderSpecificationId'=>$orderSpecifications['id']])}"
                    class="text-mod">
@@ -92,6 +148,27 @@
     </table>
     <div id="box_heji">
         本订单共消费：<span id="sp_heji" style="color: red">0</span>元
+    </div>
+
+    <div class="btn-group">
+
+        {if condition="($order->getData('status')==0)"}
+        <a href="{:url('home/user/doPay',['orderId'=>$order->getData('id')])}"
+           class="btn btn-default">
+            去付款
+        </a>
+        {else /}
+        {/if}
+
+        {if condition="($order->getData('status')!=5)"}
+        <button type="button" class="btn btn-default" onclick=deleteOrder("cancel","{$order['id']}")>取消订单</button>
+        {else /}
+        {/if}
+
+        {if condition="($order->getData('status')==5)"}
+        <button type="button" class="btn btn-default" onclick=deleteOrder("delete","{$order['id']}")>删除订单</button>
+        {else /}
+        {/if}
     </div>
 
 </div>
@@ -108,4 +185,53 @@
         sp_heji.innerText = "";
         sp_heji.innerText = count;
     });
+
+    function deleteOrder(type, orderId) {
+        if (type != "" && orderId != "") {
+            var t = "";
+            if (type == "delete") {
+                t = "删除";
+            } else if (type == "cancel") {
+                t = "取消"
+            }
+            if (confirm("您确定要" + t + "此订单吗？")) {
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('home/user/deleteOrder')}",
+                    dataType: "json",
+                    data: {
+                        orderId: orderId,
+                        type: type
+                    },
+                    success: function (msg) {
+                        switch (msg) {
+                            case "success":
+                                document.location.reload();//当前页面
+                                break;
+                            case "PostError":
+                                //非法请求
+                                alert("非法请求");
+                                break;
+                            case "ParameterError":
+                                //参数错误
+                                alert("参数错误！");
+                                break;
+                            case "OrderNull":
+                                alert('这个订单从地球上消失了~~');
+                                break;
+                            case "TypeError":
+                                alert('类型错误！');
+                                break;
+                            default:
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    },
+                });
+            }
+        } else {
+            alert("参数错误！");
+        }
+    }
 </script>

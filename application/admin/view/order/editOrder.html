@@ -4,6 +4,15 @@
     {load href="__PUBLIC__/static/js/area.js" /}
 </block>
 
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li>
+        <a href="{:url('admin/Order/orderIndex',['type'=>'all'])}">所有订单</a></li>
+    <li>
+        <a href="{:url('admin/order/orderDetailed?id='.$order->getData('id'))}">订单信息</a></li>
+    <li class="active">修改订单信息</li>
+</ol>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-list"></i> 修改订单信息</h3>
@@ -129,19 +138,7 @@
             <input name="id" value="799" type="hidden">
             <input type="hidden" value="" id="hi_status2_8"/>
             <input type="hidden" value="" id="hi_status3_8"/>
-            {php}
-            if($order['status']>=2 && $order['status']!=4){
-            echo "<label><input type='checkbox' id='status2_8' disabled checked/>捡货完成</label>";
-            }else{
-            echo "<label><input type='checkbox' id='status2_8'/>捡货完成</label>";
-            }
 
-            if($order['status']>=3 && $order['status']!=4){
-            echo "<label><input type='checkbox' id='status3_8' disabled checked/>已发货</label>";
-            }else{
-            echo "<label><input type='checkbox' id='status3_8'/>已发货</label>";
-            }
-            {/php}
             <button class="btn btn-info" type="button" onclick="checkSubmit()">
                 <i class="ace-icon fa fa-check bigger-110"></i>
                 保存

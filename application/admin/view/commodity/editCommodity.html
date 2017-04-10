@@ -8,6 +8,12 @@
 
 </block>
 
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li><a href="{:url('admin/commodity/index')}">所有商品</a></li>
+    <li class="active">编辑商品</li>
+</ol>
+
 <form class="form-horizontal" role="form" id="commodityData" action="">
 
     <input type="hidden" id="dirname" name="dirname" value=""/>
@@ -87,8 +93,7 @@
                                                                             class="form-control"
                                                                             value="{$item['repertory']}"/><br/>价格：<input
                             type="text" name="specificationPrice" class="form-control" value="{$item['price']}">
-                        <a href="#" class="removeclass_cq"><img src="__PUBLIC__/static/images/delete.png" width="10px;"
-                                                                height="10px"></a><br/><span>---------------------------------------------------------</span>
+                        <br/><span>---------------------------------------------------------</span>
                     </div>
                     {/volist}
                 </div>
@@ -148,7 +153,7 @@
 </form>
 
 <div class="form-group">
-
+    <div><span style="color: red">****图片上传完成后请点击  确认修改 ！否则无效！****</span></div>
     <div class="col-sm-8">
         <div id="zyupload" class="zyupload"></div>
     </div>
@@ -282,12 +287,12 @@
             dataType: "json",
             data: {
                 commodityData: $('#commodityData').serializeArray(),
-                commodityIcon:$("#commodity_icon_base64").val()
+                commodityIcon: $("#commodity_icon_base64").val()
             },
             success: function (msg) {
 //                alert(msg+"====="+divId);
                 $("#dirname").val("");
-                switch (msg){
+                switch (msg) {
                     case "success":
                         window.location = "{:url('admin/commodity/commodityDetailed?id='.$commodity->getData('id'))}";
                         break;

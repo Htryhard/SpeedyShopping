@@ -3,6 +3,12 @@
 <block name="resources">
 
 </block>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li class="active">发货单</li>
+</ol>
+
 <h3 style="color: #000000" align="center">发货单</h3>
 <div style="float: right" class="btn btn-default">
     <select id="se_status" onchange="orderType()">
@@ -44,17 +50,17 @@
 <script type="text/javascript">
     $(function () {
         var type = "";
-        document.getElementById("op_"+type).selected = true;
+        document.getElementById("op_" + type).selected = true;
     });
     function orderType() {
         //获取被选中的option标签
         var vsId = $('#se_status option:selected').attr("id");
-        vsId = vsId.replace("op_","");
+        vsId = vsId.replace("op_", "");
 //        alert(vsId);
         var url = "{:url('admin/Order/orderIndex?type=')}";
         var pot = url.indexOf(".");
-        url = url.substring(0,pot);
-        url = url+"/type/"+vsId;
+        url = url.substring(0, pot);
+        url = url + "/type/" + vsId;
 //                                alert(url);
         window.location = url;
     }

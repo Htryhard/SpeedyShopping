@@ -1,5 +1,10 @@
 {layout name="layout" /}
+<block name="titel"><title>所有分类</title></block>
 
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li class="active">所有分类</li>
+</ol>
 
 <div class="row">
     <div class="col-md-11">
@@ -9,26 +14,29 @@
             <div class="col-md-5">
                 <form class="form-inline">
                     <div class="form-group">
-                        <label class="sr-only" >Search</label>
-                        <input name="name" type="text" class="form-control" placeholder="查询..." value={:input('get.name')}>
+                        <label class="sr-only">Search</label>
+                        <input name="name" type="text" class="form-control" placeholder="查询..."
+                               value={:input('get.name')}>
                     </div>
-                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-search"></i>&nbsp;查询
+                    </button>
                 </form>
             </div>
-            <form action="{:url('admin/type/add')}" method="post"  class="form-inline">
+            <form action="{:url('admin/type/add')}" method="post" class="form-inline">
 
                 <div class="form-group">
                     <div class="col-md-8">
-                    <label class="sr-only" >Add</label>
-                        <input  type="text" name="content" class="form-control" placeholder="添加...">
+                        <label class="sr-only">Add</label>
+                        <input type="text" name="content" class="form-control" placeholder="添加...">
                     </div>
-                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i>&nbsp;确定</button>
-            </div>
+                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i>&nbsp;确定
+                    </button>
+                </div>
             </form>
         </div>
-<div style="height: 25px;"></div>
+        <div style="height: 25px;"></div>
         <table class="table table-hover table-bordered">
-            <tr class="info" >
+            <tr class="info">
                 <th>id</th>
                 <th>内容</th>
                 <th>操作</th>
@@ -37,8 +45,9 @@
             <tr>
                 <td>{$type.id}</td>
                 <td>{$type.content}</td>
-                <td><a class="btn btn-danger btn-sm" href=""><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>&nbsp;
-                    <a class="btn btn-sm btn-primary" href="">
+                <td><a class="btn btn-danger btn-sm" href="" onclick="deleteType()">
+                    <i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>&nbsp;
+                    <a class="btn btn-sm btn-primary" href="" onclick=editType("{$type['content']}","{$type['id']}")>
                         <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                 </td>
             </tr>
@@ -47,6 +56,48 @@
 
     </div>
 </div>
+<script type="text/javascript">
+
+    function deleteType() {
+        alert("此分类内存在许多商品，暂不提供删除，您可以选择编辑！");
+    }
+
+    function editType(content, id) {
+        var conStr = prompt("请输入新分类名称:", content);
+        if (conStr != null && conStr != "") {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/type/editType')}",
+                dataType: "json",
+                data: {
+                    content: conStr,
+                    typeId: id
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "Success":
+                            alert("类型修改成功！");
+                            document.location.reload();//当前页面
+                            break;
+                        case "PostError":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+                },
+            });
+        }
+    }
+
+</script>
 
 
 

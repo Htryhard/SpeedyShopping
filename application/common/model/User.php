@@ -84,8 +84,23 @@ class User extends Model
         // 验证用户是否存在
         $map = array('email' => $email);
         $user = self::get($map);
-
         if (!is_null($user)) {
+
+            //验证权限
+            $authId = $user->getData("role_id");
+            $auth = AuthGroup::get(["id" => $authId]);
+            if ($modle == "home") {
+                if ($auth->getData("rules") != "user" || $auth->getData("status") != 1) {
+                    return false;
+                }
+            }
+
+            if ($modle == "admin") {
+                if ($auth->getData("rules") != "administrator" || $auth->getData("status") != 1) {
+                    return false;
+                }
+            }
+
             // 验证密码是否正确
             if ($user->checkPassword($password)) {
                 if ($modle == "home") {

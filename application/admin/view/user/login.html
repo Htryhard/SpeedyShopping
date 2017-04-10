@@ -1,14 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     {load href="__PUBLIC__/static/bootstrap/css/bootstrap.min.css" /}
     {load href="__PUBLIC__/static/bootstrap/js/bootstrap.min.js" /}
     {load href="__PUBLIC__/static/zyupload/jquery-1.7.2.js" /}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>"周边送"后台登录</title>
 
-    <link href="__PUBLIC__/static/css/adminLoginStyle.css" rel='stylesheet' type='text/css' />
+    <link href="__PUBLIC__/static/css/adminLoginStyle.css" rel='stylesheet' type='text/css'/>
 
 </head>
 <body>
@@ -18,13 +19,13 @@
         <h1>"周边送"后台登录</h1>
         <div class="head"><img src="__PUBLIC__/static/images/userLogin.png" alt=""/></div>
         <form>
-            <input type="text" class="text" id="email" placeholder="邮箱" />
-            <input type="password" id="password" placeholder="密码" />
-            <div class="submit"><input type="button" onClick="adminLogin()" value="登录" ></div>
+            <input type="text" class="text" id="email" placeholder="邮箱"/>
+            <input type="password" id="password" placeholder="密码"/>
+            <div class="submit"><input type="button" onClick="adminLogin()" value="登录"></div>
             <p><a href="#">忘记密码?</a></p>
         </form>
     </div>
-    <div class="copy-right"><p>版权是2017。"周边送"保留所有权利。</p> </div>
+    <div class="copy-right"><p>版权是2017。"周边送"保留所有权利。</p></div>
 </div>
 <script type="text/javascript">
     function adminLogin() {
@@ -37,23 +38,24 @@
             dataType: "json",
             data: {
                 email: email.value,
-                password:password.value
+                password: password.value
             },
             success: function (msg) {
-//                    alert(msg);
                 switch (msg) {
-                    case 'passwordNoFit':
-                        getlayout("other_error", "两次密码不一致！");
+                    case 'TheUserNameOrPasswordError':
+                        alert("账号或密码错误！");
+//                        getlayout("other_error", "账号或密码错误！");
                         break;
                     case 'error_notAjax':
                         alert("提交方式出错！");
+//                        alert("提交方式出错！");
                         break;
                     case 'succeed':
-                        window.location = "{:url('admin/commodity/index')}";
+                        window.location = "{:url('admin/index/index')}";
                         break;
                     default:
                         alert(msg);
-                        getlayout("other_error", msg);
+//                        getlayout("other_error", msg);
 
                 }
             },

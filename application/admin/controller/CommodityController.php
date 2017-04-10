@@ -326,4 +326,30 @@ class CommodityController extends BaseController
         }
     }
 
+    /**
+     * 商品的下架
+     */
+    public function supermarketCommodity()
+    {
+        if ($this->request->isAjax()) {
+            $commodityId = $this->request->post("commodityId");
+            $type = $this->request->post("type");
+            $commodity = Commodity::get(["id" => $commodityId]);
+            if ($commodity != null) {
+                if ($type == "up") {
+                    $commodity->states = 0;
+                }
+                if ($type == "off") {
+                    $commodity->states = 1;
+                }
+                $commodity->save();
+                return "Success";
+            } else {
+                return "ParameterError";
+            }
+        } else {
+            return "PostError";
+        }
+    }
+
 }

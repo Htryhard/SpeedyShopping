@@ -1,19 +1,30 @@
 {layout name="layout" /}
 <block name="title"><title>商品明细</title></block>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li><a href="{:url('admin/commodity/index')}">所有商品</a></li>
+    <li class="active">商品详情</li>
+</ol>
+
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">商品详情</h3>
     </div>
     <table class="table">
 
-        <tr><td>标题：</td><td>{$commodity->getData("title")}<br/></td>
-        <tr><td>分类：</td><td>{$commodity['type']['content']}<br/></td>
+        <tr>
+            <td>标题：</td>
+            <td>{$commodity->getData("title")}<br/></td>
+        <tr>
+            <td>分类：</td>
+            <td>{$commodity['type']['content']}<br/></td>
     </table>
 </div>
 <div class="panel panel-info">
     <div class="panel-heading">商品参数</div>
     <table class="table">
-        {volist name="parameters" id="vo"  }
+        {volist name="parameters" id="vo" }
         <tr>
             <td>{$key}</td>
             <td>{$vo}</td>
@@ -29,13 +40,12 @@
             <td>规格内容</td>
             <td>规格库存</td>
             <td>价格</td>
-
         </tr>
-        {volist name="$commodity['specifications']" id="vo"  }
+        {volist name="$commodity['specifications']" id="vo" }
         <tr>
-          <td>{$vo['content']}</td>
-          <td>{$vo['repertory']}</td>
-          <td>{$vo['price']}</td>
+            <td>{$vo['content']}</td>
+            <td>{$vo['repertory']}</td>
+            <td>{$vo['price']}</td>
 
         </tr>
         {/volist}
@@ -45,19 +55,77 @@
 <div class="panel panel-info">
     <div class="panel-heading">商品图片</div>
     <table class="table">
-        <th></th><th> </th>
+        <th></th>
+        <th></th>
         {volist name="images" id="item"}
-        <img src="{$item}" width="150px;"height="150px">
+        <img src="{$item}" width="150px;" height="150px">
         {/volist}
     </table>
 </div>
-<!--<span>商品参数：</span><br/>-->
-<!--{volist name="parameters" id="vo"  }-->
-<!--{$key}<span>:</span>{$vo}<br/>-->
-<!--{/volist}-->
-<!--<hr/>-->
-<!--<span>商品图片：</span>-->
-<!--{volist name="images" id="item"}-->
-<!--<img src="{$item}" width="150px;"height="150px">-->
-<!--{/volist}-->
+
+<div class="panel panel-info">
+    <div class="panel-heading">操作</div>
+    <table class="table">
+        <tr>
+            <td>
+                <a href="{:url('admin/commodity/editCommodity?id='.$commodity->getData('id'))}"
+                   class="btn btn-warning">编辑商品</a>
+                {if condition="($commodity->getData('states') != 0)"}
+                <button type="button" class="btn btn-danger" onclick=supermarketCommodity("{$commodity['id']}","up")>
+                    重新上架商品
+                </button>
+                {else /}
+                <button type="button" class="btn btn-danger" onclick=supermarketCommodity("{$commodity['id']}","off")>
+                    下架商品
+                </button>
+                {/if}
+
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    function supermarketCommodity(commodityId, type) {
+        var msg = "";
+        if (type == "up") {
+            msg = "你确定要重新上架此商品吗？";
+        }
+        if (type == "off") {
+            msg = "你即将下架此商品！要确定吗？";
+        }
+        if (confirm(msg)) {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/commodity/supermarketCommodity')}",
+                dataType: "json",
+                data: {
+                    commodityId: commodityId,
+                    type: type
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "Success":
+                            alert("操作成功！！");
+                            document.location.reload();//当前页面
+                            break;
+                        case "PostError":
+                            //非法请求
+                            alert("非法请求");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+                },
+            });
+        }
+    }
+</script>
+
 
