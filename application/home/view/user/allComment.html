@@ -1,0 +1,268 @@
+{layout name="layout" /}
+<block name="titel"><title>我的评价</title></block>
+<block name="resources">
+    {load href="__PUBLIC__/login/login.css" /}
+    {load href="__PUBLIC__/homestatic/css/myhome.css" /}
+</block>
+<style>
+
+    left {
+        width: 200px;
+        height: 100%;
+        border-right: 1px solid #CCCCCC;
+        color: #000000;
+        font-size: 14px;
+        text-align: center;
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        bottom: 100px;
+        position: fixed;
+    }
+
+    .div1 {
+        text-align: center;
+        width: 200px;
+        padding-top: 30px;
+
+    }
+
+    .div2 {
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        font-size: 13px;
+        position: relative;
+        border-bottom: #ccc 1px dotted;
+
+    }
+
+    .div2 a {
+        color: #000000;
+    }
+
+    .div2 a:hover {
+        color: red;
+    }
+
+    .jbsz {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 40px;
+        top: 10px;
+    }
+
+    .right {
+        position: relative;
+        left: 250px;
+        top: 30px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+
+    }
+
+    .conten_margin {
+        /*margin-bottom: 20px;*/
+        /*margin-right: 20px;*/
+        float: left;
+        padding: 5px;
+
+    }
+
+    .conten_margin:hover {
+        /*border: 1px solid silver;*/
+    }
+
+    .conten_margin .titlea {
+        width: 180px;
+        overflow: hidden; /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap; /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .bordera {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: #666666;
+        font-size: 13px;
+
+    }
+
+    .bordera:hover {
+        border: 1px solid red;
+        color: red;
+    }
+
+    .borderb {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+        font-size: 13px;
+    }
+
+    .borderb:hover {
+        border: 1px solid red;
+    }
+
+    .pricea {
+        font-size: 18px;
+        color: red;
+    }
+
+    .pingjiaa {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    .pingjiab {
+        font-size: 18px;
+        color: red;
+    }
+
+    .img_xing {
+        vertical-align: middle;
+    }
+
+    .btn_guanzhu {
+        border: 0;
+        background: #F4F4F4;
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    #myhomem {
+        position: absolute;
+        left: 120px;
+        top: 30px;
+        right: 0px;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+    .s-bar {
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
+        color: #fff;
+        background: #a0cdeb;
+        border: #a0cdeb;
+        border-top: #e4eaee;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 11px 10px;
+        position: relative;
+        width: 85%;
+    }
+
+    .text-mod {
+        font-family: sans-serif;
+        color: #333;
+        text-decoration: none;
+        line-height: 1;
+        font-size: 15px;
+    }
+</style>
+<asidehome>
+    <div class="left">
+        <div class="div1">
+            <div class="div2">
+                <div class="div2" style="font-size:25px;font-family: '楷体', '微软雅黑'">
+                    <h2>全部功能</h2>
+                </div>
+                <div class="div2">
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userHome')}">我的收藏</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userOrders',['type'=>'all'])}">全部订单</a>
+                    </div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/showCart')}">我的购物车</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userMessage')}">我的个人资料</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/allComment')}" style="color: #00a2d4;">我的评价</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/customerService')}">退换货</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</asidehome>
+<div id="myhomem">
+    <div id="con">
+        <div style="height: 80px;"></div>
+        <div id="box_userMsg">
+            <div id="box_user">
+                <img src="{$iconRoot.$user['icon']}" height="90" width="90" class="img-circle">&nbsp;&nbsp;&nbsp;
+                <span><a href="{:url('home/user/userMessage')}">{$user['user_name']}</a></span>
+            </div>
+            <div id="box_userSta"></div>
+        </div>
+        <table border="1" width="700px">
+            <tr>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu5'])}">待评价<i style="color: red">{$order_5}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">{$order_6}</i></a></th>
+            </tr>
+        </table>
+        <div style="height: 10px"></div>
+
+        <!--第二层开始【我的订单】-->
+        <div id="box_order_content">
+            <div class="s-bar">我的全部评价</div>
+            <div style="height: 10px"></div>
+            {volist name="comments" id="comment"}
+            <table width="85%" border="1" cellpadding="0" cellspacing="0" style="table-layout:fixed">
+                <tr>
+                    <td><img src="{$iconRoot.$comment['user']['icon']}" height="50" width="50" class="img-circle">
+                        {eq name="$comment['user']['nick_name']" value=""}
+                        匿名用户
+                        {else/}
+                        {$comment['user']['nick_name']}
+                        {/eq}
+                        <div style="float: right;padding:20px 0; ">{:date('Y年m月d日',$comment['creation_time'])}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="50">{$comment['content']}</td>
+                </tr>
+                <tr>
+                    <td height="40" style="color: #9d9d9d">
+                        【{$comment['OrderSpecification']['specification']['commodity']['title']}】 &nbsp;&nbsp;&nbsp;&nbsp;规格：{$comment['OrderSpecification']['specification']['content']}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {foreach name="$comment['commentImgs']" item="coImg"}
+                        <img src="{$commentImg.$coImg['image']}" width="100" height="50" class="img-thumbnail"
+                             rel="lightbox-tour"/>
+                        {/foreach}
+                    </td>
+                </tr>
+            </table>
+            <hr style="width: 87%"/>
+            {/volist}
+        </div>
+        <!--第二层结束【我的订单】-->
+        {$comments->render()}
+    </div>
+</div>
+
+

@@ -146,7 +146,7 @@
     }
 
     .s-bar {
-        font-family: tahoma,arial,'Hiragino Sans GB','Microsoft YaHei',宋体,sans-serif;
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
         color: #fff;
         background: #a0cdeb;
         border: #a0cdeb;
@@ -181,10 +181,13 @@
                         <a href="{:url('home/user/userMessage')}">我的个人资料</a></div>
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a href="">我的评价</a></div>
+                        <a href="{:url('home/user/allComment')}">我的评价</a></div>
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a>退换货</a></div>
+                        <a href="{:url('home/user/customerService')}">退换货</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/message/index')}">客服</a></div>
 
                 </div>
             </div>
@@ -203,11 +206,16 @@
         </div>
         <table border="1" width="700px">
             <tr>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">0</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu0'])}">待付款<i style="color: red">{$order_0}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu1'])}">待发货<i style="color: red">{$order_2+$order_1}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">{$order_5}</i></a>
+                </th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">{$order_6}</i></a>
+                </th>
             </tr>
         </table>
         <div style="height: 10px"></div>
@@ -277,9 +285,9 @@
                     switch (msg) {
                         case "ReceiptSuccess":
                             var url = "{:url('home/user/orderDetailed?orderId=')}";
-                                var pot = url.indexOf(".");
-                                url = url.substring(0,pot);
-                                url = url+"?orderId="+orderId;
+                            var pot = url.indexOf(".");
+                            url = url.substring(0, pot);
+                            url = url + "?orderId=" + orderId;
 //                                alert(url);
                             window.location = url;
                             break;

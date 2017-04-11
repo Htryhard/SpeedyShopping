@@ -352,4 +352,22 @@ class CommodityController extends BaseController
         }
     }
 
+    /**
+     * 获取此商品下的所有评论
+     * @return mixed
+     */
+    public function findComments()
+    {
+        $commodityId = $this->request->get(["commodityId"]);
+        $commodity = Commodity::get(["id" => $commodityId]);
+        if ($commodity != null) {
+            $comments = $commodity["comments"];
+            $this->assign("comments", $comments);
+            return $this->fetch();
+        } else {
+            $this->redirect(url("home/error/postError", ['code' => "404", 'msg' => "此商品已经不存在！"]));
+        }
+
+    }
+
 }

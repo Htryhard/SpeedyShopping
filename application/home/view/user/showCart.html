@@ -180,10 +180,10 @@
                         <a href="{:url('home/user/userMessage')}">我的个人资料</a></div>
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a href="">我的评价</a></div>
+                        <a href="{:url('home/user/allComment')}">我的评价</a></div>
                     <div class="div2">
                         <div class="jbsz"></div>
-                        <a>退换货</a></div>
+                        <a href="{:url('home/user/customerService')}">退换货</a></div>
 
                 </div>
             </div>
@@ -208,8 +208,8 @@
                 </th>
                 <th><a href="{:url('home/user/userOrders',['type'=>'statu3'])}">待收货<i style="color: red">{$order_3}</i></a>
                 </th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">0</i></a></th>
-                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">0</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'all'])}">待评价<i style="color: red">{$order_5}</i></a></th>
+                <th><a href="{:url('home/user/userOrders',['type'=>'statu6'])}">退款返修<i style="color: red">{$order_6}</i></a></th>
             </tr>
         </table>
         <div style="height: 10px"></div>

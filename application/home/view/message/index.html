@@ -1,0 +1,521 @@
+{layout name="layout" /}
+<block name="title"><title>客户消息</title></block>
+<block name="resources">
+    {load href="__PUBLIC__/static/css/chat.css" /}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</block>
+<style>
+
+    left {
+        width: 200px;
+        height: 100%;
+        border-right: 1px solid #CCCCCC;
+        color: #000000;
+        font-size: 14px;
+        text-align: center;
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        bottom: 100px;
+        position: fixed;
+    }
+
+    .div1 {
+        text-align: center;
+        width: 200px;
+        padding-top: 30px;
+
+    }
+
+    .div2 {
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        font-size: 13px;
+        position: relative;
+        border-bottom: #ccc 1px dotted;
+
+    }
+
+    .div2 a {
+        color: #000000;
+    }
+
+    .div2 a:hover {
+        color: red;
+    }
+
+    .jbsz {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 40px;
+        top: 10px;
+    }
+
+    .right {
+        position: relative;
+        left: 250px;
+        top: 30px;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+
+    }
+
+    .conten_margin {
+        /*margin-bottom: 20px;*/
+        /*margin-right: 20px;*/
+        float: left;
+        padding: 5px;
+
+    }
+
+    .conten_margin:hover {
+        /*border: 1px solid silver;*/
+    }
+
+    .conten_margin .titlea {
+        width: 180px;
+        overflow: hidden; /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap; /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .bordera {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: #666666;
+        font-size: 13px;
+
+    }
+
+    .bordera:hover {
+        border: 1px solid red;
+        color: red;
+    }
+
+    .borderb {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+        font-size: 13px;
+    }
+
+    .borderb:hover {
+        border: 1px solid red;
+    }
+
+    .pricea {
+        font-size: 18px;
+        color: red;
+    }
+
+    .pingjiaa {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    .pingjiab {
+        font-size: 18px;
+        color: red;
+    }
+
+    .img_xing {
+        vertical-align: middle;
+    }
+
+    .btn_guanzhu {
+        border: 0;
+        background: #F4F4F4;
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    #myhomem {
+        position: absolute;
+        left: 120px;
+        top: 30px;
+        right: 0px;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+    .s-bar {
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
+        color: #fff;
+        background: #a0cdeb;
+        border: #a0cdeb;
+        border-top: #e4eaee;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 11px 10px;
+        position: relative;
+        width: 86%;
+    }
+</style>
+<asidehome>
+    <div class="left">
+        <div class="div1">
+            <div class="div2">
+                <div class="div2" style="font-size:25px;font-family: '楷体', '微软雅黑'">
+                    <h2>全部功能</h2>
+                </div>
+                <div class="div2">
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userHome')}">我的收藏</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userOrders',['type'=>'all'])}">全部订单</a>
+                    </div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/showCart')}">我的购物车</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/userMessage')}">我的个人资料</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/allComment')}">我的评价</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/user/customerService')}">退换货</a></div>
+                    <div class="div2">
+                        <div class="jbsz"></div>
+                        <a href="{:url('home/message/index')}" style="color: #00a2d4;">客服</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</asidehome>
+<div id="myhomem">
+    <div id="con">
+        <div style="height: 100px"></div>
+        <div class="content">
+            <div class="chatBox">
+                <div class="chatLeft">
+                    <div class="chat01">
+                        <div class="chat01_title">
+                            <ul class="talkTo">
+                                <li><a href="javascript:;">王旭</a></li>
+                            </ul>
+                            <a class="close_btn" href="javascript:;"></a>
+                        </div>
+                        <div class="chat01_content">
+                            <div class="message_box mes1">
+                            </div>
+                            <div class="message_box mes2">
+                            </div>
+                            <div class="message_box mes3" style="display: block;">
+                            </div>
+                            <div class="message_box mes4">
+                            </div>
+                            <div class="message_box mes5">
+                            </div>
+                            <div class="message_box mes6">
+                            </div>
+                            <div class="message_box mes7">
+                            </div>
+                            <div class="message_box mes8">
+                            </div>
+                            <div class="message_box mes9">
+                            </div>
+                            <div class="message_box mes10">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat02">
+                        <div class="chat02_title">
+                            <a class="chat02_title_btn ctb01" href="javascript:;"></a><a class="chat02_title_btn ctb02"
+                                                                                         href="javascript:;"
+                                                                                         title="选择文件">
+                            <embed width="15" height="16"
+                                   flashvars="swfid=2556975203&amp;maxSumSize=50&amp;maxFileSize=50&amp;maxFileNum=1&amp;multiSelect=0&amp;uploadAPI=http%3A%2F%2Fupload.api.weibo.com%2F2%2Fmss%2Fupload.json%3Fsource%3D209678993%26tuid%3D1887188824&amp;initFun=STK.webim.ui.chatWindow.msgToolBar.upload.initFun&amp;sucFun=STK.webim.ui.chatWindow.msgToolBar.upload.sucFun&amp;errFun=STK.webim.ui.chatWindow.msgToolBar.upload.errFun&amp;beginFun=STK.webim.ui.chatWindow.msgToolBar.upload.beginFun&amp;showTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.showTipFun&amp;hiddenTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.hiddenTipFun&amp;areaInfo=0-16|12-16&amp;fExt=*.jpg;*.gif;*.jpeg;*.png|*&amp;fExtDec=选择图片|选择文件"
+                                   data="upload.swf" wmode="transparent" bgcolor="" allowscriptaccess="always"
+                                   allowfullscreen="true"
+                                   scale="noScale" menu="false" type="application/x-shockwave-flash"
+                                   src="http://service.weibo.com/staticjs/tools/upload.swf?v=36c9997f1313d1c4"
+                                   id="swf_3140">
+                        </a><a class="chat02_title_btn ctb03" href="javascript:;" title="选择附件">
+                            <embed width="15" height="16"
+                                   flashvars="swfid=2556975203&amp;maxSumSize=50&amp;maxFileSize=50&amp;maxFileNum=1&amp;multiSelect=0&amp;uploadAPI=http%3A%2F%2Fupload.api.weibo.com%2F2%2Fmss%2Fupload.json%3Fsource%3D209678993%26tuid%3D1887188824&amp;initFun=STK.webim.ui.chatWindow.msgToolBar.upload.initFun&amp;sucFun=STK.webim.ui.chatWindow.msgToolBar.upload.sucFun&amp;errFun=STK.webim.ui.chatWindow.msgToolBar.upload.errFun&amp;beginFun=STK.webim.ui.chatWindow.msgToolBar.upload.beginFun&amp;showTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.showTipFun&amp;hiddenTipFun=STK.webim.ui.chatWindow.msgToolBar.upload.hiddenTipFun&amp;areaInfo=0-16|12-16&amp;fExt=*.jpg;*.gif;*.jpeg;*.png|*&amp;fExtDec=选择图片|选择文件"
+                                   data="upload.swf" wmode="transparent" bgcolor="" allowscriptaccess="always"
+                                   allowfullscreen="true"
+                                   scale="noScale" menu="false" type="application/x-shockwave-flash"
+                                   src="http://service.weibo.com/staticjs/tools/upload.swf?v=36c9997f1313d1c4"
+                                   id="swf_3140">
+                        </a>
+                            <label class="chat02_title_t">
+                                <a href="#" target="_blank">聊天记录</a></label>
+                            <div class="wl_faces_box">
+                                <div class="wl_faces_content">
+                                    <div class="title">
+                                        <ul>
+                                            <li class="title_name">常用表情</li>
+                                            <li class="wl_faces_close"><span>&nbsp;</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="wl_faces_main">
+                                        <ul>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_01.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_02.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_03.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_04.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_05.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_06.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_07.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_08.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_09.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_10.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_11.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_12.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_13.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_14.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_15.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_16.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_17.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_18.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_19.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_20.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_21.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_22.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_23.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_24.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_25.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_26.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_27.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_28.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_29.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_30.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_31.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_32.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_33.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_34.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_35.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_36.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_37.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_38.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_39.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_40.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_41.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_42.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_43.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_44.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_45.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_46.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_47.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_48.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_49.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_50.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_51.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_52.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_53.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_54.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_55.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_56.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_57.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_58.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_59.gif"/></a></li>
+                                            <li><a href="javascript:;">
+                                                <img src="__PUBLIC__/static/img/emo_60.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="wlf_icon">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat02_content">
+                            <textarea id="textarea"></textarea>
+                        </div>
+                        <div class="chat02_bar">
+                            <ul>
+                                <li style="left: 20px; top: 10px; padding-left: 30px;">
+                                </li>
+                                <li style="right: 5px; top: 5px;"><a href="javascript:;">
+                                    <img src="__PUBLIC__/static/img/send_btn.jpg"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatRight">
+                    <div class="chat03">
+                        <div class="chat03_title">
+                            <label class="chat03_title_t">
+                                会话列表</label>
+                        </div>
+                        <div class="chat03_content">
+                            <ul>
+                                <li>
+                                    <label class="online">
+                                    </label>
+                                    <a href="javascript:;">
+                                        <img src="__PUBLIC__/static/img/head/2013.jpg"></a><a href="javascript:;"
+                                                                                              class="chat03_name">刘秀</a>
+                                </li>
+                                <li>
+                                    <label class="offline">
+                                    </label>
+                                    <a href="javascript:;">
+                                        <img src="__PUBLIC__/static/img/head/2014.jpg"></a><a href="javascript:;"
+                                                                                              class="chat03_name">陈诚</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both;">
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+            <p></p>
+            <p></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function message() {
+        var a = $.blinkTitle.show();
+        setTimeout(function () {
+            $.blinkTitle.clear(a)
+        }, 8e3)
+    }
+    $(document).ready(function () {
+        function e() {
+            function h() {
+                -1 != g.indexOf("*#emo_") && (g = g.replace("*#", "<img src='__PUBLIC__/static/img/").replace("#*", ".gif'/>"), h())
+            }
+
+            var e = new Date, f = "";
+            f += e.getFullYear() + "-", f += e.getMonth() + 1 + "-", f += e.getDate() + "  ", f += e.getHours() + ":", f += e.getMinutes() + ":", f += e.getSeconds();
+            var g = $("#textarea").val();
+            h();
+            var i = "<div class='message clearfix'><div class='user-logo'><img src='" + b + "'/>" + "</div>" + "<div class='wrap-text'>" + "<h5 class='clearfix'>\u5f20\u98de</h5>" + "<div>" + g + "</div>" + "</div>" + "<div class='wrap-ri'>" + "<div clsss='clearfix'><span>" + f + "</span></div>" + "</div>" + "<div style='clear:both;'></div>" + "</div>" + "<div class='message clearfix'>" + "<div class='user-logo'>" + "<img src='" + c + "'/>" + "</div>" + "<div class='wrap-text'>" + "<h5 class='clearfix'>" + d + "</h5>" + "<div>" + g + "\u7684\u56de\u590d\u5185\u5bb9</div>" + "</div>" + "<div class='wrap-ri'>" + "<div clsss='clearfix'><span>" + f + "</span></div>" + "</div>" + "<div style='clear:both;'></div>";
+            null != g && "" != g ? ($(".mes" + a).append(i), $(".chat01_content").scrollTop($(".mes" + a).height()), $("#textarea").val(""), message()) : alert("\u8bf7\u8f93\u5165\u804a\u5929\u5185\u5bb9!")
+        }
+
+        var a = 3, b = "__PUBLIC__/static/img/head/2024.jpg", c = "__PUBLIC__/static/img/head/2015.jpg", d = "\u738b\u65ed";
+        $(".close_btn").click(function () {
+            $(".chatBox").hide()
+        }), $(".chat03_content li").mouseover(function () {
+            $(this).addClass("hover").siblings().removeClass("hover")
+        }).mouseout(function () {
+            $(this).removeClass("hover").siblings().removeClass("hover")
+        }), $(".chat03_content li").dblclick(function () {
+            var b = $(this).index() + 1;
+            a = b, c = "img/head/20" + (12 + a) + ".jpg", d = $(this).find(".chat03_name").text(), $(".chat01_content").scrollTop(0), $(this).addClass("choosed").siblings().removeClass("choosed"), $(".talkTo a").text($(this).children(".chat03_name").text()), $(".mes" + b).show().siblings().hide()
+        }), $(".ctb01").mouseover(function () {
+            $(".wl_faces_box").show()
+        }).mouseout(function () {
+            $(".wl_faces_box").hide()
+        }), $(".wl_faces_box").mouseover(function () {
+            $(".wl_faces_box").show()
+        }).mouseout(function () {
+            $(".wl_faces_box").hide()
+        }), $(".wl_faces_close").click(function () {
+            $(".wl_faces_box").hide()
+        }), $(".wl_faces_main img").click(function () {
+            var a = $(this).attr("src");
+            $("#textarea").val($("#textarea").val() + "*#" + a.substr(a.indexOf("img/") + 4, 6) + "#*"), $("#textarea").focusEnd(), $(".wl_faces_box").hide()
+        }), $(".chat02_bar img").click(function () {
+            e()
+        }), document.onkeydown = function (a) {
+            var b = document.all ? window.event : a;
+            return 13 == b.keyCode ? (e(), !1) : void 0
+        }, $.fn.setCursorPosition = function (a) {
+            return 0 == this.lengh ? this : $(this).setSelection(a, a)
+        }, $.fn.setSelection = function (a, b) {
+            if (0 == this.lengh)return this;
+            if (input = this[0], input.createTextRange) {
+                var c = input.createTextRange();
+                c.collapse(!0), c.moveEnd("character", b), c.moveStart("character", a), c.select()
+            } else input.setSelectionRange && (input.focus(), input.setSelectionRange(a, b));
+            return this
+        }, $.fn.focusEnd = function () {
+            this.setCursorPosition(this.val().length)
+        }
+    }), function (a) {
+        a.extend({
+            blinkTitle: {
+                show: function () {
+                    var a = 0, b = document.title;
+                    if (-1 == document.title.indexOf("\u3010"))var c = setInterval(function () {
+                        a++, 3 == a && (a = 1), 1 == a && (document.title = "\u3010\u3000\u3000\u3000\u3011" + b), 2 == a && (document.title = "\u3010\u65b0\u6d88\u606f\u3011" + b)
+                    }, 500);
+                    return [c, b]
+                }, clear: function (a) {
+                    a && (clearInterval(a[0]), document.title = a[1])
+                }
+            }
+        })
+    }(jQuery);
+
+</script>

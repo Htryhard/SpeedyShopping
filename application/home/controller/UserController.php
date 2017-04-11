@@ -25,6 +25,12 @@ use app\common\model\User;
 use think\Controller;
 use think\Request;
 
+/**
+ * 拥有用户权限的操作
+ * @author 陈炳威、赖常帆
+ * Class UserController
+ * @package app\home\controller
+ */
 class UserController extends BaseController
 {
 
@@ -36,26 +42,34 @@ class UserController extends BaseController
 //        $orders = Order::all(["user_id"=>$user->getData('id')]);
 //        $type = input('get.type');
         $orders = null;
+        $clickType = "";
         if ($type == "statu0") {
             $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 0])->order('order_time', 'desc')->paginate(6);
+            $clickType = "待付款";
         } elseif ($type == "statu1") {
             $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 1])->order('order_time', 'desc')->paginate(6);
+            $clickType = "待发货";
         } elseif ($type == "statu2") {
             $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 2])->order('order_time', 'desc')->paginate(6);
+            $clickType = "待发货";
         } elseif ($type == "statu3") {
             $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 3])->order('order_time', 'desc')->paginate(6);
+            $clickType = "待收货";
         } elseif ($type == "statu4") {
             $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 4])->order('order_time', 'desc')->paginate(6);
+            $clickType = "货到付款";
         } elseif ($type == "statu5") {
             $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 5])->order('order_time', 'desc')->paginate(6);
+            $clickType = "待评价";
         } elseif ($type == "statu6") {
-            $orders = Order::where("status", "<>", 8)->where(['user_id' => $user->getData('id'), 'status' => 6])->order('order_time', 'desc')->paginate(6);
+            $this->redirect(url('home/user/customerService'));
         } else {
             //全部订单
             $orders = Order::where("user_id", $user->getData('id'))->where("status", "<>", 8)->order('order_time', 'desc')->paginate(6);
+            $clickType = "全部订单";
         }
         $this->assign("orders", $orders);
-
+        $this->assign("clickType", $clickType);
         $this->assign("status", $type);
         $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
         $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
@@ -70,6 +84,10 @@ class UserController extends BaseController
         $order_3 = 0;//配送中
         $order_4 = 0;//货到付款
         $order_5 = 0;//交易已经完成（待评价）
+        $order_6 = 0;//交易已经完成（待评价）
+        $refs = Refunds::where(['user_id' => $user->getData('id'), "status" => 0])->select();
+        $order_6 = count($refs);
+        $this->assign("order_6", $order_6);
         foreach ($user['orders'] as $order) {
             if ($order->getData('status') == 0) {
                 $order_0 = $order_0 + 1;
@@ -152,6 +170,11 @@ class UserController extends BaseController
         $order_2 = 0;//待发货
         $order_3 = 0;//配送中
         $order_4 = 0;//货到付款
+        $order_5 = 0;//交易已经完成（待评价）
+        $order_6 = 0;//交易已经完成（待评价）
+        $refs = Refunds::where(['user_id' => $user->getData('id'), "status" => 0])->select();
+        $order_6 = count($refs);
+        $this->assign("order_6", $order_6);
         foreach ($user['orders'] as $order) {
             if ($order->getData('status') == 0) {
                 $order_0 = $order_0 + 1;
@@ -163,6 +186,8 @@ class UserController extends BaseController
                 $order_3 = $order_3 + 1;
             } elseif ($order->getData('status') == 4) {
                 $order_4 = $order_4 + 1;
+            } elseif ($order->getData('status') == 5) {
+                $order_5 = $order_5 + 1;
             }
         }
         $this->assign("order_0", $order_0);
@@ -170,6 +195,7 @@ class UserController extends BaseController
         $this->assign("order_2", $order_2);
         $this->assign("order_3", $order_3);
         $this->assign("order_4", $order_4);
+        $this->assign("order_5", $order_5);
         return $this->fetch();
     }
 
@@ -287,6 +313,11 @@ class UserController extends BaseController
         $order_2 = 0;//待发货
         $order_3 = 0;//配送中
         $order_4 = 0;//货到付款
+        $order_5 = 0;//交易已经完成（待评价）
+        $order_6 = 0;//交易已经完成（待评价）
+        $refs = Refunds::where(['user_id' => $user->getData('id'), "status" => 0])->select();
+        $order_6 = count($refs);
+        $this->assign("order_6", $order_6);
         foreach ($user['orders'] as $order) {
             if ($order->getData('status') == 0) {
                 $order_0 = $order_0 + 1;
@@ -298,6 +329,8 @@ class UserController extends BaseController
                 $order_3 = $order_3 + 1;
             } elseif ($order->getData('status') == 4) {
                 $order_4 = $order_4 + 1;
+            } elseif ($order->getData('status') == 5) {
+                $order_5 = $order_5 + 1;
             }
         }
         $this->assign("order_0", $order_0);
@@ -305,6 +338,7 @@ class UserController extends BaseController
         $this->assign("order_2", $order_2);
         $this->assign("order_3", $order_3);
         $this->assign("order_4", $order_4);
+        $this->assign("order_5", $order_5);
         return $this->fetch();
     }
 
@@ -928,6 +962,134 @@ class UserController extends BaseController
             return "PostError";
         }
 
+    }
+
+    public function allComment()
+    {
+        $user = User::getUserBySession("home");
+        $comments = null;
+        if ($user != null) {
+            $comments = Comment::where(['user_id' => $user->getData('id')])->order('creation_time', 'desc')->paginate(6);
+        } else {
+            $this->redirect(url('home/thing/login'));
+        }
+        $this->assign("user", $user);
+        $this->assign("comments", $comments);
+        $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+        $commentImg = "/SpeedyShopping/public//uploads/comment_images/";
+        $this->assign("commentImg", $commentImg);
+        $this->assign("imgRoot", $imgRoot);
+        $this->assign("iconRoot", $iconRoot);
+        //用户订单状态
+        $order_0 = 0;//待付款
+        $order_1 = 0;//待捡货
+        $order_2 = 0;//待发货
+        $order_3 = 0;//配送中
+        $order_4 = 0;//货到付款
+        $order_5 = 0;//交易已经完成（待评价）
+        $order_6 = 0;//交易已经完成（待评价）
+        $refs = Refunds::where(['user_id' => $user->getData('id'), "status" => 0])->select();
+        $order_6 = count($refs);
+        $this->assign("order_6", $order_6);
+
+        foreach ($user['orders'] as $order) {
+            if ($order->getData('status') == 0) {
+                $order_0 = $order_0 + 1;
+            } elseif ($order->getData('status') == 1) {
+                $order_1 = $order_1 + 1;
+            } elseif ($order->getData('status') == 2) {
+                $order_2 = $order_2 + 1;
+            } elseif ($order->getData('status') == 3) {
+                $order_3 = $order_3 + 1;
+            } elseif ($order->getData('status') == 4) {
+                $order_4 = $order_4 + 1;
+            } elseif ($order->getData('status') == 5) {
+                $order_5 = $order_5 + 1;
+            }
+        }
+        $this->assign("order_0", $order_0);
+        $this->assign("order_1", $order_1);
+        $this->assign("order_2", $order_2);
+        $this->assign("order_3", $order_3);
+        $this->assign("order_4", $order_4);
+        $this->assign("order_5", $order_5);
+        return $this->fetch();
+    }
+
+    public function customerService()
+    {
+        $user = User::getUserBySession("home");
+        $refunds = null;
+        if ($user != null) {
+            $refunds = Refunds::where(['user_id' => $user->getData('id')])->order('creation_time', 'desc')->paginate(6);
+        } else {
+            $this->redirect(url('home/thing/login'));
+        }
+        $this->assign("user", $user);
+        $this->assign("refunds", $refunds);
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+        $this->assign("imgRoot", $imgRoot);
+        $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+        $this->assign("iconRoot", $iconRoot);
+        //用户订单状态
+        $order_0 = 0;//待付款
+        $order_1 = 0;//待捡货
+        $order_2 = 0;//待发货
+        $order_3 = 0;//配送中
+        $order_4 = 0;//货到付款
+        $order_5 = 0;//交易已经完成（待评价）
+        $order_6 = 0;//交易已经完成（待评价）
+        $refs = Refunds::where(['user_id' => $user->getData('id'), "status" => 0])->select();
+        $order_6 = count($refs);
+        $this->assign("order_6", $order_6);
+
+        foreach ($user['orders'] as $order) {
+            if ($order->getData('status') == 0) {
+                $order_0 = $order_0 + 1;
+            } elseif ($order->getData('status') == 1) {
+                $order_1 = $order_1 + 1;
+            } elseif ($order->getData('status') == 2) {
+                $order_2 = $order_2 + 1;
+            } elseif ($order->getData('status') == 3) {
+                $order_3 = $order_3 + 1;
+            } elseif ($order->getData('status') == 4) {
+                $order_4 = $order_4 + 1;
+            } elseif ($order->getData('status') == 5) {
+                $order_5 = $order_5 + 1;
+            }
+        }
+        $this->assign("order_0", $order_0);
+        $this->assign("order_1", $order_1);
+        $this->assign("order_2", $order_2);
+        $this->assign("order_3", $order_3);
+        $this->assign("order_4", $order_4);
+        $this->assign("order_5", $order_5);
+        return $this->fetch();
+    }
+
+    /**
+     * 退换货，申请取消
+     */
+    public function withdrawRefund()
+    {
+        if ($this->request->isAjax()) {
+            $refundId = $this->request->post("refundId");
+            $refund = Refunds::get(["id" => $refundId]);
+            if ($refund != null) {
+                if ($refund->getData("status") == 0) {
+                    $refund->status = 3;
+                    $refund->save();
+                    return "Success";
+                } else {
+                    return "RepeatError";
+                }
+            } else {
+                return "ParameterError";
+            }
+        } else {
+            return "PostError";
+        }
     }
 
 }
