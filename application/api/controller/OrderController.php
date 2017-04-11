@@ -200,7 +200,7 @@ class OrderController extends Controller
                     if ($val->getData("status") != 8 && $val->getData("status") != 7) {
                         $orderSpes = $val["orderSpecifications"];
                         foreach ($orderSpes as $orderSpe) {
-                            $comment = Comment::get(["order_id" => $val["id"], "specification_id" => $orderSpe["specification_id"]]);
+                            $comment = Comment::get(["order_id" => $val["id"], "order_specification_id" => $orderSpe["id"]]);
                             if ($comment == null) {
                                 array_push($orderArr, $val);
                                 break;
@@ -271,7 +271,7 @@ class OrderController extends Controller
                 if ($val->getData("status") != 8 && $val->getData("status") != 7) {
                     $orderSpes = $val["orderSpecifications"];
                     foreach ($orderSpes as $orderSpe) {
-                        $comment = Comment::get(["order_id" => $val["id"], "specification_id" => $orderSpe["specification_id"]]);
+                        $comment = Comment::get(["order_id" => $val["id"], "order_specification_id" => $orderSpe["id"]]);
                         if ($comment == null) {
                             array_push($orderArr, $val);
                             break;
