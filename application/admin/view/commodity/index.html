@@ -11,9 +11,13 @@
         <form class="form-inline">
             <div class="form-group">
                 <label class="sr-only" for="title">标题</label>
-                <input name="title" type="text" class="form-control" id="title" placeholder="标题..." value="{:input('get.title')}">
+                <input name="title" type="text" class="form-control" id="title" placeholder="标题..."
+                       value="{:input('get.title')}">
             </div>
-            <a href="" ><button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>&nbsp;搜索</button></a>
+            <a href="">
+                <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>&nbsp;搜索
+                </button>
+            </a>
         </form>
     </div>
 </div>
@@ -21,7 +25,7 @@
     /*a:link,a:visited { color:#00FF00;}*/
     /*a:hover,a:active { color:#000000;}*/
 </style>
-<table class="table table-hover"  >
+<table class="table table-hover">
     <h3 style="color: #000000" align="center">所有商品</h3>
     <thead>
     <tr class="info">
@@ -52,7 +56,7 @@
         <td>
             <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> |
             <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">编辑</a>|
-            <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">查看评论</a>
+            <a href="{:url('admin/commodity/findComments?commodityId='.$item->getData('id'))}">查看评论</a>
         </td>
     </tr>
     {/volist}

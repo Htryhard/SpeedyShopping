@@ -1,0 +1,107 @@
+{layout name="layout" /}
+<block name="title"><title>商品的评论</title></block>
+
+<block name="resources">
+
+
+</block>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li><a href="{:url('admin/commodity/index')}">所有商品</a></li>
+    <li class="active">商品的评论</li>
+</ol>
+
+<div id="box_order_content">
+    <table width="85%" border="1" cellpadding="0" cellspacing="0" style="table-layout:fixed">
+        <tr>
+            <td rowspan="3">
+                <img src="{$imgRoot}{$commodity['icon']}"
+                     style="height: 100px;width: 100px;" class="img-rounded"/>
+            </td>
+            <td style="text-overflow: ellipsis;overflow:hidden;width: 50%;">
+                {$commodity['title']}
+            </td>
+            <td rowspan="3">
+                <div style="width: 100px"></div>
+            </td>
+            <td rowspan="3">
+
+            </td>
+            <td rowspan="3">
+                <div style="width: 100px"></div>
+            </td>
+            <td rowspan="3">
+            </td>
+        </tr>
+        <tr>
+            <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">
+                销量：{$commodity['staistics']}
+            </td>
+        </tr>
+        <tr>
+            <td style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">评分：
+                {if condition="($commodity->getData('grade') == 0)"}
+                0
+                {else /}
+                {$commodity->getData('grade')/$commodity->getData('staistics')}
+                {/if}
+            </td>
+        </tr>
+    </table>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">全部评价</h3>
+        </div>
+        <div class="panel-body">
+
+            <div id="box_comment_content">
+                {volist name="comments" id="comment"}
+                <table width="85%" border="1" cellpadding="0" cellspacing="0" style="table-layout:fixed">
+                    <tr>
+                        <td><img src="{$iconRoot.$comment['user']['icon']}" height="50" width="50" class="img-circle">
+                            {eq name="$comment['user']['nick_name']" value=""}
+                            匿名用户
+                            {else/}
+                            {$comment['user']['nick_name']}
+                            {/eq}
+                            <div style="float: right;padding:20px 0; ">
+                                {:date('Y年m月d日',$comment['creation_time'])}
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                {eq name="$comment->getData('status')" value="0"}
+                                <span class="label label-success">评论正常显示</span>
+                                <a href="#"><span class="label label-danger">关闭此评论</span></a>
+                                {else/}
+                                <span class="label label-warning">评论已经被管理员关闭</span>
+                                <a href="#"><span class="label label-success">显示此评论</span></a>
+                                {/eq}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="50">{$comment['content']}</td>
+                    </tr>
+                    <tr>
+                        <td height="40" style="color: #9d9d9d">
+                            【{$comment['OrderSpecification']['specification']['commodity']['title']}】 &nbsp;&nbsp;&nbsp;&nbsp;规格：{$comment['OrderSpecification']['specification']['content']}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {foreach name="$comment['commentImgs']" item="coImg"}
+                            <img src="{$commentImg.$coImg['image']}" width="100" height="50" class="img-thumbnail"
+                                 rel="lightbox-tour"/>
+                            {/foreach}
+                        </td>
+                    </tr>
+                </table>
+                <hr style="border:1px dashed darkcyan;width: 87%">
+                {/volist}
+            </div>
+            <!--第二层结束【我的订单】-->
+            {$comments->render()}
+
+        </div>
+    </div>
+</div>

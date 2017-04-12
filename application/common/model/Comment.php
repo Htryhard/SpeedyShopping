@@ -28,4 +28,15 @@ class Comment extends Model
         return $this->hasMany('CommentImages', 'comment_id', 'id');
     }
 
+    /**
+     * 读取器
+     * @param $value
+     * @return mixed
+     */
+    public function getStatusAttr($value)
+    {
+        $status = [0 => '正常显示', 1 => '已被管理员关闭!'];
+        return $status[$value];
+    }
+
 }

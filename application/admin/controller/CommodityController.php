@@ -11,6 +11,7 @@ namespace app\admin\controller;
 
 use app\common\Comm;
 use app\common\controller\BaseController;
+use app\common\model\Comment;
 use app\common\model\Commodity;
 use app\common\model\CommodityImages;
 use app\common\model\Count;
@@ -356,12 +357,20 @@ class CommodityController extends BaseController
      * 获取此商品下的所有评论
      * @return mixed
      */
-    public function findComments()
+    public function findComments($commodityId)
     {
-        $commodityId = $this->request->get(["commodityId"]);
         $commodity = Commodity::get(["id" => $commodityId]);
         if ($commodity != null) {
-            $comments = $commodity["comments"];
+            $user = User::getUserBySession("admin");
+            $comments = Comment::where(['commodity_id' => $commodityId])->order('creation_time', 'desc')->paginate(6);
+            $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+            $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+            $commentImg = "/SpeedyShopping/public//uploads/comment_images/";
+            $this->assign("commentImg", $commentImg);
+            $this->assign("imgRoot", $imgRoot);
+            $this->assign("iconRoot", $iconRoot);
+            $this->assign("commodity", $commodity);
+            $this->assign("user", $user);
             $this->assign("comments", $comments);
             return $this->fetch();
         } else {

@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/4/11 23:38:49
+Date: 2017/4/12 ������ ���� 6:26:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -173,7 +173,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1984 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2072 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -321,6 +321,7 @@ INSERT INTO `shopp_cart` VALUES ('F77903BE-80A4-B9BD-88F7-058666C0F8F1', '426D79
 INSERT INTO `shopp_collect` VALUES ('0933F13F-D5D9-F8B0-7629-C561D8E42DF6', '5D754767-F3D5-1D93-E588-856B288B08CC', '179149C6-2255-FAA2-F9F8-CA6608080FAA', '1487170028');
 INSERT INTO `shopp_collect` VALUES ('18986546-E777-C595-DCF8-ADDC3A185B9F', '5D754767-F3D5-1D93-E588-856B288B08CC', '753C793E-1F5D-1DC7-4103-A23D23E016C2', '1487170021');
 INSERT INTO `shopp_collect` VALUES ('1E11DADF-860B-27E7-43EB-4C87C92F17E8', '5D754767-F3D5-1D93-E588-856B288B08CC', '22B10E64-2792-9976-E179-2481FBD15CB5', '1487528525');
+INSERT INTO `shopp_collect` VALUES ('2686F7F1-DB91-9476-2319-E87BBC4705C7', 'AA692D26-B786-D8A0-1420-F8F33264485C', '38B3FE41-5AB1-F2AF-3446-7E07D8DD8851', '1491988997');
 INSERT INTO `shopp_collect` VALUES ('3819D231-DDB6-035D-E079-E70B0C7F11D3', '5D754767-F3D5-1D93-E588-856B288B08CC', 'D678064A-D80E-EFA2-4A01-873583FF3E9B', '1487170025');
 INSERT INTO `shopp_collect` VALUES ('6F588002-A221-016D-EF14-063AB394BCE4', '5D754767-F3D5-1D93-E588-856B288B08CC', '934AE8D8-B061-C383-3FE1-6566C597B7F4', '1485160350');
 INSERT INTO `shopp_collect` VALUES ('8053C695-9C0F-75C5-89CA-799A5E298CA8', '5D754767-F3D5-1D93-E588-856B288B08CC', 'C3E30939-86EB-730F-900E-17B582155781', '1486699401');
@@ -352,7 +353,7 @@ INSERT INTO `shopp_commodity` VALUES ('26C82144-FCFB-AA3A-150D-2640FFF623F2', '�
 INSERT INTO `shopp_commodity` VALUES ('28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '四大名著 新课标必读 28000多名读者热评 ', '                    本套丛书包含《红楼梦》《三国演义》《水浒传》《西游记》，这四部著作可谓家喻户晓，在我国有着深远的影响，是汉语文学中不可多得的佳作。其中的故事、场景，已经深深地影响了中国人的思想观念、价值取向。四部著作以其极高的艺术水平、细致的人物刻画和丰富的思想内涵为历代读者所称道。\r\n     本丛书由北京市基层教育骨干教师主编，拥有强大的编写团队（作者均为知名高校中文系博士、硕士），以简洁上口的白话表达，译写、改写；去其糟粕、取其精华，专业插画师在通读文本基础上绘制精美插图，清晰详尽的知识点拓展，双色印刷编排，非常符合青少年阅读心里和阅读习惯。\r\n\r\n     丛书由国内知名的儿童文学作家、上海师范大学教授梅子涵先生写序并推荐。可谓“经典中的经典”。                ', '0', '{\"\\u5370\\u5237\\u65f6\\u95f4\":\"2013\\u5e7409\\u670801\\u65e5\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"23356962\"}', '1490004693', '1584633600', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '7FFEE1F9-2699-D245-92FC-64F3F0CD0DE4.png');
 INSERT INTO `shopp_commodity` VALUES ('2D089988-6636-BF15-676F-15A6AED0433F', '打火机与公主裙 ', '我有我的国王，我是他不二之臣，我愿为他摇旗呐喊 ，也愿为他战死沙场。年度*受欢迎作者Twentine*之作，同名影视剧重磅打造中！ 春风得意每满150减50 文艺分会场>> ', '0', '{\"\\u7248 \\u6b21\":\"1\",\"\\u9875 \\u6570\":\"352\",\"\\u5b57 \\u6570\":\"2000000\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"9787555247630\",\"\":\"\"}', '1489979760', '1532880000', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '6DF8D5B2-81CB-1E08-822D-968B1FB61778.png');
 INSERT INTO `shopp_commodity` VALUES ('37B10231-4225-C269-DB28-F1C40A6CA448', '雪纺白衬衫女长袖韩版休闲百搭职业女装秋冬季加绒加厚保暖衬衣寸', '衬衫', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u805a\\u916f\\u7ea4\\u7ef495% \\u805a\\u6c28\\u916f\\u5f39\\u6027\\u7ea4\",\"\\u670d\\u88c5\\u7248\\u578b\":\"\\u4fee\\u8eab\",\"\\u98ce\\u683c\":\"\\u901a\\u52e4\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\" \\u5355\\u6392\\u591a\\u6263\",\"\\u5c3a\\u7801\":\"S M L XL XXL 3XL 4XL\"}', '1484576598', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
-INSERT INTO `shopp_commodity` VALUES ('38B3FE41-5AB1-F2AF-3446-7E07D8DD8851', '64G/128G顶配【送VR电源+12期分期】Xiaomi/小米 小米Max手机 MIX ', '正品保障，支持官网验货，全国联保！买就送：7H级纳米防爆膜，保护壳，延保一年等！小米MAX配置一览：①:顶配为4G运行内存+128G存储闪存；②:6.44英寸大屏黄金尺寸，④:全网通3.0，4G+；⑤:1600万像素，5片式镜头，f2.0光圈；⑥:4850mAh', '0', '{\"CPU\\u578b\\u53f7\":\"\\u9a81\\u9f99650\",\"\\u4ea7\\u54c1\\u540d\\u79f0:\":\"\\u5c0f\\u7c73Max\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u952e\\u76d8\\u7c7b\\u578b\":\"\\u865a\\u62df\\u89e6\\u5c4f\\u952e\\u76d8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1600\\u4e07\"}', '1484983134', '1611849600', '035979B6-A44A-32EA-646F-28A51C607A73', '4.5', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
+INSERT INTO `shopp_commodity` VALUES ('38B3FE41-5AB1-F2AF-3446-7E07D8DD8851', '64G/128G顶配【送VR电源+12期分期】Xiaomi/小米 小米Max手机 MIX ', '正品保障，支持官网验货，全国联保！买就送：7H级纳米防爆膜，保护壳，延保一年等！小米MAX配置一览：①:顶配为4G运行内存+128G存储闪存；②:6.44英寸大屏黄金尺寸，④:全网通3.0，4G+；⑤:1600万像素，5片式镜头，f2.0光圈；⑥:4850mAh', '1', '{\"CPU\\u578b\\u53f7\":\"\\u9a81\\u9f99650\",\"\\u4ea7\\u54c1\\u540d\\u79f0:\":\"\\u5c0f\\u7c73Max\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u952e\\u76d8\\u7c7b\\u578b\":\"\\u865a\\u62df\\u89e6\\u5c4f\\u952e\\u76d8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1600\\u4e07\"}', '1484983134', '1611849600', '035979B6-A44A-32EA-646F-28A51C607A73', '4.5', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('433DA60D-5065-1301-48B8-76D1BB06CDF0', '现货当天发Huawei/华为 Mate 9 Pro保时捷4G曲屏手机正品mate9pro ', '【华为Mate9Pro原装正品手机现货当天发，下单再送购机豪礼】【收到货晒图分享美照有送好礼哦】(主图具体礼品以套餐为准】', '0', '{\"\\u54c1\\u724c\":\"\\u534e\\u4e3a\",\"cpu\":\"G71 MP8 + \\u5fae\\u667a\\u6838i6\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8 2k\\u53cc\\u66f2\\u9762\",\"\\u6444\\u50cf\\u5934\":\"\\u524d800\\u4e07 + \\u540e2000\\u4e07 + 1200\\u4e07\\u50cf\\u7d20\",\"\\u7535\\u6c60\\u5bb9\\u91cf\":\"4000mah\"}', '1486186369', '1580745600', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('47D002AB-DFA4-11CF-52FB-398122144EF1', '五面取暖器烧烤型家用四面型小太阳全方位烤火器电暖炉电热扇包邮 ', '烧烤型五面烤火炉取暖器升级啦。顶部可调温,烧烤网可直接取下!  普通款特价机:尺寸21*21*37CM ,顶部2根管,无接渣盘。无调温开关,固定脚。网不能直接取下。  顶3管小款烧烤型:顶部3根管,尺寸为21*21*38CM,5面都有调温开关，带接渣盘。轮子脚，5面全开共2200W,顶面烧烤网可以直接取下。  顶3管大款烧烤型:顶部3根管,尺寸为23*23*43CM,5面都有高低调温开关,带接渣盘,轮子脚。5面全开共2200W,顶面烧烤网可以自行取下,  顶4管大款烧烤型:顶面4根管,尺寸为23*23*43CM,5面都有高低调温开关,带接渣盘,轮子脚。5面全开共2400W,顶面烧烤网可以单独取下.  注意:小款的取接渣盘处都有小门条设计,大款都是直接开口的,没有小门条,以图片显示为标准!', '0', '{\"CCC\\u8bc1\\u4e66\\u7f16\\u53f7\":\"2009010707382203\",\"\\u53d6\\u6696\\u5668\\u52a0\\u70ed\\u65b9\\u5f0f\":\"\\u77f3\\u82f1\\u7ba1\\u52a0\\u70ed\",\"\\u667a\\u80fd\\u7c7b\\u578b\":\"\\u4e0d\\u652f\\u6301\\u667a\\u80fd\",\"\\u6700\\u5927\\u91c7\\u6696\\u9762\\u79ef(\\u5e73\\u65b9\\u7c73)\":\"20m^2\\u4ee5\\u4e0b\",\"\\u7535\\u6696\\u5668\\u6700\\u5927\\u529f\\u7387\":\"2000W\\u4ee5\\u4e0a\",\"\\u6863\\u4f4d\":\"5\\u6863\\u53ca\\u4ee5\\u4e0a\"}', '1486198318', '1580745600', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('4CF00EB1-8CBA-C3D9-F93F-DF01511391BE', '原封现货 现货速发Meizu/魅族 魅蓝X全网通4G八核智能手机 ', '                    全新白色现货！！送包邮+延保！！推荐选购套餐，搭使用更方便。 拒绝黄牛，每人限购1台相同类似地址多拍只发一台！双I2活动，现货大礼！！                ', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"Meizu\\/\\u9b45\\u65cf \\u9b45\\u84ddX\",\"CPU\\u54c1\\u724c\":\"\\u8054\\u53d1\\u79d1\",\"CPU\\u578b\\u53f7\":\"Helio P20\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200\\u4e07\",\"\\u8fd0\\u884c\\u5185\\u5b58RAM\":\"3GB\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"32GB\"}', '1487260706', '1581782400', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '7E70998B-C25C-BC33-971E-2E788CE80504.png');
@@ -2437,6 +2438,94 @@ INSERT INTO `shopp_count` VALUES ('1980', '::1', '1491919740', 'admin', 'admin/C
 INSERT INTO `shopp_count` VALUES ('1981', '::1', '1491919742', 'admin', 'admin/Commodity/addCommodity');
 INSERT INTO `shopp_count` VALUES ('1982', '::1', '1491919745', 'admin', 'admin/Type/index');
 INSERT INTO `shopp_count` VALUES ('1983', '::1', '1491919750', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('1984', '::1', '1491960086', '', 'home');
+INSERT INTO `shopp_count` VALUES ('1985', '::1', '1491960111', '陈欢', 'home');
+INSERT INTO `shopp_count` VALUES ('1986', '::1', '1491960118', '陈欢', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('1987', '::1', '1491960133', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('1988', '::1', '1491960193', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1989', '::1', '1491960379', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1990', '::1', '1491960392', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1991', '::1', '1491960400', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1992', '::1', '1491960791', '陈欢', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('1993', '::1', '1491961457', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1994', '::1', '1491961468', '陈欢', 'home/User/allComment');
+INSERT INTO `shopp_count` VALUES ('1995', '::1', '1491961480', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1996', '::1', '1491961522', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('1997', '::1', '1491961527', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('1998', '::1', '1491961700', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('1999', '::1', '1491961720', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2000', '::1', '1491961748', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2001', '::1', '1491961806', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2002', '::1', '1491961818', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2003', '::1', '1491961820', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2004', '::1', '1491961869', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2005', '::1', '1491961899', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2006', '::1', '1491961937', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2007', '::1', '1491961974', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2008', '::1', '1491961985', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2009', '::1', '1491962060', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2010', '::1', '1491962107', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2011', '::1', '1491962193', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2012', '::1', '1491962246', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2013', '::1', '1491962360', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2014', '::1', '1491962368', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2015', '::1', '1491962371', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2016', '::1', '1491962512', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2017', '::1', '1491962619', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2018', '::1', '1491962632', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2019', '::1', '1491962681', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2020', '::1', '1491962689', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2021', '::1', '1491963001', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2022', '::1', '1491963115', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2023', '::1', '1491963125', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2024', '::1', '1491963137', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2025', '::1', '1491963147', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2026', '::1', '1491963156', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2027', '::1', '1491963178', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2028', '::1', '1491963296', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2029', '::1', '1491963341', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2030', '::1', '1491963445', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2031', '::1', '1491963464', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2032', '::1', '1491963595', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2033', '::1', '1491963632', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2034', '::1', '1491963641', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2035', '::1', '1491964069', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2036', '::1', '1491964104', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2037', '::1', '1491964126', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2038', '::1', '1491964135', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2039', '::1', '1491964145', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2040', '::1', '1491964154', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2041', '::1', '1491964179', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2042', '::1', '1491964302', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2043', '::1', '1491964384', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2044', '::1', '1491964393', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2045', '::1', '1491964414', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2046', '::1', '1491964422', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2047', '::1', '1491964437', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2048', '::1', '1491964447', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2049', '::1', '1491964453', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2050', '::1', '1491964555', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2051', '::1', '1491964603', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2052', '::1', '1491964623', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2053', '::1', '1491964664', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2054', '::1', '1491964713', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2055', '::1', '1491964739', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2056', '::1', '1491964752', '陈欢', 'home');
+INSERT INTO `shopp_count` VALUES ('2057', '::1', '1491964847', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2058', '::1', '1491964863', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2059', '::1', '1491968955', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2060', '::1', '1491968956', 'admin', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('2061', '::1', '1491969626', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2062', '::1', '1491969630', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2063', '::1', '1491969633', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2064', '::1', '1491985366', '陈欢', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2065', '::1', '1491985369', '陈欢', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('2066', '::1', '1491985373', '陈欢', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('2067', '::1', '1491985374', '陈欢', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('2068', '::1', '1491985378', '陈欢', 'home/User/allComment');
+INSERT INTO `shopp_count` VALUES ('2069', '::1', '1491985380', '陈欢', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2070', '::1', '1491985442', '陈欢', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2071', '::1', '1491985504', '陈欢', 'home/User/customerService');
 INSERT INTO `shopp_order` VALUES ('0670EC59-8FAB-9175-24F0-9BABD7AD9989', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491825231', '1491825231', '1491825237', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order` VALUES ('0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491814301', '1491814301', '1491816240', '1491816305', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order` VALUES ('6263F939-9CAA-935B-E4A9-563C797BBDA6', '1', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491921853', '1491921853', '1491921861', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
