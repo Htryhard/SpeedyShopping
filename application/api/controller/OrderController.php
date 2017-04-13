@@ -294,6 +294,14 @@ class OrderController extends Controller
         if ($user != null && $order != null && $type != "") {
             if ($type == "confirm") {
                 $order->status = 5;
+                //改变商品的销量
+                $orderSpecifications = $order["orderSpecifications"];
+                foreach ($orderSpecifications as $orderSpecification) {
+                    $commodity = $orderSpecification["specification"]["commodity"];
+                    $oldStaistics = $commodity["staistics"];
+                    $commodity->staistics = $oldStaistics + $orderSpecification["count"];
+                    $commodity->save();
+                }
             } else if ($type == "cancel") {
                 $order->status = 7;
             } else if ($type == "detele") {

@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/4/12 ������ ���� 6:26:59
+Date: 2017/4/13 ������ ���� 6:51:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,6 +83,19 @@ CREATE TABLE `shopp_cart_specification` (
   `specification_id` char(36) NOT NULL,
   `cart_id` char(36) NOT NULL,
   `count` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for shopp_code
+-- ----------------------------
+CREATE TABLE `shopp_code` (
+  `id` char(36) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `create_time` varchar(50) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `key` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -173,7 +186,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2072 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2091 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -310,7 +323,7 @@ INSERT INTO `shopp_address` VALUES ('130D6D3D-ADD3-57DE-6F76-76F9A3F57B70', '156
 INSERT INTO `shopp_address` VALUES ('5168B53E-A892-0D70-B992-75B65DC0ECE3', '1782008688', '广东省 广州市 天河区 棠下街道', '426D79CF-279A-2033-0A77-72166CC15CC1', '小赖宝宝');
 INSERT INTO `shopp_address` VALUES ('58B47E1E-2AC2-3972-3294-48A8764F2A74', '077128384858', '广西壮族自治区 柳州市 柳州职业技术学院', '5D754767-F3D5-1D93-E588-856B288B08CC', '爱丽丝');
 INSERT INTO `shopp_address` VALUES ('7D930930-7979-70BC-D48B-6586FCAFE0B1', '077128384858', '广东广州天河区', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '筑梦草根');
-INSERT INTO `shopp_address` VALUES ('B1A6D755-B3FA-40BD-6500-0BB14CF4A303', '77889966', '广西壮族自治区  柳州市  鱼峰区', 'AA692D26-B786-D8A0-1420-F8F33264485C', '欢歌');
+INSERT INTO `shopp_address` VALUES ('B1A6D755-B3FA-40BD-6500-0BB14CF4A303', '77889966', '广西壮族自治区  柳州市  鱼峰区', 'AA692D26-B786-D8A0-1420-F8F33264485C', '赖哔哔咯');
 INSERT INTO `shopp_address` VALUES ('FCA8DF02-398F-5EC8-3549-C7EA83CB8DA7', '1768888', '广东省 广州市 天河区 天河工业园', '98EB35BE-CB9E-82A3-C458-5CD2A21BF59D', '张二二');
 INSERT INTO `shopp_auth_group` VALUES ('F966ADA4-6A49-30FC-EF47-D6B1BF8F3BDC', '管理员', '1', 'administrator');
 INSERT INTO `shopp_auth_group` VALUES ('580D6AAE-5B5A-914B-5838-CD052F819229', '普通用户', '1', 'user');
@@ -336,9 +349,16 @@ INSERT INTO `shopp_collect` VALUES ('D9C5A264-E1CC-FCF0-14D8-4F34F15E0506', '5D7
 INSERT INTO `shopp_collect` VALUES ('DDA8EF38-2184-8F3B-532F-0F6774E3C741', '5D754767-F3D5-1D93-E588-856B288B08CC', '72387161-B237-7FC1-3FB3-E78C23533C5C', '1487170033');
 INSERT INTO `shopp_collect` VALUES ('E15310D0-8D62-B658-1627-BE3F7560D2B9', 'AA692D26-B786-D8A0-1420-F8F33264485C', 'C3E30939-86EB-730F-900E-17B582155781', '1491013058');
 INSERT INTO `shopp_comment` VALUES ('90DE8ED6-7F04-6BB1-F505-867B39E9E204', '叽叽咋咋', '4', '1491832055', 'AA692D26-B786-D8A0-1420-F8F33264485C', '468422A1-CB9B-E3EF-1D16-E3530A347479', '0', '0670EC59-8FAB-9175-24F0-9BABD7AD9989', '38B3FE41-5AB1-F2AF-3446-7E07D8DD8851');
+INSERT INTO `shopp_comment` VALUES ('FE7EC775-8A03-A978-E816-07E951C66923', '还行咯哦呜口渴的拒绝啦咯下午默默拒绝了恶露我恩考虑咯的来了额困困的具体墨鱼KKK考虑看看默默无卡', '3', '1492053397', 'AA692D26-B786-D8A0-1420-F8F33264485C', '2ED02411-EE70-3EB7-4770-BEDDE694B386', '0', '4ECB76B4-60F4-FED3-D6D4-8F72D197253A', '38B3FE41-5AB1-F2AF-3446-7E07D8DD8851');
+INSERT INTO `shopp_comment_images` VALUES ('54CD051F-C8C5-4F37-A7B1-5E61F990840B', 'FE7EC775-8A03-A978-E816-07E951C66923', 'C77CE7A5-DB72-050E-6A0E-E55755494996.png');
+INSERT INTO `shopp_comment_images` VALUES ('57D333C7-15D4-7B4E-B230-391216DAD54B', 'FE7EC775-8A03-A978-E816-07E951C66923', 'C59E8530-36BC-A331-4B6D-27E19351335F.png');
 INSERT INTO `shopp_comment_images` VALUES ('58B65F2A-162E-7BBF-24B4-5CCF0483A006', '90DE8ED6-7F04-6BB1-F505-867B39E9E204', '226D3902-8CC4-5ECD-049C-CC13FA221C06.png');
 INSERT INTO `shopp_comment_images` VALUES ('70D7017E-0B44-5545-3331-7197219A08B1', '90DE8ED6-7F04-6BB1-F505-867B39E9E204', 'F08704CE-C838-6067-5C82-66B9ECBBE3FC.png');
 INSERT INTO `shopp_comment_images` VALUES ('7FD6A24C-B51A-67E9-260A-AE901691E095', '90DE8ED6-7F04-6BB1-F505-867B39E9E204', 'EE74E7E4-B7A4-3BD4-3C21-683C5EC482DC.png');
+INSERT INTO `shopp_comment_images` VALUES ('9B56A696-1AE1-2431-18E4-E9FEFEFB501C', 'FE7EC775-8A03-A978-E816-07E951C66923', '9DD6BC47-3B6B-EC34-1FB7-453F7440B51B.png');
+INSERT INTO `shopp_comment_images` VALUES ('A1C12B50-D9EF-BA02-268D-181646340E1F', 'FE7EC775-8A03-A978-E816-07E951C66923', 'F54D327C-D804-1C9F-DC02-AECC0DF5DBE9.png');
+INSERT INTO `shopp_comment_images` VALUES ('A8EB3242-78E8-A122-AF8F-556F475BD5D7', 'FE7EC775-8A03-A978-E816-07E951C66923', 'B9682F4F-ECB8-A9F5-1415-EC282B536CFF.png');
+INSERT INTO `shopp_comment_images` VALUES ('B6752219-A670-E736-6602-2E05FD2C5988', 'FE7EC775-8A03-A978-E816-07E951C66923', 'C95ACE58-902A-AE60-378F-8938EE41A906.png');
 INSERT INTO `shopp_comment_images` VALUES ('D7918D46-A247-7DC1-0C25-5048904838DC', '90DE8ED6-7F04-6BB1-F505-867B39E9E204', 'E16B16DC-0C15-1FA2-1A5D-BCFAD0F6251C.png');
 INSERT INTO `shopp_comment_images` VALUES ('F88CBDCF-4A1D-9F3A-44DD-62F6B9B4799C', '90DE8ED6-7F04-6BB1-F505-867B39E9E204', '6CA7551B-EC24-6608-883E-F6EBAA6CE404.png');
 INSERT INTO `shopp_commodity` VALUES ('00D84306-7B0D-F027-28E4-09D70124D2CB', '包邮 韩国菲诗小铺双头自动旋转眉笔一字眉 防水防汗带眉刷非眉粉', '扁平型笔芯设计，扁平口保护笔芯！扁平眉笔可以大面积的均匀上色，笔芯软硬适中，使眉毛看起来更加自然。眉笔还有一个小技巧，深棕色系眉笔还可以做阴影哈！', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"The Face Shop\",\"\\u51c0\\u542b\\u91cf\":\"0.3g\",\"\\u5f69\\u5986\\u5206\\u7c7b\":\"\\u7709\\u7b14\",\"\\u529f\\u6548\":\"\\u9632\\u6c34 \\u9501\\u8272\",\"\\u4fdd\\u8d28\\u671f\":\"3\\u5e74\"}', '1486201101', '1517673600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
@@ -350,18 +370,18 @@ INSERT INTO `shopp_commodity` VALUES ('22B10E64-2792-9976-E179-2481FBD15CB5', 'A
 INSERT INTO `shopp_commodity` VALUES ('241411DE-FEBB-E3B4-4FE8-F73BDE54B32B', 'AEJE 5.1家庭影院音响套装家用ktv音箱客厅低音炮蓝牙hdmi功放机 ', 'AEJE发烧高清震撼5.1家庭影院 ● 含一台高清多功能蓝牙5.1功放 + 一套AEJE原装品质高清5.1音箱 ● 功放支持DTS/杜比解码、HDMI高清3入1出端口、单独6声道支持有/无源炮、内置蓝牙、USB、双人同时K歌，FM收音等【可用淘金币抵钱】升级功放享大优惠 ● 下单立赠7件套', '0', '{\"CCC\\u8bc1\\u4e66\\u7f16\\u53f7\":\"2013010802653540\",\"\\u4f4e\\u97f3\\u97f3\\u7bb1\\u4e2a\\u6570\":\"1\\u4e2a\",\"\\u4e2d\\u7f6e(\\u4e3b\\u97f3)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"1\\u4e2a\",\"\\u524d\\u7f6e(\\u5de6\\u53f3)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"2\\u4e2a\",\"\\u540e\\u7f6e(\\u73af\\u7ed5)\\u97f3\\u7bb1\\u4e2a\\u6570\":\"2\\u4e2a\",\"\\u4e3b\\u673a\\u7c7b\\u578b\":\"\\u4ec5\\u6709\\u529f\\u653e\\u65e0\\u789f\\u673a\",\"\\u89c6\\u9891\\u8fde\\u63a5\\u65b9\\u5f0f\":\"HDMI \\u8272\\u5dee\\u5206\\u91cf\",\"\\u97f3\\u6548\\u6a21\\u5f0f\":\"DTS Dolby Digital\"}', '1486188726', '1580745600', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('25AA487A-1A8F-A2A1-E1B5-78EA0EEC85A3', '拉夏贝尔2017春款新品 条纹方领九分袖衬衫式连衣裙10012162 ', '拉夏贝尔2017春款新品 条纹方领九分袖衬衫式连衣裙10012162 ', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u68c9100%\",\"\\u9500\\u552e\\u6e20\\u9053\\u7c7b\\u578b\":\"\\u5546\\u573a\\u540c\\u6b3e\"}', '1484975106', '1579536000', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('26C82144-FCFB-AA3A-150D-2640FFF623F2', '制ZPLPKK 2017春季新款女士中长款舒适羽绒服修身毛领外套 ', '制ZPLPKK 2017春季新款女士中长款舒适羽绒服修身毛领外套 ', '0', '{\"\\u4e0a\\u5e02\\u5e74\\u4efd\\u5b63\\u8282\":\"2017\\u5e74\\u6625\\u5b63\",\"\\u539a\\u8584\":\"\\u5e38\\u89c4\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u7c98\\u80f6\\u7ea4\\u7ef4(\\u7c98\\u7ea4)51% \\u805a\\u916f\\u7ea4\"}', '1484975592', '1548345600', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
-INSERT INTO `shopp_commodity` VALUES ('28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '四大名著 新课标必读 28000多名读者热评 ', '                    本套丛书包含《红楼梦》《三国演义》《水浒传》《西游记》，这四部著作可谓家喻户晓，在我国有着深远的影响，是汉语文学中不可多得的佳作。其中的故事、场景，已经深深地影响了中国人的思想观念、价值取向。四部著作以其极高的艺术水平、细致的人物刻画和丰富的思想内涵为历代读者所称道。\r\n     本丛书由北京市基层教育骨干教师主编，拥有强大的编写团队（作者均为知名高校中文系博士、硕士），以简洁上口的白话表达，译写、改写；去其糟粕、取其精华，专业插画师在通读文本基础上绘制精美插图，清晰详尽的知识点拓展，双色印刷编排，非常符合青少年阅读心里和阅读习惯。\r\n\r\n     丛书由国内知名的儿童文学作家、上海师范大学教授梅子涵先生写序并推荐。可谓“经典中的经典”。                ', '0', '{\"\\u5370\\u5237\\u65f6\\u95f4\":\"2013\\u5e7409\\u670801\\u65e5\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"23356962\"}', '1490004693', '1584633600', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '7FFEE1F9-2699-D245-92FC-64F3F0CD0DE4.png');
+INSERT INTO `shopp_commodity` VALUES ('28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF', '四大名著 新课标必读 28000多名读者热评 ', '                    本套丛书包含《红楼梦》《三国演义》《水浒传》《西游记》，这四部著作可谓家喻户晓，在我国有着深远的影响，是汉语文学中不可多得的佳作。其中的故事、场景，已经深深地影响了中国人的思想观念、价值取向。四部著作以其极高的艺术水平、细致的人物刻画和丰富的思想内涵为历代读者所称道。\r\n     本丛书由北京市基层教育骨干教师主编，拥有强大的编写团队（作者均为知名高校中文系博士、硕士），以简洁上口的白话表达，译写、改写；去其糟粕、取其精华，专业插画师在通读文本基础上绘制精美插图，清晰详尽的知识点拓展，双色印刷编排，非常符合青少年阅读心里和阅读习惯。\r\n\r\n     丛书由国内知名的儿童文学作家、上海师范大学教授梅子涵先生写序并推荐。可谓“经典中的经典”。                ', '1', '{\"\\u5370\\u5237\\u65f6\\u95f4\":\"2013\\u5e7409\\u670801\\u65e5\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"23356962\"}', '1490004693', '1584633600', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '7FFEE1F9-2699-D245-92FC-64F3F0CD0DE4.png');
 INSERT INTO `shopp_commodity` VALUES ('2D089988-6636-BF15-676F-15A6AED0433F', '打火机与公主裙 ', '我有我的国王，我是他不二之臣，我愿为他摇旗呐喊 ，也愿为他战死沙场。年度*受欢迎作者Twentine*之作，同名影视剧重磅打造中！ 春风得意每满150减50 文艺分会场>> ', '0', '{\"\\u7248 \\u6b21\":\"1\",\"\\u9875 \\u6570\":\"352\",\"\\u5b57 \\u6570\":\"2000000\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"9787555247630\",\"\":\"\"}', '1489979760', '1532880000', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '6DF8D5B2-81CB-1E08-822D-968B1FB61778.png');
 INSERT INTO `shopp_commodity` VALUES ('37B10231-4225-C269-DB28-F1C40A6CA448', '雪纺白衬衫女长袖韩版休闲百搭职业女装秋冬季加绒加厚保暖衬衣寸', '衬衫', '0', '{\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u805a\\u916f\\u7ea4\\u7ef495% \\u805a\\u6c28\\u916f\\u5f39\\u6027\\u7ea4\",\"\\u670d\\u88c5\\u7248\\u578b\":\"\\u4fee\\u8eab\",\"\\u98ce\\u683c\":\"\\u901a\\u52e4\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\" \\u5355\\u6392\\u591a\\u6263\",\"\\u5c3a\\u7801\":\"S M L XL XXL 3XL 4XL\"}', '1484576598', '1486742400', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
-INSERT INTO `shopp_commodity` VALUES ('38B3FE41-5AB1-F2AF-3446-7E07D8DD8851', '64G/128G顶配【送VR电源+12期分期】Xiaomi/小米 小米Max手机 MIX ', '正品保障，支持官网验货，全国联保！买就送：7H级纳米防爆膜，保护壳，延保一年等！小米MAX配置一览：①:顶配为4G运行内存+128G存储闪存；②:6.44英寸大屏黄金尺寸，④:全网通3.0，4G+；⑤:1600万像素，5片式镜头，f2.0光圈；⑥:4850mAh', '1', '{\"CPU\\u578b\\u53f7\":\"\\u9a81\\u9f99650\",\"\\u4ea7\\u54c1\\u540d\\u79f0:\":\"\\u5c0f\\u7c73Max\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u952e\\u76d8\\u7c7b\\u578b\":\"\\u865a\\u62df\\u89e6\\u5c4f\\u952e\\u76d8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1600\\u4e07\"}', '1484983134', '1611849600', '035979B6-A44A-32EA-646F-28A51C607A73', '4.5', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
+INSERT INTO `shopp_commodity` VALUES ('38B3FE41-5AB1-F2AF-3446-7E07D8DD8851', '64G/128G顶配【送VR电源+12期分期】Xiaomi/小米 小米Max手机 MIX ', '正品保障，支持官网验货，全国联保！买就送：7H级纳米防爆膜，保护壳，延保一年等！小米MAX配置一览：①:顶配为4G运行内存+128G存储闪存；②:6.44英寸大屏黄金尺寸，④:全网通3.0，4G+；⑤:1600万像素，5片式镜头，f2.0光圈；⑥:4850mAh', '1', '{\"CPU\\u578b\\u53f7\":\"\\u9a81\\u9f99650\",\"\\u4ea7\\u54c1\\u540d\\u79f0:\":\"\\u5c0f\\u7c73Max\",\"\\u7f51\\u7edc\\u7c7b\\u578b:\":\"4G\\u5168\\u7f51\\u901a\",\"\\u952e\\u76d8\\u7c7b\\u578b\":\"\\u865a\\u62df\\u89e6\\u5c4f\\u952e\\u76d8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1600\\u4e07\"}', '1484983134', '1611849600', '035979B6-A44A-32EA-646F-28A51C607A73', '7.5', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('433DA60D-5065-1301-48B8-76D1BB06CDF0', '现货当天发Huawei/华为 Mate 9 Pro保时捷4G曲屏手机正品mate9pro ', '【华为Mate9Pro原装正品手机现货当天发，下单再送购机豪礼】【收到货晒图分享美照有送好礼哦】(主图具体礼品以套餐为准】', '0', '{\"\\u54c1\\u724c\":\"\\u534e\\u4e3a\",\"cpu\":\"G71 MP8 + \\u5fae\\u667a\\u6838i6\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8 2k\\u53cc\\u66f2\\u9762\",\"\\u6444\\u50cf\\u5934\":\"\\u524d800\\u4e07 + \\u540e2000\\u4e07 + 1200\\u4e07\\u50cf\\u7d20\",\"\\u7535\\u6c60\\u5bb9\\u91cf\":\"4000mah\"}', '1486186369', '1580745600', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('47D002AB-DFA4-11CF-52FB-398122144EF1', '五面取暖器烧烤型家用四面型小太阳全方位烤火器电暖炉电热扇包邮 ', '烧烤型五面烤火炉取暖器升级啦。顶部可调温,烧烤网可直接取下!  普通款特价机:尺寸21*21*37CM ,顶部2根管,无接渣盘。无调温开关,固定脚。网不能直接取下。  顶3管小款烧烤型:顶部3根管,尺寸为21*21*38CM,5面都有调温开关，带接渣盘。轮子脚，5面全开共2200W,顶面烧烤网可以直接取下。  顶3管大款烧烤型:顶部3根管,尺寸为23*23*43CM,5面都有高低调温开关,带接渣盘,轮子脚。5面全开共2200W,顶面烧烤网可以自行取下,  顶4管大款烧烤型:顶面4根管,尺寸为23*23*43CM,5面都有高低调温开关,带接渣盘,轮子脚。5面全开共2400W,顶面烧烤网可以单独取下.  注意:小款的取接渣盘处都有小门条设计,大款都是直接开口的,没有小门条,以图片显示为标准!', '0', '{\"CCC\\u8bc1\\u4e66\\u7f16\\u53f7\":\"2009010707382203\",\"\\u53d6\\u6696\\u5668\\u52a0\\u70ed\\u65b9\\u5f0f\":\"\\u77f3\\u82f1\\u7ba1\\u52a0\\u70ed\",\"\\u667a\\u80fd\\u7c7b\\u578b\":\"\\u4e0d\\u652f\\u6301\\u667a\\u80fd\",\"\\u6700\\u5927\\u91c7\\u6696\\u9762\\u79ef(\\u5e73\\u65b9\\u7c73)\":\"20m^2\\u4ee5\\u4e0b\",\"\\u7535\\u6696\\u5668\\u6700\\u5927\\u529f\\u7387\":\"2000W\\u4ee5\\u4e0a\",\"\\u6863\\u4f4d\":\"5\\u6863\\u53ca\\u4ee5\\u4e0a\"}', '1486198318', '1580745600', 'B619C389-BE62-40B1-0F25-4B5E60B356D2', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('4CF00EB1-8CBA-C3D9-F93F-DF01511391BE', '原封现货 现货速发Meizu/魅族 魅蓝X全网通4G八核智能手机 ', '                    全新白色现货！！送包邮+延保！！推荐选购套餐，搭使用更方便。 拒绝黄牛，每人限购1台相同类似地址多拍只发一台！双I2活动，现货大礼！！                ', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"Meizu\\/\\u9b45\\u65cf \\u9b45\\u84ddX\",\"CPU\\u54c1\\u724c\":\"\\u8054\\u53d1\\u79d1\",\"CPU\\u578b\\u53f7\":\"Helio P20\",\"\\u5c4f\\u5e55\\u5c3a\\u5bf8\":\"5.5\\u82f1\\u5bf8\",\"\\u540e\\u7f6e\\u6444\\u50cf\\u5934\":\"1200\\u4e07\",\"\\u8fd0\\u884c\\u5185\\u5b58RAM\":\"3GB\",\"\\u5b58\\u50a8\\u5bb9\\u91cf\":\"32GB\"}', '1487260706', '1581782400', '035979B6-A44A-32EA-646F-28A51C607A73', '0', '0', '7E70998B-C25C-BC33-971E-2E788CE80504.png');
 INSERT INTO `shopp_commodity` VALUES ('511676D4-6E5E-A943-02D2-23838D8A4B2A', '卡丝拉狄 中年大衣女装中国风撞色绣花立领长袖宽松毛呢女士外套 ', '卡丝拉狄 中年大衣女装中国风撞色绣花立领长袖宽松毛呢女士外套 ', '0', '{\"\\u6d41\\u884c\\u5143\\u7d20\\/\\u5de5\\u827a\":\"\\u7ee3\\u82b1\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u9ec4\\u8272 \\u9ed1\\u8272 \\u84dd\\u8272\",\"\\u9886\\u5b50\":\"\\u7acb\\u9886\",\"\\u901a\\u52e4\":\"\\u97e9\\u7248\",\"\\u8863\\u95e8\\u895f\":\"\\u4e00\\u7c92\\u6263\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u7f8a\\u6bdb50% \\u805a\\u916f\\u7ea4\\u7ef450%\"}', '1484978091', '1585843200', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
-INSERT INTO `shopp_commodity` VALUES ('61F54F17-89B5-A2B6-2A20-353A55A4F6D5', '愿你的青春无所畏惧，勇往直前 ', '一部让你在青春十字路口找到努力方向、学会规划人生、懂得设计未来的暖心之作！不曾努力的青春，那是虚度光阴；未曾拼搏的岁月，那是浪费生命！鹿晗、邓超、李晨、乐嘉备受推崇的人生信条！', '0', '{\"\\u5370\\u5237\\u65f6\\u95f4\":\"2016\\u5e7409\\u670815\\u65e5\",\"\\u9875 \\u6570\":\"386\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"9787510146312\"}', '1490061187', '1553875200', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', 'D4FD3044-112E-265B-8460-E3C4141290AE.png');
+INSERT INTO `shopp_commodity` VALUES ('61F54F17-89B5-A2B6-2A20-353A55A4F6D5', '愿你的青春无所畏惧，勇往直前 ', '一部让你在青春十字路口找到努力方向、学会规划人生、懂得设计未来的暖心之作！不曾努力的青春，那是虚度光阴；未曾拼搏的岁月，那是浪费生命！鹿晗、邓超、李晨、乐嘉备受推崇的人生信条！', '2', '{\"\\u5370\\u5237\\u65f6\\u95f4\":\"2016\\u5e7409\\u670815\\u65e5\",\"\\u9875 \\u6570\":\"386\",\"\\u56fd\\u9645\\u6807\\u51c6\\u4e66\\u53f7ISBN\":\"9787510146312\"}', '1490061187', '1553875200', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', 'D4FD3044-112E-265B-8460-E3C4141290AE.png');
 INSERT INTO `shopp_commodity` VALUES ('6275F89C-A2A1-8B7B-A259-94926A84C442', '良品铺子手造麻薯干吃汤圆糕点点心特产美食小吃零食大礼包 组合', '良品铺子祝大家新春快乐大吉大利 咕叽咕叽 ', '0', '{\"\\u751f\\u4ea7\\u8bb8\\u53ef\\u8bc1\\u7f16\\u53f7\":\"QS4401 2401 2230 \",\"\\u50a8\\u85cf\\u65b9\\u6cd5\":\"\\u8bf7\\u7f6e\\u4e8e\\u9634\\u51c9\\u5e72\\u71e5\\u5904\",\"\\u4fdd\\u8d28\\u671f\":\"180 \\u5929\",\"\\u98df\\u54c1\\u6dfb\\u52a0\\u5242\":\"\\u5355\\uff0c\\u53cc\\u7518\\u6cb9\\u8102\\u80aa\\u9178\\u916f\",\"\\u51c0\\u542b\\u91cf\":\"1050g\"}', '1486187304', '1517673600', '25D26743-4E79-4489-AB85-C6B773BA6588', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('629BAE4F-B30D-D852-BFE6-A43A373A2ED8', '家庭居家宿舍寝室必备懒人神器实用创意家居生活日用品小百货商品 ', '自动挤牙膏套装，漱口杯，自动挤牙膏，牙膏家三合一。爱上刷牙，而且是很漂亮的摆件，安装简单，拆洗容易，质量保证，送朋友很好的礼物', '0', '{\"\\u54c1\\u724c\":\"\\u9752\\u9f99\\u9999\",\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u89c1\\u89c4\\u683c\"}', '1486199874', '1517673600', 'D6B7AFDA-D508-4B1D-0D09-8AE2740A3485', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
-INSERT INTO `shopp_commodity` VALUES ('63D87121-EC06-A576-DE0F-386A49F4243B', '家庭日常创意实用家居用品居家必备生活日用品小百货宿舍寝室神器 ', '                     运费险\r\n    买卖双方在交易未完结前，买家发起退货请求时，保险公司会对退货产生的单程运费提供保险服务\r\n\r\n木质DIY收纳盒,超大实用经典款式(带把手+送化妆镜+手机支架支架)\r\n极有家认证[优质网店]：1年好店，权威认证，买退无忧                                ', '0', '{\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u4e73\\u767d\\u8272 \\u7c73\\u767d\\u8272 \\u9ed1\\u8272 \\u7c89\\u7ea2\\u8272 \\u85d5\\u8272 \\u897f\\u74dc\"}', '1491621108', '1527609600', 'A2AF9D4A-D613-0A44-353C-F015BB16F24A', '0', '0', '0F5B584C-3ED7-B315-8E7B-C147CF8C224B.png');
+INSERT INTO `shopp_commodity` VALUES ('63D87121-EC06-A576-DE0F-386A49F4243B', '家庭日常创意实用家居用品居家必备生活日用品小百货宿舍寝室神器 ', '                     运费险\r\n    买卖双方在交易未完结前，买家发起退货请求时，保险公司会对退货产生的单程运费提供保险服务\r\n\r\n木质DIY收纳盒,超大实用经典款式(带把手+送化妆镜+手机支架支架)\r\n极有家认证[优质网店]：1年好店，权威认证，买退无忧                                ', '3', '{\"\\u989c\\u8272\\u5206\\u7c7b\":\"\\u4e73\\u767d\\u8272 \\u7c73\\u767d\\u8272 \\u9ed1\\u8272 \\u7c89\\u7ea2\\u8272 \\u85d5\\u8272 \\u897f\\u74dc\"}', '1491621108', '1527609600', 'A2AF9D4A-D613-0A44-353C-F015BB16F24A', '0', '0', '0F5B584C-3ED7-B315-8E7B-C147CF8C224B.png');
 INSERT INTO `shopp_commodity` VALUES ('6D025479-654E-5D3F-2B6D-ECF783A2D918', '骆驼男装 2017春季新品青年时尚立领商务休闲外套纯色运动风衣男 ', '骆驼男装 2017春季新品青年时尚立领商务休闲外套纯色运动风衣男 ', '0', '{\"\\u54c1\\u724c\":\"Camel\\/\\u9a86\\u9a7c\",\"\\u57fa\\u7840\\u98ce\\u683c\":\"\\u65f6\\u5c1a\\u90fd\\u5e02\",\"\\u6750\\u8d28\\u6210\\u5206\":\"\\u68c9100%\",\"\\u4e0a\\u5e02\\u5e74\\u4efd\\u5b63\\u8282\":\"2017\\u5e74\\u6625\\u5b63\"}', '1484978236', '1390320000', '57F48D6B-76A0-36DB-5F9B-103D007B9B9C', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('6FFC6691-7F05-8AB8-B1E1-5C839BB4F446', '正版钢铁是怎样炼成的 原著经典世界名著外国外小说文学青少版 少儿童书籍畅销书阅读 初中学生小学生课外必读物图书', '《钢铁是怎样炼成的》被誉为“影响历史的百部经典之一”，“影响中国近代社会的经典译作”。保尔那顽强坚韧，奋发向上的人格力量，对我们的青少年，对我们的民族来说，是永远具有特殊意义的宝贵财富', '0', '{\"     \\u4ea7\\u54c1\\u540d\\u79f0\":\"\\u94a2\\u94c1\\u662f\\u600e\\u6837\\u70bc\\u6210\\u7684\",\"\\u51fa\\u7248\\u793e\\u540d\\u79f0\":\"\\u4e2d\\u56fd\\u6587\\u8054\\u51fa\\u7248\\u793e\",\"\\u4f5c\\u8005\":\"\\u5965\\u65af\\u7279\\u6d1b\\u592b\\u65af\\u57fa\",\"ISBN\\u7f16\\u53f7\":\"9787519006129\"}', '1484925988', '1486742400', 'FCDB71E5-E93E-7BBC-6ADD-9DB3EE39B6F4', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
 INSERT INTO `shopp_commodity` VALUES ('72387161-B237-7FC1-3FB3-E78C23533C5C', '韩国the saem得鲜口红不脱色咬唇妆哑光豆沙色唇膏大红姨妈色雾面 ', '这款只能按出，不能按进，用多少按多少，千万不要为了满足自己好奇心狂按，否则口红就回去不了哦', '0', '{\"\\u4ea7\\u54c1\\u540d\\u79f0\":\"The Saem\",\"\\u662f\\u5426\\u4e3a\\u7279\\u6b8a\\u7528\\u9014\\u5316\\u5986\\u54c1\":\"\\u5426\",\"\\u529f\\u6548\":\"\\u6ecb\\u6da6 \\u4fdd\\u6e7f\",\"\\u9002\\u5408\\u80a4\\u8d28\":\"\\u4efb\\u4f55\\u80a4\\u8d28\",\"\\u4fdd\\u8d28\\u671f\":\"3\\u5e74\"}', '1486200570', '1517673600', 'F994FC1C-7A5F-16A6-70E4-1672633B13D6', '0', '0', '1D7E477D-4EEA-2490-AB16-CA5A7423144D.png');
@@ -2526,19 +2546,44 @@ INSERT INTO `shopp_count` VALUES ('2068', '::1', '1491985378', '陈欢', 'home/U
 INSERT INTO `shopp_count` VALUES ('2069', '::1', '1491985380', '陈欢', 'home/User/customerService');
 INSERT INTO `shopp_count` VALUES ('2070', '::1', '1491985442', '陈欢', 'home/User/customerService');
 INSERT INTO `shopp_count` VALUES ('2071', '::1', '1491985504', '陈欢', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2072', '::1', '1492052956', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2073', '::1', '1492052960', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2074', '::1', '1492052969', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2075', '::1', '1492052986', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2076', '::1', '1492053019', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2077', '::1', '1492053285', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2078', '::1', '1492053288', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2079', '::1', '1492054569', '', 'home');
+INSERT INTO `shopp_count` VALUES ('2080', '::1', '1492054582', '陈欢', 'home');
+INSERT INTO `shopp_count` VALUES ('2081', '::1', '1492054585', '陈欢', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2082', '::1', '1492054587', '陈欢', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('2083', '::1', '1492054624', '陈欢', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('2084', '::1', '1492056209', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2085', '::1', '1492056212', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2086', '::1', '1492056218', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2087', '::1', '1492056228', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2088', '::1', '1492056304', '陈欢', 'home');
+INSERT INTO `shopp_count` VALUES ('2089', '::1', '1492057462', '陈欢', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2090', '::1', '1492057465', '陈欢', 'home');
 INSERT INTO `shopp_order` VALUES ('0670EC59-8FAB-9175-24F0-9BABD7AD9989', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491825231', '1491825231', '1491825237', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order` VALUES ('0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491814301', '1491814301', '1491816240', '1491816305', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
+INSERT INTO `shopp_order` VALUES ('4ECB76B4-60F4-FED3-D6D4-8F72D197253A', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1492052921', '1492052921', '1492052929', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
 INSERT INTO `shopp_order` VALUES ('6263F939-9CAA-935B-E4A9-563C797BBDA6', '1', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491921853', '1491921853', '1491921861', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
+INSERT INTO `shopp_order` VALUES ('68F7AD70-2C3B-43FC-ADC8-A3CB25B31938', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1492056178', '1492056178', '1492056185', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
 INSERT INTO `shopp_order` VALUES ('72C7BF04-A458-3647-BD42-05535C505C06', '8', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491924797', '1491924797', '', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
 INSERT INTO `shopp_order` VALUES ('AAEDD164-4521-A7F1-51AB-429540A364BF', '7', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491920329', '1491920329', '', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
 INSERT INTO `shopp_order` VALUES ('E802DFAA-A57B-3DFC-9D45-85F2839D2AAC', '1', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491919268', '1491919268', '1491919277', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
+INSERT INTO `shopp_order_specification` VALUES ('2ED02411-EE70-3EB7-4770-BEDDE694B386', '4ECB76B4-60F4-FED3-D6D4-8F72D197253A', '7897433D-81EB-C106-90CC-BA8A9A1C8DA5', '2', '3000', '官方标配');
 INSERT INTO `shopp_order_specification` VALUES ('468422A1-CB9B-E3EF-1D16-E3530A347479', '0670EC59-8FAB-9175-24F0-9BABD7AD9989', '7897433D-81EB-C106-90CC-BA8A9A1C8DA5', '1', '3000', '官方标配');
 INSERT INTO `shopp_order_specification` VALUES ('7F251C92-B396-B014-BAC7-BA311866E9E2', '6263F939-9CAA-935B-E4A9-563C797BBDA6', '8F1748AD-30E8-7A09-D78D-7ACAE9E8F711', '1', '23', '第一版');
 INSERT INTO `shopp_order_specification` VALUES ('8279BD68-A06D-AFBF-3F4A-A32E25E19AD4', 'E802DFAA-A57B-3DFC-9D45-85F2839D2AAC', '7897433D-81EB-C106-90CC-BA8A9A1C8DA5', '1', '3000', '官方标配');
 INSERT INTO `shopp_order_specification` VALUES ('A25F28C3-4A63-1F53-C353-F4AD732970AE', 'AAEDD164-4521-A7F1-51AB-429540A364BF', '2E0E5BC1-3A74-DC36-42D0-20F59E7E4924', '1', '1709', '套餐一');
 INSERT INTO `shopp_order_specification` VALUES ('AA45B055-802F-8291-B031-37FE8098EA18', '72C7BF04-A458-3647-BD42-05535C505C06', '843E945A-620F-292E-F2E8-D5FFF45F76B0', '1', '18', '绿豆沙');
+INSERT INTO `shopp_order_specification` VALUES ('BE373DD0-1A1B-0659-1458-50BBFC94905F', '68F7AD70-2C3B-43FC-ADC8-A3CB25B31938', '3C0C3BE6-CEBF-931C-FB6D-2FA4B34B39D8', '2', '33', '第二版');
 INSERT INTO `shopp_order_specification` VALUES ('D9FFC194-BC92-3D9E-92F5-7F8DFE186651', '6263F939-9CAA-935B-E4A9-563C797BBDA6', '82DEE154-BF19-E15F-A6DD-02630F4571BE', '1', '299', '官方');
+INSERT INTO `shopp_order_specification` VALUES ('DAF1DE83-C75B-61D4-74B5-3A29FEFEE7E3', '68F7AD70-2C3B-43FC-ADC8-A3CB25B31938', '82DEE154-BF19-E15F-A6DD-02630F4571BE', '1', '299', '官方');
 INSERT INTO `shopp_order_specification` VALUES ('E016FFC7-F9DA-08D6-BA09-5D9E5B9BA20B', '0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '0959E8FD-75B4-F041-9820-C0038FDD68DD', '1', '2800', '官方标配 :银色');
+INSERT INTO `shopp_order_specification` VALUES ('F438F843-962B-AFE4-6084-05C4CAC55B6E', '68F7AD70-2C3B-43FC-ADC8-A3CB25B31938', '4C4138B7-0E86-01A1-2432-87B3D1B9C320', '3', '35', '浅绿色');
 INSERT INTO `shopp_refunds` VALUES ('89DB898B-C473-05B3-47B0-E0DA5EB4B37E', 'E016FFC7-F9DA-08D6-BA09-5D9E5B9BA20B', '2', '发发撒旦飞洒发斯蒂芬', '0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '1491894427', '0', 'AA692D26-B786-D8A0-1420-F8F33264485C');
 INSERT INTO `shopp_refunds` VALUES ('9F0A48DA-EA16-26EE-2F3B-10733902ED5B', '468422A1-CB9B-E3EF-1D16-E3530A347479', '0', '坏了发动机涉及到了快速减肥的快乐地方上的', '0670EC59-8FAB-9175-24F0-9BABD7AD9989', '1491890543', '3', 'AA692D26-B786-D8A0-1420-F8F33264485C');
 INSERT INTO `shopp_specification` VALUES ('023EDF9B-3ED9-935A-81A1-FA3CC96E169C', '棕色', '4', '300', '179149C6-2255-FAA2-F9F8-CA6608080FAA');
@@ -2567,7 +2612,7 @@ INSERT INTO `shopp_specification` VALUES ('351CB270-9EFB-FF1A-9D2F-E8337A56D3F6'
 INSERT INTO `shopp_specification` VALUES ('38BE888F-837B-B57D-E0ED-FB358C7AF49A', '一件', '200', '2000', '96A28FC7-E21C-2185-D3BC-4DD5FE91ADB7');
 INSERT INTO `shopp_specification` VALUES ('3BA5EB3D-0119-1B55-2C0C-402066D4EC65', '组合2100g', '55', '298', '6275F89C-A2A1-8B7B-A259-94926A84C442');
 INSERT INTO `shopp_specification` VALUES ('3BE1F4C9-E437-BAD8-9019-423F492CF6B8', '16G/玫瑰金', '2999', '29', '72599D9A-E2FE-0D2C-B74A-DBDE17AA0E2E');
-INSERT INTO `shopp_specification` VALUES ('3C0C3BE6-CEBF-931C-FB6D-2FA4B34B39D8', '第二版', '33', '42', '61F54F17-89B5-A2B6-2A20-353A55A4F6D5');
+INSERT INTO `shopp_specification` VALUES ('3C0C3BE6-CEBF-931C-FB6D-2FA4B34B39D8', '第二版', '33', '40', '61F54F17-89B5-A2B6-2A20-353A55A4F6D5');
 INSERT INTO `shopp_specification` VALUES ('3C5050DC-8239-FCDF-25A2-1047B0C2CA28', '16G/银色', '2999', '30', '72599D9A-E2FE-0D2C-B74A-DBDE17AA0E2E');
 INSERT INTO `shopp_specification` VALUES ('3C5F6EDD-6979-1DAE-A071-021A3155D3C3', '套餐二', '1809', '10', '4CF00EB1-8CBA-C3D9-F93F-DF01511391BE');
 INSERT INTO `shopp_specification` VALUES ('3FC5CCB0-0160-34C4-E181-C419F0070958', '100g', '23', '200', 'F7BC08D4-A15A-0784-3456-04EE6D29C689');
@@ -2575,7 +2620,7 @@ INSERT INTO `shopp_specification` VALUES ('406DEDB1-A1C0-7814-EAA6-8E80EEA2A97E'
 INSERT INTO `shopp_specification` VALUES ('4549C0D8-3A4F-A148-4B47-A44DED568182', '180g', '28', '15', 'B7391928-0D76-8E49-8911-CF772446F9C1');
 INSERT INTO `shopp_specification` VALUES ('467E4794-E139-9D4C-A001-648467AE4B50', 'M码', '199', '9', 'B33E6242-90AA-0E1A-17AE-3B2F7C20FBC1');
 INSERT INTO `shopp_specification` VALUES ('48305973-85B5-63FF-5D12-B503B2C7A7E6', '小款白色', '78', '18', '47D002AB-DFA4-11CF-52FB-398122144EF1');
-INSERT INTO `shopp_specification` VALUES ('4C4138B7-0E86-01A1-2432-87B3D1B9C320', '浅绿色', '35', '29', '63D87121-EC06-A576-DE0F-386A49F4243B');
+INSERT INTO `shopp_specification` VALUES ('4C4138B7-0E86-01A1-2432-87B3D1B9C320', '浅绿色', '35', '26', '63D87121-EC06-A576-DE0F-386A49F4243B');
 INSERT INTO `shopp_specification` VALUES ('501BCF11-3BC4-756F-5343-FF22FE148F44', '运动少女', '28', '788', '629BAE4F-B30D-D852-BFE6-A43A373A2ED8');
 INSERT INTO `shopp_specification` VALUES ('525BAE0A-4415-3A40-769A-564DBF4F55FB', 'M L XL 2XL', '2999', '200', '900AA834-8BF4-9826-3239-01487EF71BED');
 INSERT INTO `shopp_specification` VALUES ('55074F79-EE7B-88F4-529F-EDF88A93E753', '小款红色', '68', '15', '47D002AB-DFA4-11CF-52FB-398122144EF1');
@@ -2589,9 +2634,9 @@ INSERT INTO `shopp_specification` VALUES ('6C584A55-081F-D42C-F5F4-9F6810931FF9'
 INSERT INTO `shopp_specification` VALUES ('6E4D44E5-6E5D-3ECE-C1DA-9D6A3BB1FA56', '200ml', '102', '200', 'E1A02C6D-C1C6-A748-983D-A236648BDCD4');
 INSERT INTO `shopp_specification` VALUES ('767B904F-ACB2-7C50-C91A-1C4279AF0935', '10片装', '50', '666', 'AE6D4A9D-7257-836A-2687-8EE3B440594E');
 INSERT INTO `shopp_specification` VALUES ('7789A9EC-3B7A-403B-92D6-261B0E135D5D', 'S码；白色', '199', '10', '25AA487A-1A8F-A2A1-E1B5-78EA0EEC85A3');
-INSERT INTO `shopp_specification` VALUES ('7897433D-81EB-C106-90CC-BA8A9A1C8DA5', '官方标配', '3000', '1998', '38B3FE41-5AB1-F2AF-3446-7E07D8DD8851');
+INSERT INTO `shopp_specification` VALUES ('7897433D-81EB-C106-90CC-BA8A9A1C8DA5', '官方标配', '3000', '1996', '38B3FE41-5AB1-F2AF-3446-7E07D8DD8851');
 INSERT INTO `shopp_specification` VALUES ('7B55E916-FE4D-F45C-51F5-361534DA9651', '32G/黑色', '3999', '45', '72599D9A-E2FE-0D2C-B74A-DBDE17AA0E2E');
-INSERT INTO `shopp_specification` VALUES ('82DEE154-BF19-E15F-A6DD-02630F4571BE', '官方', '299', '11', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF');
+INSERT INTO `shopp_specification` VALUES ('82DEE154-BF19-E15F-A6DD-02630F4571BE', '官方', '299', '10', '28FDD4CE-5DC6-FC44-58EE-47ABB5B33BCF');
 INSERT INTO `shopp_specification` VALUES ('84231135-44F5-BA48-ADBE-4F2377042F68', '600g', '68', '200', 'F72A0711-12B1-2360-6A79-023E0A6FB6BF');
 INSERT INTO `shopp_specification` VALUES ('843E945A-620F-292E-F2E8-D5FFF45F76B0', '绿豆沙', '18', '14', '1581855B-4F44-E6F1-8E95-59AD9A5A0C5D');
 INSERT INTO `shopp_specification` VALUES ('850BB1F2-58D2-5D4E-9E99-1CA26DB1CD9B', '黑色', '4', '198', '179149C6-2255-FAA2-F9F8-CA6608080FAA');
