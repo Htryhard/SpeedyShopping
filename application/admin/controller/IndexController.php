@@ -39,7 +39,7 @@ class IndexController extends BaseController
 
     public function add()
     {
-        echo 'laibaibao提交的';
+        echo time();
     }
 
     public function test1()

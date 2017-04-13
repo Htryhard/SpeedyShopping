@@ -4,11 +4,14 @@ namespace app\api\controller;
 use app\common\aliyun\top\request\AlibabaAliqinFcSmsNumSendRequest;
 use app\common\aliyun\top\TopClient;
 use app\common\Comm;
+use app\common\model\AuthGroup;
 use app\common\model\Code;
 use app\common\model\Commodity;
 use app\common\model\Type;
 use app\common\model\User;
+use com\Auth;
 use think\Controller;
+use think\Request;
 
 class IndexController extends Controller
 {
@@ -66,7 +69,7 @@ class IndexController extends Controller
 
     public function getCode()
     {
-        $phone = $this->request->param("phone");
+        $phone = $this->request->post("phone");
 
         if ($phone != "") {
             $user = User::get(['phone' => $phone]);
@@ -97,30 +100,52 @@ class IndexController extends Controller
                 $req->setRecNum($phone);
                 $req->setSmsTemplateCode("SMS_34830149");
                 $resp = $c->execute($req);
-                return json($code);
+                return json("Success");
             } else {
-                return json("no user");//没有这个用户
+                return json("NoUser");//没有这个用户
             }
         }
     }
 
     public function loginCode()
     {
-        $phone = $this->request->get("userPhone");
-        $userCode = $this->request->get("code");
-        $code = Code::get(["key" => $phone . $userCode]);
+        $phone = Request::instance()->post("phone");
+        $userCode = Request::instance()->post("code");
+        $code = Code::get(["phone" => $phone]);
         if ($code != null) {
             //判断是否过期
             $createTime = $code->getData("create_time");
+            $createTime = $createTime + 1800;//三十分钟有效期
+            $currentTime = time();
 
-            if ($code->getData("code") == $userCode) {
+            //有效
+            if ($createTime > $currentTime && $code->getData("code") == $userCode) {
                 $user = User::get(['phone' => $phone]);
-                return json($user);
+                //判断用户的权限
+                $rule = $user->getData("role_id");
+                $auth = AuthGroup::get(["id" => $rule]);
+                $flag = false;
+                if ($auth->getData("rules") == "user") {
+                    $flag = true;
+                }
+                if ($flag) {
+                    $data["state"] = "Success";
+                    $data["data"] = $user;
+                    return json($data);
+                } else {
+                    $data["state"] = "Power";//无权访问
+                    $data["data"] = "";
+                    return json($data);
+                }
             } else {
-                return json("code error userCode:" . $userCode . "  code:" . $code . "  " . $phone);//验证码错误
+                $data["state"] = "Fail";
+                $data["data"] = "";
+                return json($data);
             }
         } else {
-            return json("phone or code null");//用户或者验证码为空
+            $data["state"] = "Fail";
+            $data["data"] = "";
+            return json($data);
         }
     }
 
