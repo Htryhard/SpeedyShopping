@@ -11,6 +11,7 @@ namespace app\api\controller;
 
 use app\common\Comm;
 use app\common\model\Address;
+use app\common\model\AuthGroup;
 use app\common\model\Cart;
 use app\common\model\CartSpecification;
 use app\common\model\Collect;
@@ -734,6 +735,63 @@ class UserController extends Controller
         }
 
         return json($commodities);
+
+    }
+
+    public function registerUser()
+    {
+        $email = Request::instance()->post("email");
+        $password = Request::instance()->post("password");
+        $userName = Request::instance()->post("userName");
+        $phone = Request::instance()->post("phone");
+
+        if ($email != "" && $password != "" && $userName != "" && $phone != "") {
+            $user = User::get(["email" => $email]);
+            if ($user != null) {
+                $data["statu"] = "501";
+                $data["data"] = "邮箱已经被注册！";
+                return json($data);
+            }
+
+            $user = User::get(["phone" => $phone]);
+            if ($user != null) {
+                $data["statu"] = "502";
+                $data["data"] = "手机号码已经被注册！";
+                return json($data);
+            }
+
+            $user = new User();
+            $user->id = Comm::getNewGuid();
+            $user->email = $email;
+            $user->user_name = $userName;
+            $user->password = User::encryptPassword($password);
+            $user->phone = $phone;
+            $auth = AuthGroup::get(["rules" => "user"]);
+            $user->role_id = $auth->getData("id");
+            $user->icon = "201702181841206215.png";//默认头像
+
+            if ($user->validate(true)->save($user->getData())) {
+                //为用户创建一个空的购物车待用
+                $cart = new Cart();
+                $cart->id = Comm::getNewGuid();
+                $cart->user_id = $user->getData('id');
+                $cart->save();
+                //写入默认权限
+//                Comm::defaltPermission($user->getData("id"));
+                $data["statu"] = "200";
+                $data["data"] = $user;
+                return json($data);
+            } else {
+                $data["statu"] = "505";
+                $data["data"] = $user->getError();
+                return json($data);
+            }
+
+        } else {
+            $data["statu"] = "500";
+            $data["data"] = "参数不全！";
+            return json($data);
+        }
 
     }
 
