@@ -4,10 +4,11 @@
 <div>
     <span>选择地址</span><br/>
     {volist name="$user['address']" id="item"}
-    <label><input type="radio" name="addressId" id="rAddressId_{$item['id']}" value="{$item['id']}"
-                  onclick=changeAddress("{$item['id']}","{$item['content']}")>
+    <label><input type="radio" name="addressId" id="rAddressId_{$item['id']}"
+                  value="{$item['id']}" onclick=changeAddress("{$item['id']}")>
         {$item['content']}({$item['user_name']} 收) {$item['phone']}</label>
     <br/>
+    <input type="hidden" id="hi_address_content_{$item['id']}" value="{$item['content']}">
     {/volist}
 </div>
 
@@ -59,15 +60,16 @@
             if (content.indexOf("柳州") > 0) {
                 $("#post_bay").submit();
             } else {
-                alert("亲！您的地址不在配送范围！请选择柳州市内的地址！" + content + "____id" + hi_addressId.value);
+                alert("亲！您的地址不在配送范围！请选择柳州市内的地址！");
             }
         }
     }
-    function changeAddress(addressId, content) {
-        alert(addressId + "    " + content);
+    function changeAddress(addressId) {
         var id = document.getElementById("rAddressId_" + addressId).value;
         document.getElementById("addressId").value = "";
         document.getElementById("addressId").value = id;
+
+        var content = document.getElementById("hi_address_content_" + addressId).value;
         document.getElementById("address_content").value = "";
         document.getElementById("address_content").value = content;
     }
