@@ -1,0 +1,164 @@
+{layout name="layout" /}
+<block name="titel"><title>报表统计</title></block>
+<block name="resources">
+</block>
+
+<style>
+    .footer_werapper li {
+        display: inline-block;
+        vertical-align: top;
+        border-right: solid 1px #FFFFFF;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .footer_werapper li:last-child {
+        border: 0; /*去掉最后一个分割线....*/
+    }
+
+    .footer_werapper footer {
+        text-align: center;
+    }
+
+    .footer_werapper a {
+        color: #FFFFFF;
+        text-decoration: none; /*去掉下划线....*/
+    }
+
+    .footer_werapper p {
+        color: #FFFFFF;
+        margin-top: 10px;
+    }
+
+    nav#nav {
+        background: gainsboro;
+    }
+
+    nav#nav ul li a:hover {
+        background: #ebebeb;
+    }
+
+</style>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li class="active">报表统计</li>
+</ol>
+<div class="btn-group">
+    &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+    <a href="{:url('admin/index/tableUser')}">
+        {if condition="($DataType == 'userDataShow')"}
+        <input type="radio" name="type" checked>
+        {else /}
+        <input type="radio" name="type">
+        {/if}
+        用户数据分析
+    </a>&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+
+
+    <a href="{:url('admin/index/tableCommodity')}">
+        {if condition="($DataType == 'commodityDataShow')"}
+        <input type="radio" name="type" checked>
+        {else /}
+        <input type="radio" name="type">
+        {/if}
+        商品数据分析
+    </a>&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+    <a href="{:url('admin/index/tableOrder')}">
+        {if condition="($DataType == 'orderDataShow')"}
+        <input type="radio" name="type" checked>
+        {else /}
+        <input type="radio" name="type">
+        {/if}
+        订单数据分析
+    </a>&numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+</div>
+
+<hr/>
+<div class="row">
+    <div class="col-md-8">
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="name">姓名</label>
+                <input name="username" type="text" id="name" class="form-control" placeholder="姓名..."
+                       value="{:input('get.username')}">
+            </div>
+            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+        </form>
+    </div>
+</div>
+<hr/>
+
+
+<h4><b>订单总数量： {$countOrder} &numsp;&numsp;&numsp;&numsp;&numsp;&numsp;
+    <i style="color: red">
+        价值合计：
+        {php}
+        $cou = 0;
+        foreach($allOrders as $ord){
+
+        foreach ($ord['orderSpecifications'] as $orspe){
+
+        $cou += $orspe['price']*$orspe['count'];
+
+        }
+
+        }
+        echo "￥".$cou.".00";
+        {/php}
+    </i>
+</b></h4>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>单号</th>
+        <th>下单时间</th>
+        <th>商品标题</th>
+        <th>规格</th>
+        <th>下单账号</th>
+        <th>联系方式（收货人）</th>
+        <th>合计</th>
+        <th>订单状态</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="orders" id="item" key="key"}
+    <tr>
+        <td>{$key}</td>
+        <td>{$item->getData('order_number')}</td>
+        <td>{:date('Y-m-d H:m:i',$item->getData('order_time'))}</td>
+        <td>
+            {php}
+            foreach ($item['orderSpecifications'] as $ordspe){
+            echo "【".$ordspe['specification']['commodity']['title']."】<br/>";
+            }
+            {/php}
+        </td>
+        <td>
+            {php}
+            foreach ($item['orderSpecifications'] as $ordspe){
+            echo $ordspe['specificationcontent']."<br/>";
+            }
+            {/php}
+        </td>
+        <td>{$item['user']['user_name']}</td>
+        <td>{$item['address']['phone']."(".$item['address']['user_name'].")"}</td>
+        <td><i style="color: red">
+            {php}
+            $countOrdSpe = 0;
+            foreach ($item['orderSpecifications'] as $ordspe){
+            $countOrdSpe = $countOrdSpe+$ordspe['price'];
+            }
+            echo "￥".$countOrdSpe.".00";
+            {/php}
+        </i></td>
+        <td>
+            {$item["status"]}
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+<div class="col-md-offset-5">{$orders->render()}</div>

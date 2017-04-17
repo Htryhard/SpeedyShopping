@@ -18,6 +18,7 @@ use app\common\model\Count;
 use app\common\model\Specification;
 use app\common\model\Type;
 use app\common\model\User;
+use think\Request;
 
 class CommodityController extends BaseController
 {
@@ -377,6 +378,32 @@ class CommodityController extends BaseController
             $this->redirect(url("home/error/postError", ['code' => "404", 'msg' => "此商品已经不存在！"]));
         }
 
+    }
+
+    public function handleComment()
+    {
+        if (Request::instance()->isAjax()) {
+            $commentId = Request::instance()->post("commentId");
+            $comment = Comment::get(["id" => $commentId]);
+            $type = Request::instance()->post("type");
+
+            if ($comment != null && $type != "") {
+                if ($type == "close") {
+                    $comment->status = 1;
+                    $comment->save();
+                }
+
+                if ($type == "open") {
+                    $comment->status = 0;
+                    $comment->save();
+                }
+                return "Success";
+            }else{
+                return "CommentError";
+            }
+        } else {
+            return "ParameterError";
+        }
     }
 
 }

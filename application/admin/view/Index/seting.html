@@ -1,0 +1,161 @@
+{layout name="layout" /}
+<block name="titel"><title>首页</title></block>
+<block name="resources">
+</block>
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li class="active">设置</li>
+</ol>
+
+<div>
+    前端轮播图片设置：<input type="file" id="selFile_web" multiple="true" onchange="getWebPicFile()"/>
+    <br/></div>
+<span id="showInfo_web"></span>
+<button type="button" class="btn btn-success" style="width: 70px" onclick="postWebImg()">提交</button>
+
+
+<div>
+    APP轮播图片设置：<input type="file" id="selFile" multiple="true" onchange="getPicFile()"/>
+    <br/></div>
+<span id="showInfo"></span>
+<button type="button" class="btn btn-success" style="width: 70px" onclick="postComment()">提交</button>
+
+<div>
+    APP滚动广告条设置：
+    <input type="text"><input type="button" value="添加">
+</div>
+
+<script type="text/javascript">
+    var arrayFile = [];
+    /**
+     * 将用户选择的图片文件显示出来预览
+     * @author 陈有欢
+     */
+    function getPicFile() {
+        var filelist = document.getElementById("selFile");
+        if (filelist.files.length == 0) {
+            alert("请选择图片")
+        } else {
+            for (var i = 0; i < filelist.files.length; i++) {
+                var file = filelist.files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    alert(file.name + " 只能上传图片文件！")
+                    continue;
+                }
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var index = Math.ceil(Math.random() * 10000);
+                    arrayFile[index] = e.target.result;
+                    document.getElementById("showInfo").innerHTML +=
+                        "<div style='display:inline;float: left'><div><img src=" + e.target.result + " width=200 height=150 style='padding-right:50px;padding-bottom:20px' class='img-rounded'/></div>" +
+                        "<div><a href='#' onclick=deteleImg('" + index + "')><img src='__PUBLIC__/static/images/delete.png' width='20px;'height='20px'></a></div></div>";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+    //删除一个正在预览中的图片
+    function deteleImg(index) {
+//        var img = arrayFile[index];
+//        document.getElementById("showOnclik").innerHTML = "";
+//        document.getElementById("showOnclik").innerHTML +=
+//            "<img src=" + img + " width=200 height=150 style='padding-right:50px;padding-bottom:20px'/><br/>";
+
+        document.getElementById("showInfo").innerHTML = "";
+        arrayFile = remove(arrayFile, index);
+        var val = "";
+        for (var base64Item in arrayFile) {
+            val +=
+                "<div style='display:inline;float: left'><div><img src=" + arrayFile[base64Item] + " width=200 height=150 style='padding-right:50px;padding-bottom:20px' class='img-rounded'/></div>" +
+                "<div><a href='#' onclick=deteleImg('" + base64Item + "')><img src='__PUBLIC__/static/images/delete.png' width='20px;'height='20px'></a></div></div>";
+        }
+        document.getElementById("showInfo").innerHTML = val;
+    }
+    /**
+     * js自定义从一个数组中根据下标值移除一个数组，返回新的数组
+     * @author 陈有欢
+     * @param array
+     * @param index
+     * @returns {Array}
+     */
+    function remove(array, index) {
+        var NewArray = [];
+        var val = array[index];
+        for (var item in array) {
+            if (array[item] == val) {
+                continue;
+            } else {
+                NewArray[item] = array[item];
+            }
+        }
+        return NewArray;
+    }
+
+    /**
+     * 提交评论
+     */
+    function postComment() {
+
+        var grade = document.getElementById("grade");
+        var fenshu = grade.innerText;
+        var content = $("#comment_content").val();
+        if (orderSpecificationId == "") {
+            alert("商品规格的ID不能为空");
+            return;
+        }
+        if (fenshu == "") {
+            alert("亲！！请先给宝贝打分儿吧！")
+            return;
+        }
+        if (content == "") {
+            alert("亲！！收到的宝贝咋样呢？说两句吧！")
+            return;
+        }
+
+        var ImagesStr = "";
+        for (var index in arrayFile) {
+            var base64 = arrayFile[index];
+            ImagesStr += base64 + "#####"
+        }
+        //JSON.stringify(arrayFile)
+
+        $.ajax({
+            type: "POST",
+            url: "{:url('home/user/commentHandle')}",
+            dataType: "json",
+            data: {
+                orderId: orderId,
+                orderSpecificationId: orderSpecificationId,
+                fenshu: fenshu,
+                content: content,
+                commentImages: ImagesStr
+            },
+            success: function (msg) {
+                switch (msg) {
+                    case "success":
+                        break;
+                    case "PostError":
+                        //非法请求
+                        alert("非法请求");
+                        break;
+                    case "ParameterError":
+                        //参数错误
+                        alert("参数错误！");
+                        break;
+                    case "SpecificationNull":
+                        alert("没有找到此规格！");
+                        break;
+                    case "CommentRepeated":
+                        alert('亲！您已经对商品评论过了~~');
+                        break;
+                    default:
+                }
+            },
+            error: function (msg) {
+                console.log(msg);
+//                alert(msg);
+            },
+        });
+    }
+</script>

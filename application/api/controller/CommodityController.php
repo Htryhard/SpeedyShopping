@@ -117,34 +117,37 @@ class CommodityController extends Controller
         if ($commodity != null) {
             $comments = $commodity["comments"];
             foreach ($comments as $comment) {
-                $comData = array();
-                $comData["id"] = $comment["id"];
-                $comData["content"] = $comment["content"];
-                $comData["grade"] = $comment["grade"];
-                $comData["creation_time"] = $comment["creation_time"];
+                if ($comment->getData("status") != 1) {
+                    $comData = array();
+                    $comData["id"] = $comment["id"];
+                    $comData["content"] = $comment["content"];
+                    $comData["grade"] = $comment["grade"];
+                    $comData["creation_time"] = $comment["creation_time"];
 
-                $user = $comment["user"];
-                $comData["user_name"] = $user["nick_name"];
-                $comData["user_icon"] = $user["icon"];
+                    $user = $comment["user"];
+                    $comData["user_name"] = $user["nick_name"];
+                    $comData["user_icon"] = $user["icon"];
 
-                $orderSpecification = $comment['OrderSpecification'];
-                if ($orderSpecification == null) {
-                    $comData["specification_content"] = "";
-                } else {
-                    $comData["specification_content"] = $orderSpecification["specificationcontent"];
+                    $orderSpecification = $comment['OrderSpecification'];
+                    if ($orderSpecification == null) {
+                        $comData["specification_content"] = "";
+                    } else {
+                        $comData["specification_content"] = $orderSpecification["specificationcontent"];
+                    }
+
+                    $comData["status"] = $comment["status"];
+                    $comData["order_id"] = $comment["order_id"];
+                    $comData["commodity_id"] = $comment["commodity_id"];
+
+                    $Images = array();
+                    foreach ($comment["commentImgs"] as $img) {
+                        array_push($Images, $img["image"]);
+                    }
+                    $comData["commentIcons"] = $Images;
+
+                    array_push($data, $comData);
                 }
 
-                $comData["status"] = $comment["status"];
-                $comData["order_id"] = $comment["order_id"];
-                $comData["commodity_id"] = $comment["commodity_id"];
-
-                $Images = array();
-                foreach ($comment["commentImgs"] as $img) {
-                    array_push($Images, $img["image"]);
-                }
-                $comData["commentIcons"] = $Images;
-
-                array_push($data, $comData);
             }
 
             return json($data);

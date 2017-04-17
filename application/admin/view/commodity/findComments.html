@@ -71,10 +71,10 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 {eq name="$comment->getData('status')" value="0"}
                                 <span class="label label-success">评论正常显示</span>
-                                <a href="#"><span class="label label-danger">关闭此评论</span></a>
+                                <a href="#" onclick=cmment("{$comment['id']}","close")><span class="label label-danger">关闭此评论</span></a>
                                 {else/}
                                 <span class="label label-warning">评论已经被管理员关闭</span>
-                                <a href="#"><span class="label label-success">显示此评论</span></a>
+                                <a href="#" onclick=cmment("{$comment['id']}","open")><span class="label label-success">显示此评论</span></a>
                                 {/eq}
                             </div>
                         </td>
@@ -105,3 +105,45 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function cmment(commentId, type) {
+        var msg = "";
+        if (type == "close") {
+            msg = "关闭后将不再显示！您确定要关闭此评论吗？";
+        } else {
+            msg = "开启后所有的用户都可以看到此评论！！您确定要开启此评论吗？";
+        }
+        if (confirm(msg)) {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/commodity/handleComment')}",
+                dataType: "json",
+                data: {
+                    commentId: commentId,
+                    type: type
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "Success":
+                            document.location.reload();//刷新当前页面
+                            break;
+                        case "CommentError":
+                            //非法请求
+                            alert("订单已经不存在！");
+                            break;
+                        case "ParameterError":
+                            //参数错误
+                            alert("参数错误！");
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+//                alert(msg);
+                },
+            });
+        }
+    }
+</script>

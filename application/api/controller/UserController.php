@@ -728,7 +728,16 @@ class UserController extends Controller
                 //销量购
                 $commodities = Commodity::where("states=0")->order('staistics', 'desc')->paginate(30);
                 break;
-            case "":
+            case "Score":
+                //高分购
+                $commodities = Commodity::where("states=0")->order('grade', 'desc')->paginate(30);
+                break;
+            case "SecondHand":
+                //二手市场
+                $type = Type::get(['id' => "7629D45C-386F-E1B0-F529-F268771CE43D"]);
+                if ($type != null)
+                    $commodities = $type['commodities'];
+                break;
                 break;
             default:
                 break;

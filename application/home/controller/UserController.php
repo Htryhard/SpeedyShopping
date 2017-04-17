@@ -550,6 +550,11 @@ class UserController extends BaseController
             $idStr = $this->request->post("cartspeId");
             //2地址id
             $addressId = $this->request->post("addressId");
+//            $address = Address::get(["id" => $addressId]);
+//            if (!strpos($address["content"], "柳州")) {
+//                return "AddressError";
+//            }
+
             if ($idStr != "" && $addressId != "") {
                 $idStr = explode(";", $idStr);
                 $CartSpecifications = array();
