@@ -102,6 +102,7 @@ class UserController extends Controller
             $user->user_name = $username;
             $user->password = User::encryptPassword($password);
             $user->phone = $phone;
+            $user->creation_time = time();
             $auth = AuthGroup::get(["rules" => "administrator"]);
             $user->role_id = $auth->getData("id");
 
@@ -129,5 +130,79 @@ class UserController extends Controller
         }
     }
 
+    public function userMesg($userId)
+    {
+        $editUser = User::get(["id" => $userId]);
+        if ($editUser != null) {
+            $user = User::getUserBySession("admin");
+            $this->assign("user", $user);
+            $this->assign("editUser", $editUser);
+            $iconRoot = "/SpeedyShopping/public//uploads/icon_images/";
+            $this->assign("iconRoot", $iconRoot);
+            return $this->fetch();
+        } else {
+            return $this->redirect(url("home/error/postError?code=404&msg=用户未找的到！！"));
+        }
+    }
+
+    //修改个人信息
+    public function userMesgHandle()
+    {
+        if ($this->request->isAjax()) {
+            $data = $this->request->param();
+            $imgBase64 = $data["imgBase64"];
+            $data = $data["userdata"];
+            if ($imgBase64 != "") {
+//                $user = User::getUserBySession("admin");
+                $userdata = array();
+                foreach ($data as $item) {
+                    $userdata += [$item['name'] => $item['value']];
+                }
+//                var_dump($userdata);
+
+//                $email = $userdata['email'];
+                $username = $userdata['name'];
+                $password = $userdata['password'];
+                $phone = $userdata['phone'];
+
+                $nickName = $userdata['nick_name'];
+                $sbasb = $userdata['sbasb'];
+                $userId = $userdata['userId'];
+                $user = User::get(["id" => $userId]);
+                if ($user == null) {
+                    //上传失败
+                    return "UploadsError";
+                }
+//                $user->email = $email;
+                $user->user_name = $username;
+                if ($password != "") {
+                    $user->password = User::encryptPassword($password);
+                }
+                $user->phone = $phone;
+                $user->nick_name = $nickName;
+                $user->sbasb = $sbasb;
+                $user->save();
+
+                $userNewIconName = Comm::uploadsIcon($imgBase64);
+                if ($userNewIconName == false) {
+                    //上传失败
+                    return "UploadsError";
+                } else {
+                    $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "icon_images" . DS . $user->getData('icon');
+                    $user->icon = $userNewIconName;
+                    $user->save();
+                    //删除旧的头像
+                    unlink($oldUrl);
+                    return "success";
+                }
+            } else {
+                //参数不正确
+                return "ParameterError";
+            }
+        } else {
+            //请求方式错误
+            return "PostError";
+        }
+    }
 
 }

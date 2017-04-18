@@ -54,9 +54,23 @@
             {/if}
         </td>
         <td>
-            <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a> |
-            <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">编辑</a>|
-            <a href="{:url('admin/commodity/findComments?commodityId='.$item->getData('id'))}">查看评论</a>
+            <a href="{:url('admin/commodity/commodityDetailed?id='.$item->getData('id'))}">明细</a><br/>
+            <a href="{:url('admin/commodity/editCommodity?id='.$item->getData('id'))}">编辑</a><br/>
+            <a href="{:url('admin/commodity/findComments?commodityId='.$item->getData('id'))}">
+                查看评论
+                <i style="color: red">
+                    {php}
+                    $colseCmment = 0;
+                    foreach($item["comments"] as $comment){
+                    if($comment->getData('status')==1){
+                    $colseCmment +=1;
+                    }
+                    }
+                    if($colseCmment!=0)
+                    echo $colseCmment;
+                    {/php}
+                </i>
+            </a>
         </td>
     </tr>
     {/volist}

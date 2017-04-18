@@ -1,0 +1,302 @@
+{layout name="layout" /}
+<block name="titel"><title>周边购-GO!购物直径</title></block>
+<block name="resources">
+    {load href="__PUBLIC__/lunbo/js/jquery.js" /}
+    {load href="__PUBLIC__/lunbo/css/lunbo.css" /}
+
+</block>
+<style>
+    body {
+        /*background: #F4F4F4;*/
+
+    }
+
+    .conten_margin {
+        /*margin-bottom: 20px;*/
+        /*margin-right: 20px;*/
+        float: left;
+        padding: 5px;
+    }
+
+    .conten_margin:hover {
+        /*border: 1px solid silver;*/
+    }
+
+    .conten_margin .titlea {
+        width: 180px;
+        overflow: hidden; /*超出的隐藏掉*/
+        text-overflow: ellipsis; /*超出的用....*/
+        white-space: nowrap; /*不换行*/
+        color: #666666;
+        font-size: 13px;
+    }
+
+    .bordera {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: #666666;
+        font-size: 13px;
+
+    }
+
+    .bordera:hover {
+        border: 1px solid red;
+        color: red;
+    }
+
+    .borderb {
+        float: left;
+        padding: 5px;
+        border: 1px solid silver;
+        color: red;
+        font-size: 13px;
+    }
+
+    .borderb:hover {
+        border: 1px solid red;
+    }
+
+    .pricea {
+        font-size: 18px;
+        color: red;
+    }
+
+    .pingjiaa {
+        font-size: 13px;
+        color: #666666;
+    }
+
+    .pingjiab {
+        font-size: 18px;
+        color: red;
+    }
+
+    .img_xing {
+        vertical-align: middle;
+    }
+
+    .btn_guanzhu {
+        border: 0;
+        background: #F4F4F4;
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    #myhomem {
+        position: absolute;
+        left: 120px;
+        top: 30px;
+        right: 0px;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+    .s-bar {
+        font-family: tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei', 宋体, sans-serif;
+        color: #fff;
+        background: #a0cdeb;
+        border: #a0cdeb;
+        border-top: #e4eaee;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 11px 10px;
+        position: relative;
+        width: 90%;
+        height: 40px;
+        left: 5%;
+    }
+
+</style>
+<asidehome>
+    <div style="margin-left: 40px">
+        {include file="./left"/}
+    </div>
+</asidehome>
+
+<section id="myhomem">
+    <div id="con">
+        <div style="height: 70px;"></div>
+        <div style="width:600px;margin:0 auto;text-align:center;">
+            <form class="form-group" role="search" action="{:url('home/commodity/search')}" method="get">
+                <div class="col-md-10">
+                    <input type="text" style="height: 50px" class="form-control" name="title" placeholder="Search"
+                           value="{:input('get.title')}">
+                </div>
+                <button type="submit" style="height: 50px" class="btn btn-success">&nbsp;搜&nbsp;索&nbsp;</button>
+
+            </form>
+        </div>
+        <div style="height: 5px;"></div>
+
+        <div style="height: 10px;"></div>
+
+
+        <div class="s-bar">
+            {$type->getData('content')}
+        </div>
+        {volist name="commodities" id="commodity"}
+        <div style="position: relative;margin-left: 90px">
+            <!--class="conten_margin col-md-"-->
+            <div class="conten_margin">
+                <a href="{:url('home/commodity/commodityDetailed?id='.$commodity->getData('id'))}">
+                    <img src="{$imgRoot}{$commodity.images[0]['image']}" style="height: 220px;width: 180px;"
+                         class="img-rounded"/></a>
+                <section class="pricea">&yen;{$commodity['specifications'][0]['price']}</section>
+                <section class="titlea">{$commodity.title}</section>
+                <section class="pingjiaa">已有<i class="pingjiab">{$commodity['staistics']}</i>人购买</section>
+
+                <section class="bordera" onmouseover=over_id("x_{$commodity['id']}");
+                         onmouseout=out_id("x_{$commodity['id']}");
+                         onclick=userCollect("{$commodity['id']}")>
+
+                    {php}
+                    $flag = false;
+                    if(count($userCollects)==0){
+                    $flag = false;
+                    }
+                    foreach ($userCollects as $collect){
+                    if($collect['commodity_id']==$commodity['id']){
+                    $flag = true;
+                    break;
+                    }else{
+                    $flag = false;
+                    }
+                    }
+                    $imgId = "x_".$commodity["id"];
+                    if($flag){
+                    echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/hongxing.png"
+                               style="width: 20px;height: 20px;">';
+                    }else{
+                    echo '<img class="img_xing" id="'.$imgId.'" src="__PUBLIC__/wei/images/baixing.png"
+                               style="width: 20px;height: 20px;">';
+                    }
+                    {/php}
+                    <button class="btn_guanzhu">关注</button>
+                </section>
+                <section class="borderb" onmouseover=over_aid("g_{$commodity['id']}");
+                         onmouseout=out_aid("g_{$commodity['id']}"); onclick=addToCart("{$commodity['id']}")>
+                    <img class="img_xing" id="g_{$commodity['id']}" src="__PUBLIC__/wei/images/baigouwuche.png"
+                         style="width: 20px;height: 20px;">
+                    <button class="btn_guanzhu">加入购物车</button>
+                </section>
+
+            </div>
+        </div>
+        {/volist}
+
+
+        <script type="text/javascript">
+            //关注（心）图标处理
+            function over_id(id) {
+                var img = document.getElementById(id);
+                var imgOldSrc = img.getAttribute("src");
+                if (imgOldSrc.indexOf("baixing") > 0) {
+                    img.src = "__PUBLIC__/wei/images/hongxing.png";
+                } else {
+                    img.src = "__PUBLIC__/wei/images/baixing.png";
+                }
+//        document.getElementById(id).src = "__PUBLIC__/wei/images/hongxing.png"
+            }
+            function out_id(id) {
+                var img = document.getElementById(id);
+                var imgOldSrc = img.getAttribute("src");
+                if (imgOldSrc.indexOf("baixing") > 0) {
+                    img.src = "__PUBLIC__/wei/images/hongxing.png";
+                } else {
+                    img.src = "__PUBLIC__/wei/images/baixing.png";
+                }
+            }
+            //购物车图标处理
+            function over_aid(id) {
+                document.getElementById(id).src = "__PUBLIC__/wei/images/honggouwuche.png"
+            }
+            function out_aid(id) {
+                document.getElementById(id).src = "__PUBLIC__/wei/images/baigouwuche.png"
+            }
+
+            //收藏功能
+            function userCollect(commodityId) {
+                var img = document.getElementById("x_" + commodityId);
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('home/user/userCollect')}",
+                    dataType: "json",
+                    data: {
+                        commodityId: commodityId
+                    },
+                    success: function (msg) {
+                        switch (msg) {
+                            case "AddCollectSuccess":
+                                alert("收藏成功！");
+                                img.src = "__PUBLIC__/wei/images/hongxing.png";
+                                break;
+                            case "CancelCollectSuccess":
+                                alert("期待您下次的宠幸！");
+                                img.src = "__PUBLIC__/wei/images/baixing.png";
+                                break;
+                            case "IllegalRequest":
+                                //非法请求
+                                alert("非法请求");
+                                break;
+                            case "UserNotLogin":
+                                window.location = "{:url('home/thing/login')}";
+                                break;
+                            case "NotFindCommodity":
+                                alert('这件宝贝从地球上消失了~~');
+                                break;
+                            default:
+                                alert(msg);
+
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    },
+                });
+            }
+
+            //添加到购物车
+            function addToCart(commodityId) {
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('home/user/addToCart')}",
+                    dataType: "json",
+                    data: {
+                        commodityId: commodityId,
+                        specificationId: ""
+                    },
+                    success: function (msg) {
+                        switch (msg) {
+                            case "AddCartSuccess":
+                                alert("添加进购物车成功！");
+                                break;
+                            case "NotRepertory":
+                                alert("库存不足！店小二正在急忙补货中！");
+                                break;
+                            case "NotFindSpecification":
+                                alert("规格参数不正确");
+                                break;
+                            case "IllegalRequest":
+                                //非法请求
+                                alert("非法请求");
+                                break;
+                            case "UserNotLogin":
+                                window.location = "{:url('home/thing/login')}";
+                                break;
+                            case "NotFindCommodity":
+                                alert('这件宝贝从地球上消失了~~');
+                                break;
+                            default:
+
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    },
+                });
+            }
+        </script>
+
+    </div>
+</section>

@@ -3,7 +3,9 @@ namespace app\admin\controller;
 
 use app\common\Comm;
 use app\common\controller\BaseController;
+use app\common\model\Comment;
 use app\common\model\Commodity;
+use app\common\model\Count;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
 use app\common\model\User;
@@ -18,6 +20,50 @@ class IndexController extends BaseController
     {
         $user = User::getUserBySession("admin");
         $this->assign("user", $user);
+        //待处理订单   状态不为0(待付款)、5(已完成)、7、(交易关闭)、8(用户已经删除订单)
+        $orders = Order::where("status!=0 AND status!=5 AND status!=7 AND status!=8")->select();
+        $this->assign("countOrder", count($orders));
+        //商品数量
+        $this->assign("countCommodity", count(Commodity::all()));
+        //用户总数
+        $this->assign("countUser", count(User::all()));
+
+        //今日订单
+        $todayOrder = array();
+        $beginToday = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+        $endToday = mktime(0, 0, 0, date('m'), date('d') + 1, date('Y')) - 1;
+        $allOrders = Order::all();
+        foreach ($allOrders as $order) {
+            $orderTime = $order["order_time"];
+            if ($orderTime > $beginToday && $orderTime < $endToday) {
+                array_push($todayOrder, $order);
+            }
+        }
+        $this->assign("countTodayOrders", count($todayOrder));
+        //今日访问量
+        $todayComent = array();
+        $allCount = Count::all();
+        foreach ($allCount as $count) {
+            $countTime = $count["time"];
+            if ($countTime > $beginToday && $countTime < $endToday) {
+                array_push($todayComent, $count);
+            }
+        }
+        $this->assign("countTodayComent", count($todayComent));
+        //今日新增会员
+        $todayUser = array();
+        $allUser = User::all();
+        foreach ($allUser as $user) {
+            $reTime = $user["creation_time"];
+            if ($reTime > $beginToday && $reTime < $endToday) {
+                array_push($todayUser, $user);
+            }
+        }
+        $this->assign("countTodayUser", count($todayUser));
+        //待审核的评论
+        $comments = Comment::where("status=1")->select();
+        $this->assign("comments", count($comments));
+
         //服务器操作系统
 
         //服务器域名/IP

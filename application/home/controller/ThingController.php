@@ -68,6 +68,7 @@ class ThingController extends Controller
             $user->user_name = $username;
             $user->password = User::encryptPassword($password);
             $user->phone = $phone;
+            $user->creation_time = time();
             $auth = AuthGroup::get(["rules" => "user"]);
             $user->role_id = $auth->getData("id");
 

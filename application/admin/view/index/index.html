@@ -1,0 +1,148 @@
+{layout name="layout" /}
+<block name="titel"><title>首页</title></block>
+<block name="resources">
+    {load href="__PUBLIC__/static/css/AdminLTE.css" /}
+    {load href="__PUBLIC__/static/css/font-awesome.min.css" /}
+</block>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-bell"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">待处理订单</span>
+                    <span class="info-box-number">{$countOrder}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">商品数量</span>
+                    <span class="info-box-number">{$countCommodity}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-user-plus"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">会员总数</span>
+                    <span class="info-box-number">{$countUser}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">今日统计</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-6">
+                            新增订单：{$countTodayOrders}
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            今日访问：{$countTodayComent}
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            新增会员：{$countTodayUser}
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            待审评论：{$comments}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box  box-primary">
+                <div class="box-body">
+                    <div class="info-box">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>服务器操作系统：</td>
+                                <td>{php}echo PHP_OS;{/php}</td>
+                                <td>服务器域名/IP：</td>
+                                <td>{php}{/php}</td>
+                                <td>服务器环境：</td>
+                                <td>{php}echo $_SERVER ['SERVER_SOFTWARE'];{/php}</td>
+                            </tr>
+                            <tr>
+                                <td>PHP 版本：</td>
+                                <td>{php}echo PHP_VERSION;{/php}</td>
+                                <td>Mysql 版本：</td>
+                                <td>{php}{/php}</td>
+                                <td>GD 版本</td>
+                                <td>{php}{/php}</td>
+                            </tr>
+                            <tr>
+                                <td>文件上传限制：</td>
+                                <td>{php}
+                                    echo get_cfg_var ("upload_max_filesize")?get_cfg_var
+                                    ("upload_max_filesize"):"不允许上传附件";
+                                    {/php}
+                                </td>
+                                <td>最大占用内存：</td>
+                                <td>
+                                    {php}echo get_cfg_var ("memory_limit")?get_cfg_var("memory_limit"):"无" {/php}
+                                </td>
+                                <td>最大执行时间：</td>
+                                <td>
+                                    {php}echo get_cfg_var("max_execution_time")."秒 "; {/php}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>安全模式：</td>
+                                <td>{php}{/php}</td>
+                                <td>Zlib支持：</td>
+                                <td>{php}{/php}</td>
+                                <td>Curl支持：</td>
+                                <td>{php}{/php}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box  box-success">
+                <div class="box-body">
+                    <div class="info-box">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>程序版本：</td>
+                                <td>v2.2</td>
+                                <td>更新时间：</td>
+                                <td>2017-04-18</td>
+                                <td>程序开发：</td>
+                                <td>周边送官方</td>
+                            </tr>
+                            <tr>
+                                <td>版权所有：</td>
+                                <td>周边送官方</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="callout callout-success">
+        <p><b>周边送</b>--一个致力于打造闪电响应的便捷购物平台 </p>
+    </div>
+</section>
+</div>

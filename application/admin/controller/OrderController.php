@@ -52,6 +52,9 @@ class OrderController extends BaseController
             case "statu8":
                 $orders = Order::where("status", "=", 8)->order('order_time', 'desc')->paginate(15);
                 break;
+            case "statu9":
+                $orders = Order::where("status!=0 AND status!=5 AND status!=7 AND status!=8")->order('order_time', 'desc')->paginate(15);
+                break;
             default:
                 break;
         }

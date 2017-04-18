@@ -76,7 +76,15 @@
                     <a href="{:url('admin/type/index')}">显示分类</a></div>
                 <div class="div2">
                     <div class="lmtj"></div>
-                    <a href="{:url('admin/Order/orderIndex',['type'=>'all'])}">订单管理</a></div>
+                    <a href="{:url('admin/Order/orderIndex',['type'=>'all'])}">
+                        订单管理<i style="color: red;font-size: 20px">
+                        {php}
+                        use app\common\model\Order;
+                        $ords = Order::where("status!=0 AND status!=5 AND status!=7 AND status!=8")->select();
+                        echo count($ords);
+                        {/php}
+                    </i>
+                    </a></div>
                 <div class="div2">
                     <div class="lmtj"></div>
                     <a href="{:url('admin/Order/refunds',['type'=>'all'])}">退货单</a>

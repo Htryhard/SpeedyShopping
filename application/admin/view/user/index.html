@@ -25,7 +25,7 @@
         <td>{$item.email}</td>
         <td>{$item.user_name}</td>
         <td>{$item.phone}</td>
-        <td><a href="#">明细</a></td>
+        <td><a href="{:url('admin/user/userMesg',['userId'=>$item['id']])}">明细</a></td>
     </tr>
     {/volist}
     </tbody>

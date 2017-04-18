@@ -1,0 +1,192 @@
+{layout name="layout" /}
+<block name="resources">
+    {load href="__PUBLIC__/static/css/cropbox.css" /}
+    {load href="__PUBLIC__/static/js/cropbox-min.js" /}
+</block>
+
+<style>
+
+    nav#nav ul li a:hover {
+        background: #ebebeb;
+    }
+</style>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li><a href="{:url('admin/user/index')}">所有用户</a></li>
+    <li class="active">编辑用户信息</li>
+</ol>
+
+<div style="height: 50px"></div>
+
+<div class="container">
+    <div class="row col-md-1"></div>
+    <form class="form-horizontal" role="form" action="{:url('admin/user/register')}" method="post" id="formdata">
+        <div class="row col-md-5 ">
+            <div class="form-group">
+                <div class="container">
+                    <div class="imageBox">
+                        <div class="thumbBox"></div>
+                        <div class="spinner" style="display: none">Loading...</div>
+                    </div>
+                    <div class="action" style="margin-top: 15px;">
+                        <input type="file" id="file" style="float:left; width: 250px">
+                        <input type="button" id="btnCrop" value="确认" style="float: left">
+                        <input type="button" id="btnZoomIn" value="放大" style="float: left">
+                        <input type="button" id="btnZoomOut" value="缩小" style="float: left">
+                    </div>
+                    <div class="cropped">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-5" style="margin-top: 20px;">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="email">邮箱</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="email" name="email" value="{$editUser['email']}"
+                           disabled/>
+                </div>
+                <div class="col-md-3" id="email_error"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="password">新密码</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                </div>
+                <div class="col-md-3" id="password_error"></div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="name">用户名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="name" name="name" value="{$editUser['user_name']}">
+                </div>
+                <div class="col-md-3" id="name_error"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="phone">联系方式</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="phone" name="phone" value="{$editUser['phone']}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="nick_name">昵称</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="nick_name" name="nick_name"
+                           value="{$editUser['nick_name']}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="sbasb">个性签名</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="sbasb" name="sbasb" value="{$editUser['sbasb']}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="creation_time">注册时间</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="creation_time"
+                           name="creation_time"
+                           value="{:date('Y年m月d日 H:i:s',$editUser['creation_time'])}"
+                           disabled>
+                </div>
+            </div>
+
+            <input type="hidden" id="hidd" name="base64Icon" value="">
+            <input type="hidden" id="hidd_uid" name="userId" value="{$editUser['id']}">
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <button type="button" class="btn btn-default" id="topost">提交</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var options =
+            {
+                imageBox: '.imageBox',
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: "{:$iconRoot.$editUser['icon']}"
+            }
+        var cropper = new cropbox(options);
+        document.querySelector('#file').addEventListener('change', function () {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                options.imgSrc = e.target.result;
+                cropper = new cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+            this.files = [];
+        })
+        document.querySelector('#topost').addEventListener('click', function () {
+            var img = cropper.getDataURL();
+            $('#hidd').val(img);
+            var imgBase64 = $('#hidd').val();
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/user/userMesgHandle')}",
+                dataType: "json",
+                data: {
+                    imgBase64: imgBase64,
+                    userdata: $('#formdata').serializeArray()
+                },
+                success: function (msg) {
+//                    alert(msg);
+                    switch (msg) {
+                        case 'success':
+                            alert("信息修改成功！");
+                            document.location.reload();//当前页面
+                            break;
+                        case 'UploadsError':
+                            alert("信息修改失败！");
+                            break;
+                        case 'PostError':
+                            alert("提交方式出错！");
+                            break;
+                        case 'ParameterError':
+                            alert("请求参数不全！");
+                            break;
+                        default:
+                            getlayout("other_error", msg);
+
+                    }
+//                    var u = "{:url('admin/label/index')}";
+//                    window.location = u;
+                },
+            });
+        })
+        document.querySelector('#btnZoomIn').addEventListener('click', function () {
+            cropper.zoomIn();
+        })
+        document.querySelector('#btnZoomOut').addEventListener('click', function () {
+            cropper.zoomOut();
+        })
+    };
+
+    //==========================================
+
+    //获得错误html代码
+    function getlayout(elid, str) {
+        $("#" + elid).empty();
+        $("#" + elid).parent().removeClass("has-success");
+        $("#" + elid).parent().addClass("has-error");
+        $("#" + elid).append(
+            "<font style='color:red;font-weight:bold;'><span class='glyphicon glyphicon-remove'></span> " + str + "</font>"
+        );
+    }
+</script>

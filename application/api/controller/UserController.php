@@ -528,7 +528,7 @@ class UserController extends Controller
         $orderSpecificationId = Request::instance()->post("orderSpecificationId");
         $rating = Request::instance()->post("rating");
         $commentContnet = Request::instance()->post("commentContnet");
-        $imgBase64s = Request::instance()->post("imgBase64s");
+//        $imgBase64s = Request::instance()->post("imgBase64s");
 
         $user = User::get(["id" => $userId]);
         $orderSpecification = OrderSpecification::get(["id" => $orderSpecificationId]);
@@ -556,25 +556,25 @@ class UserController extends Controller
             $comment->commodity_id = $commodity["id"];
             $comment->order_id = $orderSpecification["order"]["id"];
             $comment->order_specification_id = $orderSpecification->getData('id');
-            $comment->status = 0;//0待审核，1通过并显示，2删除不显示
+            $comment->status = 1;//0正常显示，1管理员暂未开放
             $comment->save();
 
-            if ($imgBase64s != "") {
-                //以约定的5个#号来分割
-                $imgArray = explode("#####", $imgBase64s);
-                //分割会导致多出一个空元素，故移除最后一个空元素
-                array_pop($imgArray);
-                foreach ($imgArray as $item) {
-                    $commentImgPath = Comm::uploadsCommentImgsForAPI($item);
-                    $commentImageModle = new CommentImages();
-                    $commentImageModle->id = Comm::getNewGuid();
-                    $commentImageModle->image = $commentImgPath;
-                    $commentImageModle->comment_id = $comment->getData("id");
-                    $commentImageModle->save();
-                }
-            }
+//            if ($imgBase64s != "") {
+//                //以约定的5个#号来分割
+//                $imgArray = explode("#####", $imgBase64s);
+//                //分割会导致多出一个空元素，故移除最后一个空元素
+//                array_pop($imgArray);
+//                foreach ($imgArray as $item) {
+//                    $commentImgPath = Comm::uploadsCommentImgsForAPI($item);
+//                    $commentImageModle = new CommentImages();
+//                    $commentImageModle->id = Comm::getNewGuid();
+//                    $commentImageModle->image = $commentImgPath;
+//                    $commentImageModle->comment_id = $comment->getData("id");
+//                    $commentImageModle->save();
+//                }
+//            }
             $date["statu"] = "success";
-            $date["data"] = "评论发表成功！";
+            $date["data"] = $comment;
             return json($date);
 
         }
@@ -775,6 +775,7 @@ class UserController extends Controller
             $user->user_name = $userName;
             $user->password = User::encryptPassword($password);
             $user->phone = $phone;
+            $user->creation_time = time();
             $auth = AuthGroup::get(["rules" => "user"]);
             $user->role_id = $auth->getData("id");
             $user->icon = "201702181841206215.png";//默认头像

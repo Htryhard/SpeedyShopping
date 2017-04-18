@@ -6,6 +6,8 @@ use app\common\aliyun\top\TopClient;
 use app\common\Comm;
 use app\common\model\AuthGroup;
 use app\common\model\Code;
+use app\common\model\Comment;
+use app\common\model\CommentImages;
 use app\common\model\Commodity;
 use app\common\model\Type;
 use app\common\model\User;
@@ -147,6 +149,31 @@ class IndexController extends Controller
             $data["data"] = "";
             return json($data);
         }
+    }
+
+    public function postCommentImgs()
+    {
+        $commentId = Request::instance()->post("commentId");
+        $imgBase64 = Request::instance()->post("imgBase64");
+        $comment = Comment::get(["id" => $commentId]);
+        if ($comment != null && $imgBase64 != "") {
+            $commentImgPath = Comm::uploadsCommentImgsForAPI($imgBase64);
+            $commentImageModle = new CommentImages();
+            $commentImageModle->id = Comm::getNewGuid();
+            $commentImageModle->image = $commentImgPath;
+            $commentImageModle->comment_id = $comment->getData("id");
+            $commentImageModle->save();
+
+            $date["statu"] = "success";
+            $date["data"] = $comment;
+            return json($date);
+        } else {
+            $date["statu"] = "error";
+            $date["data"] = "";
+            return json($date);
+        }
+
+
     }
 
 }
