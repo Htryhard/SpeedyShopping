@@ -1,0 +1,75 @@
+{layout name="layout" /}
+<block name="title"><title>退货换单</title></block>
+<block name="resources">
+
+</block>
+
+<ol class="breadcrumb">
+    <li><a href="{:url('admin/index/index')}">首页</a></li>
+    <li><a href="{:url('admin/Order/refunds',['type'=>'all'])}">退换货单</a></li>
+    <li class="active">详情</li>
+</ol>
+
+<div style="width:600px">
+    <img src="{$imgRoot}{$refund['OrderSpecification']['specification']['commodity']['icon']}"
+         style="height: 100px;width: 100px;" class="img-rounded"/>
+    <div style="float: right">
+        <p>{$refund['OrderSpecification']['specification']['commodity']['title']}</p>
+        <p style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">
+            购买的规格：{$refund['OrderSpecification']['specificationcontent']}
+        </p>
+        <p style="font-family: 微软雅黑;font-size: 15px;color: #ABABC3">
+            申请时间：{:date('Y年m月d日 H:i:s',$refund['creation_time'])}
+        </p>
+    </div>
+</div>
+
+<div>
+    <p style="font-family: 微软雅黑;font-size: 15px;color: red">
+        退换货单状态：{$refund['status']}
+    </p>
+    <p>
+        <span style="font-size: 15px">申请理由:</span>
+        <span style="font-size: 20px">{$refund['content']}</span>
+    </p>
+</div>
+
+<div>
+    <button type="button" class="btn btn-danger" onclick="toHandleRefund(2)">不同意申请</button>
+    <button type="button" class="btn btn-success" onclick="toHandleRefund(1)">同意申请</button>
+</div>
+
+<script type="text/javascript">
+    function toHandleRefund(type) {
+        if (confirm("操作后不可更改！确定要操作吗？")) {
+            $.ajax({
+                type: "POST",
+                url: "{:url('admin/order/customerServiceHandle')}",
+                dataType: "json",
+                data: {
+                    type: type,
+                    refundId: "{$refund['id']}"
+                },
+                success: function (msg) {
+                    switch (msg) {
+                        case "Success":
+                            alert("操作成功！");
+                            document.location.reload();//当前页面
+                            break;
+                        case "Obsolete":
+                            alert("此退货单已经被处理！不能再次处理！");
+                            break;
+                        case "ParameterError":
+                            alert("参数错误！");
+                            break;
+                        default:
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+//                alert(msg);
+                },
+            });
+        }
+    }
+</script>

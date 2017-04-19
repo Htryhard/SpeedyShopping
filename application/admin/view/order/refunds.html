@@ -30,6 +30,7 @@
         <th>联系电话</th>
         <th>申请时间</th>
         <th>类型</th>
+        <th>状态</th>
         <th>操作</th>
     </tr>
     </thead>
@@ -42,8 +43,9 @@
         <td>{$refund['order']['address']['phone']}</td>
         <td>{:date('Y年m月d日 H:i:s',$refund['creation_time'])}</td>
         <td>{$refund->type}</td>
+        <td>{$refund->status}</td>
         <td>
-            <a href="{:url('admin/order/orderDetailed?id='.$refund->getData('id'))}">详细</a>
+            <a href="{:url('admin/order/customerService?refundId='.$refund->getData('id'))}">详细</a>
         </td>
     </tr>
     {/volist}

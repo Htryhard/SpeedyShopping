@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: shopp_database
 Target Host: localhost
 Target Database: shopp_database
-Date: 2017/4/18 ���ڶ� ���� 5:51:53
+Date: 2017/4/19 ������ ���� 2:09:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -186,7 +186,7 @@ CREATE TABLE `shopp_count` (
   `user` varchar(100) DEFAULT NULL,
   `modle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2459 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2572 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for shopp_feedback
@@ -762,6 +762,119 @@ INSERT INTO `shopp_count` VALUES ('2455', '::1', '1492508956', 'admin', 'admin/C
 INSERT INTO `shopp_count` VALUES ('2456', '::1', '1492508965', 'admin', 'admin/Type/index');
 INSERT INTO `shopp_count` VALUES ('2457', '::1', '1492508984', 'admin', 'admin/Commodity/index');
 INSERT INTO `shopp_count` VALUES ('2458', '::1', '1492509053', '张三', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2459', '::1', '1492509961', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2460', '::1', '1492509978', '', 'home');
+INSERT INTO `shopp_count` VALUES ('2461', '::1', '1492509992', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2462', '::1', '1492510005', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2463', '::1', '1492510009', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2464', '::1', '1492510010', 'admin', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('2465', '::1', '1492510011', 'admin', 'admin/Type/index');
+INSERT INTO `shopp_count` VALUES ('2466', '::1', '1492510012', 'admin', 'admin/Order/sendGoods');
+INSERT INTO `shopp_count` VALUES ('2467', '::1', '1492510280', 'admin', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('2468', '::1', '1492510281', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2469', '::1', '1492510317', 'admin', 'admin/Commodity/findComments');
+INSERT INTO `shopp_count` VALUES ('2470', '::1', '1492510350', 'admin', 'admin/Index/tableUser');
+INSERT INTO `shopp_count` VALUES ('2471', '::1', '1492510388', 'admin', 'admin/Index/seting');
+INSERT INTO `shopp_count` VALUES ('2472', '::1', '1492510581', 'admin', 'admin/Index/seting');
+INSERT INTO `shopp_count` VALUES ('2473', '::1', '1492510622', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2474', '::1', '1492510642', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2475', '::1', '1492510661', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2476', '::1', '1492510666', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2477', '::1', '1492564666', '', 'home');
+INSERT INTO `shopp_count` VALUES ('2478', '::1', '1492564676', '', 'home');
+INSERT INTO `shopp_count` VALUES ('2479', '::1', '1492564703', '张三', 'home');
+INSERT INTO `shopp_count` VALUES ('2480', '::1', '1492564705', '张三', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2481', '::1', '1492564707', '张三', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('2482', '::1', '1492564708', '张三', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('2483', '::1', '1492564709', '张三', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('2484', '::1', '1492564709', '张三', 'home/User/allComment');
+INSERT INTO `shopp_count` VALUES ('2485', '::1', '1492564710', '张三', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2486', '::1', '1492564934', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2487', '::1', '1492564962', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2488', '::1', '1492565008', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2489', '::1', '1492565009', 'admin', 'admin/Order/sendGoods');
+INSERT INTO `shopp_count` VALUES ('2490', '::1', '1492565012', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2491', '::1', '1492565015', 'admin', 'admin/Order/sendGoods');
+INSERT INTO `shopp_count` VALUES ('2492', '::1', '1492565028', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2493', '::1', '1492565033', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2494', '::1', '1492565036', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2495', '::1', '1492565195', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2496', '::1', '1492565197', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2497', '::1', '1492565201', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2498', '::1', '1492565205', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2499', '::1', '1492565307', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2500', '::1', '1492565314', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2501', '::1', '1492566041', '张三', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('2502', '::1', '1492566042', '张三', 'home/User/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2503', '::1', '1492566170', '张三', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2504', '::1', '1492566172', '张三', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2505', '::1', '1492566511', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2506', '::1', '1492566593', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2507', '::1', '1492566595', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2508', '::1', '1492566638', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2509', '::1', '1492566679', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2510', '::1', '1492566707', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2511', '::1', '1492566715', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2512', '::1', '1492566722', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2513', '::1', '1492566725', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2514', '::1', '1492566726', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2515', '::1', '1492566844', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2516', '::1', '1492566853', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2517', '::1', '1492566888', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2518', '::1', '1492566939', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2519', '::1', '1492567183', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2520', '::1', '1492567191', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2521', '::1', '1492567216', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2522', '::1', '1492567223', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2523', '::1', '1492569585', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2524', '::1', '1492569738', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2525', '::1', '1492570115', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2526', '::1', '1492572001', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2527', '::1', '1492572141', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2528', '::1', '1492572148', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2529', '::1', '1492572151', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2530', '::1', '1492572168', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2531', '::1', '1492572182', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2532', '::1', '1492572197', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2533', '::1', '1492572210', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2534', '::1', '1492572217', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2535', '::1', '1492572225', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2536', '::1', '1492572281', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2537', '::1', '1492572285', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2538', '::1', '1492572293', 'admin', 'admin/Order/customerService');
+INSERT INTO `shopp_count` VALUES ('2539', '::1', '1492572296', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2540', '::1', '1492572303', '张三', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2541', '::1', '1492572347', '张三', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2542', '::1', '1492572347', '张三', 'home/User/userOrders');
+INSERT INTO `shopp_count` VALUES ('2543', '::1', '1492572348', '张三', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('2544', '::1', '1492572349', '张三', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('2545', '::1', '1492572350', '张三', 'home/User/allComment');
+INSERT INTO `shopp_count` VALUES ('2546', '::1', '1492572351', '张三', 'home/User/customerService');
+INSERT INTO `shopp_count` VALUES ('2547', '::1', '1492572355', '张三', 'home');
+INSERT INTO `shopp_count` VALUES ('2548', '::1', '1492572374', '张三', 'home/User/userHome');
+INSERT INTO `shopp_count` VALUES ('2549', '::1', '1492572376', '张三', 'home/User/showCart');
+INSERT INTO `shopp_count` VALUES ('2550', '::1', '1492572378', '张三', 'home/User/userMessage');
+INSERT INTO `shopp_count` VALUES ('2551', '::1', '1492572380', '张三', 'home/User/allComment');
+INSERT INTO `shopp_count` VALUES ('2552', '::1', '1492572387', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2553', '::1', '1492572394', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2554', '::1', '1492572398', 'admin', 'admin/Commodity/editCommodity');
+INSERT INTO `shopp_count` VALUES ('2555', '::1', '1492572426', 'admin', 'admin/Order/refunds');
+INSERT INTO `shopp_count` VALUES ('2556', '::1', '1492572427', 'admin', 'admin/Order/sendGoods');
+INSERT INTO `shopp_count` VALUES ('2557', '::1', '1492572441', 'admin', 'admin/Index/index');
+INSERT INTO `shopp_count` VALUES ('2558', '::1', '1492572443', 'admin', 'admin/Commodity/index');
+INSERT INTO `shopp_count` VALUES ('2559', '::1', '1492572444', 'admin', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('2560', '::1', '1492572445', 'admin', 'admin/Type/index');
+INSERT INTO `shopp_count` VALUES ('2561', '::1', '1492572446', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2562', '::1', '1492572456', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2563', '::1', '1492572461', 'admin', 'admin/Order/editOrder');
+INSERT INTO `shopp_count` VALUES ('2564', '::1', '1492572466', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2565', '::1', '1492572472', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2566', '::1', '1492572480', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2567', '::1', '1492572483', 'admin', 'admin/Order/orderDetailed');
+INSERT INTO `shopp_count` VALUES ('2568', '::1', '1492572489', 'admin', 'admin/Order/orderIndex');
+INSERT INTO `shopp_count` VALUES ('2569', '::1', '1492572494', 'admin', 'admin/Commodity/addCommodity');
+INSERT INTO `shopp_count` VALUES ('2570', '::1', '1492573438', '张三', 'home/User/logOut');
+INSERT INTO `shopp_count` VALUES ('2571', '::1', '1492573438', '', 'home');
 INSERT INTO `shopp_order` VALUES ('0670EC59-8FAB-9175-24F0-9BABD7AD9989', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491825231', '1491825231', '1491825237', '', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
 INSERT INTO `shopp_order` VALUES ('093FA0F9-B083-7CA0-0930-CA7968077100', '7', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1492097717', '1492097717', '1492097724', '', '130D6D3D-ADD3-57DE-6F76-76F9A3F57B70');
 INSERT INTO `shopp_order` VALUES ('0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '5', 'AA692D26-B786-D8A0-1420-F8F33264485C', '1491814301', '1491814301', '1491816240', '1491816305', 'B1A6D755-B3FA-40BD-6500-0BB14CF4A303');
@@ -791,7 +904,7 @@ INSERT INTO `shopp_order_specification` VALUES ('D9FFC194-BC92-3D9E-92F5-7F8DFE1
 INSERT INTO `shopp_order_specification` VALUES ('DAF1DE83-C75B-61D4-74B5-3A29FEFEE7E3', '68F7AD70-2C3B-43FC-ADC8-A3CB25B31938', '82DEE154-BF19-E15F-A6DD-02630F4571BE', '1', '299', '官方');
 INSERT INTO `shopp_order_specification` VALUES ('E016FFC7-F9DA-08D6-BA09-5D9E5B9BA20B', '0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '0959E8FD-75B4-F041-9820-C0038FDD68DD', '1', '2800', '官方标配 :银色');
 INSERT INTO `shopp_order_specification` VALUES ('F438F843-962B-AFE4-6084-05C4CAC55B6E', '68F7AD70-2C3B-43FC-ADC8-A3CB25B31938', '4C4138B7-0E86-01A1-2432-87B3D1B9C320', '3', '35', '浅绿色');
-INSERT INTO `shopp_refunds` VALUES ('89DB898B-C473-05B3-47B0-E0DA5EB4B37E', 'E016FFC7-F9DA-08D6-BA09-5D9E5B9BA20B', '2', '发发撒旦飞洒发斯蒂芬', '0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '1491894427', '0', 'AA692D26-B786-D8A0-1420-F8F33264485C');
+INSERT INTO `shopp_refunds` VALUES ('89DB898B-C473-05B3-47B0-E0DA5EB4B37E', 'E016FFC7-F9DA-08D6-BA09-5D9E5B9BA20B', '2', '发发撒旦飞洒发斯蒂芬', '0E70D5B7-1F3F-BCF7-0C4D-3E9D2DAE2F66', '1491894427', '1', 'AA692D26-B786-D8A0-1420-F8F33264485C');
 INSERT INTO `shopp_refunds` VALUES ('9F0A48DA-EA16-26EE-2F3B-10733902ED5B', '468422A1-CB9B-E3EF-1D16-E3530A347479', '0', '坏了发动机涉及到了快速减肥的快乐地方上的', '0670EC59-8FAB-9175-24F0-9BABD7AD9989', '1491890543', '3', 'AA692D26-B786-D8A0-1420-F8F33264485C');
 INSERT INTO `shopp_specification` VALUES ('023EDF9B-3ED9-935A-81A1-FA3CC96E169C', '棕色', '4', '300', '179149C6-2255-FAA2-F9F8-CA6608080FAA');
 INSERT INTO `shopp_specification` VALUES ('047856A0-44BB-884C-1524-588F079D3BBE', '60V', '7', '6', 'B1096A78-4A70-39E0-EBE4-3523CE963812');

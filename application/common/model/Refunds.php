@@ -46,7 +46,7 @@ class Refunds extends Model
      */
     public function getStatusAttr($value)
     {
-        $status = [0 => '正在处理...', 1 => '申请通过!', 2 => '卖家不同意!', 3 => "申请取消"];
+        $status = [0 => '正在处理...', 1 => '申请通过!请留意电话联系。', 2 => '卖家不同意!', 3 => "申请取消"];
         return $status[$value];
     }
 

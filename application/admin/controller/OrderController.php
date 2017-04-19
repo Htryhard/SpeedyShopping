@@ -15,6 +15,7 @@ use app\common\model\OrderSpecification;
 use app\common\model\Refunds;
 use app\common\model\Specification;
 use app\common\model\User;
+use think\Request;
 
 class OrderController extends BaseController
 {
@@ -217,20 +218,61 @@ class OrderController extends BaseController
     //更新订单的状态
     public function editOrderStatus()
     {
-        if ($this->request->isAjax()){
+        if ($this->request->isAjax()) {
             $orderId = $this->request->post("orderId");
             $type = $this->request->post("type");
-            $order = Order::get(['id'=>$orderId]);
-            if ($type=="" || $order==null){
+            $order = Order::get(['id' => $orderId]);
+            if ($type == "" || $order == null) {
                 $this->redirect(url("home/error/postError", ['code' => "404", 'msg' => "请求的参数不存在！"]));
-            }else{
+            } else {
                 $oldStatus = $order->getData('status');
-                $order->status = $oldStatus+1;
+                $order->status = $oldStatus + 1;
                 $order->save();
                 return "success";
             }
-        }else{
+        } else {
             $this->redirect(url("home/error/postError", ['code' => "400", 'msg' => "请求方式错误！"]));
+        }
+    }
+
+
+    public function customerService($refundId)
+    {
+        $refund = Refunds::get(["id" => $refundId]);
+        if ($refund != null) {
+            $this->assign("refund", $refund);
+            $user = User::getUserBySession("admin");
+            $this->assign("user", $user);
+            $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+            $this->assign("imgRoot", $imgRoot);
+            return $this->fetch();
+        } else {
+            return $this->redirect(url("home/error/postError?code=404&msg=该退货单未找的到！！"));
+        }
+    }
+
+    public function customerServiceHandle()
+    {
+        $refundId = Request::instance()->post("refundId");
+        $type = Request::instance()->post("type");
+        $refund = Refunds::get(["id" => $refundId]);
+        if ($refund != null && $type != "") {
+            if ($refund->getData("status") == 0) {
+                if ($type == 1) {
+                    //申请通过
+                    $refund->status = 1;
+                } else {
+                    //拒绝申请
+                    $refund->status = 2;
+                }
+                $refund->save();
+                return "Success";
+            } else {
+                //退货订单已经被处理，不能再次处理
+                return "Obsolete";
+            }
+        } else {
+            return "ParameterError";
         }
     }
 
