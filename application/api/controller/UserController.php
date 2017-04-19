@@ -31,6 +31,7 @@ class UserController extends Controller
 {
     /**
      * 用户登录
+     * 参数：邮箱；密码
      * @return \think\response\Json
      */
     public function login()
