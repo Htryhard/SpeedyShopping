@@ -848,9 +848,9 @@ class UserController extends BaseController
                     return "SpecificationNull";
                 }
 
-                if ($orderSpecification["order"]["status"] != 5) {
-                    return "NoPermission";
-                }
+//                if ($orderSpecification["order"]["status"] != 5) {
+//                    return "NoPermission";
+//                }
 
                 $commodityId = $orderSpecification['specification']['commodity']['id'];
                 //判断是否已经对这次购买的商品评论过
