@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+
+    {load href="__PUBLIC__/static/wap-phone/css/amazeui.min.css" /}
+    {load href="__PUBLIC__/static/wap-phone/css/wap.css" /}
+
+    <title>首页</title>
+</head>
+<body>
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+    <a href="#top" title="">
+        <img class="am-gotop-icon-custom" src="__PUBLIC__/static/wap-phone/img/goTop.png"/>
+    </a>
+</div>
+
+
+
+<div class="pet_mian" id="top">
+    <div class="pet_head">
+        <header data-am-widget="header"
+                class="am-header am-header-default pet_head_block">
+            <div class="am-header-left am-header-nav ">
+                <a href="#left-link" class="iconfont pet_head_jt_ico">&#xe601;</a>
+            </div>
+            <div class="pet_news_list_tag_name">瓜农信息</div>
+            <div class="am-header-right am-header-nav">
+                <a href="javascript:;" class="iconfont pet_head_gd_ico">&#xe600;</a>
+            </div>
+        </header>
+    </div>
+
+    <!--中间列表开始-->
+    <div class="pet_content_main">
+        <div class="pet_grzx_nr">
+            <div class="pet_grzx_ico">
+                <img src="__PUBLIC__/static/wap-phone/img/qq1.png" alt="">
+            </div>
+            <div class="pet_grzx_name">陈学远</div>
+            <div class="pet_grzx_map">15277176161</div>
+            <div class="pet_grzx_num_font">
+                南宁市良庆区南晓镇团东村雅王坡瓜农
+            </div>
+            <div class="pet_grzx_num">
+                <span>653<i>瓜田（亩）</i></span>
+                <span>234<i>辣椒（亩）</i></span>
+                <span>34<i>水稻（亩）</i></span>
+            </div>
+
+        </div>
+
+    </div>
+    <!--中间列表结束-->
+
+    <!--底部网站信息-->
+    <div class="pet_article_dowload pet_dowload_more_top_off">
+        <div class="pet_article_dowload_title">关于农展示</div>
+        <div class="pet_article_dowload_content pet_dowload_more_top_bg">
+            <div class="pet_article_dowload_triangle pet_dowload_more_top_san"></div>
+            <div class="pet_article_dowload_ico"><img src="__PUBLIC__/static/wap-phone/img/footdon.png" alt=""></div>
+            <div class="pet_article_dowload_content_font">
+                农展示 以提供农作物展示平台为理念，从小小瓜农到收购商，最终实现所有你有我需的目标。
+            </div>
+            <div class="pet_article_dowload_all">
+                <a href="" class="pet_article_dowload_Az am-icon-apple"> App store</a>
+                <a href="" class="pet_article_dowload_Pg am-icon-android"> Android</a>
+            </div>
+        </div>
+        <div class="pet_article_footer_info">Copyright(c)2018 hloveq All Rights Reserved</div>
+    </div>
+</div>
+
+{load href="__PUBLIC__/static/wap-phone/js/jquery.min.js" /}
+{load href="__PUBLIC__/static/wap-phone/js/amazeui.min.js" /}
+<script>
+    $(function () {
+
+        // 动态计算新闻列表文字样式
+        auto_resize();
+        $(window).resize(function () {
+            auto_resize();
+        });
+        $('.am-list-thumb img').load(function () {
+            auto_resize();
+        });
+
+        $('.am-list > li:last-child').css('border', 'none');
+
+        function auto_resize() {
+            $('.pet_list_one_nr').height($('.pet_list_one_img').height());
+
+        }
+
+        $('.pet_nav_gengduo').on('click', function () {
+            $('.pet_more_list').addClass('pet_more_list_show');
+        });
+        $('.pet_more_close').on('click', function () {
+            $('.pet_more_list').removeClass('pet_more_list_show');
+        });
+    });
+
+</script>
+</body>
+</html>

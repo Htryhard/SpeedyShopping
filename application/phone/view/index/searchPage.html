@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+
+    {load href="__PUBLIC__/static/wap-phone/css/amazeui.min.css" /}
+    {load href="__PUBLIC__/static/wap-phone/css/wap.css" /}
+
+    <title>首页</title>
+</head>
+<body>
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+    <a href="#top" title="">
+        <img class="am-gotop-icon-custom" src="__PUBLIC__/static/wap-phone/img/goTop.png"/>
+    </a>
+</div>
+
+
+<div class="pet_mian" id="top">
+    <!--顶部搜索栏-->
+    <div class="gray-panel">
+        <div class="my-search-title-panel">
+            <div class="am-input-group">
+                
+                <input type="text" class="am-form-field am-radius" value="{$keyword}" id="keywordId">
+                <span class="am-input-group-btn">
+                <button class="am-btn am-radius" type="button" id="sumbKey" onclick="sumbKey()"><span class="am-icon-search"></span></button>
+                    </span>
+
+            </div>
+        </div>
+    </div>
+
+    <!--中间列表开始-->
+    <div class="pet_content_main">
+        <div data-am-widget="list_news" class="am-list-news am-list-news-default">
+            <div class="am-list-news-bd">
+                <ul class="am-list">
+                    <!--缩略图在标题右边-->
+                    {volist name="commodities" id="item" key="key"}
+
+                    {if condition="($key == 1)"}
+
+                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
+                        <div class="pet_list_one_info">
+                            <div class="pet_list_one_info_l">
+                                <div class="pet_list_one_info_ico"></div>
+                                <div class="pet_list_one_info_name"></div>
+                            </div>
+                            <div class="pet_list_one_info_r">
+                                <!--<div class="pet_list_tag pet_list_tag_xxs"></div>-->
+                            </div>
+                        </div>
+                        <div class=" am-u-sm-8 am-list-main pet_list_one_nr">
+                            <h3 class="am-list-item-hd pet_list_one_bt"><a
+                                    href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">{$item['title']}</a>
+                            </h3>
+                            <div class="am-list-item-text pet_list_one_text">
+                                {$item["describe"]}
+                            </div>
+
+                        </div>
+                        <div class="am-u-sm-4 am-list-thumb">
+                            <a href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">
+                                <img src="{$imgRoot}{$item['icon']}" class="pet_list_one_img" alt=""/>
+                            </a>
+                        </div>
+                    </li>
+
+
+                    {else /}
+                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
+                        <div class=" am-u-sm-8 am-list-main pet_list_one_nr">
+                            <h3 class="am-list-item-hd pet_list_one_bt"><a
+                                    href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">{$item['title']}</a>
+                            </h3>
+                            <div class="am-list-item-text pet_list_one_text">
+                                {$item["describe"]}
+                            </div>
+
+                        </div>
+                        <div class="am-u-sm-4 am-list-thumb">
+                            <a href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">
+                                <img src="{$imgRoot}{$item['icon']}" class="pet_list_one_img" alt=""/>
+                            </a>
+                        </div>
+                    </li>
+                    {/if}
+
+
+                    {/volist}
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <!--中间列表结束-->
+
+    <!--底部网站信息-->
+    <div class="pet_article_dowload pet_dowload_more_top_off">
+        <div class="pet_article_dowload_title">关于农展示</div>
+        <div class="pet_article_dowload_content pet_dowload_more_top_bg">
+            <div class="pet_article_dowload_triangle pet_dowload_more_top_san"></div>
+            <div class="pet_article_dowload_ico"><img src="__PUBLIC__/static/wap-phone/img/footdon.png" alt=""></div>
+            <div class="pet_article_dowload_content_font">
+                农展示 以提供农作物展示平台为理念，从小小瓜农到收购商，最终实现所有你有我需的目标。
+            </div>
+            <div class="pet_article_dowload_all">
+                <a href="" class="pet_article_dowload_Az am-icon-apple"> App store</a>
+                <a href="" class="pet_article_dowload_Pg am-icon-android"> Android</a>
+            </div>
+        </div>
+        <div class="pet_article_footer_info">Copyright(c)2018 hloveq All Rights Reserved</div>
+    </div>
+</div>
+
+{load href="__PUBLIC__/static/wap-phone/js/jquery.min.js" /}
+{load href="__PUBLIC__/static/wap-phone/js/amazeui.min.js" /}
+<script>
+    $(function () {
+
+        // 动态计算新闻列表文字样式
+        auto_resize();
+        $(window).resize(function () {
+            auto_resize();
+        });
+        $('.am-list-thumb img').load(function () {
+            auto_resize();
+        });
+
+        $('.am-list > li:last-child').css('border', 'none');
+
+        function auto_resize() {
+            $('.pet_list_one_nr').height($('.pet_list_one_img').height());
+
+        }
+
+        $('.pet_nav_gengduo').on('click', function () {
+            $('.pet_more_list').addClass('pet_more_list_show');
+        });
+        $('.pet_more_close').on('click', function () {
+            $('.pet_more_list').removeClass('pet_more_list_show');
+        });
+    });
+
+    function sumbKey() {
+        var keyword = $("#keywordId").val();
+        $.ajax({
+            type: "GET",
+            url: "{:url('phone/index/searchPage?keyword=')}",
+            dataType: "json",
+            data: {
+                commodityId: commodityId,
+                specificationId: specificationId
+            },
+            success: function (msg) {
+                switch (msg) {
+                    case "AddCartSuccess":
+                        alert("添加进购物车成功！");
+                        break;
+                    case "NotRepertory":
+                        alert("库存不足！店小二正在急忙补货中！");
+                        break;
+                    case "NotFindSpecification":
+                        alert("规格参数不正确");
+                        break;
+                    case "IllegalRequest":
+                        //非法请求
+                        alert("非法请求");
+                        break;
+                    case "UserNotLogin":
+                        window.location = "{:url('home/thing/login')}";
+                        break;
+                    case "NotFindCommodity":
+                        alert('这件宝贝从地球上消失了~~');
+                        break;
+                    default:
+
+                }
+            },
+            error: function (msg) {
+                alert(msg);
+            },
+        });
+    }
+    
+</script>
+</body>
+</html>
