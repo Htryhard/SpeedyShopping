@@ -16,12 +16,18 @@ class IndexController extends Controller
     public function index()
     {
         // 使用闭包查询
+        $bannerCommodities = Commodity::all(function ($query) {
+            $query->where('staistics', 0)->limit(3)->order('creation_time', 'desc');
+        });
+
+        // 使用闭包查询
         $commodities = Commodity::all(function ($query) {
             $query->where('staistics', 0)->limit(10)->order('creation_time', 'desc');
         });
         $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
         $this->assign('commodities', $commodities);
+        $this->assign('bannerCommodities', $bannerCommodities);
         return $this->fetch();
     }
 
@@ -36,7 +42,7 @@ class IndexController extends Controller
                     'query' => [
                         'title' => $keyword,
                     ],
-                ])->order('creation_time', 'desc');
+                ]);
         } else {
             $commodities = [];
         }
