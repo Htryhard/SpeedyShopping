@@ -5,6 +5,8 @@ namespace app\phone\controller;
 
 use app\common\Comm;
 use app\common\model\Commodity;
+use app\common\model\Count;
+use app\common\model\Images;
 use think\Controller;
 
 /**
@@ -13,16 +15,40 @@ use think\Controller;
  */
 class IndexController extends Controller
 {
+    /**
+     * 测试页面
+     * @return mixed
+     */
+    public function test()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * 首页
+     * @return mixed
+     * @throws \think\Exception\DbException
+     */
     public function index()
     {
+        //记录访问IP
+        $requestIP = Comm::getClientIP();
+        $requestDate = time();
+        $count = new Count();
+        $count->ipcontent = $requestIP;
+        $count->time = date('Y-m-d h:i:s', $requestDate);
+        $count->user = "手机端";
+        $count->modle = $this->request->module();
+        $count->save();
+
         // 使用闭包查询
         $bannerCommodities = Commodity::all(function ($query) {
-            $query->where('staistics', 0)->limit(3)->order('creation_time', 'desc');
+            $query->where('states', 0)->limit(3)->order('creation_time', 'desc');
         });
 
         // 使用闭包查询
         $commodities = Commodity::all(function ($query) {
-            $query->where('staistics', 0)->limit(10)->order('creation_time', 'desc');
+            $query->where('states', 0)->limit(10)->order('creation_time', 'desc');
         });
         $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
@@ -31,6 +57,12 @@ class IndexController extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 搜索页面
+     * @param string $keyword
+     * @return mixed
+     * @throws \think\exception\DbException
+     */
     public function searchPage($keyword = "")
     {
         $pageSize = 100; // 每页显示30条数据
@@ -53,11 +85,16 @@ class IndexController extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 商品列表页面
+     * @return mixed
+     * @throws \think\Exception\DbException
+     */
     public function commodityList()
     {
         // 使用闭包查询
         $commodities = Commodity::all(function ($query) {
-            $query->where('staistics', 0)->limit(100)->order('creation_time', 'desc');
+            $query->where('states', 0)->limit(100)->order('creation_time', 'desc');
         });
         $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
         $this->assign("imgRoot", $imgRoot);
@@ -65,11 +102,21 @@ class IndexController extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 关于我的页面
+     * @return mixed
+     */
     public function aboutMe()
     {
         return $this->fetch();
     }
 
+    /**
+     * 商品明细页面
+     * @param string $id
+     * @return mixed|string
+     * @throws \think\Exception\DbException
+     */
     public function commodityDetailed($id = "")
     {
         if ($id != "") {
@@ -98,5 +145,14 @@ class IndexController extends Controller
         }
     }
 
+
+    public function imagesList()
+    {
+        $images = Images::all();
+        $imgRoot = '/SpeedyShopping/public//uploads/commodity_images/';
+        $this->assign("imgRoot", $imgRoot);
+        $this->assign("Images", $images);
+        return $this->fetch();
+    }
 
 }

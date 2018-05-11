@@ -1,4 +1,5 @@
 <?php
+
 namespace app\admin\controller;
 
 use app\common\Comm;
@@ -6,6 +7,7 @@ use app\common\controller\BaseController;
 use app\common\model\Comment;
 use app\common\model\Commodity;
 use app\common\model\Count;
+use app\common\model\Images;
 use app\common\model\Order;
 use app\common\model\OrderSpecification;
 use app\common\model\User;
@@ -167,12 +169,6 @@ class IndexController extends BaseController
 
     }
 
-    public function seting()
-    {
-        $user = User::getUserBySession("admin");
-        $this->assign("user", $user);
-        return $this->fetch();
-    }
 
     public function testUUID()
     {
@@ -194,6 +190,58 @@ class IndexController extends BaseController
     public function testWei()
     {
         return $this->fetch();
+    }
+
+
+    public function seting()
+    {
+        $user = User::getUserBySession("admin");
+        $this->assign("user", $user);
+        return $this->fetch();
+    }
+
+    public function saveImages()
+    {
+        $commodityImages = $this->request->param("commodityImages");
+        if ($commodityImages != "") {
+            $commodityImages = substr($commodityImages, 1);
+        }
+        $imagesArr = explode(";", $commodityImages);
+        //此循环是保存商品的图片
+        foreach ($imagesArr as $image) {
+            $commodityImage = new Images();
+            $commodityImage->id = Comm::getNewGuid();
+            $commodityImage->path = $image;
+            $commodityImage->image_type_id = "";
+            $commodityImage->save();
+            $oldUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "cacheImages" . DS . $image;
+            $newUrl = ROOT_PATH . 'public' . DS . 'uploads' . DS . "commodity_images" . DS . $image;
+            Comm::moveFile($newUrl, $oldUrl);
+        }
+    }
+
+    /**
+     * 上传商品的图片
+     * @return string
+     */
+    public function uploadImage()
+    {
+        $imgSuffix = $_FILES['file']['name'];
+        $imgSuffix = substr($imgSuffix, strpos($imgSuffix, ".") + 1);
+        $imageName = Comm::getNewGuid() . "." . $imgSuffix;
+        $uploaddir = ROOT_PATH . 'public' . DS . 'uploads' . DS . "cacheImages";
+//        if (!is_dir($uploaddir)) {
+//            mkdir($uploaddir);
+//        }
+
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir . "/" . $imageName)) {
+//                print "文件上传成功！这是文件的一下信息:\n";
+//                print_r($_FILES);
+            return $imageName;
+        } else {
+            print "文件上传失败啦!这里有一些信息可以帮助你去调试:\n";
+            print_r($_FILES);
+        }
     }
 
 

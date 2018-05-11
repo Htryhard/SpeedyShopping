@@ -10,7 +10,9 @@
     {load href="__PUBLIC__/static/wap-phone/css/amazeui.min.css" /}
     {load href="__PUBLIC__/static/wap-phone/css/wap.css" /}
 
-    <title>瓜农信息</title>
+    {load href="__PUBLIC__/static/wap-phone/css/wow-style.css" /}
+    {load href="__PUBLIC__/static/wap-phone/css/wow-style2.css" /}
+    <title>图片展示区</title>
 </head>
 <body>
 <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
@@ -20,41 +22,41 @@
 </div>
 
 
-
 <div class="pet_mian" id="top">
+
     <div class="pet_head">
         <header data-am-widget="header"
                 class="am-header am-header-default pet_head_block">
             <div class="am-header-left am-header-nav ">
                 <a href="javascript:history.back(-1)" class="iconfont pet_head_jt_ico">&#xe601;</a>
             </div>
-            <div class="pet_news_list_tag_name">瓜农信息</div>
+            <div class="pet_news_list_tag_name">图片展示</div>
             <div class="am-header-right am-header-nav">
                 <a href="{:url('phone/index/index')}" class="iconfont pet_head_gd_ico">&#xe600;</a>
             </div>
         </header>
     </div>
 
+    <div style="height: 35px"></div>
+
+
     <!--中间列表开始-->
     <div class="pet_content_main">
-        <div class="pet_grzx_nr">
-            <div class="pet_grzx_ico">
-                <img src="__PUBLIC__/static/wap-phone/img/q11.png" alt="">
-            </div>
-            <div class="pet_grzx_name">陈先生</div>
-            <div class="pet_grzx_map">
-                <a href="tel:15277176161" class=" am-text-success"><i class="am-icon-phone"></i> 15277176161</a>
-            </div>
-            <div class="pet_grzx_num_font">
-                南宁市良庆区南晓镇团东村雅王坡瓜农
-            </div>
-            <div class="pet_grzx_num">
-                <span>7000<i>大冬瓜田（亩）</i></span>
-                <span>2000<i>辣椒（亩）</i></span>
-                <span>3万<i>荔枝（亩）</i></span>
-            </div>
 
+        <div class="wow-wrapper">
+            <ul class="wow-wall">
+                {volist name="Images" id="i" key="key"}
+                <li class="wow-article">
+                    <a href="###">
+                        <img src="{$imgRoot}{$i['path']}"/>
+                    </a>
+                </li>
+                {/volist}
+
+
+            </ul>
         </div>
+
 
     </div>
     <!--中间列表结束-->
@@ -78,33 +80,16 @@
 </div>
 
 {load href="__PUBLIC__/static/wap-phone/js/jquery.min.js" /}
+{load href="__PUBLIC__/static/wap-phone/js/wow.min.js" /}
 {load href="__PUBLIC__/static/wap-phone/js/amazeui.min.js" /}
-<script>
+
+
+<script type="text/javascript">
+
     $(function () {
-
-        // 动态计算新闻列表文字样式
-        auto_resize();
-        $(window).resize(function () {
-            auto_resize();
-        });
-        $('.am-list-thumb img').load(function () {
-            auto_resize();
-        });
-
-        $('.am-list > li:last-child').css('border', 'none');
-
-        function auto_resize() {
-            $('.pet_list_one_nr').height($('.pet_list_one_img').height());
-
-        }
-
-        $('.pet_nav_gengduo').on('click', function () {
-            $('.pet_more_list').addClass('pet_more_list_show');
-        });
-        $('.pet_more_close').on('click', function () {
-            $('.pet_more_list').removeClass('pet_more_list_show');
-        });
+        $('.wow-wall').jaliswall({item: '.wow-article'});
     });
+
 
 </script>
 </body>

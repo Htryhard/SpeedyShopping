@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>商品详情页</title>
+    <title>商品详情</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -107,18 +107,22 @@
                 <!--<i class="am-icon-star"></i>收藏-->
                 <!--</span>-->
                 <span class="bold">价格：</span>
-                <span class="red2" id="i_price">￥60.00</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="red2">致电或者面议</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <!--<span class="red2" id="i_price">￥60.00</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                 <!--<span class="product-title-gray-text">积分：300积分</span>-->
             </p>
         </div>
-        <div class="my-search-title-panel">
-            <ul class="am-avg-sm-2 am-text-center am-text-sm">
-                <li class="am-text-center" id="s_number">销量<br/>0件</li>
-                <li class="am-text-center" id="s_repertory">库存<br/>0件</li>
-                <!--<li class="am-text-center">订单<br/>0个</li>-->
-                <!--<li class="am-text-center">评价<br/>0条</li>-->
-            </ul>
-        </div>
+
+        <!--销量块暂时不要-->
+        <!--<div class="my-search-title-panel">-->
+            <!--<ul class="am-avg-sm-2 am-text-center am-text-sm">-->
+                <!--<li class="am-text-center" id="s_number">销量<br/>0件</li>-->
+                <!--<li class="am-text-center" id="s_repertory">库存<br/>0件</li>-->
+                <!--&lt;!&ndash;<li class="am-text-center">订单<br/>0个</li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="am-text-center">评价<br/>0条</li>&ndash;&gt;-->
+            <!--</ul>-->
+        <!--</div>-->
+
         <div class="my-search-title-panel">
 
             <p class="my-search-titp-p am-text-sm bold">规格</p>
@@ -146,11 +150,11 @@
                         $("#color").val(s);
                     });
 
-                    document.getElementById("i_price").innerText = "￥{$commodity['specifications'][0]['price']}";
-                    document.getElementById("s_repertory").innerHTML = "库存<br/>{$commodity['specifications'][0]['repertory']}件";
+                    // document.getElementById("i_price").innerText = "￥{$commodity['specifications'][0]['price']}";
+                    // document.getElementById("s_repertory").innerHTML = "库存<br/>{$commodity['specifications'][0]['repertory']}件";
 
-                    var n =Math.ceil(Math.random()*100);
-                    document.getElementById("s_number").innerHTML = "销量<br/>"+n+"件";
+                    // var n = Math.ceil(Math.random() * 100);
+                    // document.getElementById("s_number").innerHTML = "销量<br/>" + n + "件";
 
                 });
 
@@ -158,8 +162,8 @@
                 function showSpecification(repertory, price, id) {
                     // document.getElementById("specificationId").value = "";
                     // document.getElementById("specificationId").value = id;
-                    document.getElementById("i_price").innerText = "￥" + price;
-                    document.getElementById("s_repertory").innerHTML = "库存<br/>"+repertory+"件";
+                    // document.getElementById("i_price").innerText = "￥" + price;
+                    // document.getElementById("s_repertory").innerHTML = "库存<br/>" + repertory + "件";
                 }
             </script>
             <!--颜色（暂时没有颜色可选）-->
@@ -303,6 +307,11 @@
         </div>
     </div>
 
+    <div class="pet_content_block">
+        <article data-am-widget="paragraph" class="am-paragraph am-paragraph-default pet_content_article" data-am-paragraph="{ tableScrollable: true, pureview: true }">
+        <video src="http://www.hloveq.com/SpeedyShopping/public/uploads/vid/v0.mp4" controls="controls" width="350" height="300"></video>
+        </article>
+    </div>
 
     <footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
         <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>

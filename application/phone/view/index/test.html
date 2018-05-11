@@ -10,7 +10,7 @@
     {load href="__PUBLIC__/static/wap-phone/css/amazeui.min.css" /}
     {load href="__PUBLIC__/static/wap-phone/css/wap.css" /}
 
-    <title>热销商品</title>
+    <title>测试页</title>
 </head>
 <body>
 <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
@@ -20,84 +20,50 @@
 </div>
 
 
-
 <div class="pet_mian" id="top">
+
     <div class="pet_head">
         <header data-am-widget="header"
                 class="am-header am-header-default pet_head_block">
             <div class="am-header-left am-header-nav ">
                 <a href="javascript:history.back(-1)" class="iconfont pet_head_jt_ico">&#xe601;</a>
             </div>
-            <div class="pet_news_list_tag_name">热销商品</div>
+            <div class="pet_news_list_tag_name">搜索商品</div>
             <div class="am-header-right am-header-nav">
                 <a href="{:url('phone/index/index')}" class="iconfont pet_head_gd_ico">&#xe600;</a>
             </div>
         </header>
     </div>
 
+    <div style="height: 50px"></div>
+    <!--顶部搜索栏-->
+    <div class="gray-panel">
+        <div class="my-search-title-panel">
+            <div class="am-input-group">
+
+                <input type="text" class="am-form-field am-radius" value="" id="keywordId">
+                <span class="am-input-group-btn">
+                <button class="am-btn am-radius" type="button" id="sumbKey" onclick="sumbKey()"><span
+                        class="am-icon-search"></span></button>
+                    </span>
+
+            </div>
+        </div>
+    </div>
+
     <!--中间列表开始-->
     <div class="pet_content_main">
-        <div data-am-widget="list_news" class="am-list-news am-list-news-default">
-            <div class="am-list-news-bd">
-                <ul class="am-list">
-                    <!--缩略图在标题右边-->
-                    {volist name="commodities" id="item" key="key"}
 
-                    {if condition="($key == 1)"}
-
-                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
-                        <div class="pet_list_one_info">
-                            <div class="pet_list_one_info_l">
-                                <div class="pet_list_one_info_ico"></div>
-                                <div class="pet_list_one_info_name"></div>
-                            </div>
-                            <div class="pet_list_one_info_r">
-                                <!--<div class="pet_list_tag pet_list_tag_xxs"></div>-->
-                            </div>
-                        </div>
-                        <div class=" am-u-sm-8 am-list-main pet_list_one_nr">
-                            <h3 class="am-list-item-hd pet_list_one_bt"><a
-                                    href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">{$item['title']}</a>
-                            </h3>
-                            <div class="am-list-item-text pet_list_one_text">
-                                {$item["describe"]}
-                            </div>
-
-                        </div>
-                        <div class="am-u-sm-4 am-list-thumb">
-                            <a href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">
-                                <img src="{$imgRoot}{$item['icon']}" class="pet_list_one_img" alt=""/>
-                            </a>
-                        </div>
-                    </li>
-
-
-                    {else /}
-                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-right pet_list_one_block">
-                        <div class=" am-u-sm-8 am-list-main pet_list_one_nr">
-                            <h3 class="am-list-item-hd pet_list_one_bt"><a
-                                    href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">{$item['title']}</a>
-                            </h3>
-                            <div class="am-list-item-text pet_list_one_text">
-                                {$item["describe"]}
-                            </div>
-
-                        </div>
-                        <div class="am-u-sm-4 am-list-thumb">
-                            <a href="{:url('phone/index/commodityDetailed?id='.$item->getData('id'))}" class="">
-                                <img src="{$imgRoot}{$item['icon']}" class="pet_list_one_img" alt=""/>
-                            </a>
-                        </div>
-                    </li>
-                    {/if}
-
-
-                    {/volist}
-
-                </ul>
-            </div>
-
-        </div>
+        <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-thumbnails">
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-4.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
+            <li><img class="am-thumbnail" src="http://s.amazeui.org/media/i/demos/bing-4.jpg" /></li>
+        </ul>
 
     </div>
     <!--中间列表结束-->
@@ -148,6 +114,19 @@
             $('.pet_more_list').removeClass('pet_more_list_show');
         });
     });
+
+    function sumbKey() {
+        var keyword = $("#keywordId").val();
+        // var url = "{:url('phone/index/searchPage')}";
+        // url = url.replace('AAAAA',keyword);
+
+        var url = "{:url('phone/index/searchPage')}";
+        var pot = url.indexOf(".");
+        url = url.substring(0, pot);
+        url = url + "?keyword=" + keyword;
+        // alert(url);
+        window.location = url;
+    }
 
 </script>
 </body>
